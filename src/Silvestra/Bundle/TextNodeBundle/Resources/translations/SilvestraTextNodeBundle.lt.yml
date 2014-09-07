@@ -1,0 +1,5 @@
+text_page: Tekstinis puslapis
+text: Tekstas
+
+success:
+  text_node_save: Sėkmingai redaguotas medžio viršūnės tekstas.

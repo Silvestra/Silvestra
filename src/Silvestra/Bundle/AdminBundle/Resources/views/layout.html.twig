@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Silvestra - administrator</title>
+
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite'
+        'bundles/silvestraadmin/css/bootstrap.min.css'
+        'bundles/silvestraadmin/font-awesome/css/font-awesome.css'
+        'bundles/silvestraadmin/css/plugins/morris/morris-0.4.3.min.css'
+        'bundles/silvestraadmin/css/plugins/timeline/timeline.css'
+        'bundles/silvestraadmin/css/sb-admin.css'
+
+        '@NercuryTranslationEditorBundle/Resources/public/css/translations_form.css'
+        'components/jstree/dist/themes/default/style.min.css'
+        'bundles/tadckasitemap/css/sitemap.css'
+
+        filter='cssrewrite,?yui_css' %}
+        <link href="{{ asset_url }}" rel="stylesheet" type="text/css"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+
+        </div>
+
+        {% include 'SilvestraAdminBundle:Menu:top.html.twig' %}
+
+        <div class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                {{ knp_menu_render('SilvestraAdminBundle:Builder:mainMenu', {'template': 'SilvestraAdminBundle:Menu:knp_menu.html.twig'}) }}
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        {% if page_header is defined %}
+            <div class="row">
+                <div>
+                    <h1 class="page-header">{{ page_header }}</h1>
+                </div>
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+
+{% block javascripts %}
+    {% javascripts
+    'components/jquery/jquery.min.js'
+    '@SilvestraAdminBundle/Resources/public/js/bootstrap.min.js'
+    '@SilvestraAdminBundle/Resources/public/js/plugins/metisMenu/jquery.metisMenu.js'
+    '@SilvestraAdminBundle/Resources/public/js/sb-admin.js'
+    '@SilvestraAdminBundle/Resources/public/js/jquery.cookie.js'
+    '@FOSJsRoutingBundle/Resources/public/js/router.js'
+
+    '@NercuryTranslationEditorBundle/Resources/public/js/translations_form.js'
+    'components/jstree/dist/jstree.min.js'
+    '@TadckaSitemapBundle/Resources/public/js/libs/content.js'
+    '@TadckaSitemapBundle/Resources/public/js/libs/tree.js'
+    '@TadckaSitemapBundle/Resources/public/js/libs/sitemap.js'
+    '@TadckaSitemapBundle/Resources/public/js/sitemap.js'
+
+    filter='?closure' %}
+    <script src='{{ asset_url }}' type='text/javascript'></script>
+    {% endjavascripts %}
+
+    <script src="/js/fos_js_routes.js"></script>
+{% endblock %}
+
+</body>
+
+</html>
