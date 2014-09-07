@@ -1,17 +1,23 @@
 {
     "name": "silvestra/silvestra",
+    "homepage": "https://github.com/Silvestra/Silvestra",
     "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tadas Gliaubicas",
+            "email": "tadcka89@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.5.*",
+        "symfony/framework-bundle": ">=2.3",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "dev-master",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
 
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle": "2.0.*@dev",
@@ -19,7 +25,6 @@
         "nercury/translation-editor-bundle": "0.1.x-dev",
 
         "tadcka/tree": "dev-master",
-        "tadcka/tree-bundle": "dev-master",
         "tadcka/jstree-bundle": "dev-master",
         "tadcka/routing-bundle": "dev-master",
         "tadcka/sitemap-bundle": "dev-master",
@@ -28,25 +33,9 @@
     "require-dev": {
         "phpunit/phpunit": "~4.2"
     },
-    "scripts": {
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
-        ]
-    },
     "autoload": {
-        "psr-0": { "Silvestra\\": "src/" }
+        "psr-0": {
+            "Silvestra\\": "src/"
+        }
     }
 }
