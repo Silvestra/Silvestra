@@ -41,7 +41,7 @@ class TextNodeController extends ContainerAware
         if ($this->getTextFormHandler()->process($request, $form)) {
             $messages->addSuccess(
                 $this->container->get('translator')
-                    ->trans('success.text_node_save', array(), 'TadckaTextNodeBundle')
+                    ->trans('success.text_node_save', array(), 'SilvestraTextNodeBundle')
             );
             $this->getTextNodeManager()->save();
 
