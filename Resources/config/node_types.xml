@@ -17,7 +17,7 @@
             <argument>false</argument>
             <argument>/bundles/silvestratextnode/images/icon/text.png</argument>
             <call method="setTranslationDomain">
-                <argument>TadckaTextNodeBundle</argument>
+                <argument>SilvestraTextNodeBundle</argument>
             </call>
         </service>
 
