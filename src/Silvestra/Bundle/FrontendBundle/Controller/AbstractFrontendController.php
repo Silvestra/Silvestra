@@ -90,7 +90,7 @@ abstract class AbstractFrontendController extends ContainerAware
      */
     protected function getConfig()
     {
-        $config = $this->container->getParameter('tadcka_frontend.controller.config');
+        $config = $this->container->getParameter('silvestra_frontend.controllers');
 
         return $config[$this->getName()];
     }
