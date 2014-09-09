@@ -42,11 +42,11 @@ class Builder extends ContainerAware
         );
         $home->setLabelAttribute('menu_logo', 'fa-dashboard');
 
-        $home = $menu->addChild(
+        $sitemap = $menu->addChild(
             $this->getTranslator()->trans('menu.sitemap', array(), 'SilvestraAdminBundle'),
             array('route' => 'tadcka_sitemap')
         );
-        $home->setLabelAttribute('menu_logo', 'fa-sitemap');
+        $sitemap->setLabelAttribute('menu_logo', 'fa-sitemap');
 
         $this->container->get('event_dispatcher')
             ->dispatch(AdminMenuEvent::ADMIN_MENU, new AdminMenuEvent($factory, $menu));
