@@ -3,7 +3,7 @@
 /*
  * This file is part of the Silvestra package.
  *
- * (c) Silvestra <tadcka89@gmail.com>
+ * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,9 +12,9 @@
 namespace Silvestra\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Silvestra\Bundle\AdminBundle\Event\AdminMenuEvent;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Translation\TranslatorInterface;
-use Tadcka\Bundle\AdminBundle\Event\AdminMenuEvent;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -47,6 +47,9 @@ class Builder extends ContainerAware
             array('route' => 'tadcka_sitemap')
         );
         $home->setLabelAttribute('menu_logo', 'fa-sitemap');
+
+        $this->container->get('event_dispatcher')
+            ->dispatch(AdminMenuEvent::ADMIN_MENU, new AdminMenuEvent($factory, $menu));
 
         return $menu;
     }
