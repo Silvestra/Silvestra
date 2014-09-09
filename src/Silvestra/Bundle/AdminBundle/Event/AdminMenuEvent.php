@@ -66,4 +66,3 @@ class AdminMenuEvent extends Event
         return $this->menu;
     }
 }
- 
