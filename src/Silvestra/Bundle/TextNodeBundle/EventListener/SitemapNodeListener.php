@@ -11,14 +11,39 @@
 
 namespace Silvestra\Bundle\TextNodeBundle\EventListener;
 
+use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManagerInterface;
 use Tadcka\Bundle\SitemapBundle\Event\SitemapNodeEvent;
 use Tadcka\Bundle\SitemapBundle\Frontend\Model\Tab;
+use Tadcka\Component\Tree\Event\TreeNodeEvent;
+use Tadcka\TextBundle\ModelManager\TextManagerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  */
 class SitemapNodeListener
 {
+    /**
+     * @var TextManagerInterface
+     */
+    private $textManager;
+
+    /**
+     * @var TextNodeManagerInterface
+     */
+    private $textNodeManager;
+
+    /**
+     * Constructor.
+     *
+     * @param TextManagerInterface $textManager
+     * @param TextNodeManagerInterface $textNodeManager
+     */
+    public function __construct(TextManagerInterface $textManager, TextNodeManagerInterface $textNodeManager)
+    {
+        $this->textManager = $textManager;
+        $this->textNodeManager = $textNodeManager;
+    }
+
     /**
      * On edit node.
      *
@@ -34,6 +59,23 @@ class SitemapNodeListener
             );
 
             $event->addTab($tab);
+        }
+    }
+
+    /**
+     * On sitemap node delete.
+     *
+     * @param TreeNodeEvent $event
+     */
+    public function onSitemapNodeDelete(TreeNodeEvent $event)
+    {
+        $node = $event->getNode();
+        if ('text' === $node->getType()) {
+            $textNode = $this->textNodeManager->findTextNodeByNode($node);
+            if (null !== $textNode) {
+                $this->textNodeManager->remove($textNode);
+                $this->textManager->delete($textNode->getText());
+            }
         }
     }
 }
