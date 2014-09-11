@@ -1,0 +1,9 @@
+form:
+    gallery:
+        add_image: Pridėti paveikslėlį
+
+image_upload_modal:
+    insert_image: Įterpti paveikslėlį
+    close: Uždaryti
+    image_crop: Iškirpti paveikslėlį
+    select_image: Pasirinkite paveikslėlį

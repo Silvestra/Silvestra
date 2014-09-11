@@ -1,0 +1,7 @@
+{% extends 'SilvestraAdminBundle::layout.html.twig' %}
+
+{% block content %}
+    {{ form_rest(form) }}
+
+    {% include 'SilvestraMediaBundle:Gallery:image_upload_modal.html.twig' %}
+{% endblock content %}

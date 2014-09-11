@@ -12,6 +12,7 @@
 namespace Silvestra\Bundle\MediaBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Silvestra\Bundle\MediaBundle\DependencyInjection\Compiler\FormPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -24,6 +25,7 @@ class SilvestraMediaBundle extends Bundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new FormPass());
         $this->addRegisterMappingsPass($container);
     }
 

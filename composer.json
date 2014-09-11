@@ -18,10 +18,16 @@
         "symfony/framework-bundle" : ">=2.3",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
 
-        "silvestra/media": "dev-master"
+        "silvestra/media": "dev-master",
+
+        "components/font-awesome": "~4.1",
+        "components/jquery": ">=1.9.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2"
+    },
+    "suggest": {
+        "components/bootstrap": "~3.2"
     },
     "repositories": [
         {

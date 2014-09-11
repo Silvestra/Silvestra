@@ -1,0 +1,45 @@
+.image-container {
+    vertical-align: middle;
+    border: solid 1px #bbbbbb;
+    border-radius: 6px;
+    padding: 2px;
+    display: inline-block;
+    margin: 10px;
+    min-height: 150px;
+    min-width: 150px;
+    height: 150px;
+    width: 150px;
+    cursor: move;
+    text-align: center;
+    background-color: #fff;
+}
+
+.image-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.image-container span.remove-image {
+    position: absolute;
+    line-height: normal;
+    margin-left: -5px;
+    margin-top: -10px;
+    cursor: hand;
+    cursor: pointer;
+    text-align: left;
+}
+
+.image-upload-modal .drop-zone {
+    border: dotted 1px #555;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 60px;
+}
+
+.image-upload-modal .select-image-zone {
+    margin-bottom: 20px;
+}
