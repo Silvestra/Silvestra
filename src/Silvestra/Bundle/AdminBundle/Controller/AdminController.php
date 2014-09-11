@@ -18,7 +18,7 @@ class AdminController extends ContainerAware
 {
     public function indexAction()
     {
-        return $this->renderResponse('SilvestraAdminBundle:Admin:index.html.twig', array('page_header' => 'Silvestra CMF'));
+        return $this->renderResponse('SilvestraAdminBundle:Admin:index.html.twig');
     }
 
     /**
