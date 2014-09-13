@@ -18,23 +18,18 @@
         "symfony/framework-bundle" : ">=2.3",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
 
-        "silvestra/media": "dev-master",
-
-        "components/font-awesome": "~4.1",
-        "components/jquery": ">=1.9.1"
+        "silvestra/media": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2"
     },
     "suggest": {
-        "components/bootstrap": "~3.2"
+        "components/bootstrap": "Bootstrap library.",
+        "components/font-awesome": "Font awesome library.",
+        "components/jquery": "JQuery library.",
+        "silvestra/jquery-file-upload": "Jquery file upload library",
+        "silvestra/jcrop": "Jcrop library"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url" : "https://github.com/Silvestra/Media.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Silvestra\\Bundle\\MediaBundle\\": ""

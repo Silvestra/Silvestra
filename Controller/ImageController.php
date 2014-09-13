@@ -41,6 +41,16 @@ class ImageController extends ContainerAware
         );
     }
 
+    public function uploadAction(Request $request)
+    {
+
+    }
+
+    public function cropAction(Request $request)
+    {
+
+    }
+
     /**
      * Render response.
      *
