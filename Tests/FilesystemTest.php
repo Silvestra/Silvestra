@@ -25,6 +25,9 @@ class FilesystemTest extends \PHPUnit_Framework_TestCase
      */
     private $filesystem;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function setUp()
     {
         $this->filesystem = new Filesystem(__DIR__ . '/');
