@@ -27,7 +27,15 @@ class ImageFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text', 'text');
+        $builder->add(
+            'image',
+            'file',
+            array(
+                'attr' => array('class' => 'hidden'),
+                'label' => false,
+                'required' => false,
+            )
+        );
     }
 
     /**
@@ -35,6 +43,11 @@ class ImageFormType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $resolver->setDefaults(
+            array(
+                'label' => false,
+            )
+        );
     }
 
     /**
