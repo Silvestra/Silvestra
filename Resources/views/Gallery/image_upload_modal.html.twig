@@ -1,7 +1,7 @@
 {% trans_default_domain 'SilvestraMediaBundle' %}
 
 <div class="modal fade image-upload-modal" tabindex="-1" role="dialog" aria-labelledby="image-upload-modal-label" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -14,14 +14,10 @@
 
                 </div>
                 <div class="text-center select-image-zone">
-                    <a class="btn btn-info btn-lg image-upload-button" href="javascript:;">
+                    <span class="btn btn-info btn-lg image-upload-button">
                         <i class="fa fa-download"></i>
                         <span>{{ 'image_upload_modal.select_image'|trans }}</span>
-                        <input id="image-upload-file" type="file" name="image-upload-file" class="hidden">
-                    </a>
-                </div>
-                <div class="progress process-zone">
-                    <div class="progress-bar progress-bar-success"></div>
+                    </span>
                 </div>
             </div>
             <div class="modal-footer">

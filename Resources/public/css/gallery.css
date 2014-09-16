@@ -1,7 +1,7 @@
 .image-container {
     vertical-align: middle;
     border: solid 1px #bbbbbb;
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     padding: 2px;
     display: inline-block;
     margin: 10px;
@@ -33,13 +33,28 @@
 
 .image-upload-modal .drop-zone {
     border: dotted 1px #555;
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     margin-bottom: 20px;
     text-align: center;
     font-size: 1.5em;
-    padding: 60px;
+    min-height: 120px;
+    position: relative;
+    /*padding: 60px;*/
 }
 
 .image-upload-modal .select-image-zone {
     margin-bottom: 20px;
+}
+
+.silvestra-media-gallery .images input {
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    max-width: 0;
+    width: 0;
+    max-height: 0;
+    height: 0;
+}
+
+.jcrop-keymgr {
+    opacity: 0;
 }
