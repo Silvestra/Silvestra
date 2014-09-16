@@ -79,7 +79,7 @@ function MediaImageUploadModal() {
     $modal.on('hidden.bs.modal', function () {
         $uploadButton.unbind();
         resetDropZone();
-        resetModalWidth();
+        resetModalDialogWidth();
     });
 
     var addImageForm = function ($gallery) {
@@ -100,7 +100,7 @@ function MediaImageUploadModal() {
         $dropZone.html('');
     };
 
-    var resetModalWidth = function () {
+    var resetModalDialogWidth = function () {
         setModalDialogWidth($modalDialogWidth);
     };
 }
