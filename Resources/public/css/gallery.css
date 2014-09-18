@@ -1,52 +1,52 @@
-.image-container {
+.silvestra-media-image {
     vertical-align: middle;
     border: solid 1px #bbbbbb;
-    /*border-radius: 6px;*/
     padding: 2px;
     display: inline-block;
     margin: 10px;
     min-height: 150px;
     min-width: 150px;
-    height: 150px;
-    width: 150px;
     cursor: move;
     text-align: center;
     background-color: #fff;
 }
 
-.image-helper {
-    display: inline-block;
-    height: 100%;
+.silvestra-media-image img, .silvestra-media-image canvas {
     vertical-align: middle;
-    margin: 0;
+    text-align: center;
 }
 
-.image-container span.remove-image {
-    position: absolute;
-    line-height: normal;
-    margin-left: -5px;
-    margin-top: -10px;
+.silvestra-media-image span.remove-image {
     cursor: hand;
     cursor: pointer;
-    text-align: left;
+    float: right;
+    background-color: #FFFFFF;
+    color: #FF0000;
+    /*margin-right: 15px;*/
+    z-index: 10;
+}
+
+.silvestra-media-image span.remove-image i {
+    position: absolute;
+    margin-top: -9px;
+    margin-left: -5px;
 }
 
 .image-upload-modal .drop-zone {
     border: dotted 1px #555;
-    /*border-radius: 6px;*/
     margin-bottom: 20px;
     text-align: center;
     font-size: 1.5em;
     min-height: 120px;
     position: relative;
-    /*padding: 60px;*/
 }
 
 .image-upload-modal .select-image-zone {
     margin-bottom: 20px;
 }
 
-.silvestra-media-gallery .images input {
+.silvestra-media-image .image-file {
+    position: relative;
     opacity: 0;
     -ms-filter: 'alpha(opacity=0)';
     max-width: 0;

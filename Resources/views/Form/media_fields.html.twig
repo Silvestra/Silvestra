@@ -1,17 +1,18 @@
 {% trans_default_domain 'SilvestraMediaBundle' %}
 
-{#{% block silvestra_media_image_widget %}#}
-    {#{{ form_widget(form) }}#}
-{#{% endblock silvestra_media_image_widget %}#}
+{% block silvestra_media_image_widget %}
+    <div class="silvestra-media-image hidden" data-settings="{{ form.vars.settings }}">
+        <span class="remove-image">
+            <i class="fa fa-remove fa-lg"></i>
+        </span>
+        <div class="image"></div>
+        {{ form_widget(form) }}
+{% endblock silvestra_media_image_widget %}
 
 {% block silvestra_media_gallery_widget %}
 
-
-
-
-    {#{{ dump(form.gallery) }}#}
     {% spaceless %}
-        <div class="well silvestra-media-gallery" data-name="{{ name }}" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
+        <div class="well silvestra-media-gallery" data-name="{{ name }}" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}" data-settings="{{ form.vars.settings }}">
 
             <div class="images">
                 {#{% for i in 0..5 %}#}
@@ -34,8 +35,6 @@
 
 {% block silvestra_image_container %}
     <div class="image-container">
-        <span class="image-helper"></span>
-        <span class="remove-image"><i class="fa fa-remove"></i></span>
-        <img data-src="holder.js/100%x180" alt="...">
+
     </div>
 {% endblock silvestra_image_container %}

@@ -13,6 +13,8 @@ namespace Silvestra\Bundle\MediaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -39,12 +41,45 @@ class GalleryFormType extends AbstractType
         );
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $options['uploaderConfig']['acceptFileTypes'] = implode('|', $options['uploaderConfig']['acceptFileTypes']);
+
+        $settings = array(
+            'cropperEnabled' => $options['cropperEnabled'],
+            'uploaderConfig' => $options['uploaderConfig'],
+            'cropperConfig' => $options['cropperConfig'],
+        );
+
+        $view->vars['settings'] = json_encode($settings);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array());
+        $resolver->setDefaults(
+            array(
+                'cropperEnabled' => true,
+                'uploaderConfig' => array(
+                    'acceptFileTypes' => array('gif', 'jpg', 'jpeg', 'png'),
+                    'maxFileSize' => 5000000,
+                    'maxWidth' => 1024,
+                    'maxHeight' => 768,
+                ),
+                'cropperConfig' => array(
+                    'minWidth' => 40,
+                    'minHeight' => 40,
+                    'maxWidth' => 1024,
+                    'maxHeight' => 768,
+                ),
+            )
+        );
     }
 
     /**

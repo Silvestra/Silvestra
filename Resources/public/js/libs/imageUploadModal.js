@@ -14,59 +14,25 @@ function MediaImageUploadModal() {
     var $dropZone = $modal.find('div.drop-zone:first');
     var $modalDialogWidth;
 
-    this.show = function ($gallery) {
+    this.show = function ($imageWidget, $settings) {
         $modal.modal('show');
         $modalDialogWidth = $modalDialog.width();
 
         $uploadButton.on('click', function () {
-            var $imageForm = $(addImageForm($gallery));
-            var $imageUploadFile = $imageForm.find(':input[type=file]:first');
+            var $image = new MediaImageUpload($imageWidget, $settings.uploaderConfig);
 
-            $imageUploadFile.click();
+            $image.click();
 
-            $imageUploadFile.fileupload({
-                dataType: 'json',
-                autoUpload: false,
-                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                maxFileSize: 5000000,
-                previewMaxWidth: 300,
-                previewMaxHeight: 300,
-                previewCrop: false,
+            $imageWidget.on('media.pre_upload.image', function($event, $image) {
+                $dropZone.html($image);
 
-                processalways: function (e, data) {
-                    var $file = data.files[data.index];
-                    var coordinates;
-                    var loadingImage = loadImage(
-                        $file,
-                        function (image) {
-                            $dropZone.html(image);
+                var $canvasImage = $dropZone.find('img, canvas');
 
-                            var imageCanvas = $dropZone.find('img, canvas');
-
-                            imageCanvas.Jcrop({
-                                trueSize: [imageCanvas[0].width, imageCanvas[0].height],
-                                setSelect: [40, 40, imageCanvas[0].width - 40, imageCanvas[0].height - 40],
-                                onSelect: function (coords) {
-                                    coordinates = coords;
-                                },
-                                onRelease: function () {
-                                    coordinates = null;
-                                }
-                            });
-
-                            setModalDialogWidth(imageCanvas[0].width + 34);
-                        },
-                        {
-                            maxWidth: $dropZone.width(),
-                            maxHeight: $(window).height() - 300,
-                            canvas: true
-                        } // Options
-                    );
-
-                    if (!loadingImage) {
-                        $dropZone.html('<span>Your browser does not support the URL or FileReader API.</span>');
-                    }
+                if ($settings.cropperEnabled) {
+                    var $cropper = new MediaImageUploadCropper($canvasImage, $settings.cropperConfig);
                 }
+
+                setModalDialogWidth($canvasImage[0].width + 34);
             });
         });
     };
@@ -81,16 +47,6 @@ function MediaImageUploadModal() {
         resetDropZone();
         resetModalDialogWidth();
     });
-
-    var addImageForm = function ($gallery) {
-        var $index = $gallery.data('index');
-        var $newImageForm = $gallery.data('prototype').replace(/__name__/g, $index);
-
-        $gallery.data('index', $index + 1);
-        $gallery.find('div.images:first').prepend($newImageForm);
-
-        return $newImageForm;
-    };
 
     var setModalDialogWidth = function ($width) {
         $modalDialog.css('width', $width + 'px');

@@ -13,6 +13,8 @@ namespace Silvestra\Bundle\MediaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -31,11 +33,23 @@ class ImageFormType extends AbstractType
             'image',
             'file',
             array(
-                'attr' => array('class' => 'hidden'),
                 'label' => false,
                 'required' => false,
             )
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $settings = array(
+            'maxWidth' => $options['maxWidth'],
+            'maxHeight' => $options['maxHeight']
+        );
+
+        $view->vars['settings'] = json_encode($settings);
     }
 
     /**
@@ -46,6 +60,9 @@ class ImageFormType extends AbstractType
         $resolver->setDefaults(
             array(
                 'label' => false,
+                'maxWidth' => 1024,
+                'maxHeight' => 768,
+                'attr' => array('class' => 'image-file')
             )
         );
     }
