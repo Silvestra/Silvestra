@@ -12,6 +12,7 @@
 namespace Silvestra\Bundle\MediaBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -21,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ImageController extends ContainerAware
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $builder = $this->container->get('form.factory')->createBuilder();
 
@@ -29,8 +30,18 @@ class ImageController extends ContainerAware
         $builder->add('images2', 'silvestra_media_gallery');
         $builder->add('image1', 'silvestra_media_image');
         $builder->add('image2', 'silvestra_media_image');
+        $builder->add('file', 'file', array('required' => false));
+        $builder->add('submit', 'submit');
 
         $form = $builder->getForm();
+
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
+            if ($form->isValid()) {
+                var_dump($form->getData()['images1']);
+                var_dump($form->getData()); die;
+            }
+        }
 
         return $this->renderResponse(
             'SilvestraMediaBundle:Image:index.html.twig',

@@ -1,0 +1,14 @@
+form:
+    gallery:
+        add_image: Add image
+
+image_upload_modal:
+    insert_image_file: Insert image file
+    close: close
+    image_crop: Crop image
+    select_image_file: Select image file
+    drop_our_image_file_here: Drop your image file here
+    or: or
+    error:
+        loading_image_file_failed: Loading image file failed!
+        not_support_url_or_file_reader: Your browser does not support the URL or FileReader API

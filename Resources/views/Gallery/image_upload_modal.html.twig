@@ -7,22 +7,23 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span><span class="sr-only">{{ 'image_upload_modal.close'|trans }}</span>
                 </button>
-                <h4 class="modal-title" id="image-upload-modal-label">{{ 'image_upload_modal.insert_image'|trans }}</h4>
+                <h4 class="modal-title" id="image-upload-modal-label">{{ 'image_upload_modal.insert_image_file'|trans }}</h4>
             </div>
             <div class="modal-body">
-                <div class="drop-zone">
-
+                <div class="drop-zone" data-loading_image_file_failed="{{ 'image_upload_modal.error.loading_image_file_failed'|trans }}" data-not_support_url_or_file_reader="{{ 'image_upload_modal.error.not_support_url_or_file_reader'|trans }}">
+                    <p>{{ 'image_upload_modal.drop_our_image_file_here'|trans }}</p>
+                    <p>{{ 'image_upload_modal.or'|trans }}</p>
                 </div>
                 <div class="text-center select-image-zone">
                     <span class="btn btn-info btn-lg image-upload-button">
                         <i class="fa fa-download"></i>
-                        <span>{{ 'image_upload_modal.select_image'|trans }}</span>
+                        <span>{{ 'image_upload_modal.select_image_file'|trans }}</span>
                     </span>
                 </div>
             </div>
             <div class="modal-footer">
                 <a href="javascript:;" class="btn btn-default" data-dismiss="modal">{{ 'image_upload_modal.close'|trans }}</a>
-                <a href="javascript:;" class="btn btn-success"><i class="fa fa-crop"></i> {{ 'image_upload_modal.image_crop'|trans }}</a>
+                <a href="javascript:;" class="btn btn-success" id="image-upload-crop"><i class="fa fa-crop"></i> {{ 'image_upload_modal.image_crop'|trans }}</a>
             </div>
         </div>
     </div>

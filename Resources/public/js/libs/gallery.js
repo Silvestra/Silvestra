@@ -22,6 +22,11 @@ $.fn.mediaGallery = function () {
             $imageUploadModal.show(addImageWidget($gallery), $settings);
         });
 
+        $gallery.on('click', 'div.silvestra-media-image > .image', function() {
+
+            $imageUploadModal.show($(this).closest('div.silvestra-media-image'), $settings);
+        });
+
         $gallery.on('click', 'span.remove-image', function() {
             removeImageWidget($(this).closest('div.silvestra-media-image'));
         });

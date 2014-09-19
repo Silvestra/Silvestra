@@ -73,10 +73,10 @@ class GalleryFormType extends AbstractType
                     'maxHeight' => 768,
                 ),
                 'cropperConfig' => array(
-                    'minWidth' => 40,
-                    'minHeight' => 40,
-                    'maxWidth' => 1024,
-                    'maxHeight' => 768,
+                    'x1' => 0,
+                    'y1' => 0,
+                    'x2' => 1024,
+                    'y2' => 768,
                 ),
             )
         );

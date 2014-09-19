@@ -7,13 +7,13 @@
     min-height: 150px;
     min-width: 150px;
     cursor: move;
-    text-align: center;
+    /*text-align: center;*/
     background-color: #fff;
 }
 
 .silvestra-media-image img, .silvestra-media-image canvas {
     vertical-align: middle;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .silvestra-media-image span.remove-image {
@@ -39,6 +39,12 @@
     font-size: 1.5em;
     min-height: 120px;
     position: relative;
+}
+
+.image-upload-modal .drop-zone p {
+    text-align: center;
+    font-weight: 800;
+    margin-top: 20px;
 }
 
 .image-upload-modal .select-image-zone {
