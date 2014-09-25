@@ -26,20 +26,26 @@ class FilesystemTest extends \PHPUnit_Framework_TestCase
     private $filesystem;
 
     /**
+     * @var string
+     */
+    private $uploaderFolder;
+
+    /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
         $this->filesystem = new Filesystem(__DIR__ . '/');
+        $this->uploaderFolder = __DIR__ . DIRECTORY_SEPARATOR . 'silvestra_media';
     }
 
     public function testGetUploaderFolder()
     {
-        $this->assertEquals(__DIR__, $this->filesystem->getUploaderFolder());
+        $this->assertEquals($this->uploaderFolder, $this->filesystem->getUploaderFolder());
     }
 
     public function testGetTmpFolder()
     {
-        $this->assertEquals(__DIR__ . DIRECTORY_SEPARATOR  . 'tadcka_media_tmp', $this->filesystem->getTmpFolder());
+        $this->assertEquals($this->uploaderFolder . DIRECTORY_SEPARATOR  . 'tmp', $this->filesystem->getTmpFolder());
     }
 }

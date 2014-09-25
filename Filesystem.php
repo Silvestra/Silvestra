@@ -11,12 +11,14 @@
 
 namespace Silvestra\Component\Media;
 
+use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
+
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 14.9.14 00.07
  */
-class Filesystem
+class Filesystem extends SymfonyFilesystem
 {
     /**
      * @var string
@@ -40,7 +42,7 @@ class Filesystem
      */
     public function getUploaderFolder()
     {
-        return rtrim($this->uploaderFolder, '/\\');
+        return rtrim($this->uploaderFolder, '/\\') . DIRECTORY_SEPARATOR . 'silvestra_media';
     }
 
     /**
@@ -50,6 +52,6 @@ class Filesystem
      */
     public function getTmpFolder()
     {
-        return $this->getUploaderFolder() . DIRECTORY_SEPARATOR  . 'tadcka_media_tmp';
+        return $this->getUploaderFolder() . DIRECTORY_SEPARATOR  . 'tmp';
     }
 }
