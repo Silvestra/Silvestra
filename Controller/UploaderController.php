@@ -8,62 +8,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Silvestra\Bundle\MediaBundle\Controller;
 
-use Silvestra\Bundle\MediaBundle\Form\Factory\UploaderFormFactory;
-use Silvestra\Bundle\MediaBundle\Form\Handler\UploaderFormHandler;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class UploaderController extends ContainerAware
 {
-    public function indexAction(Request $request)
+    public function uploadAction(Request $request)
     {
-        $form = $this->getFormFactory()->create(array());
-
-        if ($this->getFormHandler()->process($request, $form)) {
-
+        $config = json_decode($request->get('config'), true);
+        $files = $request->files->get('files');
+        $uploaderHandler = $this->getUploaderHandler();
+        $data = array();
+        foreach ($files as $file) {
+            $data[] = $uploaderHandler->process($file, $config['uploaderConfig']);
         }
 
-        return $this->renderResponse(
-            'SilvestraMediaBundle:Uploader:index.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+        return new JsonResponse($data);
     }
 
-    /**
-     * Get uploader form factory.
-     *
-     * @return UploaderFormFactory
-     */
-    private function getFormFactory()
-    {
-        return $this->container->get('silvestra_media.form_factory.uploader');
-    }
 
-    /**
-     * Get uploader form handler.
-     *
-     * @return UploaderFormHandler
-     */
-    private function getFormHandler()
+    private function getUploaderHandler()
     {
-        return $this->container->get('silvestra_media.form_handler.uploader');
-    }
-
-    /**
-     * Render response.
-     *
-     * @param string $name
-     * @param array $parameters
-     *
-     * @return Response
-     */
-    private function renderResponse($name, array $parameters = array())
-    {
-        return new Response($this->container->get('templating')->render($name, $parameters));
+        return $this->container->get('silvestra_media.uploader_handler');
     }
 }

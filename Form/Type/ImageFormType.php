@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\Image;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -32,6 +33,25 @@ class ImageFormType extends AbstractType
         $builder->add(
             'image',
             'file',
+            array(
+                'label' => false,
+                'required' => false,
+//                'constraints' => array(
+//                    new Image(array(
+//                        'minWidth' => $options['minWidth'],
+//                        'maxWidth' => $options['maxWidth'],
+//                        'minHeight' => $options['minHeight'],
+//                        'maxHeight' => $options['maxHeight'],
+//                        'maxSize' => '50M',
+//                        'mimeTypes' => $options['mimeTypes'],
+//                    ))
+//                ),
+            )
+        );
+
+        $builder->add(
+            'cropper',
+            'hidden',
             array(
                 'label' => false,
                 'required' => false,
@@ -60,8 +80,18 @@ class ImageFormType extends AbstractType
         $resolver->setDefaults(
             array(
                 'label' => false,
+                'mimeTypes' => array(
+                    'png' => 'image/png',
+                    'jpe' => 'image/jpeg',
+                    'jpeg' => 'image/jpeg',
+                    'jpg' => 'image/jpeg',
+                    'gif' => 'image/gif',
+                ),
+                'maxFileSize' => '5M',
                 'maxWidth' => 1024,
                 'maxHeight' => 768,
+                'minWidth' => 0,
+                'minHeight' => 0,
                 'attr' => array('class' => 'image-file')
             )
         );

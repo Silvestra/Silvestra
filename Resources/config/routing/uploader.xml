@@ -8,4 +8,9 @@
         <default key="_controller">SilvestraMediaBundle:Uploader:index</default>
     </route>
 
+    <route id="silvestra_media_uploader_upload" path="/media/uploader/upload">
+        <default key="_controller">SilvestraMediaBundle:Uploader:upload</default>
+        <option key="expose">true</option>
+    </route>
+
 </routes>

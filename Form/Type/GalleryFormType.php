@@ -37,6 +37,14 @@ class GalleryFormType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'required' => false,
+                'options' => array(
+                    'mimeTypes' => $options['mimeTypes'],
+                    'maxFileSize' => $options['uploaderConfig']['maxFileSize'],
+                    'maxWidth' => $options['uploaderConfig']['maxWidth'],
+                    'maxHeight' => $options['uploaderConfig']['maxHeight'],
+                    'minWidth' => $options['uploaderConfig']['minWidth'],
+                    'minHeight' => $options['uploaderConfig']['minHeight'],
+                ),
             )
         );
     }
@@ -47,7 +55,7 @@ class GalleryFormType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $options['uploaderConfig']['acceptFileTypes'] = implode('|', $options['uploaderConfig']['acceptFileTypes']);
+        $options['uploaderConfig']['acceptFileTypes'] = implode('|', array_keys($options['mimeTypes']));
 
         $settings = array(
             'cropperEnabled' => $options['cropperEnabled'],
@@ -65,12 +73,20 @@ class GalleryFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
+                'mimeTypes' => array(
+                    'png' => 'image/png',
+                    'jpe' => 'image/jpeg',
+                    'jpeg' => 'image/jpeg',
+                    'jpg' => 'image/jpeg',
+                    'gif' => 'image/gif',
+                ),
                 'cropperEnabled' => true,
                 'uploaderConfig' => array(
-                    'acceptFileTypes' => array('gif', 'jpg', 'jpeg', 'png'),
                     'maxFileSize' => 5000000,
                     'maxWidth' => 1024,
                     'maxHeight' => 768,
+                    'minWidth' => 0,
+                    'minHeight' => 0,
                 ),
                 'cropperConfig' => array(
                     'x1' => 0,

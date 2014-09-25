@@ -12,6 +12,7 @@
 namespace Silvestra\Bundle\MediaBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,20 +28,25 @@ class ImageController extends ContainerAware
         $builder = $this->container->get('form.factory')->createBuilder();
 
         $builder->add('images1', 'silvestra_media_gallery');
-        $builder->add('images2', 'silvestra_media_gallery');
-        $builder->add('image1', 'silvestra_media_image');
-        $builder->add('image2', 'silvestra_media_image');
-        $builder->add('file', 'file', array('required' => false));
+//        $builder->add('images2', 'silvestra_media_gallery');
+//        $builder->add('image1', 'silvestra_media_image');
+//        $builder->add('image2', 'silvestra_media_image');
+//        $builder->add('file', 'file', array('required' => false));
         $builder->add('submit', 'submit');
 
         $form = $builder->getForm();
 
         if ($request->isMethod('POST')) {
+            $data = $request->files->get('form');
+            /** @var UploadedFile $file */
+            $file = $data['images1']['images'][0]['image'];
             $form->submit($request);
             if ($form->isValid()) {
                 var_dump($form->getData()['images1']);
                 var_dump($form->getData()); die;
             }
+
+            var_dump($form->getErrors(true)); die;
         }
 
         return $this->renderResponse(

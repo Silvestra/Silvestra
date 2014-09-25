@@ -36,6 +36,7 @@ $.fn.mediaGallery = function () {
         var $index = $gallery.data('index');
         var $newImageWidget = $($gallery.data('prototype').replace(/__name__/g, $index));
 
+        $newImageWidget.hide();
         $gallery.data('index', $index + 1);
         $gallery.find('div.images:first').prepend($newImageWidget);
 

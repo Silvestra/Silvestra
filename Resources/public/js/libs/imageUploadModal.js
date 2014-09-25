@@ -10,107 +10,122 @@
 function MediaImageUploadModal() {
     var $modal = $('div.image-upload-modal');
     var $modalDialog = $modal.find('.modal-dialog:first');
-    var $uploadButton = $modal.find('span.image-upload-button:first');
+    var $imageUploadButton = $modal.find('span.image-upload-button:first');
+    var $fileUpload = $modal.find('input#file-upload:first');
+
     var $dropZone = $modal.find('div.drop-zone:first');
     var $dropZoneContent = $dropZone.html();
+
+    var $progressBar = $modal.find('.progress-bar:first');
     var $cropButton = $modal.find('a#image-upload-crop:first');
+
     var $imageUploadCropper = new MediaImageUploadCropper();
-    var $imageUpload = new MediaImageUpload();
+
     var $modalDialogWidth;
-    var $currentSettings;
-    var $currentImageWidget;
-    var $currentImageFile;
+    var $settings;
+    var $imageWidget;
 
-    this.show = function ($imageWidget, $settings) {
-        var $imageUploadFile = $imageWidget.find(':input[type=file]:first');
+    $modal.on('hidden.bs.modal', function () {
+        resetModal();
+    });
 
+    this.show = function (imageWidget, settings) {
+        $imageWidget = imageWidget;
+        $settings = settings;
         $modalDialogWidth = $modalDialog.width();
-        $currentSettings = $settings;
-        $currentImageWidget = $imageWidget;
-        $imageUpload.reset();
 
-        $imageWidget.on('change', fileHandler);
+        $imageUploadButton.on('click', function () {
+//            $('#ImgForm').each(function(){
+//                this.reset();
+//            });
+//            if ($fileUpload.val()) {
+////                console.log($fileUpload.data);
+////                $fileUpload.fileupload('destroy');
+//                $fileUpload.empty();
+//                $fileUpload.remove();
+////                $fileUpload.prop('disabled', true);
+//                $fileUpload.detach();
+//                $fileUpload.triggerHandler('remove');
+//                $fileUpload.val('');
+//                $fileUpload.removeData();
+//                //$temp.fileInput.context = [];
+//            }
 
-        $uploadButton.on('click', function () {
-            $imageUploadFile.click();
+            //$fileUpload.replaceWith($fileUpload.val('').clone(true));
+            $fileUpload.click();
         });
 
-        $currentImageFile = $imageUploadFile && $imageUploadFile[0].files && $imageUploadFile[0].files[0];
-        if ($currentImageFile) {
-            console.log($currentImageFile);
-            loadModalImage($currentImageFile, $currentSettings.uploaderConfig);
-        }
+        //initFileUpload($settings);
+
+        $('#test-file-upload').on('change', function () {
+            console.log('esu');
+        });
 
         $modal.modal('show');
     };
 
-    $cropButton.click(function () {
-        if ($imageUpload.isLoaded()) {
-            var $thumbnail = $imageUpload.getThumbnail(function ($image) {
-                if ($imageUpload.isImage($image)) {
-                    $currentImageWidget.find('div.image:first').html($image);
-                    $currentImageWidget.removeClass('hidden');
-                }
+
+
+    var initFileUpload = function ($settings) {
+        $fileUpload.fileupload({
+            autoUpload: false,
+            url: Routing.generate('silvestra_media_uploader_upload'),
+            dataType: 'json',
+            formData: {'config': JSON.stringify($settings) },
+            dropZone: $dropZone,
+//            sequentialUploads: true,
+            multiple: false,
+            replaceFileInput: true,
+            acceptFileTypes: /(\.|\/)($settings.uploaderConfig.acceptFileTypes)$/i,
+            maxFileSize: $settings.uploaderConfig.maxFileSize, // 5 MB
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator && navigator.userAgent),
+            imageMaxWidth: $settings.uploaderConfig.maxWidth,
+            imageMaxHeight: $settings.uploaderConfig.maxHeight
+        });
+
+        $fileUpload.on('fileuploadchange',function (e, data) {
+
+        }).on('fileuploadadd',function (e, data) {
+            $cropButton.click(function () {
+                data.submit();
             });
-        } else {
-            $currentImageWidget.remove();
-        }
-
-        $modal.modal('hide');
-    });
-
-    $dropZone.on('media.pre_upload.image', function ($event, $file) {
-        var $uploaderConfig = $currentSettings.uploaderConfig;
-
-        loadModalImage($file, $uploaderConfig);
-    });
-
-    var loadModalImage = function ($file, $uploaderConfig) {
-        loadImage.parseMetaData($file, function ($data) {
-            if (!$data.imageHead) {
-                $dropZone.html('<p>' + $dropZone.data('loading_image_file_failed') + '</p>');
-
-                return;
+        }).on('fileuploaddone',function (e, data) {
+            if (data.result[0].errors.length) {
+                console.log(data.result[0]);
+            } else {
+                loadImage(data.result[0].file, function($image) {
+                    $imageWidget.find('div.image:first').html($image);
+                }, {minHeight: 150, maxHeight: 150, canvas: true});
+                $imageWidget.show();
+                $modal.modal('hide');
+                resetModal();
             }
+        }).on('fileuploadprocessalways',function (e, data) {
+            var $file = data.files[data.index];
+            var $image = getImage($file, function ($image) {
+                $dropZone.html($image);
 
-            if ($data.exif) {
-                $uploaderConfig.orientation = $data.exif.get('Orientation');
-            }
-            $imageUpload.init($file, $uploaderConfig);
+                var $canvasImage = $dropZone.find('img:first, canvas:first');
 
-            var $image = $imageUpload.getImage(function ($image) {
-                if (!$imageUpload.isImage($image)) {
-                    $dropZone.html('<p>' + $dropZone.data('loading_image_file_failed') + '</p>');
-                } else {
-                    $dropZone.html($image);
-
-                    var $canvasImage = $dropZone.find('img, canvas');
-
-                    if ($currentSettings.cropperEnabled) {
-                        $imageUploadCropper.init($canvasImage, $currentSettings.cropperConfig);
-                    }
-
-                    setModalDialogWidth($canvasImage[0].width + 34);
+                if ($settings.cropperEnabled) {
+                    $imageUploadCropper.init($canvasImage, $settings.cropperConfig);
                 }
+                setModalDialogWidth($canvasImage[0].width + 36);
             });
 
             if (!$image) {
                 $dropZone.html('<p>' + $dropZone.data('not_support_url_or_file_reader') + '</p>');
             }
-        });
-    }
+        }).on('fileuploadprogressall', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $progressBar.css('width', progress + '%');
+        }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    };
 
-    var fileHandler = function ($event) {
-        $event.preventDefault();
-        $event = $event.originalEvent;
-        var $target = $event.dataTransfer || $event.target;
-        var $file = $target && $target.files && $target.files[0];
-        console.log($file);
-        if (!$file) {
-            return;
-        }
-
-        $dropZone.trigger('media.pre_upload.image', [$file]);
+    var getImage = function ($file, $callback) {
+        return loadImage($file, $callback, {canvas: true});
     };
 
     var setModalDialogWidth = function ($width) {
@@ -125,65 +140,12 @@ function MediaImageUploadModal() {
         setModalDialogWidth($modalDialogWidth);
     };
 
-    $dropZone
-        .on('dragover',function ($event) {
-            $event.preventDefault();
-            $event = $event.originalEvent;
-            $event.dataTransfer.dropEffect = 'copy';
-        }).on('drop', fileHandler);
-
-    $modal.on('hidden.bs.modal', function () {
-        $uploadButton.unbind();
+    var resetModal = function () {
+        $fileUpload.fileupload('destroy');
+        $imageUploadButton.unbind();
         resetDropZone();
         resetModalDialogWidth();
-        if (!$imageUpload.isLoaded()) {
-            $currentImageWidget.remove();
-        }
-    });
-}
-
-function MediaImageUpload() {
-    var $currentFile;
-    var $currentConfig;
-    var $isLoaded = false;
-
-    this.init = function ($file, $config) {
-        $currentFile = $file;
-        $currentConfig = $config;
-    };
-
-    this.reset = function () {
-        $currentFile = null;
-        $currentConfig = null;
-        $isLoaded = false;
-    };
-
-    this.getImage = function ($callback) {
-        $isLoaded = true;
-
-        return getLoadingImage(
-            $callback,
-            {orientation: $currentConfig.orientation, maxWidth: $currentConfig.maxWidth, maxHeight: $currentConfig.maxHeight}
-        )
-    };
-
-    this.getThumbnail = function ($callback) {
-        return getLoadingImage(
-            $callback,
-            {orientation: $currentConfig.orientation, maxWidth: 150, maxHeight: 150, crop: true}
-        );
-    };
-
-    this.isImage = function ($image) {
-        return $image.src || $image instanceof HTMLCanvasElement;
-    }
-
-    this.isLoaded = function () {
-        return $isLoaded;
-    }
-
-    var getLoadingImage = function ($callback, $options) {
-        return loadImage($currentFile, $callback, $options);
+        $progressBar.css('width', '0%');
     };
 }
 
@@ -206,7 +168,7 @@ function MediaImageUploadCropper() {
         return $coordinates;
     };
 
-    var cropper = function ($coordinates) {
-        console.log($coordinates);
+    var cropper = function ($coord) {
+        $coordinates = $coord;
     };
 }
