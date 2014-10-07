@@ -1,2 +1,4 @@
 MediaBundle
 ===========
+
+Silvestra media bundle.
