@@ -1,2 +1,4 @@
 Seo
 ===
+
+Silvestra seo component.
