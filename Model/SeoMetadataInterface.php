@@ -16,22 +16,21 @@ namespace Silvestra\Component\Seo\Model;
  */
 interface SeoMetadataInterface
 {
-
     /**
-     * Set title.
+     * Set language.
      *
-     * @param string $title
+     * @param string $lang
      *
      * @return SeoMetadataInterface
      */
-    public function setTitle($title);
+    public function setLang($lang);
 
     /**
-     * Get title.
+     * Get language.
      *
      * @return string
      */
-    public function getTitle();
+    public function getLang();
 
     /**
      * Set metaDescription.
@@ -80,4 +79,20 @@ interface SeoMetadataInterface
      * @return string
      */
     public function getMetaRobots();
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return SeoMetadataInterface
+     */
+    public function setTitle($title);
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle();
 }

@@ -19,7 +19,7 @@ class SeoMetadata implements SeoMetadataInterface
     /**
      * @var string
      */
-    protected $title;
+    protected $lang;
 
     /**
      * @var string
@@ -37,11 +37,16 @@ class SeoMetadata implements SeoMetadataInterface
     protected $metaRobots;
 
     /**
+     * @var string
+     */
+    protected $title;
+
+    /**
      * {@inheritdoc}
      */
-    public function setTitle($title)
+    public function setLang($lang)
     {
-        $this->title = $title;
+        $this->lang = $lang;
 
         return $this;
     }
@@ -49,9 +54,9 @@ class SeoMetadata implements SeoMetadataInterface
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
+    public function getLang()
     {
-        return $this->title;
+        return $this->lang;
     }
 
     /**
@@ -106,5 +111,23 @@ class SeoMetadata implements SeoMetadataInterface
     public function getMetaRobots()
     {
         return $this->metaRobots;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }
