@@ -24,6 +24,24 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('silvestra_seo');
 
+        $rootNode
+            ->children()
+                ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->end()
+
+                ->scalarNode('seo_metadata_manager')->defaultValue('silvestra_seo.manager.seo_metadata.default')
+                    ->cannotBeEmpty()->end()
+
+                ->arrayNode('class')->isRequired()
+                    ->children()
+                        ->arrayNode('model')->isRequired()
+                            ->children()
+                                ->scalarNode('seo_metadata')->isRequired()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+
 
         return $treeBuilder;
     }

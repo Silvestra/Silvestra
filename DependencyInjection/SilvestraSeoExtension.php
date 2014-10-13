@@ -28,5 +28,14 @@ class SilvestraSeoExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        if (!in_array(strtolower($config['db_driver']), array('mongodb', 'orm'))) {
+            throw new \InvalidArgumentException(sprintf('Invalid db driver "%s".', $config['db_driver']));
+        }
+        $loader->load('db_driver/' . sprintf('%s.xml', $config['db_driver']));
+
+        $container->setParameter('silvestra_seo.model.seo_metadata.class', $config['class']['model']['seo_metadata']);
+
+        $container->setAlias('silvestra_seo.manager.seo_metadata', $config['seo_metadata_manager']);
     }
 }
