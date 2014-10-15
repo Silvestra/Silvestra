@@ -14,6 +14,7 @@ namespace Silvestra\Bundle\SeoBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -22,6 +23,21 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class SeoMetadataFormType extends AbstractType
 {
+    /**
+     * @var string
+     */
+    private $seoMetadataClass;
+
+    /**
+     * Constructor.
+     *
+     * @param string $seoMetadataClass
+     */
+    public function __construct($seoMetadataClass)
+    {
+        $this->seoMetadataClass = $seoMetadataClass;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -64,6 +80,7 @@ class SeoMetadataFormType extends AbstractType
         $resolver->setDefaults(
             array(
                 'translation_domain' => 'SilvestraSeoBundle',
+//                'data_class' => $this->seoMetadataClass,
             )
         );
     }
