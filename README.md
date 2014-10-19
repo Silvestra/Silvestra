@@ -1,4 +1,4 @@
-Seo
+Seo Component
 ===
 
 Silvestra seo component.
