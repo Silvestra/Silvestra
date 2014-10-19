@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
+        
         "symfony/framework-bundle": ">=2.3",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "dev-master",
@@ -30,9 +31,15 @@
         "tadcka/text-bundle": "dev-master"
     },
     "replace": {
+        "silvestra/form": "self.version",
+        "silvestra/media": "self.version",
+        "silvestra/seo": "self.version",
         "silvestra/admin-bundle": "self.version",
         "silvestra/admin-user-bundle": "self.version",
+        "silvestra/form-bundle": "self.version",
         "silvestra/frontend-bundle": "self.version",
+        "silvestra/media-bundle": "self.version",
+        "silvestra/seo-bundle": "self.version",
         "silvestra/text-node-bundle": "self.version"
     },
     "require-dev": {
