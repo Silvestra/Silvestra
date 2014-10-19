@@ -23,6 +23,7 @@
         "knplabs/knp-menu-bundle": "~2.0",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "nercury/translation-editor-bundle": "0.1.x-dev",
+        "Trsteel/ckeditor-bundle": "~1.2",
 
         "tadcka/tree": "dev-master",
         "tadcka/jstree-bundle": "dev-master",
