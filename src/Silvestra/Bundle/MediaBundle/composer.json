@@ -35,5 +35,10 @@
         "psr-4": {
             "Silvestra\\Bundle\\MediaBundle\\": ""
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
     }
 }

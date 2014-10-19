@@ -1,4 +1,4 @@
-Media
+Media Component
 =====
 
 Silvestra media component.
