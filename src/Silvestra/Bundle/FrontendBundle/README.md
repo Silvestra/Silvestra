@@ -1,4 +1,4 @@
-Frontend Bundle
+FrontendBundle
 =========
 
 Silvestra frontend bundle.

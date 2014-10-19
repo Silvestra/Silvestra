@@ -1,4 +1,4 @@
-Text node Bundle
+TextNodeBundle
 =========
 
 Silvestra text node bundle.

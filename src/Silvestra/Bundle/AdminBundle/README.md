@@ -1,4 +1,4 @@
-Admin Bundle
+AdminBundle
 =========
 
 Silvestra admin bundle.

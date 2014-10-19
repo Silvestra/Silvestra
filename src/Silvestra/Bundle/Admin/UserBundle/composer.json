@@ -1,0 +1,28 @@
+{
+    "name": "silvestra/admin-user-bundle",
+    "homepage": "https://github.com/Silvestra/AdminUserBundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tadas Gliaubicas",
+            "email": "tadcka89@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle": ">=2.3",
+        "friendsofsymfony/user-bundle": "2.0.*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Bundle\\Admin\\UserBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
