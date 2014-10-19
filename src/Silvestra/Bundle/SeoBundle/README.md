@@ -1,0 +1,4 @@
+SeoBundle
+=========
+
+Silvestra seo bundle.
