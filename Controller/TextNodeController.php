@@ -11,19 +11,17 @@
 
 namespace Silvestra\Bundle\TextNodeBundle\Controller;
 
+use Silvestra\Bundle\TextBundle\Form\Factory\TextFormFactory;
+use Silvestra\Bundle\TextBundle\Form\Handler\TextFormHandler;
+use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManagerInterface;
+use Silvestra\Bundle\TextNodeBundle\Model\TextNodeInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tadcka\Bundle\SitemapBundle\Controller\AbstractController;
 use Tadcka\Bundle\SitemapBundle\Frontend\Message\Messages;
 use Tadcka\Bundle\SitemapBundle\Frontend\Model\JsonResponseContent;
 use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;
-use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManagerInterface;
-use Silvestra\Bundle\TextNodeBundle\Model\TextNodeInterface;
 use Tadcka\Component\Tree\Event\TreeNodeEvent;
 use Tadcka\Component\Tree\TadckaTreeEvents;
-use Tadcka\TextBundle\Form\Factory\TextFormFactory;
-use Tadcka\TextBundle\Form\Handler\TextFormHandler;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -74,7 +72,7 @@ class TextNodeController extends AbstractController
      */
     private function getTextFormFactory()
     {
-        return $this->container->get('tadcka_text.form_factory.text');
+        return $this->container->get('silvestra_text.form_factory.text');
     }
 
     /**
@@ -82,7 +80,7 @@ class TextNodeController extends AbstractController
      */
     private function getTextFormHandler()
     {
-        return $this->container->get('tadcka_text.form_handler.text');
+        return $this->container->get('silvestra_text.form_handler.text');
     }
 
     /**
@@ -105,7 +103,7 @@ class TextNodeController extends AbstractController
         $textNode = $this->getTextNodeManager()->findTextNodeByNode($node);
         if (null === $textNode) {
             $textNode = $this->getTextNodeManager()->create();
-            $textNode->setText($this->container->get('tadcka_text.manager.text')->create());
+            $textNode->setText($this->container->get('silvestra_text.manager.text')->create());
             $textNode->setNode($node);
             $this->getTextNodeManager()->add($textNode);
         }

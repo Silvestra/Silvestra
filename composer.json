@@ -13,7 +13,7 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": ">=2.3",
-        "tadcka/text-bundle": "~0.2",
+        "silvestra/text-bundle": "dev-master",
         "tadcka/sitemap-bundle": "~0.2"
     },
     "autoload": {
