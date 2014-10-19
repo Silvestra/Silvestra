@@ -27,8 +27,7 @@
         "tadcka/tree": "dev-master",
         "tadcka/jstree-bundle": "dev-master",
         "tadcka/routing-bundle": "dev-master",
-        "tadcka/sitemap-bundle": "dev-master",
-        "tadcka/text-bundle": "dev-master"
+        "tadcka/sitemap-bundle": "dev-master"
     },
     "replace": {
         "silvestra/form": "self.version",
