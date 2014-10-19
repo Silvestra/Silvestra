@@ -1,0 +1,28 @@
+{
+    "name":         "silvestra/text",
+    "homepage":     "https://github.com/Silvestra/Text",
+    "description":  "Silvestra text component",
+    "keywords":     [" "],
+    "type":         "library",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":   "Tadas Gliaubicas",
+            "email":  "tadcka89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Component\\Text\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
