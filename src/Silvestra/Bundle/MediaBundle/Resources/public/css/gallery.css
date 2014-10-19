@@ -1,0 +1,81 @@
+.silvestra-media-image {
+    vertical-align: middle;
+    border: solid 1px #bbbbbb;
+    /*padding: 2px;*/
+    display: inline-block;
+    margin: 10px;
+    min-height: 150px;
+    min-width: 150px;
+    cursor: move;
+    text-align: center;
+    background-color: #fff;
+    max-height: 152px;
+}
+
+.silvestra-media-image .image {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.silvestra-media-image span.remove-image {
+    cursor: hand;
+    cursor: pointer;
+    float: right;
+    background-color: #FFFFFF;
+    color: #FF0000;
+    /*margin-right: 15px;*/
+    z-index: 10;
+}
+
+.silvestra-media-image span.remove-image i {
+    position: absolute;
+    margin-top: -8px;
+    margin-left: -7px;
+}
+
+.image-upload-modal .drop-zone {
+    margin-bottom: 10px;
+    min-height: 120px;
+    position: relative;
+    border: 2px dashed #bbb;
+    text-align: center;
+    font: 20pt bold 'Vollkorn';
+    color: #bbb;
+}
+
+.image-upload-modal .drop-zone p {
+    text-align: center;
+    font-weight: 800;
+    margin-top: 20px;
+}
+
+/*.image-upload-modal .select-image-zone {*/
+    /*margin-bottom: 20px;*/
+/*}*/
+
+.image-upload-modal #file-upload {
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    max-width: 0;
+    width: 0;
+    max-height: 0;
+    height: 0;
+}
+
+.silvestra-media-image .image-file {
+    position: relative;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    max-width: 0;
+    width: 0;
+    max-height: 0;
+    height: 0;
+}
+
+.silvestra-media-image .image-file {
+
+}
+
+.jcrop-keymgr {
+    opacity: 0;
+}

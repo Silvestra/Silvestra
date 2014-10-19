@@ -1,0 +1,14 @@
+form:
+    gallery:
+        add_image: Pridėti paveikslėlį
+
+image_upload_modal:
+    insert_image_file: Įterpti paveikslėlio failą
+    close: Uždaryti
+    image_crop: Iškirpti paveikslėlį
+    select_image_file: Pasirinkite paveikslėlio failą
+    drop_our_image_file_here: Kelkite savo paveikslėlio failą čia
+    or: arba
+    error:
+        loading_image_file_failed: Kraunant paveikslėlio failą įvyko klaida!
+        not_support_url_or_file_reader: Jūsų naršyklė nepalaiko URL arba FileReader API

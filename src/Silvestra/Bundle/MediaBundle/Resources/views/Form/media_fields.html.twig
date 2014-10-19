@@ -1,0 +1,37 @@
+{% trans_default_domain 'SilvestraMediaBundle' %}
+
+{% block silvestra_media_image_widget %}
+    <div class="silvestra-media-image" data-settings="{{ form.vars.settings }}">
+        <span class="remove-image">
+            <i class="fa fa-remove fa-lg"></i>
+        </span>
+        <div class="image"></div>
+        {{ form_widget(form) }}
+{% endblock silvestra_media_image_widget %}
+
+{% block silvestra_media_gallery_widget %}
+
+    {% spaceless %}
+        <div class="well silvestra-media-gallery" data-name="{{ name }}" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}" data-settings="{{ form.vars.settings }}">
+            {{ form_errors(form) }}
+            <div class="images">
+                {#{% for i in 0..5 %}#}
+                    {#{{ block('silvestra_image_container') }}#}
+                {#{% endfor %}#}
+            </div>
+
+
+            <div>
+                <a class="btn btn-success add-image-button" href="javascript:;">
+                    <i class="fa fa-picture-o"></i> {{ 'form.gallery.add_image'|trans }}
+                </a>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock silvestra_media_gallery_widget %}
+
+{% block silvestra_image_container %}
+    <div class="image-container">
+
+    </div>
+{% endblock silvestra_image_container %}

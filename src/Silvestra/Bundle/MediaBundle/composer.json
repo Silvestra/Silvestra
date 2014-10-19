@@ -1,0 +1,39 @@
+{
+    "name":         "silvestra/media-bundle",
+    "homepage":     "https://github.com/Silvestra/MediaBundle",
+    "description":  "Media bundle on Symfony2",
+    "keywords":     ["media"],
+    "type":         "symfony-bundle",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":   "Tadas Gliaubicas",
+            "email":  "tadcka89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle" : ">=2.3",
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
+
+        "silvestra/media": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2"
+    },
+    "suggest": {
+        "components/bootstrap": "Bootstrap library.",
+        "components/font-awesome": "Font awesome library.",
+        "components/jquery": "JQuery library.",
+        "silvestra/jquery-file-upload": "Jquery file upload library",
+        "silvestra/javascript-load-image": "Javascript load image library.",
+        "silvestra/jcrop": "Jcrop library"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Bundle\\MediaBundle\\": ""
+        }
+    }
+}
