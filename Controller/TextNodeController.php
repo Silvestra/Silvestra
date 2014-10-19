@@ -11,11 +11,12 @@
 
 namespace Silvestra\Bundle\TextNodeBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Tadcka\Bundle\SitemapBundle\Controller\AbstractController;
 use Tadcka\Bundle\SitemapBundle\Frontend\Message\Messages;
+use Tadcka\Bundle\SitemapBundle\Frontend\Model\JsonResponseContent;
 use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;
 use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManagerInterface;
 use Silvestra\Bundle\TextNodeBundle\Model\TextNodeInterface;
@@ -29,7 +30,7 @@ use Tadcka\TextBundle\Form\Handler\TextFormHandler;
  *
  * @since 9/7/14 12:04 PM
  */
-class TextNodeController extends ContainerAware
+class TextNodeController extends AbstractController
 {
     public function indexAction(Request $request, $nodeId)
     {
@@ -45,12 +46,22 @@ class TextNodeController extends ContainerAware
             );
             $this->getTextNodeManager()->save();
 
-            $this->container->get('event_dispatcher')
-                ->dispatch(TadckaTreeEvents::NODE_EDIT_SUCCESS, new TreeNodeEvent($node));
+            $this->getEventDispatcher()->dispatch(TadckaTreeEvents::NODE_EDIT_SUCCESS, new TreeNodeEvent($node));
+        }
+
+        if ('json' === $request->getRequestFormat()) {
+            $jsonResponseContent = new JsonResponseContent($nodeId);
+            $jsonResponseContent->setMessages($this->getMessageHtml($messages));
+            $jsonResponseContent->setTab(
+                $this->render('SilvestraTextNodeBundle:TextNode:index.html.twig', array('form' => $form->createView()))
+            );
+            $jsonResponseContent->setToolbar($this->getToolbarHtml($node));
+
+            return $this->getJsonResponse($jsonResponseContent);
         }
 
         return $this->renderResponse(
-            '@SilvestraTextNode/TextNode/index.html.twig',
+            'SilvestraTextNodeBundle:TextNode:index.html.twig',
             array(
                 'form' => $form->createView(),
                 'messages' => $messages,
@@ -80,38 +91,6 @@ class TextNodeController extends ContainerAware
     private function getTextNodeManager()
     {
         return $this->container->get('silvestra_text_node.manager.text_node');
-    }
-
-    /**
-     * Render response.
-     *
-     * @param string $name
-     * @param array $parameters
-     *
-     * @return Response
-     */
-    private function renderResponse($name, array $parameters = array())
-    {
-        return new Response($this->container->get('templating')->render($name, $parameters));
-    }
-
-    /**
-     * Get node or 404 http status code.
-     *
-     * @param int $id
-     *
-     * @return null|NodeInterface
-     *
-     * @throws NotFoundHttpException
-     */
-    private function getNodeOr404($id)
-    {
-        $node = $this->container->get('tadcka_sitemap.manager.node')->findNodeById($id);
-        if (null === $node) {
-            throw new NotFoundHttpException('Not found node!');
-        }
-
-        return $node;
     }
 
     /**

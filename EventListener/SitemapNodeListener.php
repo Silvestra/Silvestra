@@ -51,11 +51,16 @@ class SitemapNodeListener
      */
     public function onSitemapNodeEdit(SitemapNodeEvent $event)
     {
-        if ('text' === $event->getNode()->getType()) {
+        $node = $event->getNode();
+
+        if ('text' === $node->getType()) {
             $tab = new Tab(
                 $event->getTranslator()->trans('text', array(), 'SilvestraTextNodeBundle'),
                 'tadcka_text_node',
-                $event->getRouter()->generate('silvestra_text_node', array('nodeId' => $event->getNode()->getId()))
+                $event->getRouter()->generate(
+                    'silvestra_text_node',
+                    array('_format' => 'json', 'nodeId' => $node->getId())
+                )
             );
 
             $event->addTab($tab);
