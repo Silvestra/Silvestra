@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+
+<!--
+ This file is part of the Silvestra package.
+
+ (c) Tadas Gliaubicas <tadcka89@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="silvestra_text.form_factory.text.class">Silvestra\Bundle\TextBundle\Form\Factory\TextFormFactory</parameter>
+        <parameter key="silvestra_text.form_handler.text.class">Silvestra\Bundle\TextBundle\Form\Handler\TextFormHandler</parameter>
+        <parameter key="silvestra_text.form_type.text.class">Silvestra\Bundle\TextBundle\Form\Type\TextType</parameter>
+        <parameter key="silvestra_text.form_type.text_translation.class">Silvestra\Bundle\TextBundle\Form\Type\TextTranslationType</parameter>
+    </parameters>
+
+    <services>
+
+        <!--Silvestra text form factory-->
+        <service id="silvestra_text.form_factory.text" class="%silvestra_text.form_factory.text.class%">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+        </service>
+
+        <!--Silvestra text form handler-->
+        <service id="silvestra_text.form_handler.text" class="%silvestra_text.form_handler.text.class%">
+            <argument type="service" id="silvestra_text.manager.text" />
+        </service>
+
+        <!--Silvestra text form type-->
+        <service id="silvestra_text.form_type.text" class="%silvestra_text.form_type.text.class%">
+            <tag name="form.type" alias="silvestra_text" />
+            <argument>%silvestra_text.model.text.class%</argument>
+        </service>
+
+        <!--Silvestra text translation form type-->
+        <service id="silvestra_text.form_type.text_translation" class="%silvestra_text.form_type.text_translation.class%">
+            <tag name="form.type" alias="silvestra_text_translation" />
+            <argument>%silvestra_text.model.text_translation.class%</argument>
+        </service>
+
+    </services>
+</container>

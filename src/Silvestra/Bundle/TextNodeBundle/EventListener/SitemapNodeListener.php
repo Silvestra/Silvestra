@@ -12,10 +12,10 @@
 namespace Silvestra\Bundle\TextNodeBundle\EventListener;
 
 use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManagerInterface;
+use Silvestra\Component\Text\Model\Manager\TextManagerInterface;
 use Tadcka\Bundle\SitemapBundle\Event\SitemapNodeEvent;
 use Tadcka\Bundle\SitemapBundle\Frontend\Model\Tab;
 use Tadcka\Component\Tree\Event\TreeNodeEvent;
-use Tadcka\TextBundle\ModelManager\TextManagerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -56,7 +56,7 @@ class SitemapNodeListener
         if ('text' === $node->getType()) {
             $tab = new Tab(
                 $event->getTranslator()->trans('text', array(), 'SilvestraTextNodeBundle'),
-                'tadcka_text_node',
+                'silvestra_text_node',
                 $event->getRouter()->generate(
                     'silvestra_text_node',
                     array('_format' => 'json', 'nodeId' => $node->getId())

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadcka <tadcka89@gmail.com>
  *

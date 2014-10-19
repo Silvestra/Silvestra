@@ -11,7 +11,7 @@
 
 namespace Silvestra\Bundle\TextNodeBundle\Model;
 
-use Tadcka\TextBundle\Model\TextInterface;
+use Silvestra\Component\Text\Model\TextInterface;
 use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;
 
 class TextNode implements TextNodeInterface

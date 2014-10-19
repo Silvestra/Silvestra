@@ -1,0 +1,6 @@
+form:
+    text_translation:
+        title: Title
+        content: Content
+    button:
+        submit: Submit

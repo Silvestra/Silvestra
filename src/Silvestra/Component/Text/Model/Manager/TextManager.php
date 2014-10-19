@@ -9,14 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Form\Tests\Type;
+namespace Silvestra\Component\Text\Model\Manager;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/8/14 1:19 AM
  */
-class KeyValueRowTypeTest extends \PHPUnit_Framework_TestCase
+abstract class TextManager implements TextManagerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function create()
+    {
+        $class = $this->getClass();
+        $text = new $class;
 
+        return $text;
+    }
 }

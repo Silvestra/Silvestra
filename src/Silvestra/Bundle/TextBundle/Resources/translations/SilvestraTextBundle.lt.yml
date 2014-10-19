@@ -1,0 +1,6 @@
+form:
+    text_translation:
+        title: Antraštė
+        content: Turinys
+    button:
+        submit: Išsaugoti
