@@ -1,0 +1,4 @@
+CacheBundle
+=========
+
+Silvestra cache bundle.

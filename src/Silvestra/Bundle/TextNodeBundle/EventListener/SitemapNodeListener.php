@@ -79,7 +79,7 @@ class SitemapNodeListener
             $textNode = $this->textNodeManager->findTextNodeByNode($node);
             if (null !== $textNode) {
                 $this->textNodeManager->remove($textNode);
-                $this->textManager->delete($textNode->getText());
+                $this->textManager->remove($textNode->getText());
             }
         }
     }

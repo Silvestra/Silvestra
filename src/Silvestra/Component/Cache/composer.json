@@ -1,0 +1,33 @@
+{
+    "name":         "silvestra/cache",
+    "homepage":     "https://github.com/Silvestra/Cache",
+    "description":  "Silvestra cache component",
+    "keywords":     ["Cache, Http Cache"],
+    "type":         "library",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":   "Tadas Gliaubicas",
+            "email":  "tadcka89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/filesystem": ">=2.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Component\\Cache\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

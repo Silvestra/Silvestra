@@ -1,0 +1,28 @@
+{
+    "name": "silvestra/cache-bundle",
+    "homepage": "https://github.com/Silvestra/CacheBundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tadas Gliaubicas",
+            "email": "tadcka89@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle": ">=2.3",
+        "silvestra/cache": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Bundle\\CacheBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
