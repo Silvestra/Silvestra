@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle;
+namespace Silvestra\Bundle\Text\NodeBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

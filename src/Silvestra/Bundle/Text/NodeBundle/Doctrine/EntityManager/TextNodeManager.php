@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle\Doctrine\EntityManager;
+namespace Silvestra\Bundle\Text\NodeBundle\Doctrine\EntityManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;
-use Silvestra\Bundle\TextNodeBundle\Model\TextNodeInterface;
-use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManager as BaseTextNodeManager;
+use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
+use Silvestra\Bundle\Text\NodeBundle\Model\Manager\TextNodeManager as BaseTextNodeManager;
 
 class TextNodeManager extends BaseTextNodeManager
 {

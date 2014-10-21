@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle\Controller;
+namespace Silvestra\Bundle\Text\NodeBundle\Controller;
 
 use Silvestra\Bundle\TextBundle\Form\Factory\TextFormFactory;
 use Silvestra\Bundle\TextBundle\Form\Handler\TextFormHandler;
-use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManagerInterface;
-use Silvestra\Bundle\TextNodeBundle\Model\TextNodeInterface;
+use Silvestra\Bundle\Text\NodeBundle\Model\Manager\TextNodeManagerInterface;
+use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Tadcka\Bundle\SitemapBundle\Controller\AbstractController;
 use Tadcka\Bundle\SitemapBundle\Frontend\Message\Messages;

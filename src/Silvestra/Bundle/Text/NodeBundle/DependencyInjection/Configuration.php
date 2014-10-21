@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle\DependencyInjection;
+namespace Silvestra\Bundle\Text\NodeBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

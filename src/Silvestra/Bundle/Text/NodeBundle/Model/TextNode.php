@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle\Model;
+namespace Silvestra\Bundle\Text\NodeBundle\Model;
 
 use Silvestra\Component\Text\Model\TextInterface;
 use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle\Model\Manager;
+namespace Silvestra\Bundle\Text\NodeBundle\Model\Manager;
 
 abstract class TextNodeManager implements TextNodeManagerInterface
 {

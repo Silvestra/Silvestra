@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Silvestra\\Bundle\\TextNodeBundle\\": ""
+            "Silvestra\\Bundle\\Text\\NodeBundle\\": ""
         }
     },
     "extra": {

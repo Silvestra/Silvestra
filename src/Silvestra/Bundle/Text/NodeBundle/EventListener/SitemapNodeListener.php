@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle\EventListener;
+namespace Silvestra\Bundle\Text\NodeBundle\EventListener;
 
-use Silvestra\Bundle\TextNodeBundle\Model\Manager\TextNodeManagerInterface;
+use Silvestra\Bundle\Text\NodeBundle\Model\Manager\TextNodeManagerInterface;
 use Silvestra\Component\Text\Model\Manager\TextManagerInterface;
 use Tadcka\Bundle\SitemapBundle\Event\SitemapNodeEvent;
 use Tadcka\Bundle\SitemapBundle\Frontend\Model\Tab;

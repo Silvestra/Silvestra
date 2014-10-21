@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\TextNodeBundle\Model\Manager;
+namespace Silvestra\Bundle\Text\NodeBundle\Model\Manager;
 
 use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;
-use Silvestra\Bundle\TextNodeBundle\Model\TextNodeInterface;
+use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 
 interface TextNodeManagerInterface
 {
