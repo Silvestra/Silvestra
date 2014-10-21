@@ -1,8 +1,9 @@
 {
-    "name": "silvestra/cache-bundle",
+    "name":     "silvestra/cache-bundle",
     "homepage": "https://github.com/Silvestra/CacheBundle",
-    "type": "symfony-bundle",
-    "license": "MIT",
+    "keywords": ["Cache", "Http Cache"],
+    "type":     "symfony-bundle",
+    "license":  "MIT",
     "authors": [
         {
             "name": "Tadas Gliaubicas",

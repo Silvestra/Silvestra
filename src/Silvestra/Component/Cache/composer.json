@@ -2,7 +2,7 @@
     "name":         "silvestra/cache",
     "homepage":     "https://github.com/Silvestra/Cache",
     "description":  "Silvestra cache component",
-    "keywords":     ["Cache, Http Cache"],
+    "keywords":     ["Cache", "Http Cache"],
     "type":         "library",
     "license":      "MIT",
     "authors": [
