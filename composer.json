@@ -31,12 +31,14 @@
         "tadcka/sitemap-bundle": "dev-master"
     },
     "replace": {
+        "silvestra/cache": "self.version",
         "silvestra/form": "self.version",
         "silvestra/media": "self.version",
         "silvestra/seo": "self.version",
         "silvestra/text": "self.version",
         "silvestra/admin-bundle": "self.version",
         "silvestra/admin-user-bundle": "self.version",
+        "silvestra/cache-bundle": "self.version",
         "silvestra/form-bundle": "self.version",
         "silvestra/frontend-bundle": "self.version",
         "silvestra/media-bundle": "self.version",
