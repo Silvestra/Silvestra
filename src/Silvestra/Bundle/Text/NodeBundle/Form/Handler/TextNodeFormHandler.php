@@ -59,7 +59,14 @@ class TextNodeFormHandler
         $this->translator = $translator;
     }
 
-
+    /**
+     * Process text node form.
+     *
+     * @param Request $request
+     * @param FormInterface $form
+     *
+     * @return bool
+     */
     public function process(Request $request, FormInterface $form)
     {
         if ($request->isMethod('POST')) {

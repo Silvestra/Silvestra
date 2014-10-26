@@ -78,7 +78,14 @@ class TextNodeController
         $this->textNodeManager = $textNodeManager;
     }
 
-
+    /**
+     * Silvestra text node index action.
+     *
+     * @param Request $request
+     * @param $nodeId
+     *
+     * @return Response
+     */
     public function indexAction(Request $request, $nodeId)
     {
         $node = $this->responseHelper->getNodeOr404($nodeId);
