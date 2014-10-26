@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="silvestra_text_node" path="/text-node/{nodeId}.{_format}">
-        <default key="_controller">SilvestraTextNodeBundle:TextNode:index</default>
+        <default key="_controller">silvestra_text_node.controller.text_node:indexAction</default>
         <default key="_format">html</default>
         <requirement key="_format">html|json</requirement>
         <requirement key="id">\d+</requirement>
