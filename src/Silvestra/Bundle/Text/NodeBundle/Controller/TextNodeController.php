@@ -28,7 +28,7 @@ use Tadcka\Component\Tree\TadckaTreeEvents;
  *
  * @since 9/7/14 12:04 PM
  */
-class TextNodeController extends AbstractController
+class TextNodeController  extends AbstractController
 {
     public function indexAction(Request $request, $nodeId)
     {

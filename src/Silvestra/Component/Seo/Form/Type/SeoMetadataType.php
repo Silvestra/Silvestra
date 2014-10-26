@@ -47,7 +47,7 @@ class SeoMetadataType extends AbstractType
             'title',
             'text',
             array(
-                'label' => 'form.seo_metadata.title',
+                'label' => 'form.seo_metadata.page_title',
                 'constraints' => array(new Assert\NotBlank()),
                 'required' => false,
             )
