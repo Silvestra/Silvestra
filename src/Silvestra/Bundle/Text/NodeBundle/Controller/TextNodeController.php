@@ -11,84 +11,101 @@
 
 namespace Silvestra\Bundle\Text\NodeBundle\Controller;
 
-use Silvestra\Bundle\TextBundle\Form\Factory\TextFormFactory;
-use Silvestra\Bundle\TextBundle\Form\Handler\TextFormHandler;
+use Silvestra\Bundle\Text\NodeBundle\Form\Factory\TextNodeFormFactory;
+use Silvestra\Bundle\Text\NodeBundle\Form\Handler\TextNodeFormHandler;
 use Silvestra\Bundle\Text\NodeBundle\Model\Manager\TextNodeManagerInterface;
 use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
+use Silvestra\Component\Text\Model\Manager\TextManagerInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Tadcka\Bundle\SitemapBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Tadcka\Bundle\SitemapBundle\Frontend\Message\Messages;
-use Tadcka\Bundle\SitemapBundle\Frontend\Model\JsonResponseContent;
+use Tadcka\Bundle\SitemapBundle\Frontend\ResponseHelper;
 use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;
-use Tadcka\Component\Tree\Event\TreeNodeEvent;
-use Tadcka\Component\Tree\TadckaTreeEvents;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 9/7/14 12:04 PM
  */
-class TextNodeController  extends AbstractController
+class TextNodeController
 {
+    /**
+     * @var TextNodeFormFactory
+     */
+    private $formFactory;
+
+    /**
+     * @var TextNodeFormHandler
+     */
+    private $formHandler;
+
+    /**
+     * @var ResponseHelper
+     */
+    private $responseHelper;
+
+    /**
+     * @var TextManagerInterface
+     */
+    private $textManager;
+
+    /**
+     * @var TextNodeManagerInterface
+     */
+    private $textNodeManager;
+
+    /**
+     * Constructor.
+     *
+     * @param TextNodeFormFactory $formFactory
+     * @param TextNodeFormHandler $formHandler
+     * @param ResponseHelper $responseHelper
+     * @param TextManagerInterface $textManager
+     * @param TextNodeManagerInterface $textNodeManager
+     */
+    public function __construct(
+        TextNodeFormFactory $formFactory,
+        TextNodeFormHandler $formHandler,
+        ResponseHelper $responseHelper,
+        TextManagerInterface $textManager,
+        TextNodeManagerInterface $textNodeManager
+    ) {
+        $this->formFactory = $formFactory;
+        $this->formHandler = $formHandler;
+        $this->responseHelper = $responseHelper;
+        $this->textManager = $textManager;
+        $this->textNodeManager = $textNodeManager;
+    }
+
+    /**
+     * Silvestra text node index action.
+     *
+     * @param Request $request
+     * @param $nodeId
+     *
+     * @return Response
+     */
     public function indexAction(Request $request, $nodeId)
     {
-        $node = $this->getNodeOr404($nodeId);
+        $node = $this->responseHelper->getNodeOr404($nodeId);
         $textNode = $this->getTextNode($node);
-        $form = $this->getTextFormFactory()->create($textNode->getText());
-
+        $form = $this->formFactory->create($textNode);
         $messages = new Messages();
-        if ($this->getTextFormHandler()->process($request, $form)) {
-            $messages->addSuccess(
-                $this->container->get('translator')
-                    ->trans('success.text_node_save', array(), 'SilvestraTextNodeBundle')
-            );
-            $this->getTextNodeManager()->save();
 
-            $this->getEventDispatcher()->dispatch(TadckaTreeEvents::NODE_EDIT_SUCCESS, new TreeNodeEvent($node));
+        if ($this->formHandler->process($request, $form)) {
+            $messages->addSuccess($this->formHandler->onSuccess($node));
         }
 
         if ('json' === $request->getRequestFormat()) {
-            $jsonResponseContent = new JsonResponseContent($nodeId);
-            $jsonResponseContent->setMessages($this->getMessageHtml($messages));
-            $jsonResponseContent->setTab(
-                $this->render('SilvestraTextNodeBundle:TextNode:index.html.twig', array('form' => $form->createView()))
-            );
-            $jsonResponseContent->setToolbar($this->getToolbarHtml($node));
+            $jsonContent = $this->responseHelper->createJsonContent($node);
+            $jsonContent->setMessages($this->responseHelper->renderMessages($messages));
+            $jsonContent->setTab($this->renderTextNode($form));
 
-            return $this->getJsonResponse($jsonResponseContent);
+            return $this->responseHelper->getJsonResponse($jsonContent);
         }
 
-        return $this->renderResponse(
-            'SilvestraTextNodeBundle:TextNode:index.html.twig',
-            array(
-                'form' => $form->createView(),
-                'messages' => $messages,
-            )
-        );
-    }
-
-    /**
-     * @return TextFormFactory
-     */
-    private function getTextFormFactory()
-    {
-        return $this->container->get('silvestra_text.form_factory.text');
-    }
-
-    /**
-     * @return TextFormHandler
-     */
-    private function getTextFormHandler()
-    {
-        return $this->container->get('silvestra_text.form_handler.text');
-    }
-
-    /**
-     * @return TextNodeManagerInterface
-     */
-    private function getTextNodeManager()
-    {
-        return $this->container->get('silvestra_text_node.manager.text_node');
+        return new Response($this->renderTextNode($form, $messages));
     }
 
     /**
@@ -100,14 +117,37 @@ class TextNodeController  extends AbstractController
      */
     private function getTextNode(NodeInterface $node)
     {
-        $textNode = $this->getTextNodeManager()->findTextNodeByNode($node);
+        $textNode = $this->textNodeManager->findTextNodeByNode($node);
+
         if (null === $textNode) {
-            $textNode = $this->getTextNodeManager()->create();
-            $textNode->setText($this->container->get('silvestra_text.manager.text')->create());
+            $textNode = $this->textNodeManager->create();
+            $text = $this->textManager->create();
+
+            $textNode->setText($text);
             $textNode->setNode($node);
-            $this->getTextNodeManager()->add($textNode);
+            $this->textManager->add($text);
+            $this->textNodeManager->add($textNode);
         }
 
         return $textNode;
+    }
+
+    /**
+     * Render text node template.
+     *
+     * @param FormInterface $form
+     * @param null|Messages $messages
+     *
+     * @return string
+     */
+    private function renderTextNode(FormInterface $form, Messages $messages = null)
+    {
+        return $this->responseHelper->render(
+            'SilvestraTextNodeBundle:TextNode:index.html.twig',
+            array(
+                'form' => $form->createView(),
+                'messages' => $messages,
+            )
+        );
     }
 }

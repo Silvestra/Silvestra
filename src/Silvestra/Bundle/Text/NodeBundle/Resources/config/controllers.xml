@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="silvestra_text_node.controller.text_node.class">Silvestra\Bundle\Text\NodeBundle\Controller\TextNodeController</parameter>
+    </parameters>
+
+    <services>
+
+        <!--Silvestra text node controller-->
+        <service id="silvestra_text_node.controller.text_node" class="%silvestra_text_node.controller.text_node.class%">
+            <argument type="service" id="silvestra_text_node.form_factory.text_node" />
+            <argument type="service" id="silvestra_text_node.form_handler.text_node" />
+            <argument type="service" id="tadcka_sitemap.helper.response" />
+            <argument type="service" id="silvestra_text.manager.text" />
+            <argument type="service" id="silvestra_text_node.manager.text_node" />
+        </service>
+
+    </services>
+
+</container>
