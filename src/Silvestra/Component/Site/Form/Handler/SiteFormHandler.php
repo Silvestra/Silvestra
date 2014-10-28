@@ -11,13 +11,26 @@
 
 namespace Silvestra\Component\Site\Form\Handler;
 
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 10/28/14 10:34 PM
  */
-class SiteFormHandler 
+class SiteFormHandler
 {
+    public function process(Request $request, FormInterface $form)
+    {
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
+            if ($form->isValid()) {
 
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
- 

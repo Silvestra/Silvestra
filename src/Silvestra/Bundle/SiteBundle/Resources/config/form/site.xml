@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<!--
+/*
+ * This file is part of the Silvestra package.
+ *
+ * (c) Tadcka <tadcka89@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="silvestra_site.form_factory.site.class">Silvestra\Component\Site\Form\Factory\SiteFormFactory</parameter>
+        <parameter key="silvestra_site.form_handler.site.class">Silvestra\Component\Site\Form\Handler\SiteFormHandler</parameter>
+        <parameter key="silvestra_site.form_type.site.class">Silvestra\Component\Site\Form\Type\SiteType</parameter>
+    </parameters>
+
+    <services>
+
+        <!--Silvestra site form factory-->
+        <service id="silvestra_site.form_factory.site" class="%silvestra_site.form_factory.site.class%">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+        </service>
+
+        <!--Silvestra site form handler-->
+        <service id="silvestra_site.form_handler.site" class="%silvestra_site.form_handler.site.class%">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+        </service>
+
+        <!--Silvestra site form type-->
+        <service id="silvestra_site.form_type.site" class="%silvestra_site.form_type.site.class%">
+            <tag name="form.type" alias="silvestra_site" />
+            <argument>%silvestra_site.model.site.class%</argument>
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,7 @@
+form:
+  site:
+    domain: Domenas
+  button:
+    save: Išsaugoti
+
+site: Svetainė

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\SiteBundle\Model;
+namespace Silvestra\Component\Site\Model;
 
 use Silvestra\Component\Seo\Model\SeoMetadataInterface;
 
@@ -25,7 +25,7 @@ class Site implements SiteInterface
     protected $domain;
 
     /**
-     * @var SeoMetadataInterface
+     * @var array|SeoMetadataInterface[]
      */
     protected $seoMetadata;
 
@@ -38,6 +38,16 @@ class Site implements SiteInterface
      * @var \DateTime
      */
     protected $updatedAt;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->seoMetadata = array();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = $this->createdAt;
+    }
 
     /**
      * {@inheritdoc}
@@ -60,7 +70,7 @@ class Site implements SiteInterface
     /**
      * {@inheritdoc}
      */
-    public function setSeoMetadata(SeoMetadataInterface $seoMetadata)
+    public function setSeoMetadata($seoMetadata)
     {
         $this->seoMetadata = $seoMetadata;
 
@@ -78,11 +88,31 @@ class Site implements SiteInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function addSeoMetadata(SeoMetadataInterface $seoMetadata)
     {
-        $this->createdAt = $createdAt;
+        $this->seoMetadata[] = $seoMetadata;
+    }
 
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSeoMetadata(SeoMetadataInterface $seoMetadata)
+    {
+        // TODO
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSeoMetadataByLang($lang)
+    {
+        foreach ($this->seoMetadata as $seoMetadata) {
+            if ($lang === $seoMetadata->getLang()) {
+                return $seoMetadata;
+            }
+        }
+
+        return null;
     }
 
     /**

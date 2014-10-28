@@ -1,13 +1,101 @@
 <?php
 
+/*
+ * This file is part of the Silvestra package.
+ *
+ * (c) Tadas Gliaubicas <tadcka89@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Silvestra\Bundle\SiteBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Silvestra\Component\Site\Form\Factory\SiteFormFactory;
+use Silvestra\Component\Site\Form\Handler\SiteFormHandler;
+use Silvestra\Component\Site\Model\Manager\SiteManagerInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
-class DefaultController extends Controller
+class SiteController
 {
-    public function indexAction($name)
+    /**
+     * @var SiteFormFactory
+     */
+    private $formFactory;
+
+    /**
+     * @var SiteFormHandler
+     */
+    private $formHandler;
+
+    /**
+     * @var SiteManagerInterface
+     */
+    private $siteManager;
+
+    /**
+     * @var EngineInterface
+     */
+    private $templating;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * Constructor.
+     *
+     * @param SiteFormFactory $formFactory
+     * @param SiteFormHandler $formHandler
+     * @param SiteManagerInterface $siteManager
+     * @param EngineInterface $templating
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(
+        SiteFormFactory $formFactory,
+        SiteFormHandler $formHandler,
+        SiteManagerInterface $siteManager,
+        EngineInterface $templating,
+        TranslatorInterface $translator
+    ) {
+        $this->formFactory = $formFactory;
+        $this->formHandler = $formHandler;
+        $this->siteManager = $siteManager;
+        $this->templating = $templating;
+        $this->translator = $translator;
+    }
+
+    public function indexAction(Request $request)
     {
-        return $this->render('SilvestraSiteBundle:Default:index.html.twig', array('name' => $name));
+        $form = $this->formFactory->create($this->siteManager->create());
+
+        if ($this->formHandler->process($request, $form)) {
+
+        }
+
+        return new Response($this->renderSite($form));
+    }
+
+    /**
+     * Render site template.
+     *
+     * @param FormInterface $form
+     *
+     * @return string
+     */
+    private function renderSite(FormInterface $form)
+    {
+        return $this->templating->render(
+            'SilvestraSiteBundle:Site:index.html.twig',
+            array(
+                'form' => $form->createView(),
+                'page_header' => $this->translator->trans('site', array(), 'SilvestraSiteBundle')
+            )
+        );
     }
 }

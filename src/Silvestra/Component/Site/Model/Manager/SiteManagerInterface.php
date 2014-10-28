@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\SiteBundle\Model\Manager;
+namespace Silvestra\Component\Site\Model\Manager;
 
-use Silvestra\Bundle\SiteBundle\Model\SiteInterface;
+use Silvestra\Component\Site\Model\SiteInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

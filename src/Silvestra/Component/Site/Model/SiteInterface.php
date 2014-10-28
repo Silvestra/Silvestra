@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\SiteBundle\Model;
+namespace Silvestra\Component\Site\Model;
 
 use Silvestra\Component\Seo\Model\SeoMetadataInterface;
 
@@ -38,27 +38,41 @@ interface SiteInterface
     /**
      * Set seoMetadata.
      *
-     * @param SeoMetadataInterface $seoMetadata
+     * @param array|SeoMetadataInterface[] $seoMetadata
      *
      * @return SiteInterface
      */
-    public function setSeoMetadata(SeoMetadataInterface $seoMetadata);
+    public function setSeoMetadata($seoMetadata);
 
     /**
      * Get seoMetadata.
      *
-     * @return SeoMetadataInterface
+     * @return array|SeoMetadataInterface[]
      */
     public function getSeoMetadata();
 
     /**
-     * Set createdAt.
+     * Add seoMetadata.
      *
-     * @param \DateTime $createdAt
-     *
-     * @return SiteInterface
+     * @param SeoMetadataInterface $seoMetadata
      */
-    public function setCreatedAt(\DateTime $createdAt);
+    public function addSeoMetadata(SeoMetadataInterface $seoMetadata);
+
+    /**
+     * Remove seoMetadata.
+     *
+     * @param SeoMetadataInterface $seoMetadata
+     */
+    public function removeSeoMetadata(SeoMetadataInterface $seoMetadata);
+
+    /**
+     * Get seoMetadata by language.
+     *
+     * @param string $lang
+     *
+     * @return null|SeoMetadataInterface
+     */
+    public function getSeoMetadataByLang($lang);
 
     /**
      * Get createdAt.
