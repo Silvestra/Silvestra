@@ -26,7 +26,7 @@
         "Trsteel/ckeditor-bundle": "~1.2",
 
         "tadcka/tree": "dev-master",
-        "tadcka/routing-bundle": "dev-master",
+        "tadcka/routing-bundle": "0.2.*@dev",
         "tadcka/sitemap-bundle": "dev-master"
     },
     "replace": {
