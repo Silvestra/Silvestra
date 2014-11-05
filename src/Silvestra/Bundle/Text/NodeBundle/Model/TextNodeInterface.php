@@ -12,7 +12,7 @@
 namespace Silvestra\Bundle\Text\NodeBundle\Model;
 
 use Silvestra\Component\Text\Model\TextInterface;
-use Tadcka\Bundle\SitemapBundle\Model\NodeInterface;
+use Tadcka\Component\Tree\Model\NodeInterface;
 
 interface TextNodeInterface
 {

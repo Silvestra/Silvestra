@@ -27,7 +27,7 @@
 
         "tadcka/tree": "dev-master",
         "tadcka/routing-bundle": "0.2.*@dev",
-        "tadcka/sitemap-bundle": "dev-master"
+        "tadcka/sitemap-bundle": "0.3.*@dev"
     },
     "replace": {
         "silvestra/cache": "self.version",

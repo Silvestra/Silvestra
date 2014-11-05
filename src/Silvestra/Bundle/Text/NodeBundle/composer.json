@@ -13,8 +13,8 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": ">=2.3",
-        "silvestra/text-bundle": "dev-master",
-        "tadcka/sitemap-bundle": "~0.2"
+        "silvestra/text-bundle": "0.1.*@dev",
+        "tadcka/sitemap-bundle": "0.2.*@dev"
     },
     "autoload": {
         "psr-4": {
