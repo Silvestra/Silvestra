@@ -5,3 +5,6 @@ form:
     save: Išsaugoti
 
 site: Svetainė
+
+success:
+  site_save: Sėkmingai išsaugoti svetainės duomenys!

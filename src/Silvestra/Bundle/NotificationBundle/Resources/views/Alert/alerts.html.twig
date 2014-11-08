@@ -1,0 +1,5 @@
+{%- for type, messages in alerts %}
+    {%- for message in messages %}
+        <div class="alert alert-{{ type }}" role="alert">{{- message -}}</div>
+    {% endfor -%}
+{% endfor -%}

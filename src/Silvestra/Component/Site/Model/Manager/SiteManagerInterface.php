@@ -19,6 +19,13 @@ use Silvestra\Component\Site\Model\SiteInterface;
 interface SiteManagerInterface
 {
     /**
+     * Find site.
+     *
+     * @return null|SiteInterface
+     */
+    public function find();
+
+    /**
      * Create new Site object.
      *
      * @return SiteInterface

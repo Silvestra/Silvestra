@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Alert manager-->
+        <service id="silvestra_notification.manager.alert" class="Silvestra\Component\Notification\AlertManager" public="true">
+            <argument type="service" id="session.flash_bag" />
+        </service>
+
+        <!--Alert templating helper-->
+        <service id="silvestra_notification.templating_helper.alert" class="Silvestra\Bundle\NotificationBundle\Twig\AlertHelper" public="false">
+            <tag name="templating.helper" alias="silvestra_alert" />
+            <argument type="service" id="twig" />
+        </service>
+
+        <!--Alert twig extension-->
+        <service class="Silvestra\Bundle\NotificationBundle\Twig\Extension\AlertExtension">
+            <tag name="twig.extension" alias="silvestra_alert" />
+            <argument type="service" id="silvestra_notification.templating_helper.alert" />
+            <argument type="service" id="silvestra_notification.manager.alert" />
+            <argument>%silvestra_notification.alert.template%</argument>
+        </service>
+
+    </services>
+
+</container>

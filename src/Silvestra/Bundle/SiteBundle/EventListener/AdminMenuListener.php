@@ -42,7 +42,7 @@ class AdminMenuListener
     public function onAdminMenu(AdminMenuEvent $event)
     {
         $tradedoublerMapper = $event->getMenu()->addChild(
-            $this->translator->trans('site', array(), 'SilvestraSiteBundle'),
+            $this->translator->trans('site', array(), 'SilvestraSite'),
             array('route' => 'silvestra_site')
         );
         $tradedoublerMapper->setLabelAttribute('menu_logo', 'fa-globe');

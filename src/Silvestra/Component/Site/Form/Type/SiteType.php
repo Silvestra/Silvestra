@@ -53,7 +53,7 @@ class SiteType extends AbstractType
             )
         );
 
-        $builder->add('seoMetadata', 'translations', array('type' => 'silvestra_seo_metadata'));
+        $builder->add('seoMetadata', 'translations', array('type' => 'silvestra_seo_metadata', 'label' => false));
 
         $builder->add('submit', 'submit', array('label' => 'form.button.save'));
     }
@@ -66,7 +66,7 @@ class SiteType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => $this->siteClass,
-                'translation_domain' => 'SilvestraSiteBundle'
+                'translation_domain' => 'SilvestraSite'
             )
         );
     }

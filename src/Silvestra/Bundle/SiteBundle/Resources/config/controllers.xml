@@ -25,6 +25,7 @@
         <service id="silvestra_site.controller.site" class="%silvestra_site.controller.site.class%">
             <argument type="service" id="silvestra_site.form_factory.site" />
             <argument type="service" id="silvestra_site.form_handler.site" />
+            <argument type="service" id="router" />
             <argument type="service" id="silvestra_site.manager.site" />
             <argument type="service" id="templating" />
             <argument type="service" id="translator" />

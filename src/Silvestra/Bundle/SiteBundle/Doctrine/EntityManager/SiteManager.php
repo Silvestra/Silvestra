@@ -53,6 +53,19 @@ class SiteManager extends BaseSiteManager
     /**
      * {@inheritdoc}
      */
+    public function find()
+    {
+        $qb = $this->repository->createQueryBuilder('s');
+
+        $qb->setMaxResults(1);
+        $qb->select('s');
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function add(SiteInterface $site, $save = false)
     {
         $this->em->persist($site);

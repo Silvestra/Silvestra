@@ -31,8 +31,9 @@
 
         <!--Silvestra site form handler-->
         <service id="silvestra_site.form_handler.site" class="%silvestra_site.form_handler.site.class%">
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="router" />
+            <argument type="service" id="silvestra_site.manager.site" />
+            <argument type="service" id="silvestra_notification.manager.alert" />
+            <argument type="service" id="translator" />
         </service>
 
         <!--Silvestra site form type-->
