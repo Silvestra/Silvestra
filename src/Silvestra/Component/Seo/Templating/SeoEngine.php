@@ -105,9 +105,9 @@ class SeoEngine implements SeoEngineInterface
 
                 $name = $this->normalize($name);
                 if (false === empty($content)) {
-                    $meta .= sprintf("<meta %s=\"%s\" content=\"%s\" />\n", $type, $name, $this->normalize($content));
+                    $meta .= sprintf("<meta %s=\"%s\" content=\"%s\">\n", $type, $name, $this->normalize($content));
                 } else {
-                    $meta .= sprintf("<meta %s=\"%s\" />\n", $type, $name);
+                    $meta .= sprintf("<meta %s=\"%s\">\n", $type, $name);
                 }
             }
         }
@@ -120,7 +120,7 @@ class SeoEngine implements SeoEngineInterface
      */
     public function renderTitle()
     {
-        return sprintf("<title>%s</title>", strip_tags($this->seoPage->getTitle()));
+        return sprintf("<title>%s</title>\n", strip_tags($this->seoPage->getTitle()));
     }
 
     /**

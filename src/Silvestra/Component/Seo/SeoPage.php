@@ -61,7 +61,7 @@ class SeoPage implements SeoPageInterface
      * @param string $title
      * @param string $separator
      */
-    public function __construct($title = '', $separator = ' ')
+    public function __construct($title = '', $separator = ' | ')
     {
         $this->title = $title;
         $this->separator = $separator;
@@ -245,7 +245,7 @@ class SeoPage implements SeoPageInterface
      */
     public function getTitle()
     {
-        return $this->title;
+        return rtrim($this->title, $this->separator);
     }
 
     /**

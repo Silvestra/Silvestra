@@ -40,6 +40,12 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('page')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('default')->defaultValue('silvestra_seo.page.default')->end()
+                        ->scalarNode('encoding')->defaultValue('UTF-8')->end()
+                    ->end()
+                ->end()
             ->end();
 
 

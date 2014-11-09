@@ -1,16 +1,37 @@
 <?xml version="1.0" ?>
 
+<!--
+/*
+ * This file is part of the Silvestra package.
+ *
+ * (c) Tadas Gliaubicas <tadcka89@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <services>
-        <service id="silvestra_seo.example" class="Silvestra\Bundle\SeoBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+
+        <!--Seo default page-->
+        <service id="silvestra_seo.page.default" class="Silvestra\Component\Seo\SeoPage" public="true" />
+
+        <!--Seo templating-->
+        <service id="silvestra_seo.templating" class="Silvestra\Component\Seo\Templating\SeoEngine" public="false">
+            <argument>%silvestra_seo.page.encoding%</argument>
+            <argument type="service" id="silvestra_seo.page" />
         </service>
+
+        <!--Seo twig extension-->
+        <service class="Silvestra\Bundle\SeoBundle\Twig\Extension\SeoExtension">
+            <tag name="twig.extension" alias="silvestra_seo" />
+            <argument type="service" id="silvestra_seo.templating" />
+        </service>
+
     </services>
-    -->
+
 </container>

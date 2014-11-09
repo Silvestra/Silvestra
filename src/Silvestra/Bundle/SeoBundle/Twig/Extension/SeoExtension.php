@@ -46,26 +46,31 @@ class SeoExtension extends \Twig_Extension
                 array($this->seoEngine, 'renderHeadAttributes'),
                 array('is_safe' => array('html'))
             ),
-            new \Twig_SimpleFunction('silvestra_seo_html_attributes', array(
-                $this->seoEngine,
-                'renderHtmlAttributes'
-            ), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('silvestra_seo_lang_alternates', array(
-                $this->seoEngine,
-                'renderLangAlternates'
-            ), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('silvestra_seo_link_canonical', array(
-                $this->seoEngine,
-                'renderLinkCanonical'
-            ), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('silvestra_seo_meta', array(
-                $this->seoEngine,
-                'renderMeta'
-            ), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('silvestra_seo_title', array(
-                $this->seoEngine,
-                'renderTitle'
-            ), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction(
+                'silvestra_seo_html_attributes',
+                array($this->seoEngine, 'renderHtmlAttributes'),
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction(
+                'silvestra_seo_lang_alternates',
+                array($this->seoEngine, 'renderLangAlternates'),
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction(
+                'silvestra_seo_link_canonical',
+                array($this->seoEngine, 'renderLinkCanonical'),
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction(
+                'silvestra_seo_meta',
+                array($this->seoEngine, 'renderMeta'),
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction(
+                'silvestra_seo_title',
+                array($this->seoEngine, 'renderTitle'),
+                array('is_safe' => array('html'))
+            ),
         );
     }
 

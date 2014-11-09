@@ -34,6 +34,10 @@ class Builder extends ContainerAware
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
+
+        $this->container->get('event_dispatcher')
+            ->dispatch(AdminMenuEvent::ADMIN_MENU, new AdminMenuEvent($factory, $menu));
+
         $menu->setChildrenAttributes(array('id' => 'side-menu', 'class' => 'nav'));
 
         $home = $menu->addChild(
@@ -48,8 +52,6 @@ class Builder extends ContainerAware
         );
         $sitemap->setLabelAttribute('menu_logo', 'fa-sitemap');
 
-        $this->container->get('event_dispatcher')
-            ->dispatch(AdminMenuEvent::ADMIN_MENU, new AdminMenuEvent($factory, $menu));
 
         return $menu;
     }
