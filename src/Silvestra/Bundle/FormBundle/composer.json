@@ -15,11 +15,13 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle" : ">=2.3",
-
-        "silvestra/form": "dev-master"
+        "silvestra/form": "0.1.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2"
+    },
+    "suggest": {
+        "bootstrap-tag": "Bootstrap tag library"
     },
     "autoload": {
         "psr-4": {

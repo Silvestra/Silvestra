@@ -22,10 +22,9 @@
 
         "knplabs/knp-menu-bundle": "~2.0",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "nercury/translation-editor-bundle": "0.1.x-dev",
+        "nercury/translation-editor-bundle": "~0.1",
         "Trsteel/ckeditor-bundle": "~1.2",
 
-        "tadcka/tree": "dev-master",
         "tadcka/routing-bundle": "0.2.*@dev",
         "tadcka/sitemap-bundle": "0.3.*@dev"
     },
@@ -33,6 +32,7 @@
         "silvestra/cache": "self.version",
         "silvestra/form": "self.version",
         "silvestra/media": "self.version",
+        "silvestra/notification": "self.version",
         "silvestra/seo": "self.version",
         "silvestra/text": "self.version",
         "silvestra/admin-bundle": "self.version",
@@ -41,6 +41,7 @@
         "silvestra/form-bundle": "self.version",
         "silvestra/frontend-bundle": "self.version",
         "silvestra/media-bundle": "self.version",
+        "silvestra/notification-bundle": "self.version",
         "silvestra/seo-bundle": "self.version",
         "silvestra/text-bundle": "self.version",
         "silvestra/text-node-bundle": "self.version"
