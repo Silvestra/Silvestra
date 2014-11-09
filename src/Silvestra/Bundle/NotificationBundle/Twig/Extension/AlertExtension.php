@@ -63,8 +63,9 @@ class AlertExtension extends \Twig_Extension
             ),
             new \Twig_SimpleFunction(
                 'silvestra_flash_alerts_render',
-                array($this,'renderFlash'),
-                array('is_safe' => array('html'))),
+                array($this, 'renderFlash'),
+                array('is_safe' => array('html'))
+            ),
         );
     }
 

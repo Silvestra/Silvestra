@@ -1,8 +1,8 @@
 {
-    "name":         "silvestra/seo-bundle",
-    "homepage":     "https://github.com/Silvestra/SeoBundle",
-    "description":  "Silvestra seo bundle",
-    "keywords":     ["SEO"],
+    "name":         "silvestra/notification-bundle",
+    "homepage":     "https://github.com/Silvestra/NotificationBundle",
+    "description":  "Silvestra notification bundle",
+    "keywords":     ["Notification", "Alert"],
     "type":         "symfony-bundle",
     "license":      "MIT",
     "authors": [
@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle" : ">=2.3",
-        "silvestra/seo": "0.1.*@dev"
+        "silvestra/notification": "0.1.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Silvestra\\Bundle\\SeoBundle\\": ""
+            "Silvestra\\Bundle\\NotificationBundle\\": ""
         }
     },
     "extra": {

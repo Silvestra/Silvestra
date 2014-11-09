@@ -2,7 +2,7 @@
     "name":         "silvestra/seo",
     "homepage":     "https://github.com/Silvestra/Seo",
     "description":  "Silvestra seo component",
-    "keywords":     [" "],
+    "keywords":     ["SEO"],
     "type":         "library",
     "license":      "MIT",
     "authors": [

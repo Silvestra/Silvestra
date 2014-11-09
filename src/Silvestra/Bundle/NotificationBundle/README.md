@@ -1,0 +1,4 @@
+NotificationBundle
+=========
+
+Silvestra notification bundle.
