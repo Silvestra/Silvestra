@@ -12,8 +12,13 @@
         <whitelist>
             <directory>./</directory>
             <exclude>
-                <directory>./Tests</directory>
                 <directory>./vendor</directory>
+                <directory>./src/Silvestra/Bundle/*/Tests</directory>
+                <directory>./src/Silvestra/Bundle/*/Resources</directory>
+                <directory>./src/Silvestra/Bundle/*/*/Tests</directory>
+                <directory>./src/Silvestra/Bundle/*/*/Resources</directory>
+                <directory>./src/Silvestra/Component/*/Tests</directory>
+                <directory>./src/Silvestra/Component/*/Resources</directory>
             </exclude>
         </whitelist>
     </filter>
