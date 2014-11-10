@@ -1,8 +1,6 @@
+/coverage.clover
 /phpunit.xml
 /composer.lock
 /composer.phar
 /vendor/
-/components/
-.idea/*
-.idea
-
+/.idea/
