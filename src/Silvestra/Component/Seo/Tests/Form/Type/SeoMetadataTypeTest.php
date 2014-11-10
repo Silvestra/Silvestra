@@ -12,12 +12,12 @@
 namespace Silvestra\Component\Seo\Tests\Form\Type;
 
 use Silvestra\Component\Seo\Form\Type\SeoMetadataType;
+use Silvestra\Component\Seo\Model\SeoMetadata;
 use Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\ConstraintViolationList;
-use Tadcka\Bundle\SandboxBundle\Entity\SeoMetadata;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
