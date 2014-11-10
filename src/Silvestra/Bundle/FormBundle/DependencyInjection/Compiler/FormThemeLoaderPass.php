@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -28,6 +28,7 @@ class FormThemeLoaderPass implements CompilerPassInterface
     {
         $formThemes = $container->getParameter('twig.form.resources');
         $formThemes[] = 'SilvestraFormBundle::tag_type.html.twig';
+
         $container->setParameter('twig.form.resources', $formThemes);
     }
 }
