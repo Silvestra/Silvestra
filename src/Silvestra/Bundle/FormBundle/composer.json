@@ -21,7 +21,7 @@
         "phpunit/phpunit": "~4.2"
     },
     "suggest": {
-        "bootstrap-tag": "Bootstrap tag library"
+        "silvestra/tagging-js": "For TaggingJS library"
     },
     "autoload": {
         "psr-4": {

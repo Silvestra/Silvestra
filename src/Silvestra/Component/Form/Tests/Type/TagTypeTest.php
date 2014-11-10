@@ -9,22 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Seo\Tests\Form\Type;
+namespace Silvestra\Component\Form\Tests\Type;
 
-use Silvestra\Component\Seo\Form\Type\SeoMetadataType;
+use Silvestra\Component\Form\Type\TagType;
 use Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\ConstraintViolationList;
-use Tadcka\Bundle\SandboxBundle\Entity\SeoMetadata;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 11/9/14 12:23 PM
+ * @since 11/10/14 10:18 PM
  */
-class SeoMetadataTypeTest extends TypeTestCase
+class TagTypeTest extends TypeTestCase
 {
     /**
      * {@inheritdoc}
@@ -41,7 +40,7 @@ class SeoMetadataTypeTest extends TypeTestCase
         $typeGuesser = $this->getMockBuilder('Symfony\\Component\\Form\\Extension\\Validator\\ValidatorTypeGuesser')
             ->disableOriginalConstructor()
             ->getMock();
-        $types = array(new SeoMetadataType('Silvestra\\Component\\Seo\\Model\\SeoMetadata'));
+        $types = array(new TagType());
 
         $this->factory = Forms::createFormFactoryBuilder()
             ->addTypeExtension($typeExtension)
@@ -54,28 +53,20 @@ class SeoMetadataTypeTest extends TypeTestCase
 
     public function testEmptyFormType()
     {
-        $form = $this->factory->create('silvestra_seo_metadata');
+        $form = $this->factory->create('silvestra_tag');
 
         $this->assertEmpty($form->getData());
     }
 
     public function testFormType()
     {
-        $seoMetadata = new SeoMetadata();
-        $form = $this->factory->create('silvestra_seo_metadata', $seoMetadata);
+        $form = $this->factory->create('silvestra_tag');
 
-        $formData = array(
-            'title' => 'Test title',
-            'metaDescription' => 'Test meta description',
-            'metaKeywords' => 'Test meta keywords',
-        );
+        $formData = array('tags' => array('Test', 'Silvestra Test'));
 
         $form->submit($formData);
 
         $this->assertTrue($form->isSynchronized());
-        $this->assertEquals($seoMetadata, $form->getData());
-        $this->assertEquals('Test title', $seoMetadata->getTitle());
-        $this->assertEquals('Test meta description', $seoMetadata->getMetaDescription());
-        $this->assertEquals('Test meta keywords', $seoMetadata->getMetaKeywords());
+        $this->assertEquals('Test, Silvestra Test', $form->getData());
     }
 }

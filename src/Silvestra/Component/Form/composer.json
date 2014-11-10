@@ -2,7 +2,7 @@
     "name":         "silvestra/form",
     "homepage":     "https://github.com/Silvestra/Form",
     "description":  "Silvestra form component",
-    "keywords":     ["form"],
+    "keywords":     ["Form", "Tag"],
     "type":         "library",
     "license":      "MIT",
     "authors": [
@@ -19,7 +19,8 @@
         "symfony/options-resolver": ">=2.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.2"
+        "phpunit/phpunit": "~4.2",
+        "squizlabs/php_codesniffer": "~1.5"
     },
     "autoload": {
         "psr-4": {

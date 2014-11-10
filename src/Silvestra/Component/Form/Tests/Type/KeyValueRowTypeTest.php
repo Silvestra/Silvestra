@@ -18,5 +18,8 @@ namespace Silvestra\Component\Form\Tests\Type;
  */
 class KeyValueRowTypeTest extends \PHPUnit_Framework_TestCase
 {
+    public function test()
+    {
 
+    }
 }

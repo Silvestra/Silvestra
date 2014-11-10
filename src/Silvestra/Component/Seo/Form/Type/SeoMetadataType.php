@@ -64,10 +64,11 @@ class SeoMetadataType extends AbstractType
 
         $builder->add(
             'metaKeywords',
-            'textarea',
+            'silvestra_tag',
             array(
                 'label' => 'form.seo_metadata.meta_keywords',
                 'required' => false,
+                'separator' => ','
             )
         );
     }

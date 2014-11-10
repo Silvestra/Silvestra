@@ -23,5 +23,10 @@ class KeyValueTransformerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var KeyValueTransformer
      */
-    private $keyValueTransformer;
+    private $transformer;
+
+    public function test()
+    {
+
+    }
 }

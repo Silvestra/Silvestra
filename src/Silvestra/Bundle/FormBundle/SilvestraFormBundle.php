@@ -11,8 +11,17 @@
 
 namespace Silvestra\Bundle\FormBundle;
 
+use Silvestra\Bundle\FormBundle\DependencyInjection\Compiler\FormThemeLoaderPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SilvestraFormBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new FormThemeLoaderPass());
+    }
 }
