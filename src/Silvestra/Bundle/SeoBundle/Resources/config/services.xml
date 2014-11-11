@@ -20,6 +20,12 @@
         <!--Seo default page-->
         <service id="silvestra_seo.page.default" class="Silvestra\Component\Seo\SeoPage" public="true" />
 
+        <!--Seo default presentation-->
+        <service id="silvestra_seo.page.presentation.default" class="Silvestra\Component\Seo\SeoPresentation" public="true">
+            <argument>%silvestra_seo.page.encoding%</argument>
+            <argument type="service" id="silvestra_seo.page" />
+        </service>
+
         <!--Seo templating-->
         <service id="silvestra_seo.templating" class="Silvestra\Component\Seo\Templating\SeoEngine" public="false">
             <argument>%silvestra_seo.page.encoding%</argument>

@@ -27,6 +27,13 @@
             <argument type="service" id="translator" />
         </service>
 
+        <!--Seo default presentation-->
+        <service id="silvestra_site.page.presentation" class="Silvestra\Component\Site\Seo\SeoPresentation" public="true">
+            <argument>%silvestra_seo.page.encoding%</argument>
+            <argument type="service" id="silvestra_seo.page" />
+            <argument type="service" id="silvestra_site.manager.site" />
+        </service>
+
     </services>
 
 </container>

@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\FrontendBundle\Controller;
 
+use Silvestra\Component\Seo\SeoPresentationInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ use Tadcka\Bundle\SitemapBundle\Provider\PageNodeProviderInterface;
  *
  * @since 9/7/14 1:00 PM
  */
-abstract class AbstractFrontendController extends ContainerAware
+abstract class FrontendController extends ContainerAware
 {
     /**
      * Get page provider.
@@ -68,6 +69,16 @@ abstract class AbstractFrontendController extends ContainerAware
     protected function getPageNodeTranslationOr404(Request $request)
     {
         return $this->getPageNodeProvider()->getNodeTranslationOr404($request);
+    }
+
+    /**
+     * Get seo page presentation.
+     *
+     * @return SeoPresentationInterface
+     */
+    protected function getSeoPresentation()
+    {
+        return $this->container->get('silvestra_seo.page.presentation');
     }
 
     /**

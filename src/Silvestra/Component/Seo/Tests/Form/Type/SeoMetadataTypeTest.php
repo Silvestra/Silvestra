@@ -11,6 +11,7 @@
 
 namespace Silvestra\Component\Seo\Tests\Form\Type;
 
+use Silvestra\Component\Form\Type\TagType;
 use Silvestra\Component\Seo\Form\Type\SeoMetadataType;
 use Silvestra\Component\Seo\Model\SeoMetadata;
 use Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension;
@@ -41,7 +42,7 @@ class SeoMetadataTypeTest extends TypeTestCase
         $typeGuesser = $this->getMockBuilder('Symfony\\Component\\Form\\Extension\\Validator\\ValidatorTypeGuesser')
             ->disableOriginalConstructor()
             ->getMock();
-        $types = array(new SeoMetadataType('Silvestra\\Component\\Seo\\Model\\SeoMetadata'));
+        $types = array(new TagType(), new SeoMetadataType('Silvestra\\Component\\Seo\\Model\\SeoMetadata'));
 
         $this->factory = Forms::createFormFactoryBuilder()
             ->addTypeExtension($typeExtension)
@@ -67,7 +68,7 @@ class SeoMetadataTypeTest extends TypeTestCase
         $formData = array(
             'title' => 'Test title',
             'metaDescription' => 'Test meta description',
-            'metaKeywords' => 'Test meta keywords',
+            'metaKeywords' => array('tags' => array('Test meta keywords')),
         );
 
         $form->submit($formData);

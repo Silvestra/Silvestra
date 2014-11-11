@@ -57,8 +57,9 @@ class SiteManager extends BaseSiteManager
     {
         $qb = $this->repository->createQueryBuilder('s');
 
+        $qb->leftJoin('s.seoMetadata', 'sm');
         $qb->setMaxResults(1);
-        $qb->select('s');
+        $qb->select('s, sm');
 
         return $qb->getQuery()->getOneOrNullResult();
     }

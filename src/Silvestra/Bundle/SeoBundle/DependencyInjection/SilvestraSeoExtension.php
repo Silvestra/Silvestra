@@ -43,5 +43,6 @@ class SilvestraSeoExtension extends Extension
 
         $container->setAlias($this->getAlias() . '.manager.seo_metadata', $config['seo_metadata_manager']);
         $container->setAlias($this->getAlias() . '.page', $config['page']['default']);
+        $container->setAlias($this->getAlias() . '.page.presentation', $config['page']['presentation']);
     }
 }
