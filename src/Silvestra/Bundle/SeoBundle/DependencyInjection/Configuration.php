@@ -45,7 +45,12 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('default')->defaultValue('silvestra_seo.page.default')->end()
                         ->scalarNode('encoding')->defaultValue('UTF-8')->end()
-                        ->scalarNode('presentation')->defaultValue('silvestra_seo.page.presentation.default')->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('presentation')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('default')->defaultValue('silvestra_seo.presentation.default')->end()
                     ->end()
                 ->end()
             ->end();

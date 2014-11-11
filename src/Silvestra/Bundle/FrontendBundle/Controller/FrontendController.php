@@ -72,13 +72,13 @@ abstract class FrontendController extends ContainerAware
     }
 
     /**
-     * Get seo page presentation.
+     * Get seo presentation.
      *
      * @return SeoPresentationInterface
      */
     protected function getSeoPresentation()
     {
-        return $this->container->get('silvestra_seo.page.presentation');
+        return $this->container->get('silvestra_seo.presentation');
     }
 
     /**

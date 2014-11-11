@@ -17,11 +17,11 @@
 
     <services>
 
-        <!--Seo default page-->
+        <!--Default seo page-->
         <service id="silvestra_seo.page.default" class="Silvestra\Component\Seo\SeoPage" public="true" />
 
-        <!--Seo default presentation-->
-        <service id="silvestra_seo.page.presentation.default" class="Silvestra\Component\Seo\SeoPresentation" public="true">
+        <!--Default seo presentation-->
+        <service id="silvestra_seo.presentation.default" class="Silvestra\Component\Seo\SeoPresentation" public="true">
             <argument>%silvestra_seo.page.encoding%</argument>
             <argument type="service" id="silvestra_seo.page" />
         </service>
