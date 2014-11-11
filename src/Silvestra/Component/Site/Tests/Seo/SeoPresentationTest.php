@@ -14,7 +14,7 @@ namespace Silvestra\Component\Site\Tests\Seo;
 use Silvestra\Component\Seo\Model\SeoMetadata;
 use Silvestra\Component\Seo\SeoPage;
 use Silvestra\Component\Site\Seo\SeoPresentation;
-use Tadcka\Bundle\SandboxBundle\Entity\Site;
+use Silvestra\Component\Site\Model\Site;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
