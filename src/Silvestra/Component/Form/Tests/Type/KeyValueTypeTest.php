@@ -11,15 +11,34 @@
 
 namespace Silvestra\Component\Form\Tests\Type;
 
+use Silvestra\Component\Form\Type\KeyValueRowType;
+use Silvestra\Component\Form\Type\KeyValueType;
+use Symfony\Component\Form\Forms;
+
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 10/8/14 1:20 AM
  */
-class KeyValueTypeTest extends \PHPUnit_Framework_TestCase
+class KeyValueTypeTest extends AbstractTypeTest
 {
-    public function test()
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp()
     {
+        parent::setUp();
 
+        $this->factory = Forms::createFormFactoryBuilder()
+            ->addTypes(array(new KeyValueRowType(), new KeyValueType()))
+            ->getFormFactory();
+        $this->builder = $this->createFormBuilder();
+    }
+
+    public function testEmptyFormType()
+    {
+        $form = $this->factory->create('silvestra_key_value', null, array('value_type' => 'text'));
+
+        $this->assertEmpty($form->getData());
     }
 }

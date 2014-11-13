@@ -12,18 +12,14 @@
 namespace Silvestra\Component\Form\Tests\Type;
 
 use Silvestra\Component\Form\Type\TagType;
-use Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\Forms;
-use Symfony\Component\Form\Test\TypeTestCase;
-use Symfony\Component\Validator\ConstraintViolationList;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 11/10/14 10:18 PM
  */
-class TagTypeTest extends TypeTestCase
+class TagTypeTest extends AbstractTypeTest
 {
     /**
      * {@inheritdoc}
@@ -32,23 +28,12 @@ class TagTypeTest extends TypeTestCase
     {
         parent::setUp();
 
-        $validator = $this->getMock('Symfony\\Component\\Validator\\Validator\\ValidatorInterface');
-        $validator->method('validate')->will($this->returnValue(new ConstraintViolationList()));
-
-        $typeExtension = new FormTypeValidatorExtension($validator);
-
-        $typeGuesser = $this->getMockBuilder('Symfony\\Component\\Form\\Extension\\Validator\\ValidatorTypeGuesser')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $types = array(new TagType());
-
         $this->factory = Forms::createFormFactoryBuilder()
-            ->addTypeExtension($typeExtension)
-            ->addTypeGuesser($typeGuesser)
-            ->addTypes($types)
+            ->addTypeExtension($this->createValidatorExtension())
+            ->addTypeGuesser($this->getMockValidatorTypeGuesser())
+            ->addTypes(array(new TagType()))
             ->getFormFactory();
-
-        $this->builder = new FormBuilder(null, null, $this->dispatcher, $this->factory);
+        $this->builder = $this->createFormBuilder();
     }
 
     public function testEmptyFormType()

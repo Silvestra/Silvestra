@@ -16,6 +16,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -30,22 +31,19 @@ class KeyValueType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $listener = function (FormEvent $event) {
-            $inputData = $event->getData();
-
-            if (null === $inputData) {
+        $preSetDataListener = function (FormEvent $event) {
+            if (null === $event->getData()) {
                 return null;
             }
 
-            $outputData = array();
-            foreach ($inputData as $key => $value) {
-                $outputData[] = array('key' => $key, 'value' => $value);
+            $data = array();
+            foreach ($event->getData() as $key => $value) {
+                $data[] = array('key' => $key, 'value' => $value);
             }
-
-            $event->setData($outputData);
+            $event->setData($data);
         };
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, $listener);
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, $preSetDataListener);
         $builder->addModelTransformer(new KeyValueTransformer($options['use_key_value_array']));
     }
 
@@ -54,9 +52,6 @@ class KeyValueType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired(array('value_type'));
-        $resolver->setAllowedTypes(array('allowed_keys' => array('null', 'array')));
-
         $resolver->setDefaults(
             array(
                 'type' => 'silvestra_key_value_row',
@@ -74,6 +69,9 @@ class KeyValueType extends AbstractType
                 }
             )
         );
+
+        $resolver->setAllowedTypes(array('allowed_keys' => array('null', 'array')));
+        $resolver->setRequired(array('value_type'));
     }
 
     /**

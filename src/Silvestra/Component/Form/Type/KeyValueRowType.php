@@ -42,15 +42,15 @@ class KeyValueRowType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired(array('value_type'));
-        $resolver->setAllowedTypes(array('allowed_keys' => array('null', 'array')));
-
         $resolver->setDefaults(
             array(
                 'value_options' => array(),
                 'allowed_keys' => null
             )
         );
+
+        $resolver->setAllowedTypes(array('allowed_keys' => array('null', 'array')));
+        $resolver->setRequired(array('value_type'));
     }
 
     /**

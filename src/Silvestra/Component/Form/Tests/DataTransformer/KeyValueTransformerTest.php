@@ -25,8 +25,59 @@ class KeyValueTransformerTest extends \PHPUnit_Framework_TestCase
      */
     private $transformer;
 
-    public function test()
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp()
     {
+        $this->transformer = new KeyValueTransformer(false);
+    }
 
+    /**
+     * Test method: transform().
+     */
+    public function testTransform()
+    {
+        $this->assertEmpty($this->transformer->transform(null));
+        $this->assertEquals($this->getKeyValues(), $this->transformer->transform($this->getKeyValues()));
+    }
+
+    /**
+     * Test method: reverseTransform().
+     */
+    public function testReverseTransform()
+    {
+        $this->assertEquals(array('key' => 'value'), $this->transformer->reverseTransform($this->getKeyValues()));
+    }
+
+    /**
+     * Test method: reverseTransform() duplicate detected.
+     */
+    public function testReverseTransformDuplicateDetected()
+    {
+        $this->setExpectedException(
+            'Symfony\\Component\\Form\\Exception\\TransformationFailedException',
+            'Duplicate key key detected!'
+        );
+
+        $this->transformer->reverseTransform(array_merge($this->getKeyValues(), $this->getKeyValues()));
+    }
+
+    /**
+     * Test method: reverseTransform() not valid.
+     */
+    public function testReverseTransformNotValid()
+    {
+        $this->setExpectedException(
+            'Symfony\\Component\\Form\\Exception\\TransformationFailedException',
+            'Key and value is not valid!'
+        );
+
+        $this->transformer->reverseTransform(array('test', 'test'));
+    }
+
+    private function getKeyValues()
+    {
+        return array(array('key' => 'key', 'value' => 'value'));
     }
 }
