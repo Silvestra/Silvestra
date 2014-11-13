@@ -46,7 +46,7 @@ interface TextInterface
      *
      * @return TextInterface
      */
-    public function setUpdatedAt(\DateTime $updatedAt );
+    public function setUpdatedAt(\DateTime $updatedAt);
 
     /**
      * Get updatedAt.
