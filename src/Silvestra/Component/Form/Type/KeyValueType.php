@@ -57,8 +57,9 @@ class KeyValueType extends AbstractType
                 'type' => 'silvestra_key_value_row',
                 'allow_add' => true,
                 'allow_delete' => true,
-                'value_options' => array(),
                 'allowed_keys' => null,
+                'label' => false,
+                'value_options' => array(),
                 'use_key_value_array' => false,
                 'options' => function (Options $options) {
                     return array(

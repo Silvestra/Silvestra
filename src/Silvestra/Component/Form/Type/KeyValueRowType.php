@@ -29,12 +29,29 @@ class KeyValueRowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (null === $options['allowed_keys']) {
-            $builder->add('key', 'text', array());
+            $builder->add(
+                'key',
+                'text',
+                array(
+                    'label' => 'key_value_row.key',
+                )
+            );
         } else {
-            $builder->add('key', 'choice', array('choice_list' => new SimpleChoiceList($options['allowed_keys'])));
+            $builder->add(
+                'key',
+                'choice',
+                array(
+                    'choice_list' => new SimpleChoiceList($options['allowed_keys']),
+                    'label' => 'key_value_row.key',
+                )
+            );
         }
 
-        $builder->add('value', $options['value_type'], $options['value_options']);
+        $builder->add(
+            'value',
+            $options['value_type'],
+            array_merge($options['value_options'], array('label' => 'key_value_row.value'))
+        );
     }
 
     /**
@@ -45,7 +62,8 @@ class KeyValueRowType extends AbstractType
         $resolver->setDefaults(
             array(
                 'value_options' => array(),
-                'allowed_keys' => null
+                'allowed_keys' => null,
+                'translation_domain' => 'SilvestraForm',
             )
         );
 

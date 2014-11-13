@@ -36,6 +36,9 @@ class TagTypeTest extends AbstractTypeTest
         $this->builder = $this->createFormBuilder();
     }
 
+    /**
+     * Test empty Tag form type.
+     */
     public function testEmptyFormType()
     {
         $form = $this->factory->create('silvestra_tag');
@@ -43,13 +46,15 @@ class TagTypeTest extends AbstractTypeTest
         $this->assertEmpty($form->getData());
     }
 
+    /**
+     * Test submit Tag form type.
+     */
     public function testFormType()
     {
         $form = $this->factory->create('silvestra_tag');
+        $data = array('tags' => array('Test', 'Silvestra Test'));
 
-        $formData = array('tags' => array('Test', 'Silvestra Test'));
-
-        $form->submit($formData);
+        $form->submit($data);
 
         $this->assertTrue($form->isSynchronized());
         $this->assertEquals('Test, Silvestra Test', $form->getData());

@@ -35,10 +35,41 @@ class KeyValueTypeTest extends AbstractTypeTest
         $this->builder = $this->createFormBuilder();
     }
 
+    /**
+     * Test empty KeyValue form type.
+     */
     public function testEmptyFormType()
     {
-        $form = $this->factory->create('silvestra_key_value', null, array('value_type' => 'text'));
+        $form = $this->createForm(null);
 
         $this->assertEmpty($form->getData());
+    }
+
+    /**
+     * Test submit KeyValue form type.
+     */
+    public function testFormType()
+    {
+        $form = $this->createForm(null);
+        $form->submit($this->getData());
+        $formData = $form->getData();
+
+        $this->assertTrue($form->isSynchronized());
+        $this->assertCount(2, $formData);
+        $this->assertEquals('Silvestra', $formData['silvestra_key']);
+        $this->assertEquals('Bar', $formData['bar_key']);
+    }
+
+    private function createForm($data, $options = array('value_type' => 'text'))
+    {
+        return $this->factory->create('silvestra_key_value', $data, $options);
+    }
+
+    private function getData()
+    {
+        return array(
+            array('key' => 'silvestra_key', 'value' => 'Silvestra'),
+            array('key' => 'bar_key', 'value' => 'Bar')
+        );
     }
 }

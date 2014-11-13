@@ -47,7 +47,7 @@ class KeyValueTransformerTest extends \PHPUnit_Framework_TestCase
      */
     public function testReverseTransform()
     {
-        $this->assertEquals(array('key' => 'value'), $this->transformer->reverseTransform($this->getKeyValues()));
+        $this->assertEquals(array('silvestra_key' => 'Silvestra'), $this->transformer->reverseTransform($this->getKeyValues()));
     }
 
     /**
@@ -57,7 +57,7 @@ class KeyValueTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Symfony\\Component\\Form\\Exception\\TransformationFailedException',
-            'Duplicate key key detected!'
+            'Duplicate silvestra_key key detected!'
         );
 
         $this->transformer->reverseTransform(array_merge($this->getKeyValues(), $this->getKeyValues()));
@@ -78,6 +78,6 @@ class KeyValueTransformerTest extends \PHPUnit_Framework_TestCase
 
     private function getKeyValues()
     {
-        return array(array('key' => 'key', 'value' => 'value'));
+        return array(array('key' => 'silvestra_key', 'value' => 'Silvestra'));
     }
 }
