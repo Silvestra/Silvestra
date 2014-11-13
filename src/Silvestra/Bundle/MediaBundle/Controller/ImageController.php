@@ -42,11 +42,11 @@ class ImageController extends ContainerAware
             $file = $data['images1']['images'][0]['image'];
             $form->submit($request);
             if ($form->isValid()) {
-                var_dump($form->getData()['images1']);
-                var_dump($form->getData()); die;
+//                var_dump($form->getData()['images1']);
+//                var_dump($form->getData()); die;
             }
 
-            var_dump($form->getErrors(true)); die;
+//            var_dump($form->getErrors(true)); die;
         }
 
         return $this->renderResponse(
