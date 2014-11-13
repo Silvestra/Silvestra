@@ -81,6 +81,22 @@ interface SeoMetadataInterface
     public function getMetaRobots();
 
     /**
+     * Set original URL.
+     *
+     * @param string $originalUrl
+     *
+     * @return SeoMetadataInterface
+     */
+    public function setOriginalUrl($originalUrl);
+
+    /**
+     * Get original URL.
+     *
+     * @return string
+     */
+    public function getOriginalUrl();
+
+    /**
      * Set title.
      *
      * @param string $title
@@ -95,4 +111,97 @@ interface SeoMetadataInterface
      * @return string
      */
     public function getTitle();
+
+    /**
+     * Get extra http.
+     *
+     * @return array
+     */
+    public function getExtraHttp();
+
+    /**
+     * Set extra http.
+     *
+     * @param array $extraHttp
+     *
+     * @return SeoMetadataInterface
+     */
+    public function setExtraHttp(array $extraHttp);
+
+    /**
+     * Add a key-value pair for meta attribute http-equiv.
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public function addExtraHttp($key, $value);
+
+    /**
+     * Remove extra meta attribute http-equiv by key.
+     *
+     * @param string $key
+     */
+    public function removeExtraHttp($key);
+
+    /**
+     * Get extra names.
+     *
+     * @return array
+     */
+    public function getExtraNames();
+
+    /**
+     * Set extra names.
+     *
+     * @param array $extraNames
+     *
+     * @return SeoMetadataInterface
+     */
+    public function setExtraNames(array $extraNames);
+
+    /**
+     * Add a key-value pair for meta attribute name.
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public function addExtraName($key, $value);
+
+    /**
+     * Remove extra meta attribute name by key.
+     *
+     * @param string $key
+     */
+    public function removeExtraName($key);
+
+    /**
+     * Get extra properties.
+     *
+     * @return array
+     */
+    public function getExtraProperties();
+
+    /**
+     * Set extra properties.
+     *
+     * @param array $extraProperties
+     *
+     * @return SeoMetadataInterface
+     */
+    public function setExtraProperties(array $extraProperties);
+
+    /**
+     * Add a key-value pair for meta attribute property.
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public function addExtraProperty($key, $value);
+
+    /**
+     * Remove extra meta attribute property by key.
+     *
+     * @param string $key
+     */
+    public function removeExtraProperty($key);
 }
