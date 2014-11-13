@@ -51,4 +51,3 @@ abstract class AbstractTypeTest extends TypeTestCase
             ->getMock();
     }
 }
- 

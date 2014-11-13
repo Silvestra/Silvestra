@@ -47,7 +47,10 @@ class KeyValueTransformerTest extends \PHPUnit_Framework_TestCase
      */
     public function testReverseTransform()
     {
-        $this->assertEquals(array('silvestra_key' => 'Silvestra'), $this->transformer->reverseTransform($this->getKeyValues()));
+        $this->assertEquals(
+            array('silvestra_key' => 'Silvestra'),
+            $this->transformer->reverseTransform($this->getKeyValues())
+        );
     }
 
     /**
