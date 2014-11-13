@@ -12,21 +12,21 @@
     "require": {
         "php": ">=5.3.3",
 
-        "symfony/framework-bundle": ">=2.3",
-        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/orm": "~2.4",
         "doctrine/doctrine-bundle": "dev-master",
-        "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-
-        "knplabs/knp-menu-bundle": "~2.0",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
+        "knplabs/knp-menu-bundle": "~2.0",
         "nercury/translation-editor-bundle": "~0.1",
-        "Trsteel/ckeditor-bundle": "~1.2",
-
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/framework-bundle": ">=2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "tadcka/routing": "0.2.*@dev",
         "tadcka/routing-bundle": "0.2.*@dev",
-        "tadcka/sitemap-bundle": "0.3.*@dev"
+        "tadcka/sitemap-bundle": "0.3.*@dev",
+        "tadcka/tree": "0.2.*@dev",
+        "Trsteel/ckeditor-bundle": "~1.2",
+        "twig/extensions": "~1.0"
     },
     "replace": {
         "silvestra/cache": "self.version",
@@ -51,11 +51,10 @@
         "squizlabs/php_codesniffer": "~1.5"
     },
     "autoload": {
-        "psr-0": {
-            "Silvestra\\": "src/"
+        "psr-4": {
+            "Silvestra\\": "src/Silvestra/"
         }
     },
-    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
             "dev-master": "0.1.x-dev"
