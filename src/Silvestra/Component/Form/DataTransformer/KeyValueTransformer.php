@@ -38,25 +38,25 @@ class KeyValueTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform($keyValue)
+    public function transform($keyValues)
     {
-        return $keyValue;
+        return $keyValues;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($keyValue)
+    public function reverseTransform($keyValues)
     {
         $data = $this->useKeyValueArray ? new KeyValueArray() : array();
 
-        foreach ($keyValue as $keyValueRow) {
-            if (array('key', 'value') != array_keys($keyValueRow)) {
-                throw new TransformationFailedException('Key value row is not valid!');
+        foreach ($keyValues as $keyValueRow) {
+            if ((false === is_array($keyValueRow)) || (array('key', 'value') != array_keys($keyValueRow))) {
+                throw new TransformationFailedException('Key and value is not valid!');
             }
 
             if (array_key_exists($keyValueRow['key'], $data)) {
-                throw new TransformationFailedException(sprintf('Duplicate %s key detected!', $data['key']));
+                throw new TransformationFailedException(sprintf('Duplicate %s key detected!', $keyValueRow['key']));
             }
 
             $data[$keyValueRow['key']] = $keyValueRow['value'];
