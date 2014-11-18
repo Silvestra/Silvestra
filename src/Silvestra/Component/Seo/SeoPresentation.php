@@ -60,6 +60,27 @@ class SeoPresentation implements SeoPresentationInterface
             $this->seoPage->addMeta('name', 'robots', $seoMetadata->getMetaRobots());
         }
 
-        $this->seoPage->addTitle($seoMetadata->getTitle());
+        if ($title = $seoMetadata->getTitle()) {
+            $this->seoPage->addTitle($title);
+            $this->seoPage->addMeta('name', 'title', $title);
+        }
+
+        if ($extraHttp = $seoMetadata->getExtraHttp()) {
+            foreach ($extraHttp as $key => $value) {
+                $this->seoPage->addMeta('http-equiv', $key, $value);
+            }
+        }
+
+        if ($extraNames = $seoMetadata->getExtraNames()) {
+            foreach ($extraNames as $key => $value) {
+                $this->seoPage->addMeta('name', $key, $value);
+            }
+        }
+
+        if ($extraProperties = $seoMetadata->getExtraProperties()) {
+            foreach ($extraProperties as $key => $value) {
+                $this->seoPage->addMeta('property', $key, $value);
+            }
+        }
     }
 }
