@@ -49,17 +49,27 @@ class SeoMetadata implements SeoMetadataInterface
     /**
      * @var array
      */
-    private $extraProperties = array();
+    protected $extraHttp;
 
     /**
      * @var array
      */
-    private $extraNames = array();
+    protected $extraNames;
 
     /**
      * @var array
      */
-    private $extraHttp = array();
+    protected $extraProperties;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->extraHttp = array();
+        $this->extraNames = array();
+        $this->extraProperties = array();
+    }
 
     /**
      * {@inheritdoc}

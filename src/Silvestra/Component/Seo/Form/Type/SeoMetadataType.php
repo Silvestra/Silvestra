@@ -54,6 +54,15 @@ class SeoMetadataType extends AbstractType
         );
 
         $builder->add(
+            'originalUrl',
+            'text',
+            array(
+                'label' => 'form.seo_metadata.original_url',
+                'required' => false,
+            )
+        );
+
+        $builder->add(
             'metaDescription',
             'textarea',
             array(
@@ -69,6 +78,45 @@ class SeoMetadataType extends AbstractType
                 'label' => 'form.seo_metadata.meta_keywords',
                 'required' => false,
                 'separator' => ','
+            )
+        );
+
+        $builder->add(
+            'metaRobots',
+            'textarea',
+            array(
+                'label' => 'form.seo_metadata.meta_robots',
+                'required' => false,
+            )
+        );
+
+        $builder->add(
+            'extraHttp',
+            'silvestra_key_value',
+            array(
+                'label' => 'form.seo_metadata.extra_http',
+                'required' => false,
+                'value_type' => 'text',
+            )
+        );
+
+        $builder->add(
+            'extraNames',
+            'silvestra_key_value',
+            array(
+                'label' => 'form.seo_metadata.extra_names',
+                'required' => false,
+                'value_type' => 'text',
+            )
+        );
+
+        $builder->add(
+            'extraProperties',
+            'silvestra_key_value',
+            array(
+                'label' => 'form.seo_metadata.extra_properties',
+                'required' => false,
+                'value_type' => 'text',
             )
         );
     }
