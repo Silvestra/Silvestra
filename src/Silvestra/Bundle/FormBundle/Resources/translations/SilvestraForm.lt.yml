@@ -1,3 +1,7 @@
 key_value_row:
   key: Raktas
   value: Reikšmė
+
+key_value:
+  add: Pridėti naują raktinę reikšmę
+  delete: Pašalinti

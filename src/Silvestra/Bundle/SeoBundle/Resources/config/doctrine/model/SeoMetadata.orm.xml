@@ -24,7 +24,15 @@
 
         <field name="metaRobots" column="meta_robots" type="text" nullable="true" />
 
+        <field name="originalUrl" column="original_url" type="string" length="511" nullable="true" />
+
         <field name="title" column="title" type="string" length="255" nullable="false" />
+
+        <field name="extraHttp" column="extra_http" type="array" nullable="true" />
+
+        <field name="extraNames" column="extra_names" type="array" nullable="true" />
+
+        <field name="extraProperties" column="extra_properties" type="array" nullable="true" />
 
     </mapped-superclass>
 

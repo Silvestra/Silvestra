@@ -1,5 +1,10 @@
 form:
   seo_metadata:
     page_title: Page title
-    meta_description: Meta description
-    meta_keywords: Meta keywords
+    meta_description: Page description
+    meta_keywords: Page keywords
+    meta_robots: Meta robot tags
+    original_url: Original url
+    extra_http: Meta http-equiv tags
+    extra_names: Meta name tags
+    extra_properties: Meta property tags

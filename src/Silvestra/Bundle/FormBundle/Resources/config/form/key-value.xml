@@ -6,14 +6,14 @@
 
     <services>
 
-        <!--Silvestra KeyValue form type-->
-        <service class="Silvestra\Component\Form\Type\KeyValueType">
-            <tag name="form.type" alias="silvestra_key_value" />
-        </service>
-
-        <!--Silvestra KeyValueRow form type-->
+        <!--Silvestra key value row form type-->
         <service class="Silvestra\Component\Form\Type\KeyValueRowType">
             <tag name="form.type" alias="silvestra_key_value_row" />
+        </service>
+
+        <!--Silvestra key value form type-->
+        <service class="Silvestra\Component\Form\Type\KeyValueType">
+            <tag name="form.type" alias="silvestra_key_value" />
         </service>
 
     </services>

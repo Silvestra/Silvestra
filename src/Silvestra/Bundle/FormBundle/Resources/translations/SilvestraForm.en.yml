@@ -1,3 +1,7 @@
 key_value_row:
   key: Key
   value: Value
+
+key_value:
+  add: Add new key value
+  delete: Delete

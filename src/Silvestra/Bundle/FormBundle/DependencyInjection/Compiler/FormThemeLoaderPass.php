@@ -27,7 +27,7 @@ class FormThemeLoaderPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $formThemes = $container->getParameter('twig.form.resources');
-        $formThemes[] = 'SilvestraFormBundle::tag_type.html.twig';
+        $formThemes[] = 'SilvestraFormBundle::form.html.twig';
 
         $container->setParameter('twig.form.resources', $formThemes);
     }
