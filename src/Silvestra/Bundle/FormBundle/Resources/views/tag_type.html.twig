@@ -1,9 +1,0 @@
-{% block silvestra_tag_widget %}
-<script>
-    $('#{{ form.vars.id }}').tagging();
-</script>
-
-<div data-tags-input-name="{{ form.tags.vars.full_name }}" id="{{ form.vars.id }}" {{ form.vars.silvestra_tag_settings|raw }} class="silvestra-tag form-control">
-    {{- form.vars.silvestra_tag_data  }}
-</div>
-{% endblock %}

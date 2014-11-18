@@ -1,5 +1,10 @@
 form:
   seo_metadata:
     page_title: Puslapio antraštė
-    meta_description: Meta aprašymas
-    meta_keywords: Meta raktiniai žodžiai
+    meta_description: Puslapio aprašymas
+    meta_keywords: Puslapio raktiniai žodžiai
+    meta_robots: Meta robots žymės
+    original_url: Orginalus universalusis adresas (URL)
+    extra_http: Meta http-equiv žymės
+    extra_names: Meta name žymės
+    extra_properties: Meta property žymės

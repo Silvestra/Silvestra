@@ -43,7 +43,7 @@ class KeyValueType extends AbstractType
             $event->setData($data);
         };
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, $preSetDataListener);
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, $preSetDataListener, 1);
         $builder->addModelTransformer(new KeyValueTransformer($options['use_key_value_array']));
     }
 
@@ -65,7 +65,8 @@ class KeyValueType extends AbstractType
                     return array(
                         'value_type' => $options['value_type'],
                         'value_options' => $options['value_options'],
-                        'allowed_keys' => $options['allowed_keys']
+                        'allowed_keys' => $options['allowed_keys'],
+                        'label' => false,
                     );
                 }
             )

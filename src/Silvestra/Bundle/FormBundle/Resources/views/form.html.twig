@@ -1,0 +1,22 @@
+{% trans_default_domain 'SilvestraForm' %}
+
+{# Silvesta key value #}
+{% block silvestra_key_value_widget -%}
+    {% set prototype = '<div class="silvestra-row form-group">' ~ form_widget(form.vars.prototype) ~ '<a href="javascript:;" class="silvestra-delete">' ~ 'key_value.delete'|trans ~ '</a></div>' %}
+    <div class="silvestra-key-value" data-prototype="{{ prototype|e }}" data-index="{{ form.vars.data|length  }}">
+        <a href="javascript:;" class="silvestra-add">{{ 'key_value.add'|trans }}</a>
+        {% for child in form.children %}
+            <div class="silvestra-row form-group">
+                {{ form_row(child) }}
+                <a href="javascript:;" class="silvestra-delete">{{ 'key_value.delete'|trans }}</a>
+            </div>
+        {%- endfor %}
+    </div>
+{%- endblock %}
+
+{# Silvetra tag #}
+{% block silvestra_tag_widget -%}
+    <div data-tags-input-name="{{ form.tags.vars.full_name }}" id="{{ form.vars.id }}" {{ form.vars.silvestra_tag_settings|raw }} class="silvestra-tag form-control">
+        {{- form.vars.silvestra_tag_data  }}
+    </div>
+{%- endblock %}
