@@ -50,19 +50,9 @@ class SeoPresentation implements SeoPresentationInterface
         $this->seoPage->addHtmlAttributes('lang', $seoMetadata->getLang());
 
         $this->seoPage->addMeta('charset', $this->encoding, '');
-        if ($seoMetadata->getMetaDescription()) {
-            $this->seoPage->addMeta('name', 'description', $seoMetadata->getMetaDescription());
-        }
-        if ($seoMetadata->getMetaKeywords()) {
-            $this->seoPage->addMeta('name', 'keywords', $seoMetadata->getMetaKeywords());
-        }
-        if ($seoMetadata->getMetaRobots()) {
-            $this->seoPage->addMeta('name', 'robots', $seoMetadata->getMetaRobots());
-        }
 
-        if ($title = $seoMetadata->getTitle()) {
-            $this->seoPage->addTitle($title);
-            $this->seoPage->addMeta('name', 'title', $title);
+        if ($description = $seoMetadata->getMetaDescription()) {
+            $this->seoPage->addMeta('name', 'description', $description);
         }
 
         if ($extraHttp = $seoMetadata->getExtraHttp()) {
@@ -81,6 +71,19 @@ class SeoPresentation implements SeoPresentationInterface
             foreach ($extraProperties as $key => $value) {
                 $this->seoPage->addMeta('property', $key, $value);
             }
+        }
+
+        if ($keywords = $seoMetadata->getMetaKeywords()) {
+            $this->seoPage->addMeta('name', 'keywords', $keywords);
+        }
+
+        if ($robots = $seoMetadata->getMetaRobots()) {
+            $this->seoPage->addMeta('name', 'robots', $robots);
+        }
+
+        if ($title = $seoMetadata->getTitle()) {
+            $this->seoPage->addTitle($title);
+            $this->seoPage->addMeta('name', 'title', $title);
         }
     }
 }
