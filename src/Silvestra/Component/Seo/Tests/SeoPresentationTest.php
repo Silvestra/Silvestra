@@ -85,7 +85,8 @@ class SeoPresentationTest extends \PHPUnit_Framework_TestCase
                 'name' => array(
                     'description' => array('Silvestra test.', array()),
                     'keywords' => array('Silvestra, Test', array()),
-                    'robots' => array('NOINDEX, NOFOLLOW', array())
+                    'robots' => array('NOINDEX, NOFOLLOW', array()),
+                    'title' => array('Silvestra', array()),
                 ),
                 'schema' => array(),
                 'charset' => array('UTF-8' => array('', array())),
