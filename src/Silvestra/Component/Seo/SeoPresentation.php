@@ -56,21 +56,15 @@ class SeoPresentation implements SeoPresentationInterface
         }
 
         if ($extraHttp = $seoMetadata->getExtraHttp()) {
-            foreach ($extraHttp as $key => $value) {
-                $this->seoPage->addMeta('http-equiv', $key, $value);
-            }
+            $this->addMetas('http-equiv', $extraHttp);
         }
 
         if ($extraNames = $seoMetadata->getExtraNames()) {
-            foreach ($extraNames as $key => $value) {
-                $this->seoPage->addMeta('name', $key, $value);
-            }
+            $this->addMetas('name', $extraNames);
         }
 
         if ($extraProperties = $seoMetadata->getExtraProperties()) {
-            foreach ($extraProperties as $key => $value) {
-                $this->seoPage->addMeta('property', $key, $value);
-            }
+            $this->addMetas('property', $extraProperties);
         }
 
         if ($keywords = $seoMetadata->getMetaKeywords()) {
@@ -82,8 +76,31 @@ class SeoPresentation implements SeoPresentationInterface
         }
 
         if ($title = $seoMetadata->getTitle()) {
-            $this->seoPage->addTitle($title);
-            $this->seoPage->addMeta('name', 'title', $title);
+            $this->addTitle($title);
         }
+    }
+
+    /**
+     * Add metas.
+     *
+     * @param string $type
+     * @param array $values
+     */
+    private function addMetas($type, array $values)
+    {
+        foreach ($values as $key => $value) {
+            $this->seoPage->addMeta($type, $key, $value);
+        }
+    }
+
+    /**
+     * Add title.
+     *
+     * @param string $title
+     */
+    private function addTitle($title)
+    {
+        $this->seoPage->addTitle($title);
+        $this->seoPage->addMeta('name', 'title', $title);
     }
 }
