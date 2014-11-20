@@ -9,24 +9,27 @@
 
 $.fn.mediaGallery = function () {
     var $self = $(this);
+    var $imageUploadModal = new MediaImageUploadModal();
 
     $self.each(function () {
         var $gallery = $(this);
-        var $addImageButton = $gallery.find('.add-image-button:first');
+        var $addImageButton = $gallery.find('a.add-image-button:first');
         var $settings = $gallery.data('settings');
-        var $imageUploadModal = new MediaImageUploadModal($gallery);
+
+        $gallery.data('index', $gallery.find(':input').length);
 
         $addImageButton.click(function () {
             $imageUploadModal.show(addImageWidget($gallery), $settings);
         });
 
-//        $gallery.on('click', '.silvestra-media-image > .image', function() {
-//            $imageUploadModal.show($(this).closest('.silvestra-media-image'), $settings);
-//        });
-//
-//        $gallery.on('click', '.remove-image', function() {
-//            removeImageWidget($(this).closest('div.silvestra-media-image'));
-//        });
+        $gallery.on('click', 'div.silvestra-media-image > .image', function() {
+
+            $imageUploadModal.show($(this).closest('div.silvestra-media-image'), $settings);
+        });
+
+        $gallery.on('click', 'span.remove-image', function() {
+            removeImageWidget($(this).closest('div.silvestra-media-image'));
+        });
     });
 
     var addImageWidget = function ($gallery) {

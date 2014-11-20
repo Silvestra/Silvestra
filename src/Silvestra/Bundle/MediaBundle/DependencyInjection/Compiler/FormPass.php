@@ -29,7 +29,7 @@ class FormPass implements CompilerPassInterface
     {
         $resources = $container->getParameter('twig.form.resources');
 
-        $resources[] = 'SilvestraMediaBundle:Form:media_fields.html.twig';
+        $resources[] = 'SilvestraMediaBundle:Form:form.html.twig';
         $container->setParameter('twig.form.resources', $resources);
     }
 }
