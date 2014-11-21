@@ -1,6 +1,8 @@
 CacheBundle
 =========
 
+[![Build Status](https://travis-ci.org/Silvestra/CacheBundle.svg?branch=master)](https://travis-ci.org/Silvestra/CacheBundle)
+
 Silvestra cache bundle.
 
 Bug Tracking

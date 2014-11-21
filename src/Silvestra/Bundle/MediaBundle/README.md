@@ -1,6 +1,8 @@
 MediaBundle
 ===========
 
+[![Build Status](https://travis-ci.org/Silvestra/MediaBundle.svg?branch=master)](https://travis-ci.org/Silvestra/MediaBundle)
+
 Silvestra media bundle.
 
 Bug Tracking

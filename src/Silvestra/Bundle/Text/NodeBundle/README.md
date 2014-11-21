@@ -1,6 +1,8 @@
 TextNodeBundle
 =========
 
+[![Build Status](https://travis-ci.org/Silvestra/TextNodeBundle.svg?branch=master)](https://travis-ci.org/Silvestra/TextNodeBundle)
+
 Silvestra text node bundle.
 
 Bug Tracking

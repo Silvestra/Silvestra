@@ -1,6 +1,8 @@
 SeoBundle
 =========
 
+[![Build Status](https://travis-ci.org/Silvestra/SeoBundle.svg?branch=master)](https://travis-ci.org/Silvestra/SeoBundle)
+
 Silvestra seo bundle.
 
 Bug Tracking

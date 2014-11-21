@@ -1,6 +1,8 @@
 FrontendBundle
 =========
 
+[![Build Status](https://travis-ci.org/Silvestra/FrontendBundle.svg?branch=master)](https://travis-ci.org/Silvestra/FrontendBundle)
+
 Silvestra frontend bundle.
 
 Bug Tracking

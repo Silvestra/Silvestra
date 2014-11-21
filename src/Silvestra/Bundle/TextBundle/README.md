@@ -1,6 +1,8 @@
 TextBundle
 =========
 
+[![Build Status](https://travis-ci.org/Silvestra/TextBundle.svg?branch=master)](https://travis-ci.org/Silvestra/TextBundle)
+
 Silvestra text bundle.
 
 Bug Tracking

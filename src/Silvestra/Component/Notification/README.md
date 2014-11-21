@@ -1,6 +1,8 @@
 Notification Component
 ===
 
+[![Build Status](https://travis-ci.org/Silvestra/Notification.svg?branch=master)](https://travis-ci.org/Silvestra/Notification)
+
 Silvestra notification component.
 
 Bug Tracking

@@ -1,6 +1,8 @@
 Site Component
 ===
 
+[![Build Status](https://travis-ci.org/Silvestra/Site.svg?branch=master)](https://travis-ci.org/Silvestra/Site)
+
 Silvestra site component.
 
 Bug Tracking
