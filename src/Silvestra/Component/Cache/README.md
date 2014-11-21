@@ -1,6 +1,8 @@
 Cache Component
 ===
 
+[![Build Status](https://travis-ci.org/Silvestra/Cache.svg?branch=master)](https://travis-ci.org/Silvestra/Cache)
+
 Silvestra cache component.
 
 Bug Tracking

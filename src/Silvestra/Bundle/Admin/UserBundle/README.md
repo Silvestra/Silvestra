@@ -1,6 +1,8 @@
 AdminUserBundle
 =========
 
+[![Build Status](https://travis-ci.org/Silvestra/AdminUserBundle.svg?branch=master)](https://travis-ci.org/Silvestra/AdminUserBundle)
+
 Silvestra admin user bundle.
 
 Bug Tracking

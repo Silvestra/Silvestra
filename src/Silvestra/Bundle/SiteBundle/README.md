@@ -1,6 +1,8 @@
 SiteBundle
 =========
 
+[![Build Status](https://travis-ci.org/Silvestra/SiteBundle.svg?branch=master)](https://travis-ci.org/Silvestra/SiteBundle)
+
 Silvestra site bundle.
 
 Bug Tracking

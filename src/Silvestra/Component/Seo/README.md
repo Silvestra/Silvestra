@@ -1,6 +1,8 @@
 Seo Component
 ===
 
+[![Build Status](https://travis-ci.org/Silvestra/Seo.svg?branch=master)](https://travis-ci.org/Silvestra/Seo)
+
 Silvestra seo component.
 
 Bug Tracking

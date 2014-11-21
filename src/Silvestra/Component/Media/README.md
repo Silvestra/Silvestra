@@ -1,6 +1,8 @@
 Media Component
 =====
 
+[![Build Status](https://travis-ci.org/Silvestra/Media.svg?branch=master)](https://travis-ci.org/Silvestra/Media)
+
 Silvestra media component.
 
 Bug Tracking

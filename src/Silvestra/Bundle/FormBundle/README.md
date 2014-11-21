@@ -1,6 +1,8 @@
 FormBundle
 ==========
 
+[![Build Status](https://travis-ci.org/Silvestra/FormBundle.svg?branch=master)](https://travis-ci.org/Silvestra/FormBundle)
+
 Silvestra form bundle.
 
 Bug Tracking
