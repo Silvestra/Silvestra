@@ -9,6 +9,3 @@ php:
 
 before_script:
   - composer install --dev
-script:
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
-  - vendor/bin/phpcs -p --standard=PSR2 --ignore=vendor/ ./
