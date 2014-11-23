@@ -48,7 +48,7 @@ class ImageValidator
      */
     public function addConfigValidator(ImageConfigValidatorInterface $configValidator)
     {
-        $this->configValidators[$configValidator->getConfigName()] = $configValidator;
+        $this->configValidators[] = $configValidator;
     }
 
     /**
@@ -64,7 +64,9 @@ class ImageValidator
     {
         $isValid = true;
 
-        foreach ($this->configValidators as $configName => $configValidator) {
+        foreach ($this->configValidators as $configValidator) {
+            $configName = $configValidator->getConfigName();
+
             if (!isset($config[$configName])) {
                 throw new InvalidImageConfigException(sprintf('Invalid image config: %s', $configName));
             }
