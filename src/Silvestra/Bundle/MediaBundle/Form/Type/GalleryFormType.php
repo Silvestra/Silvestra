@@ -38,12 +38,15 @@ class GalleryFormType extends AbstractType
                 'allow_delete' => true,
                 'required' => false,
                 'options' => array(
-                    'mimeTypes' => $options['mimeTypes'],
-                    'maxFileSize' => $options['uploaderConfig']['maxFileSize'],
-                    'maxWidth' => $options['uploaderConfig']['maxWidth'],
-                    'maxHeight' => $options['uploaderConfig']['maxHeight'],
-                    'minWidth' => $options['uploaderConfig']['minWidth'],
-                    'minHeight' => $options['uploaderConfig']['minHeight'],
+                    'types' => $options['types'],
+                    'max_file_size' => $options['max_file_size'],
+                    'max_height' => $options['max_height'],
+                    'max_width' => $options['max_width'],
+                    'min_height' => $options['min_height'],
+                    'min_width' => $options['min_width'],
+                    'resize_strategy' => $options['resize_strategy'],
+                    'cropper_enabled' => $options['cropper_enabled'],
+                    'cropper_coordinates' => $options['cropper_coordinates'],
                 ),
             )
         );
@@ -55,12 +58,16 @@ class GalleryFormType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $options['uploaderConfig']['acceptFileTypes'] = implode('|', array_keys($options['mimeTypes']));
-
         $settings = array(
-            'cropperEnabled' => $options['cropperEnabled'],
-            'uploaderConfig' => $options['uploaderConfig'],
-            'cropperConfig' => $options['cropperConfig'],
+            'types' => $options['types'],
+            'max_file_size' => $options['max_file_size'],
+            'max_height' => $options['max_height'],
+            'max_width' => $options['max_width'],
+            'min_height' => $options['min_height'],
+            'min_width' => $options['min_width'],
+            'resize_strategy' => $options['resize_strategy'],
+            'cropper_enabled' => $options['cropper_enabled'],
+            'cropper_coordinates' => $options['cropper_coordinates'],
         );
 
         $view->vars['settings'] = json_encode($settings);
@@ -73,26 +80,19 @@ class GalleryFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'mimeTypes' => array(
-                    'png' => 'image/png',
-                    'jpe' => 'image/jpeg',
-                    'jpeg' => 'image/jpeg',
-                    'jpg' => 'image/jpeg',
-                    'gif' => 'image/gif',
-                ),
-                'cropperEnabled' => true,
-                'uploaderConfig' => array(
-                    'maxFileSize' => 5000000,
-                    'maxWidth' => 1024,
-                    'maxHeight' => 768,
-                    'minWidth' => 0,
-                    'minHeight' => 0,
-                ),
-                'cropperConfig' => array(
+                'types' => array('image/png', 'image/jpeg', 'image/jpeg', 'image/jpeg', 'image/gif'),
+                'max_file_size' => 5000000,
+                'max_height' => 800,
+                'max_width' => 800,
+                'min_height' => 100,
+                'min_width' => 100,
+                'resize_strategy' => 'max',
+                'cropper_enabled' => true,
+                'cropper_coordinates' => array(
                     'x1' => 0,
                     'y1' => 0,
-                    'x2' => 1024,
-                    'y2' => 768,
+                    'x2' => 800,
+                    'y2' => 800,
                 ),
             )
         );

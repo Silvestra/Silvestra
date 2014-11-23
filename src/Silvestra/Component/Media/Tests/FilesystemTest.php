@@ -12,6 +12,7 @@
 namespace Silvestra\Component\Media\Tests;
 
 use Silvestra\Component\Media\Filesystem;
+use Silvestra\Component\Media\Media;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -28,24 +29,64 @@ class FilesystemTest extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    private $uploaderFolder;
+    private $tempDir;
 
     /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        $this->filesystem = new Filesystem(__DIR__ . '/');
-        $this->uploaderFolder = __DIR__ . DIRECTORY_SEPARATOR . 'silvestra_media';
+        $this->tempDir = sys_get_temp_dir() . '/sivestra/';
+        $this->filesystem = new Filesystem($this->tempDir);
     }
 
-    public function testGetUploaderFolder()
+    /**
+     * Test method: getMediaRootDir().
+     */
+    public function testGetMediaRootDir()
     {
-        $this->assertEquals($this->uploaderFolder, $this->filesystem->getUploaderFolder());
+        $this->assertEquals($this->getMediaRootDir(), $this->filesystem->getMediaRootDir());
     }
 
-    public function testGetTmpFolder()
+    /**
+     * Test method: getActualFileDir().
+     */
+    public function testGetActualFileDir()
     {
-        $this->assertEquals($this->uploaderFolder . DIRECTORY_SEPARATOR  . 'tmp', $this->filesystem->getTmpFolder());
+        $this->assertEquals(
+            $this->getMediaRootDir() . '/s/i/l/v/e',
+            $this->filesystem->getActualFileDir('silvestra.png')
+        );
+
+        $this->assertEquals(
+            $this->getMediaRootDir() . '/t/e/s/t',
+            $this->filesystem->getActualFileDir('test.png')
+        );
+    }
+
+    /**
+     * Test method: getActualFileDir() with empty filename.
+     */
+    public function testGetActualFileDirWithEmptyFilename()
+    {
+        $this->setExpectedException('Silvestra\\Component\\Media\\Exception\\InvalidArgumentException');
+
+        $this->filesystem->getActualFileDir('');
+    }
+
+    /**
+     * Test method: mkdir() with empty filename.
+     */
+    public function testMkdir()
+    {
+        $dir = $this->filesystem->getActualFileDir('silvestra.png');
+        $this->filesystem->mkdir($dir);
+
+        $this->assertFileExists($dir);
+    }
+
+    private function getMediaRootDir()
+    {
+        return $this->tempDir . Media::NAME;
     }
 }

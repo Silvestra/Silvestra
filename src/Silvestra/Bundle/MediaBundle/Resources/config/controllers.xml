@@ -6,10 +6,9 @@
 
     <services>
 
-        <!--Silvestra media gallery form type-->
-        <service id="silvestra_media.form_type.gallery" class="Silvestra\Component\Media\Form\Type\GalleryType">
-            <tag name="form.type" alias="silvestra_media_gallery" />
-            <argument type="service" id="silvestra_media.image.config" />
+        <!--Silvestra media uploader controller-->
+        <service id="silvestra_media.controllers.uploader" class="Silvestra\Bundle\MediaBundle\Controller\UploaderController">
+            <argument type="service" id="silvestra_media.handler.uploader" />
         </service>
 
     </services>

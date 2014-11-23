@@ -11,47 +11,98 @@
 
 namespace Silvestra\Component\Media;
 
-use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
+use Silvestra\Component\Media\Exception\InvalidArgumentException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 14.9.14 00.07
  */
-class Filesystem extends SymfonyFilesystem
+class Filesystem
 {
     /**
+     * Root directory.
+     *
      * @var string
      */
-    private $uploaderFolder;
+    private $rootDir;
+
+    /**
+     * Prefix directories size
+     *
+     * For instance, if the file is silvestra.png and the prefix size is
+     * 5, the media file will be: s/i/l/v/e/silvestra.png
+     *
+     * @var int
+     */
+    protected $prefixSize = 5;
+
+    /**
+     * Directory mode
+     *
+     * Allows setting of the access mode for the directories created.
+     *
+     * @var int
+     */
+    protected $dirMode = 0755;
 
     /**
      * Constructor.
      *
-     * @param string $uploaderFolder
+     * @param string $rootDir
      */
-    public function __construct($uploaderFolder)
+    public function __construct($rootDir)
     {
-        $this->uploaderFolder = $uploaderFolder;
+        $this->rootDir = rtrim($rootDir, '/\\');
     }
 
     /**
-     * Get uploader folder.
+     * Get actual file dir.
+     *
+     * @param string $filename
      *
      * @return string
+     *
+     * @throws InvalidArgumentException
      */
-    public function getUploaderFolder()
+    public function getActualFileDir($filename)
     {
-        return rtrim($this->uploaderFolder, '/\\') . DIRECTORY_SEPARATOR . 'silvestra_media';
+        if (empty($filename)) {
+            throw new InvalidArgumentException('Invalid filename argument');
+        }
+
+        $path = array();
+        $parts = explode('.', $filename);
+
+        for ($i=0; $i<min(strlen($parts[0]), $this->prefixSize); $i++) {
+            $path[] = $filename[$i];
+        }
+
+        $path = implode(DIRECTORY_SEPARATOR, $path);
+
+        return $this->getMediaRootDir() . DIRECTORY_SEPARATOR . $path;
     }
 
     /**
-     * Get temporary folder.
+     * Get media root dir.
      *
      * @return string
      */
-    public function getTmpFolder()
+    public function getMediaRootDir()
     {
-        return $this->getUploaderFolder() . DIRECTORY_SEPARATOR  . 'tmp';
+        return $this->rootDir . DIRECTORY_SEPARATOR . Media::NAME;
+    }
+
+
+    /**
+     * Creates a directory.
+     *
+     * @param string $dir
+     */
+    public function mkdir($dir)
+    {
+        if (!is_dir($dir)) {
+            @mkdir($dir, $this->dirMode, true);
+        }
     }
 }

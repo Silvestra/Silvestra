@@ -17,6 +17,11 @@
     text-align: center;
 }
 
+.silvestra-media-image .image img {
+    height: 150px;
+    width: 150px;
+}
+
 .silvestra-media-image span.remove-image {
     cursor: hand;
     cursor: pointer;

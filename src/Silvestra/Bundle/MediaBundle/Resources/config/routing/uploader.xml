@@ -9,7 +9,7 @@
     </route>
 
     <route id="silvestra_media_uploader_upload" path="/media/uploader/upload">
-        <default key="_controller">SilvestraMediaBundle:Uploader:upload</default>
+        <default key="_controller">silvestra_media.controllers.uploader:uploadAction</default>
         <option key="expose">true</option>
     </route>
 

@@ -14,10 +14,10 @@ $.fn.mediaGallery = function () {
         var $gallery = $(this);
         var $addImageButton = $gallery.find('.add-image-button:first');
         var $settings = $gallery.data('settings');
-        var $imageUploadModal = new MediaImageUploadModal($gallery);
+        var $imageUploadModal = new MediaImageUploadModal($gallery.find('.image-upload-modal:first'), $settings);
 
         $addImageButton.click(function () {
-            $imageUploadModal.show(addImageWidget($gallery), $settings);
+            $imageUploadModal.show(addImageWidget($gallery));
         });
 
 //        $gallery.on('click', '.silvestra-media-image > .image', function() {
@@ -33,7 +33,6 @@ $.fn.mediaGallery = function () {
         var $index = $gallery.data('index');
         var $newImageWidget = $($gallery.data('prototype').replace(/__name__/g, $index));
 
-        $newImageWidget.hide();
         $gallery.data('index', $index + 1);
         $gallery.find('div.images:first').prepend($newImageWidget);
 

@@ -11,32 +11,32 @@
 
 namespace Silvestra\Component\Media\Model\Manager;
 
-use Silvestra\Component\Media\Model\FileInterface;
+use Silvestra\Component\Media\Model\ImageInterface;
 
-interface FileManagerInterface
+interface ImageManagerInterface
 {
     /**
-     * Create new File object.
+     * Create new Image object.
      *
-     * @return FileInterface
+     * @return ImageInterface
      */
     public function create();
 
     /**
-     * Add File object from persistent layer.
+     * Add Image object from persistent layer.
      *
-     * @param FileInterface $file
+     * @param ImageInterface $image
      * @param bool $save
      */
-    public function add(FileInterface $file, $save = false);
+    public function add(ImageInterface $image, $save = false);
 
     /**
-     * Remove File object from persistent layer.
+     * Remove Image object from persistent layer.
      *
-     * @param FileInterface $file
+     * @param ImageInterface $image
      * @param bool $save
      */
-    public function remove(FileInterface $file, $save = false);
+    public function remove(ImageInterface $image, $save = false);
 
     /**
      * Save persistent layer.
@@ -44,12 +44,12 @@ interface FileManagerInterface
     public function save();
 
     /**
-     * Clear File objects from persistent layer.
+     * Clear Image objects from persistent layer.
      */
     public function clear();
 
     /**
-     * Get File object class name.
+     * Get Image object class name.
      *
      * @return string
      */

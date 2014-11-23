@@ -5,12 +5,12 @@
         <span class="remove-image">
             <i class="fa fa-remove fa-lg"></i>
         </span>
-        <div class="image"></div>
+        <div class="image"><img src="{{ asset('/bundles/silvestramedia/image/noimage.png') }}"></div>
         {{ form_widget(form) }}
 {%- endblock silvestra_media_image_widget %}
 
 {% block silvestra_media_gallery_widget -%}
-    <div class="well silvestra-media-gallery" data-name="{{ name }}" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}" data-settings="{{ form.vars.settings }}" data-index="{{ form.vars.data|length  }}">
+    <div class="well silvestra-media-gallery" data-name="{{ name }}" data-prototype="{{ form_widget(form.vars.prototype)|e }}" data-index="{{ form.vars.data|length  }}" data-settings="{{ form.vars.prototype.vars.settings }}">
         {{ form_errors(form) }}
         <div class="images">
             {#{% for i in 0..5 %}#}

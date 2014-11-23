@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Uploader;
+namespace Silvestra\Component\Media\Handler;
 
 use Silvestra\Component\Media\Filesystem;
+use Silvestra\Component\Media\ImageConfig;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
@@ -30,71 +31,27 @@ class UploaderHandler
     private $filesystem;
 
     /**
+     * @var ImageConfig
+     */
+    private $imageConfig;
+
+    /**
      * @var ValidatorInterface
      */
     private $validator;
-
-    private $imageMimeTypes = array(
-        'png' => 'image/png',
-        'jpe' => 'image/jpeg',
-        'jpeg' => 'image/jpeg',
-        'jpg' => 'image/jpeg',
-        'gif' => 'image/gif',
-        'bmp' => 'image/bmp',
-        'ico' => 'image/vnd.microsoft.icon',
-        'tiff' => 'image/tiff',
-        'tif' => 'image/tiff',
-        'svg' => 'image/svg+xml',
-        'svgz' => 'image/svg+xml',
-    );
-
-    private $mimeTypes = array(
-        'txt' => 'text/plain',
-        'htm' => 'text/html',
-        'html' => 'text/html',
-        'php' => 'text/html',
-        'css' => 'text/css',
-        'js' => 'application/javascript',
-        'json' => 'application/json',
-        'xml' => 'application/xml',
-        'swf' => 'application/x-shockwave-flash',
-        'flv' => 'video/x-flv',
-        // archives
-        'zip' => 'application/zip',
-        'rar' => 'application/x-rar-compressed',
-        'exe' => 'application/x-msdownload',
-        'msi' => 'application/x-msdownload',
-        'cab' => 'application/vnd.ms-cab-compressed',
-        // audio/video
-        'mp3' => 'audio/mpeg',
-        'qt' => 'video/quicktime',
-        'mov' => 'video/quicktime',
-        // adobe
-        'pdf' => 'application/pdf',
-        'psd' => 'image/vnd.adobe.photoshop',
-        'ai' => 'application/postscript',
-        'eps' => 'application/postscript',
-        'ps' => 'application/postscript',
-        // ms office
-        'doc' => 'application/msword',
-        'rtf' => 'application/rtf',
-        'xls' => 'application/vnd.ms-excel',
-        'ppt' => 'application/vnd.ms-powerpoint',
-        // open office
-        'odt' => 'application/vnd.oasis.opendocument.text',
-        'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
-    );
 
     /**
      * Constructor.
      *
      * @param Filesystem $filesystem
+     * @param ImageConfig $imageConfig
      * @param ValidatorInterface $validator
      */
-    public function __construct(Filesystem $filesystem, ValidatorInterface $validator)
+    public function __construct(Filesystem $filesystem, ImageConfig $imageConfig, ValidatorInterface $validator)
     {
-        $this->validator = $validator;
         $this->filesystem = $filesystem;
+        $this->imageConfig = $imageConfig;
+        $this->validator = $validator;
     }
 
     public function process(UploadedFile $uploadedFile, array $config)
@@ -123,7 +80,7 @@ class UploaderHandler
      *
      * @return File|Image
      */
-    private function getConstraint(UploadedFile $uploadedFile, array $config)
+    private function getConstraint(array $config)
     {
         $options = array(
 //            'maxSize' => '5M',
@@ -133,28 +90,12 @@ class UploaderHandler
             ),
         );
 
-        if ($this->isImageFile($uploadedFile)) {
-            $options['minWidth'] = $config['minWidth'];
-            $options['maxWidth'] = $config['maxWidth'];
-            $options['minHeight'] = $config['minHeight'];
-            $options['maxHeight'] = $config['maxHeight'];
+        $options['minWidth'] = $config['minWidth'];
+        $options['maxWidth'] = $config['maxWidth'];
+        $options['minHeight'] = $config['minHeight'];
+        $options['maxHeight'] = $config['maxHeight'];
 
-            return new Image($options);
-        }
-
-        return new File($options);
-    }
-
-    /**
-     * Check if is image file.
-     *
-     * @param UploadedFile $uploadedFile
-     *
-     * @return bool
-     */
-    private function isImageFile(UploadedFile $uploadedFile)
-    {
-        return in_array($uploadedFile->getClientMimeType(), $this->imageMimeTypes);
+        return new Image($options);
     }
 
     /**

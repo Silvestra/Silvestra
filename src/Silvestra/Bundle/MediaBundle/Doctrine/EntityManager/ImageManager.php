@@ -13,10 +13,10 @@ namespace Silvestra\Bundle\MediaBundle\Doctrine\EntityManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Silvestra\Component\Media\Model\FileInterface;
-use Silvestra\Component\Media\Model\Manager\FileManager as BaseFileManager;
+use Silvestra\Component\Media\Model\ImageInterface;
+use Silvestra\Component\Media\Model\Manager\ImageManager as BaseImageManager;
 
-class FileManager extends BaseFileManager
+class ImageManager extends BaseImageManager
 {
 
     /**
@@ -50,9 +50,9 @@ class FileManager extends BaseFileManager
     /**
      * {@inheritdoc}
      */
-    public function add(FileInterface $file, $save = false)
+    public function add(ImageInterface $image, $save = false)
     {
-        $this->em->persist($file);
+        $this->em->persist($image);
         if (true === $save) {
             $this->save();
         }
@@ -61,9 +61,9 @@ class FileManager extends BaseFileManager
     /**
      * {@inheritdoc}
      */
-    public function remove(FileInterface $file, $save = false)
+    public function remove(ImageInterface $image, $save = false)
     {
-        $this->em->remove($file);
+        $this->em->remove($image);
         if (true === $save) {
             $this->save();
         }

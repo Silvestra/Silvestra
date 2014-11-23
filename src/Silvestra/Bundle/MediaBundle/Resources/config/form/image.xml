@@ -6,9 +6,10 @@
 
     <services>
 
-        <!--Silvestra media gallery form type-->
-        <service id="silvestra_media.form_type.gallery" class="Silvestra\Component\Media\Form\Type\GalleryType">
-            <tag name="form.type" alias="silvestra_media_gallery" />
+        <!--Silvestra media image form type-->
+        <service id="silvestra_media.form_type.image" class="Silvestra\Component\Media\Form\Type\ImageType">
+            <tag name="form.type" alias="silvestra_media_image" />
+            <argument>%silvestra_media.model.image.class%</argument>
             <argument type="service" id="silvestra_media.image.config" />
         </service>
 

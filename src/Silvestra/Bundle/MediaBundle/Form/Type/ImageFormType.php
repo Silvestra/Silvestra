@@ -65,8 +65,15 @@ class ImageFormType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $settings = array(
-            'maxWidth' => $options['maxWidth'],
-            'maxHeight' => $options['maxHeight']
+            'types' => $options['types'],
+            'max_file_size' => $options['max_file_size'],
+            'max_height' => $options['max_height'],
+            'max_width' => $options['max_width'],
+            'min_height' => $options['min_height'],
+            'min_width' => $options['min_width'],
+            'resize_strategy' => $options['resize_strategy'],
+            'cropper_enabled' => $options['cropper_enabled'],
+            'cropper_coordinates' => $options['cropper_coordinates'],
         );
 
         $view->vars['settings'] = json_encode($settings);
@@ -80,19 +87,20 @@ class ImageFormType extends AbstractType
         $resolver->setDefaults(
             array(
                 'label' => false,
-                'mimeTypes' => array(
-                    'png' => 'image/png',
-                    'jpe' => 'image/jpeg',
-                    'jpeg' => 'image/jpeg',
-                    'jpg' => 'image/jpeg',
-                    'gif' => 'image/gif',
+                'types' => array('image/png', 'image/jpeg', 'image/jpeg', 'image/jpeg', 'image/gif'),
+                'max_file_size' => 5000000,
+                'max_height' => 800,
+                'max_width' => 800,
+                'min_height' => 100,
+                'min_width' => 100,
+                'resize_strategy' => 'max',
+                'cropper_enabled' => true,
+                'cropper_coordinates' => array(
+                    'x1' => 0,
+                    'y1' => 0,
+                    'x2' => 800,
+                    'y2' => 800,
                 ),
-                'maxFileSize' => '5M',
-                'maxWidth' => 1024,
-                'maxHeight' => 768,
-                'minWidth' => 0,
-                'minHeight' => 0,
-                'attr' => array('class' => 'image-file')
             )
         );
     }

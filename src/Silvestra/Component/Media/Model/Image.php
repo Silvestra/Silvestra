@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Silvestra package.
+ * This file is part of the Tadcka package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -11,23 +11,37 @@
 
 namespace Silvestra\Component\Media\Model;
 
-class File implements FileInterface
+/**
+ * @author Tadas Gliaubicas <tadcka89@gmail.com>
+ *
+ * @since 11/23/14 1:32 PM
+ */
+class Image implements ImageInterface
 {
+    /**
+     * @var \DateTime
+     */
+    protected $createdAt;
+
+    /**
+     * @var array
+     */
+    protected $cropperCoordinates;
 
     /**
      * @var string
      */
-    protected $contentType;
-
-    /**
-     * @var string
-     */
-    protected $extension;
+    protected $mimeType;
 
     /**
      * @var string
      */
     protected $name;
+
+    /**
+     * @var string
+     */
+    protected $originalPath;
 
     /**
      * @var string
@@ -40,14 +54,14 @@ class File implements FileInterface
     protected $size;
 
     /**
-     * @var \DateTime
+     * @var bool
      */
-    protected $updatedAt;
+    protected $temporary;
 
     /**
      * @var \DateTime
      */
-    protected $createdAt;
+    protected $updatedAt;
 
     /**
      * Constructor.
@@ -56,14 +70,23 @@ class File implements FileInterface
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
+        $this->cropperCoordinates = array();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setContentType($contentType)
+    public function setCropperCoordinates(array $cropperCoordinates)
     {
-        $this->contentType = $contentType;
+        $this->cropperCoordinates = $cropperCoordinates;
 
         return $this;
     }
@@ -71,17 +94,17 @@ class File implements FileInterface
     /**
      * {@inheritdoc}
      */
-    public function getContentType()
+    public function getCropperCoordinates()
     {
-        return $this->contentType;
+        return $this->cropperCoordinates;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setExtension($extension)
+    public function setMimeType($mimeType)
     {
-        $this->extension = $extension;
+        $this->mimeType = $mimeType;
 
         return $this;
     }
@@ -89,9 +112,9 @@ class File implements FileInterface
     /**
      * {@inheritdoc}
      */
-    public function getExtension()
+    public function getMimeType()
     {
-        return $this->extension;
+        return $this->mimeType;
     }
 
     /**
@@ -110,6 +133,24 @@ class File implements FileInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginalPath($originalPath)
+    {
+        $this->originalPath = $originalPath;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginalPath()
+    {
+        return $this->originalPath;
     }
 
     /**
@@ -151,6 +192,24 @@ class File implements FileInterface
     /**
      * {@inheritdoc}
      */
+    public function setTemporary($temporary)
+    {
+        $this->temporary = $temporary;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTemporary()
+    {
+        return $this->temporary;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
@@ -164,13 +223,5 @@ class File implements FileInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 }

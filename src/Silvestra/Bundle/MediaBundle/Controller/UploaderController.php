@@ -11,28 +11,32 @@
 
 namespace Silvestra\Bundle\MediaBundle\Controller;
 
+use Silvestra\Component\Media\Handler\UploaderHandler;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class UploaderController extends ContainerAware
 {
-    public function uploadAction(Request $request)
-    {
-        $config = json_decode($request->get('config'), true);
-        $files = $request->files->get('files');
-        $uploaderHandler = $this->getUploaderHandler();
-        $data = array();
-        foreach ($files as $file) {
-            $data[] = $uploaderHandler->process($file, $config['uploaderConfig']);
-        }
+    /**
+     * @var UploaderHandler
+     */
+    private $uploaderHandler;
 
-        return new JsonResponse($data);
+    /**
+     * Constructor.
+     *
+     * @param UploaderHandler $uploaderHandler
+     */
+    public function __construct(UploaderHandler $uploaderHandler)
+    {
+        $this->uploaderHandler = $uploaderHandler;
     }
 
-
-    private function getUploaderHandler()
+    public function uploadAction(Request $request)
     {
-        return $this->container->get('silvestra_media.uploader_handler');
+        $data = $this->uploaderHandler->process($request->files->get('image'), $request->get('config'));
+
+        return new JsonResponse($data);
     }
 }

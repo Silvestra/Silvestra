@@ -11,7 +11,7 @@
 
 namespace Silvestra\Component\Media\Model\Manager;
 
-abstract class FileManager implements FileManagerInterface
+abstract class ImageManager implements ImageManagerInterface
 {
 
     /**
