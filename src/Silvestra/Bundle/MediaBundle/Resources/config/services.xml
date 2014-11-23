@@ -12,6 +12,7 @@
 
         <service id="silvestra_media.handler.uploader" class="Silvestra\Component\Media\Handler\UploaderHandler" public="false">
             <argument type="service" id="silvestra_media.filesystem" />
+            <argument type="service" id="silvestra_media.manager.image" />
             <argument type="service" id="validator" />
         </service>
 

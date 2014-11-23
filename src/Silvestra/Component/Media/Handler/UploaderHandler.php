@@ -12,6 +12,7 @@
 namespace Silvestra\Component\Media\Handler;
 
 use Silvestra\Component\Media\Filesystem;
+use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
@@ -30,6 +31,11 @@ class UploaderHandler
     private $filesystem;
 
     /**
+     * @var ImageManagerInterface
+     */
+    private $imageManager;
+
+    /**
      * @var ValidatorInterface
      */
     private $validator;
@@ -38,27 +44,29 @@ class UploaderHandler
      * Constructor.
      *
      * @param Filesystem $filesystem
+     * @param ImageManagerInterface $imageManager
      * @param ValidatorInterface $validator
      */
-    public function __construct(Filesystem $filesystem,  ValidatorInterface $validator)
-    {
+    public function __construct(
+        Filesystem $filesystem,
+        ImageManagerInterface $imageManager,
+        ValidatorInterface $validator
+    ) {
         $this->filesystem = $filesystem;
+        $this->imageManager = $imageManager;
         $this->validator = $validator;
     }
 
     public function process(UploadedFile $uploadedFile, array $config)
     {
-        $data = array('errors' => array());
+        $data = array();
 
-        $errors = $this->validator->validateValue($uploadedFile, $this->getConstraint($uploadedFile, $config));
-        if (0 === $errors->count()) {
-            $filename = $this->getFilename($uploadedFile);
-//            $uploadedFile->move($this->getTmpDir(), $filename);
-            $data['file'] = '/silvestra_media/tmp/' . $filename;
-        } else {
+        if ($errors = $this->validator->validateValue($uploadedFile, $this->getConstraint($config))) {
             foreach ($errors as $error) {
-                $data['errors'][] = $error;
+                $data['errors'][] = $error->getMessage();
             }
+
+            return $data;
         }
 
         return $data;
@@ -67,7 +75,6 @@ class UploaderHandler
     /**
      * Get constraint.
      *
-     * @param UploadedFile $uploadedFile
      * @param array $config
      *
      * @return File|Image
@@ -76,30 +83,16 @@ class UploaderHandler
     {
         $options = array(
 //            'maxSize' => '5M',
-            'mimeTypes' => array_intersect_key(
-                array_merge($this->mimeTypes, $this->imageMimeTypes),
-                array_flip(explode('|', $config['acceptFileTypes']))
-            ),
+            'mimeTypes' => $config['mime_types'],
         );
 
-        $options['minWidth'] = $config['minWidth'];
-        $options['maxWidth'] = $config['maxWidth'];
-        $options['minHeight'] = $config['minHeight'];
-        $options['maxHeight'] = $config['maxHeight'];
+        $options['maxHeight'] = $config['max_height'];
+        $options['maxWidth'] = $config['max_width'];
+        $options['minHeight'] = $config['min_height'];
+        $options['minWidth'] = $config['min_width'];
+
 
         return new Image($options);
-    }
-
-    /**
-     * @return string
-     */
-    private function getTmpDir()
-    {
-        if (false === is_dir($this->filesystem->getTmpFolder())) {
-            $this->filesystem->mkdir($this->filesystem->getTmpFolder());
-        }
-
-        return $this->filesystem->getTmpFolder();
     }
 
     /**
@@ -110,9 +103,9 @@ class UploaderHandler
     private function getFilename(UploadedFile $uploadedFile)
     {
         $filename = $uploadedFile->getClientOriginalName();
-        if ($this->hasFileTmp($filename)) {
-            $filename = $this->generateUniqueFilename($filename);
-        }
+//        if ($this->hasFileTmp($filename)) {
+//            $filename = $this->generateUniqueFilename($filename);
+//        }
 
         return $filename;
     }
@@ -135,15 +128,5 @@ class UploaderHandler
 
         return $filename;
 
-    }
-
-    /**
-     * @param string $filename
-     *
-     * @return bool
-     */
-    private function hasFileTmp($filename)
-    {
-        return $this->filesystem->exists($this->filesystem->getTmpFolder() . DIRECTORY_SEPARATOR . $filename);
     }
 }

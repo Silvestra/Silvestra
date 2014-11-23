@@ -27,8 +27,6 @@
         "components/bootstrap": "Bootstrap library.",
         "components/font-awesome": "Font awesome library.",
         "components/jquery": "JQuery library.",
-        "silvestra/jquery-file-upload": "Jquery file upload library",
-        "silvestra/javascript-load-image": "Javascript load image library.",
         "silvestra/jcrop": "Jcrop library"
     },
     "autoload": {
