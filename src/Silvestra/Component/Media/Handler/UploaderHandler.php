@@ -12,7 +12,6 @@
 namespace Silvestra\Component\Media\Handler;
 
 use Silvestra\Component\Media\Filesystem;
-use Silvestra\Component\Media\ImageConfig;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
@@ -31,11 +30,6 @@ class UploaderHandler
     private $filesystem;
 
     /**
-     * @var ImageConfig
-     */
-    private $imageConfig;
-
-    /**
      * @var ValidatorInterface
      */
     private $validator;
@@ -44,13 +38,11 @@ class UploaderHandler
      * Constructor.
      *
      * @param Filesystem $filesystem
-     * @param ImageConfig $imageConfig
      * @param ValidatorInterface $validator
      */
-    public function __construct(Filesystem $filesystem, ImageConfig $imageConfig, ValidatorInterface $validator)
+    public function __construct(Filesystem $filesystem,  ValidatorInterface $validator)
     {
         $this->filesystem = $filesystem;
-        $this->imageConfig = $imageConfig;
         $this->validator = $validator;
     }
 

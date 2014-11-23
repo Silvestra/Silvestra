@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -11,7 +11,7 @@
 
 namespace Silvestra\Component\Media\Form\Type;
 
-use Silvestra\Component\Media\ImageConfig;
+use Silvestra\Component\Media\Image\ImageDefaultConfig;
 use Silvestra\Component\Media\Media;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,9 +28,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ImageType extends AbstractType
 {
     /**
-     * @var ImageConfig
+     * @var ImageDefaultConfig
      */
-    private $config;
+    private $defaultConfig;
 
     /**
      * @var string
@@ -41,12 +41,12 @@ class ImageType extends AbstractType
      * Constructor.
      *
      * @param string $imageClass
-     * @param ImageConfig $config
+     * @param ImageDefaultConfig $defaultConfig
      */
-    public function __construct($imageClass, ImageConfig $config)
+    public function __construct($imageClass, ImageDefaultConfig $defaultConfig)
     {
         $this->imageClass = $imageClass;
-        $this->config = $config;
+        $this->defaultConfig = $defaultConfig;
     }
 
     /**
@@ -65,7 +65,7 @@ class ImageType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $settings = array(
-            'types' => $options['types'],
+            'mime_types' => $options['mime_types'],
             'max_file_size' => $options['max_file_size'],
             'max_height' => $options['max_height'],
             'max_width' => $options['max_width'],
@@ -89,14 +89,14 @@ class ImageType extends AbstractType
                 'data_class' => $this->imageClass,
                 'label' => false,
 
-                'types' => $this->config->getAvailableMimeTypes(),
-                'max_file_size' => $this->config->getMaxFileSize(),
-                'max_height' => $this->config->getMaxHeight(),
-                'max_width' => $this->config->getMaxWidth(),
-                'min_height' => $this->config->getMinHeight(),
-                'min_width' => $this->config->getMinWidth(),
-                'resize_strategy' => $this->config->getDefaultResizeStrategy(),
-                'cropper_enabled' => $this->config->isDefaultCropperEnabled(),
+                'mime_types' => $this->defaultConfig->getAvailableMimeTypes(),
+                'max_file_size' => $this->defaultConfig->getMaxFileSize(),
+                'max_height' => $this->defaultConfig->getMaxHeight(),
+                'max_width' => $this->defaultConfig->getMaxWidth(),
+                'min_height' => $this->defaultConfig->getMinHeight(),
+                'min_width' => $this->defaultConfig->getMinWidth(),
+                'resize_strategy' => $this->defaultConfig->getDefaultResizeStrategy(),
+                'cropper_enabled' => $this->defaultConfig->isDefaultCropperEnabled(),
                 'cropper_coordinates' => function (Options $options) {
                     return array(
                         'x1' => 0,
@@ -108,33 +108,33 @@ class ImageType extends AbstractType
             )
         );
 
-        $config = $this->config;
+        $defaultConfig = $this->defaultConfig;
 
         $resolver->setAllowedValues(
             array(
-                'types' => function ($types) use ($config) {
-                    foreach ($types as $type) {
-                        if (!in_array($type, $config->getAvailableMimeTypes())) {
+                'mime_types' => function ($mimeTypes) use ($defaultConfig) {
+                    foreach ($mimeTypes as $type) {
+                        if (!in_array($type, $defaultConfig->getAvailableMimeTypes())) {
                             return false;
                         }
                     }
 
                     return true;
                 },
-                'max_file_size' => function ($maxFileSize) use ($config) {
-                    return ($config->getMaxFileSize() >= $maxFileSize);
+                'max_file_size' => function ($maxFileSize) use ($defaultConfig) {
+                    return ($defaultConfig->getMaxFileSize() >= $maxFileSize);
                 },
-                'max_height' => function ($maxHeight) use ($config) {
-                    return ($config->getMaxHeight() >= $maxHeight);
+                'max_height' => function ($maxHeight) use ($defaultConfig) {
+                    return ($defaultConfig->getMaxHeight() >= $maxHeight);
                 },
-                'max_width' => function ($maxWidth) use ($config) {
-                    return ($config->getMaxWidth() >= $maxWidth);
+                'max_width' => function ($maxWidth) use ($defaultConfig) {
+                    return ($defaultConfig->getMaxWidth() >= $maxWidth);
                 },
-                'min_height' => function ($minHeight) use ($config) {
-                    return ($config->getMinHeight() <= $minHeight);
+                'min_height' => function ($minHeight) use ($defaultConfig) {
+                    return ($defaultConfig->getMinHeight() <= $minHeight);
                 },
-                'min_width' => function ($minWidth) use ($config) {
-                    return ($config->getMinWidth() <= $minWidth);
+                'min_width' => function ($minWidth) use ($defaultConfig) {
+                    return ($defaultConfig->getMinWidth() <= $minWidth);
                 },
                 'resize_strategy' => function ($resizeStrategy) {
                     return in_array($resizeStrategy, Media::getResizeStrategies());

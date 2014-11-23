@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media;
+namespace Silvestra\Component\Media\Image;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 11/23/14 1:38 PM
  */
-class ImageConfig
+class ImageDefaultConfig
 {
     /**
      * @var array

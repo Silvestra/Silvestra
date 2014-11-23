@@ -6,12 +6,11 @@
 
     <services>
 
-        <!--Silvestra media image form type-->
-        <service id="silvestra_media.form_type.image" class="Silvestra\Component\Media\Form\Type\ImageType">
-            <tag name="form.type" alias="silvestra_media_image" />
-            <argument>%silvestra_media.model.image.class%</argument>
+        <service id="silvestra_media.image.validator" class="Silvestra\Component\Media\Image\ImageValidator" public="false">
             <argument type="service" id="silvestra_media.image.default_config" />
         </service>
+
+        <service id="silvestra_media.image.default_config" class="Silvestra\Component\Media\Image\ImageDefaultConfig" public="false" />
 
     </services>
 

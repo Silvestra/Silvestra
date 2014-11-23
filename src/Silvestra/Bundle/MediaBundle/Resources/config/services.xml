@@ -5,17 +5,15 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="silvestra_media.filesystem" class="Silvestra\Component\Media\Filesystem">
+
+        <service id="silvestra_media.filesystem" class="Silvestra\Component\Media\Filesystem" public="false">
             <argument>%kernel.root_dir%/../web</argument>
         </service>
 
-        <service id="silvestra_media.handler.uploader" class="Silvestra\Component\Media\Handler\UploaderHandler">
+        <service id="silvestra_media.handler.uploader" class="Silvestra\Component\Media\Handler\UploaderHandler" public="false">
             <argument type="service" id="silvestra_media.filesystem" />
-            <argument type="service" id="silvestra_media.image.config" />
             <argument type="service" id="validator" />
         </service>
-
-        <service id="silvestra_media.image.config" class="Silvestra\Component\Media\ImageConfig" />
 
     </services>
 

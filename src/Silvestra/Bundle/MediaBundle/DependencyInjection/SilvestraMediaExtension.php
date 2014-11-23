@@ -31,6 +31,8 @@ class SilvestraMediaExtension extends Extension
         $loader->load('controllers.xml');
         $loader->load('form/gallery.xml');
         $loader->load('form/image.xml');
+        $loader->load('image/config-validator.xml');
+        $loader->load('image/services.xml');
         $loader->load('services.xml');
 
         if (!in_array(strtolower($config['db_driver']), array('mongodb', 'orm'))) {
@@ -70,7 +72,7 @@ class SilvestraMediaExtension extends Extension
      */
     private function setImageConfigs(array $configs, ContainerBuilder $container)
     {
-        $definition = $container->getDefinition('silvestra_media.image.config');
+        $definition = $container->getDefinition('silvestra_media.image.default_config');
 
         $definition->setArguments($configs);
     }

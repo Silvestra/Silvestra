@@ -8,6 +8,7 @@
 
         <!--Silvestra media uploader controller-->
         <service id="silvestra_media.controllers.uploader" class="Silvestra\Bundle\MediaBundle\Controller\UploaderController">
+            <argument type="service" id="silvestra_media.image.validator" />
             <argument type="service" id="silvestra_media.handler.uploader" />
         </service>
 

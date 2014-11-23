@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -11,9 +11,8 @@
 
 namespace Silvestra\Component\Media\Form\Type;
 
-use Silvestra\Component\Media\ImageConfig;
+use Silvestra\Component\Media\Image\ImageDefaultConfig;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -25,18 +24,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class GalleryType extends AbstractType
 {
     /**
-     * @var ImageConfig
+     * @var ImageDefaultConfig
      */
-    private $config;
+    private $defaultConfig;
 
     /**
      * Constructor.
      *
-     * @param ImageConfig $config
+     * @param ImageDefaultConfig $defaultConfig
      */
-    public function __construct(ImageConfig $config)
+    public function __construct(ImageDefaultConfig $defaultConfig)
     {
-        $this->config = $config;
+        $this->defaultConfig = $defaultConfig;
     }
 
     /**
@@ -52,14 +51,14 @@ class GalleryType extends AbstractType
                 'label' => false,
 
                 'limit' => null,
-                'types' => $this->config->getAvailableMimeTypes(),
-                'max_file_size' => $this->config->getMaxFileSize(),
-                'max_height' => $this->config->getMaxHeight(),
-                'max_width' => $this->config->getMaxWidth(),
-                'min_height' => $this->config->getMinHeight(),
-                'min_width' => $this->config->getMinWidth(),
-                'resize_strategy' => $this->config->getDefaultResizeStrategy(),
-                'cropper_enabled' => $this->config->isDefaultCropperEnabled(),
+                'mime_types' => $this->defaultConfig->getAvailableMimeTypes(),
+                'max_file_size' => $this->defaultConfig->getMaxFileSize(),
+                'max_height' => $this->defaultConfig->getMaxHeight(),
+                'max_width' => $this->defaultConfig->getMaxWidth(),
+                'min_height' => $this->defaultConfig->getMinHeight(),
+                'min_width' => $this->defaultConfig->getMinWidth(),
+                'resize_strategy' => $this->defaultConfig->getDefaultResizeStrategy(),
+                'cropper_enabled' => $this->defaultConfig->isDefaultCropperEnabled(),
                 'cropper_coordinates' => function (Options $options) {
                     return array(
                         'x1' => 0,
@@ -71,7 +70,7 @@ class GalleryType extends AbstractType
 
                 'options' => function (Options $options) {
                     array(
-                      'types' => $options['types'],
+                      'mime_types' => $options['mime_types'],
                       'max_file_size' => $options['max_file_size'],
                       'max_height' => $options['max_height'],
                       'max_width' => $options['max_width'],
