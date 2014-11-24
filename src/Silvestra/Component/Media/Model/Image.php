@@ -36,7 +36,7 @@ class Image implements ImageInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $filename;
 
     /**
      * @var string
@@ -120,9 +120,9 @@ class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setFilename($filename)
     {
-        $this->name = $name;
+        $this->filename = $filename;
 
         return $this;
     }
@@ -130,9 +130,9 @@ class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getFilename()
     {
-        return $this->name;
+        return $this->filename;
     }
 
     /**

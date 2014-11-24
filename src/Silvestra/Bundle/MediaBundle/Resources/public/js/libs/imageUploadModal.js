@@ -15,12 +15,13 @@ function MediaImageUploadModal($modal, $settings) {
     var $uploadCropButton = $modal.find('#image-upload-crop:first');
     var $cropperCoord = $settings.cropper_coordinates;
     var $files;
+    var $image;
 
     FileAPI.event.on($input, 'change', function ($event) {
         $files = FileAPI.getFiles($event);
 
         if (validateFileType($files[0].type)) {
-            var $image = getImage($files[0]);
+            $image = getImage($files[0]);
 
             $image.get(function ($error, $img) {
                 $dropzone.html($img);
@@ -39,7 +40,7 @@ function MediaImageUploadModal($modal, $settings) {
     $uploadCropButton.on('click', function ($event) {
         $event.preventDefault();
 
-        if ($files) {
+        if ($image) {
             var $config = {
                 mime_types: $settings.mime_types,
                 max_file_size: $settings.max_file_size,
@@ -56,7 +57,7 @@ function MediaImageUploadModal($modal, $settings) {
             var xhr = FileAPI.upload({
                 url: Routing.generate('silvestra_media_uploader_upload'),
                 data: { config: $config },
-                files: { image: $files[0] },
+                files: { image: $image },
                 progress: function ($event, $file, $xhr, $options){
                     $modal.find('.progress-bar:first').css('width', parseInt($event.loaded / $event.total * 100, 10) + '%');
                 },

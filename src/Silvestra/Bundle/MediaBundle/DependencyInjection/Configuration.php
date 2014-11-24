@@ -56,8 +56,8 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('default_cropper_enabled')->defaultTrue()->end()
                         ->scalarNode('default_resize_strategy')->defaultValue('max')->end()
                         ->integerNode('max_file_size')->defaultValue(5)->end() // MB
-                        ->integerNode('max_height')->defaultValue(1024)->end()
-                        ->integerNode('max_width')->defaultValue(768)->end()
+                        ->integerNode('max_height')->defaultValue(768)->end()
+                        ->integerNode('max_width')->defaultValue(1024)->end()
                         ->integerNode('min_height')->defaultValue(0)->end()
                         ->integerNode('min_width')->defaultValue(0)->end()
                     ->end()

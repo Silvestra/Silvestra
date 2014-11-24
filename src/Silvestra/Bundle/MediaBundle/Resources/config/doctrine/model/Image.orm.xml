@@ -11,7 +11,7 @@
 
         <field name="mimeType" column="mime_type" type="string" length="255" nullable="false" />
 
-        <field name="name" column="name" type="string" length="255" nullable="false" />
+        <field name="filename" column="filename" type="string" length="255" nullable="false" />
 
         <field name="originalPath" column="original_path" type="string" length="511" nullable="false" unique="true" />
 

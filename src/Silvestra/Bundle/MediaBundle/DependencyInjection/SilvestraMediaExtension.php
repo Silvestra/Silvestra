@@ -74,6 +74,13 @@ class SilvestraMediaExtension extends Extension
     {
         $definition = $container->getDefinition('silvestra_media.image.default_config');
 
-        $definition->setArguments($configs);
+        $definition->addArgument($configs['available_mime_types']);
+        $definition->addArgument($configs['default_cropper_enabled']);
+        $definition->addArgument($configs['default_resize_strategy']);
+        $definition->addArgument($configs['max_file_size']);
+        $definition->addArgument($configs['max_height']);
+        $definition->addArgument($configs['max_width']);
+        $definition->addArgument($configs['min_height']);
+        $definition->addArgument($configs['min_width']);
     }
 }

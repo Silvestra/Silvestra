@@ -16,6 +16,15 @@ use Silvestra\Component\Media\Model\ImageInterface;
 interface ImageManagerInterface
 {
     /**
+     * Find image by filename.
+     *
+     * @param string $filename
+     *
+     * @return ImageInterface
+     */
+    public function findByFilename($filename);
+
+    /**
      * Create new Image object.
      *
      * @return ImageInterface

@@ -12,6 +12,8 @@
 namespace Silvestra\Component\Media\Handler;
 
 use Silvestra\Component\Media\Filesystem;
+use Silvestra\Component\Media\Image\ImageGenerator;
+use Silvestra\Component\Media\Model\ImageInterface;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
@@ -29,6 +31,11 @@ class UploaderHandler
      * @var Filesystem
      */
     private $filesystem;
+
+    /**
+     * @var ImageGenerator
+     */
+    private $imageGenerator;
 
     /**
      * @var ImageManagerInterface
@@ -57,19 +64,44 @@ class UploaderHandler
         $this->validator = $validator;
     }
 
-    public function process(UploadedFile $uploadedFile, array $config)
+    public function process(UploadedFile $uploadedImage, array $config, $isNew)
     {
-        $data = array();
+        if ($errors = $this->validateUploadImage($uploadedImage, $config)) {
+            return array('errors' => $errors);
+        }
 
-        if ($errors = $this->validator->validateValue($uploadedFile, $this->getConstraint($config))) {
-            foreach ($errors as $error) {
-                $data['errors'][] = $error->getMessage();
-            }
+        $image = null;
 
-            return $data;
+        if (false === $isNew) {
+
+        }
+
+        if (null === $image) {
+            $image = $this->createImage($uploadedImage);
         }
 
         return $data;
+    }
+
+    /**
+     * Validate upload image.
+     *
+     * @param UploadedFile $uploadedImage
+     * @param array $config
+     *
+     * @return array
+     */
+    private function validateUploadImage(UploadedFile $uploadedImage, array $config)
+    {
+        $errors = array();
+
+        if ($errors = $this->validator->validateValue($uploadedImage, $this->getConstraint($config))) {
+            foreach ($errors as $error) {
+                $errors[] = $error->getMessage();
+            }
+        }
+
+        return $errors;
     }
 
     /**
@@ -95,38 +127,45 @@ class UploaderHandler
         return new Image($options);
     }
 
-    /**
-     * @param UploadedFile $uploadedFile
-     *
-     * @return string
-     */
-    private function getFilename(UploadedFile $uploadedFile)
+    private function updateImage(UploadedFile $uploadedImage, array $config)
     {
-        $filename = $uploadedFile->getClientOriginalName();
-//        if ($this->hasFileTmp($filename)) {
-//            $filename = $this->generateUniqueFilename($filename);
-//        }
+        $image = $this->imageManager->findByFilename($uploadedImage->getClientOriginalName());
+        if (null !== $image) {
+            $image->setSize($uploadedImage->getClientSize());
+            $image->setMimeType($uploadedImage->getClientMimeType());
+        }
 
-        return $filename;
+        return $image;
     }
 
     /**
-     * @param string $filename
+     * Create image.
+     *
+     * @param UploadedFile $uploadedImage
+     *
+     * @return ImageInterface
+     */
+    private function createImage(UploadedFile $uploadedImage)
+    {
+        $image  = $this->imageManager->create();
+
+        $image->setFilename($this->getUniqueFilename($uploadedImage));
+        $image->setMimeType($uploadedImage->getClientMimeType());
+        $image->setOriginalPath($this->filesystem->getActualFileDir($image->getFilename()));
+        $image->setSize($uploadedImage->getClientSize());
+
+        return $image;
+    }
+
+    /**
+     * Get unique filename.
+     *
+     * @param UploadedFile $uploadedImage
      *
      * @return string
      */
-    private function generateUniqueFilename($filename)
+    private function getUniqueFilename(UploadedFile $uploadedImage)
     {
-        $key = 0;
-        $originalFilename = pathinfo($filename, PATHINFO_FILENAME);
-        $originalExtension = pathinfo($filename, PATHINFO_EXTENSION);
-
-        while ($this->hasFileTmp($filename)) {
-            $key++;
-            $filename = $originalFilename . '-' . $key . '.' . $originalExtension;
-        }
-
-        return $filename;
-
+        return $this->imageGenerator->generateUniqueFilename($uploadedImage->getClientOriginalName());
     }
 }

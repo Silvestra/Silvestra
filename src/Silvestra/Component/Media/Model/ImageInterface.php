@@ -58,20 +58,20 @@ interface ImageInterface
     public function getMimeType();
 
     /**
-     * Set name.
+     * Set filename.
      *
-     * @param string $name
+     * @param string $filename
      *
      * @return ImageInterface
      */
-    public function setName($name);
+    public function setFilename($filename);
 
     /**
-     * Get name.
+     * Get filename.
      *
      * @return string
      */
-    public function getName();
+    public function getFilename();
 
     /**
      * Set original path.

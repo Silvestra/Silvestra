@@ -50,6 +50,14 @@ class ImageManager extends BaseImageManager
     /**
      * {@inheritdoc}
      */
+    public function findByFilename($filename)
+    {
+        return $this->repository->findOneBy(array('filename' => $filename));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function add(ImageInterface $image, $save = false)
     {
         $this->em->persist($image);

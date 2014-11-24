@@ -67,6 +67,20 @@ class Filesystem
      */
     public function getActualFileDir($filename)
     {
+        return $this->getMediaRootDir() . DIRECTORY_SEPARATOR . $this->getFileDirPrefix($filename);
+    }
+
+    /**
+     * Get file dir prefix.
+     *
+     * @param string $filename
+     *
+     * @return string
+     *
+     * @throws InvalidArgumentException
+     */
+    public function getFileDirPrefix($filename)
+    {
         if (empty($filename)) {
             throw new InvalidArgumentException('Invalid filename argument');
         }
@@ -74,13 +88,13 @@ class Filesystem
         $path = array();
         $parts = explode('.', $filename);
 
-        for ($i=0; $i<min(strlen($parts[0]), $this->prefixSize); $i++) {
+        for ($i = 0; $i < min(strlen($parts[0]), $this->prefixSize); $i++) {
             $path[] = $filename[$i];
         }
 
         $path = implode(DIRECTORY_SEPARATOR, $path);
 
-        return $this->getMediaRootDir() . DIRECTORY_SEPARATOR . $path;
+        return $path;
     }
 
     /**
