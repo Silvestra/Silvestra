@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Cropper;
+namespace Silvestra\Component\Media\Image;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;

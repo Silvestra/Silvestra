@@ -11,12 +11,10 @@
 
 namespace Silvestra\Component\Media\Handler;
 
-use Silvestra\Component\Media\Filesystem;
-use Silvestra\Component\Media\Image\ImageGenerator;
-use Silvestra\Component\Media\Model\ImageInterface;
+use Silvestra\Component\Media\Image\ImageCropper;
+use Silvestra\Component\Media\Image\ImageUploader;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -25,22 +23,22 @@ use Symfony\Component\Validator\ValidatorInterface;
  *
  * @since 9/20/14 5:19 PM
  */
-class UploaderHandler
+class ImageUploadHandler
 {
     /**
-     * @var Filesystem
+     * @var ImageCropper
      */
-    private $filesystem;
-
-    /**
-     * @var ImageGenerator
-     */
-    private $imageGenerator;
+    private $imageCropper;
 
     /**
      * @var ImageManagerInterface
      */
     private $imageManager;
+
+    /**
+     * @var ImageUploader
+     */
+    private $imageUploader;
 
     /**
      * @var ValidatorInterface
@@ -50,17 +48,20 @@ class UploaderHandler
     /**
      * Constructor.
      *
-     * @param Filesystem $filesystem
+     * @param ImageCropper $imageCropper
      * @param ImageManagerInterface $imageManager
+     * @param ImageUploader $imageUploader
      * @param ValidatorInterface $validator
      */
     public function __construct(
-        Filesystem $filesystem,
+        ImageCropper $imageCropper,
         ImageManagerInterface $imageManager,
+        ImageUploader $imageUploader,
         ValidatorInterface $validator
     ) {
-        $this->filesystem = $filesystem;
+        $this->imageCropper = $imageCropper;
         $this->imageManager = $imageManager;
+        $this->imageUploader = $imageUploader;
         $this->validator = $validator;
     }
 
@@ -73,14 +74,25 @@ class UploaderHandler
         $image = null;
 
         if (false === $isNew) {
-
+            $this->imageUploader->updateImage($uploadedImage);
         }
 
         if (null === $image) {
-            $image = $this->createImage($uploadedImage);
+            $image = $this->imageUploader->createImage($uploadedImage);
+
+            $this->imageManager->add($image);
         }
 
-        return $data;
+        if ($config['cropper_enabled']) {
+            // TODO
+            $image->setPath($image->getOriginalPath());
+        } else {
+            $image->setPath($image->getOriginalPath());
+        }
+
+        $this->imageManager->save();
+
+        return array();
     }
 
     /**
@@ -95,10 +107,8 @@ class UploaderHandler
     {
         $errors = array();
 
-        if ($errors = $this->validator->validateValue($uploadedImage, $this->getConstraint($config))) {
-            foreach ($errors as $error) {
-                $errors[] = $error->getMessage();
-            }
+        foreach ($this->validator->validateValue($uploadedImage, $this->getConstraint($config)) as $error) {
+            $errors[] = $error->getMessage();
         }
 
         return $errors;
@@ -109,7 +119,7 @@ class UploaderHandler
      *
      * @param array $config
      *
-     * @return File|Image
+     * @return Image
      */
     private function getConstraint(array $config)
     {
@@ -125,47 +135,5 @@ class UploaderHandler
 
 
         return new Image($options);
-    }
-
-    private function updateImage(UploadedFile $uploadedImage, array $config)
-    {
-        $image = $this->imageManager->findByFilename($uploadedImage->getClientOriginalName());
-        if (null !== $image) {
-            $image->setSize($uploadedImage->getClientSize());
-            $image->setMimeType($uploadedImage->getClientMimeType());
-        }
-
-        return $image;
-    }
-
-    /**
-     * Create image.
-     *
-     * @param UploadedFile $uploadedImage
-     *
-     * @return ImageInterface
-     */
-    private function createImage(UploadedFile $uploadedImage)
-    {
-        $image  = $this->imageManager->create();
-
-        $image->setFilename($this->getUniqueFilename($uploadedImage));
-        $image->setMimeType($uploadedImage->getClientMimeType());
-        $image->setOriginalPath($this->filesystem->getActualFileDir($image->getFilename()));
-        $image->setSize($uploadedImage->getClientSize());
-
-        return $image;
-    }
-
-    /**
-     * Get unique filename.
-     *
-     * @param UploadedFile $uploadedImage
-     *
-     * @return string
-     */
-    private function getUniqueFilename(UploadedFile $uploadedImage)
-    {
-        return $this->imageGenerator->generateUniqueFilename($uploadedImage->getClientOriginalName());
     }
 }

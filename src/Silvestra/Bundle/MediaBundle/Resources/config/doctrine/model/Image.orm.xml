@@ -9,13 +9,13 @@
 
         <field name="cropperCoordinates" column="cropper_coordinates" type="array" nullable="true" />
 
+        <field name="filename" column="filename" type="string" length="255" nullable="false" unique="true" />
+
         <field name="mimeType" column="mime_type" type="string" length="255" nullable="false" />
 
-        <field name="filename" column="filename" type="string" length="255" nullable="false" />
+        <field name="originalPath" column="original_path" type="string" length="511" nullable="false" />
 
-        <field name="originalPath" column="original_path" type="string" length="511" nullable="false" unique="true" />
-
-        <field name="path" column="path" type="string" length="511" nullable="false" unique="true" />
+        <field name="path" column="path" type="string" length="511" nullable="false" />
 
         <field name="size" column="size" type="integer" nullable="false" />
 

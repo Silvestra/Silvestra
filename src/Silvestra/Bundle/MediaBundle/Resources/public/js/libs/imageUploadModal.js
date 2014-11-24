@@ -55,7 +55,7 @@ function MediaImageUploadModal($modal, $settings) {
 
 
             var xhr = FileAPI.upload({
-                url: Routing.generate('silvestra_media_uploader_upload'),
+                url: Routing.generate('silvestra_media_image_uploader_upload'),
                 data: { config: $config },
                 files: { image: $image },
                 progress: function ($event, $file, $xhr, $options){

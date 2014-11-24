@@ -48,7 +48,7 @@ class ImageGenerator
         $filename = pathinfo($originalFilename, PATHINFO_FILENAME);
         $extension = pathinfo($originalFilename, PATHINFO_EXTENSION);
 
-        while ($this->imageManager->findByName($originalFilename)) {
+        while ($this->imageManager->findByFilename($originalFilename)) {
             $index++;
             $originalFilename = $filename . '-' . $index . '.' . $extension;
         }

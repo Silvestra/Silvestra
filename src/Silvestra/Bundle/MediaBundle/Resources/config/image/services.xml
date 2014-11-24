@@ -6,11 +6,26 @@
 
     <services>
 
+        <service id="silvestra_media.image.default_config" class="Silvestra\Component\Media\Image\ImageDefaultConfig" public="false" />
+
+        <service id="silvestra_media.image.cropper" class="Silvestra\Component\Media\Image\ImageCropper" public="false">
+            <argument type="service" id="silvestra_media.filesystem" />
+        </service>
+
+        <service id="silvestra_media.image.generator" class="Silvestra\Component\Media\Image\ImageGenerator" public="false">
+            <argument type="service" id="silvestra_media.manager.image" />
+        </service>
+
+        <service id="silvestra_media.image.uploader" class="Silvestra\Component\Media\Image\ImageUploader" public="false">
+            <argument type="service" id="silvestra_media.filesystem" />
+            <argument type="service" id="silvestra_media.image.generator" />
+            <argument type="service" id="silvestra_media.manager.image" />
+        </service>
+
         <service id="silvestra_media.image.validator" class="Silvestra\Component\Media\Image\ImageValidator" public="false">
             <argument type="service" id="silvestra_media.image.default_config" />
         </service>
 
-        <service id="silvestra_media.image.default_config" class="Silvestra\Component\Media\Image\ImageDefaultConfig" public="false" />
 
     </services>
 

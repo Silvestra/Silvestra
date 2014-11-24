@@ -12,6 +12,7 @@
 namespace Silvestra\Component\Media;
 
 use Silvestra\Component\Media\Exception\InvalidArgumentException;
+use Silvestra\Component\Media\Exception\IOException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -44,7 +45,7 @@ class Filesystem
      *
      * @var int
      */
-    protected $dirMode = 0755;
+    protected $mode = 0755;
 
     /**
      * Constructor.
@@ -107,7 +108,6 @@ class Filesystem
         return $this->rootDir . DIRECTORY_SEPARATOR . Media::NAME;
     }
 
-
     /**
      * Creates a directory.
      *
@@ -116,7 +116,7 @@ class Filesystem
     public function mkdir($dir)
     {
         if (!is_dir($dir)) {
-            @mkdir($dir, $this->dirMode, true);
+            @mkdir($dir, $this->mode, true);
         }
     }
 }

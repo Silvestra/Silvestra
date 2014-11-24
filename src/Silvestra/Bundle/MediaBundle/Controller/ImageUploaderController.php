@@ -12,13 +12,14 @@
 namespace Silvestra\Bundle\MediaBundle\Controller;
 
 use Silvestra\Component\Media\Exception\InvalidImageConfigException;
+use Silvestra\Component\Media\Handler\ImageUploadHandler;
 use Silvestra\Component\Media\Handler\UploaderHandler;
 use Silvestra\Component\Media\Image\ImageValidator;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class UploaderController extends ContainerAware
+class ImageUploaderController extends ContainerAware
 {
     /**
      * @var ImageValidator
@@ -26,20 +27,20 @@ class UploaderController extends ContainerAware
     private $imageValidator;
 
     /**
-     * @var UploaderHandler
+     * @var ImageUploadHandler
      */
-    private $uploaderHandler;
+    private $imageUploadHandler;
 
     /**
      * Constructor.
      *
      * @param ImageValidator $imageValidator
-     * @param UploaderHandler $uploaderHandler
+     * @param ImageUploadHandler $imageUploadHandler
      */
-    public function __construct(ImageValidator $imageValidator, UploaderHandler $uploaderHandler)
+    public function __construct(ImageValidator $imageValidator, ImageUploadHandler $imageUploadHandler)
     {
         $this->imageValidator = $imageValidator;
-        $this->uploaderHandler = $uploaderHandler;
+        $this->imageUploadHandler = $imageUploadHandler;
     }
 
     public function uploadAction(Request $request)
@@ -50,7 +51,7 @@ class UploaderController extends ContainerAware
             throw new InvalidImageConfigException('Image config is not valid!');
         }
 
-        $data = $this->uploaderHandler->process($request->files->get('image'), $config);
+        $data = $this->imageUploadHandler->process($request->files->get('image'), $config, $request->get('is_new', false));
 
         return new JsonResponse($data);
     }
