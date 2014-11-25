@@ -71,6 +71,7 @@ class Image implements ImageInterface
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
         $this->cropperCoordinates = array();
+        $this->temporary = false;
     }
 
     /**

@@ -15,7 +15,10 @@ function MediaImageUploadModal($modal, $settings) {
     var $uploadCropButton = $modal.find('#image-upload-crop:first');
     var $cropperCoord = $settings.cropper_coordinates;
     var $files;
+    var $imageHeight;
+    var $imageWidth;
     var $image;
+    var $isNewImage = false;
 
     FileAPI.event.on($input, 'change', function ($event) {
         $files = FileAPI.getFiles($event);
@@ -24,6 +27,8 @@ function MediaImageUploadModal($modal, $settings) {
             $image = getImage($files[0]);
 
             $image.get(function ($error, $img) {
+                $imageHeight = $img.height;
+                $imageWidth = $img.width;
                 $dropzone.html($img);
                 setDialogWidth($img.width + 36);
 
@@ -56,8 +61,14 @@ function MediaImageUploadModal($modal, $settings) {
 
             var xhr = FileAPI.upload({
                 url: Routing.generate('silvestra_media_image_uploader_upload'),
-                data: { config: $config },
-                files: { image: $image },
+                data: { config: $config, is_new: $isNewImage },
+                files: { image: $files[0] },
+                imageTransform: {
+                    maxWidth: $imageWidth,
+                    maxHeight: $imageHeight,
+                    strategy: $settings.resize_strategy
+                },
+                imageOriginal: false,
                 progress: function ($event, $file, $xhr, $options){
                     $modal.find('.progress-bar:first').css('width', parseInt($event.loaded / $event.total * 100, 10) + '%');
                 },
@@ -77,7 +88,9 @@ function MediaImageUploadModal($modal, $settings) {
         $input.click();
     });
 
-    this.show = function ($imageWidget) {
+    this.show = function ($imageWidget, $isNew) {
+        $isNewImage = $isNew;
+
         $modal.modal('show');
     };
 

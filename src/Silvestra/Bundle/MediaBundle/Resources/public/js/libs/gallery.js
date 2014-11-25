@@ -17,7 +17,7 @@ $.fn.mediaGallery = function () {
         var $imageUploadModal = new MediaImageUploadModal($gallery.find('.image-upload-modal:first'), $settings);
 
         $addImageButton.click(function () {
-            $imageUploadModal.show(addImageWidget($gallery));
+            $imageUploadModal.show(addImageWidget($gallery), true);
         });
 
 //        $gallery.on('click', '.silvestra-media-image > .image', function() {

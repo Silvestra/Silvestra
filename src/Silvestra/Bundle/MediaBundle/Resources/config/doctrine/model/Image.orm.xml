@@ -19,6 +19,8 @@
 
         <field name="size" column="size" type="integer" nullable="false" />
 
+        <field name="temporary" column="temporary" type="boolean" nullable="false" />
+
         <field name="updatedAt" column="updated_at" type="datetime" nullable="false" />
 
         <field name="createdAt" column="created_at" type="datetime" nullable="false" />

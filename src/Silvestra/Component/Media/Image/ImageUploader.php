@@ -71,7 +71,7 @@ class ImageUploader
             $image->setSize($uploadedImage->getClientSize());
             $image->setUpdatedAt(new \DateTime());
 
-            $uploadedImage->move($image->getOriginalPath(), $image->getFilename());
+            $uploadedImage->move($this->filesystem->getActualFileDir($image->getFilename()), $image->getFilename());
         }
 
         return $image;
@@ -87,13 +87,14 @@ class ImageUploader
     public function createImage(UploadedFile $uploadedImage)
     {
         $image = $this->imageManager->create();
+        $filename = $this->getUniqueFilename($uploadedImage);
 
-        $image->setFilename($this->getUniqueFilename($uploadedImage));
+        $image->setFilename($filename);
         $image->setMimeType($uploadedImage->getClientMimeType());
-        $image->setOriginalPath($this->filesystem->getActualFileDir($image->getFilename()));
+        $image->setOriginalPath($this->filesystem->getRelativeFilePath($filename));
         $image->setSize($uploadedImage->getClientSize());
 
-        $uploadedImage->move($image->getOriginalPath(), $image->getFilename());
+        $uploadedImage->move($this->filesystem->getActualFileDir($filename), $image->getFilename());
 
         return $image;
     }

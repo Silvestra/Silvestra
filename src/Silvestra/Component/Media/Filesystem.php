@@ -22,6 +22,21 @@ use Silvestra\Component\Media\Exception\IOException;
 class Filesystem
 {
     /**
+     * Cache sub directory.
+     */
+    const CACHE_SUB_DIR = 'cache';
+
+    /**
+     * Cropper sub directory.
+     */
+    const CROPPER_SUB_DIR = 'cropper';
+
+    /**
+     * Uploader sub directory.
+     */
+    const UPLOADER_SUB_DIR = 'uploader';
+
+    /**
      * Root directory.
      *
      * @var string
@@ -61,14 +76,13 @@ class Filesystem
      * Get actual file dir.
      *
      * @param string $filename
+     * @param string $subDir
      *
      * @return string
-     *
-     * @throws InvalidArgumentException
      */
-    public function getActualFileDir($filename)
+    public function getActualFileDir($filename, $subDir = self::UPLOADER_SUB_DIR)
     {
-        return $this->getMediaRootDir() . DIRECTORY_SEPARATOR . $this->getFileDirPrefix($filename);
+        return $this->getPath(array($this->getMediaRootDir(), $subDir, $this->getFileDirPrefix($filename)));
     }
 
     /**
@@ -93,7 +107,7 @@ class Filesystem
             $path[] = $filename[$i];
         }
 
-        $path = implode(DIRECTORY_SEPARATOR, $path);
+        $path = $this->getPath($path);
 
         return $path;
     }
@@ -105,7 +119,7 @@ class Filesystem
      */
     public function getMediaRootDir()
     {
-        return $this->rootDir . DIRECTORY_SEPARATOR . Media::NAME;
+        return $this->getPath(array($this->rootDir, Media::NAME));
     }
 
     /**
@@ -118,5 +132,45 @@ class Filesystem
         if (!is_dir($dir)) {
             @mkdir($dir, $this->mode, true);
         }
+    }
+
+    /**
+     * Get absolute file path.
+     *
+     * @param string $filename
+     * @param string $subDir
+     *
+     * @return string
+     */
+    public function getAbsoluteFilePath($filename, $subDir = self::UPLOADER_SUB_DIR)
+    {
+        return $this->rootDir . $this->getRelativeFilePath($filename, $subDir);
+    }
+
+    /**
+     * Get relative file path.
+     *
+     * @param string $filename
+     * @param string $subDir
+     *
+     * @return string
+     */
+    public function getRelativeFilePath($filename, $subDir = self::UPLOADER_SUB_DIR)
+    {
+        $pathParts = array(Media::NAME, $subDir, $this->getFileDirPrefix($filename), $filename);
+
+        return  DIRECTORY_SEPARATOR . $this->getPath($pathParts);
+    }
+
+    /**
+     * Get path.
+     *
+     * @param array $pathParts
+     *
+     * @return string
+     */
+    private function getPath(array $pathParts)
+    {
+        return implode(DIRECTORY_SEPARATOR, $pathParts);
     }
 }

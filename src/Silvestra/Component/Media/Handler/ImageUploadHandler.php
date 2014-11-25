@@ -15,7 +15,7 @@ use Silvestra\Component\Media\Image\ImageCropper;
 use Silvestra\Component\Media\Image\ImageUploader;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ValidatorInterface;
 
 /**
@@ -80,6 +80,7 @@ class ImageUploadHandler
         if (null === $image) {
             $image = $this->imageUploader->createImage($uploadedImage);
 
+            $image->setTemporary(true);
             $this->imageManager->add($image);
         }
 
@@ -119,12 +120,12 @@ class ImageUploadHandler
      *
      * @param array $config
      *
-     * @return Image
+     * @return Assert\Image
      */
     private function getConstraint(array $config)
     {
         $options = array(
-//            'maxSize' => '5M',
+            'maxSize' => '5M',
             'mimeTypes' => $config['mime_types'],
         );
 
@@ -134,6 +135,6 @@ class ImageUploadHandler
         $options['minWidth'] = $config['min_width'];
 
 
-        return new Image($options);
+        return new Assert\Image($options);
     }
 }
