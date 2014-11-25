@@ -51,4 +51,12 @@ class EncryptionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($data, $this->encryption->decrypt($encrypt));
     }
+
+    public function testString()
+    {
+        $data = 'silvestra';
+        $encrypt = $this->encryption->encrypt($data);
+
+        $this->assertEquals($data, $this->encryption->decrypt($encrypt));
+    }
 }
