@@ -54,12 +54,12 @@ class FilesystemTest extends \PHPUnit_Framework_TestCase
     public function testGetActualFileDir()
     {
         $this->assertEquals(
-            $this->getMediaRootDir() . '/s/i/l/v/e',
+            $this->getMediaRootDir() . '/uploader/s/i/l/v/e',
             $this->filesystem->getActualFileDir('silvestra.png')
         );
 
         $this->assertEquals(
-            $this->getMediaRootDir() . '/t/e/s/t',
+            $this->getMediaRootDir() . '/uploader/t/e/s/t',
             $this->filesystem->getActualFileDir('test.png')
         );
     }
