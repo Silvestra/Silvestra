@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Tests\Image\Validator;
+namespace Silvestra\Component\Media\Tests\Image\Config\Validator;
 
-use Silvestra\Component\Media\Image\Validator\MaxHeightValidator;
+use Silvestra\Component\Media\Image\Config\Validator\MaxWidthValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 11/23/14 8:17 PM
  */
-class MaxHeightValidatorTest extends AbstractConfigValidator
+class MaxWidthValidatorTest extends AbstractConfigValidator
 {
     /**
-     * @var MaxHeightValidator
+     * @var MaxWidthValidator
      */
     private $validator;
 
@@ -30,7 +30,7 @@ class MaxHeightValidatorTest extends AbstractConfigValidator
      */
     protected function setUp()
     {
-        $this->validator = new MaxHeightValidator();
+        $this->validator = new MaxWidthValidator();
     }
 
     public function testValidateWithValidData()
@@ -38,7 +38,7 @@ class MaxHeightValidatorTest extends AbstractConfigValidator
         $defaultConfig = $this->getMockImageDefaultConfig();
 
         $defaultConfig->expects($this->any())
-            ->method('getMaxHeight')
+            ->method('getMaxWidth')
             ->willReturn(400);
 
         $this->assertTrue($this->validator->validate(400, $defaultConfig));
@@ -49,7 +49,7 @@ class MaxHeightValidatorTest extends AbstractConfigValidator
         $defaultConfig = $this->getMockImageDefaultConfig();
 
         $defaultConfig->expects($this->any())
-            ->method('getMaxHeight')
+            ->method('getMaxWidth')
             ->willReturn(400);
 
         $this->assertFalse($this->validator->validate(500, $defaultConfig));
@@ -57,6 +57,6 @@ class MaxHeightValidatorTest extends AbstractConfigValidator
 
     public function testConfigName()
     {
-        $this->assertEquals('max_height', $this->validator->getConfigName());
+        $this->assertEquals('max_width', $this->validator->getConfigName());
     }
 }

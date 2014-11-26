@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Tests\Image\Validator;
+namespace Silvestra\Component\Media\Tests\Image\Config\Validator;
 
-use Silvestra\Component\Media\Image\Validator\CropperCoordinatesValidator;
+use Silvestra\Component\Media\Image\Config\Validator\CropperCoordinatesValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

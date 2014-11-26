@@ -6,7 +6,7 @@
 
     <services>
 
-        <service id="silvestra_media.image.default_config" class="Silvestra\Component\Media\Image\ImageDefaultConfig" public="false" />
+        <service id="silvestra_media.image.default_config" class="Silvestra\Component\Media\Image\Config\ImageDefaultConfig" public="false" />
 
         <service id="silvestra_media.image.cropper" class="Silvestra\Component\Media\Image\ImageCropper" public="false">
             <argument type="service" id="silvestra_media.filesystem" />

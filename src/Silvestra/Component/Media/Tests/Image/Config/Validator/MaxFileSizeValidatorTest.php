@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Tests\Image\Validator;
+namespace Silvestra\Component\Media\Tests\Image\Config\Validator;
 
-use Silvestra\Component\Media\Image\Validator\MinWidthValidator;
+use Silvestra\Component\Media\Image\Config\Validator\MaxFileSizeValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 11/23/14 8:18 PM
+ * @since 11/23/14 8:17 PM
  */
-class MinWidthValidatorTest extends AbstractConfigValidator
+class MaxFileSizeValidatorTest extends AbstractConfigValidator
 {
     /**
-     * @var MinWidthValidator
+     * @var MaxFileSizeValidator
      */
     private $validator;
 
@@ -30,7 +30,7 @@ class MinWidthValidatorTest extends AbstractConfigValidator
      */
     protected function setUp()
     {
-        $this->validator = new MinWidthValidator();
+        $this->validator = new MaxFileSizeValidator();
     }
 
     public function testValidateWithValidData()
@@ -38,10 +38,10 @@ class MinWidthValidatorTest extends AbstractConfigValidator
         $defaultConfig = $this->getMockImageDefaultConfig();
 
         $defaultConfig->expects($this->any())
-            ->method('getMinWidth')
-            ->willReturn(400);
+            ->method('getMaxFileSize')
+            ->willReturn(5);
 
-        $this->assertTrue($this->validator->validate(500, $defaultConfig));
+        $this->assertTrue($this->validator->validate(5, $defaultConfig));
     }
 
     public function testValidateWithNotValidData()
@@ -49,14 +49,14 @@ class MinWidthValidatorTest extends AbstractConfigValidator
         $defaultConfig = $this->getMockImageDefaultConfig();
 
         $defaultConfig->expects($this->any())
-            ->method('getMinWidth')
-            ->willReturn(400);
+            ->method('getMaxFileSize')
+            ->willReturn(4);
 
-        $this->assertFalse($this->validator->validate(300, $defaultConfig));
+        $this->assertFalse($this->validator->validate(5, $defaultConfig));
     }
 
     public function testConfigName()
     {
-        $this->assertEquals('min_width', $this->validator->getConfigName());
+        $this->assertEquals('max_file_size', $this->validator->getConfigName());
     }
 }

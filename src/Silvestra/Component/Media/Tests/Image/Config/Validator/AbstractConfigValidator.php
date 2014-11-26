@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Tests\Image\Validator;
+namespace Silvestra\Component\Media\Tests\Image\Config\Validator;
 
-use Silvestra\Component\Media\Image\ImageDefaultConfig;
+use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -25,7 +25,7 @@ class AbstractConfigValidator extends \PHPUnit_Framework_TestCase
      */
     protected function getMockImageDefaultConfig()
     {
-        return $this->getMockBuilder('Silvestra\\Component\\Media\\Image\\ImageDefaultConfig')
+        return $this->getMockBuilder('Silvestra\\Component\\Media\\Image\\Config\\ImageDefaultConfig')
             ->disableOriginalConstructor()
             ->getMock();
     }

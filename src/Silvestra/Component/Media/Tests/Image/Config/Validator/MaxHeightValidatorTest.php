@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Tests\Image\Validator;
+namespace Silvestra\Component\Media\Tests\Image\Config\Validator;
 
-use Silvestra\Component\Media\Image\Validator\MinHeightValidator;
+use Silvestra\Component\Media\Image\Config\Validator\MaxHeightValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 11/23/14 8:18 PM
+ * @since 11/23/14 8:17 PM
  */
-class MinHeightValidatorTest extends AbstractConfigValidator
+class MaxHeightValidatorTest extends AbstractConfigValidator
 {
     /**
-     * @var MinHeightValidator
+     * @var MaxHeightValidator
      */
     private $validator;
 
@@ -30,7 +30,7 @@ class MinHeightValidatorTest extends AbstractConfigValidator
      */
     protected function setUp()
     {
-        $this->validator = new MinHeightValidator();
+        $this->validator = new MaxHeightValidator();
     }
 
     public function testValidateWithValidData()
@@ -38,10 +38,10 @@ class MinHeightValidatorTest extends AbstractConfigValidator
         $defaultConfig = $this->getMockImageDefaultConfig();
 
         $defaultConfig->expects($this->any())
-            ->method('getMinHeight')
+            ->method('getMaxHeight')
             ->willReturn(400);
 
-        $this->assertTrue($this->validator->validate(500, $defaultConfig));
+        $this->assertTrue($this->validator->validate(400, $defaultConfig));
     }
 
     public function testValidateWithNotValidData()
@@ -49,14 +49,14 @@ class MinHeightValidatorTest extends AbstractConfigValidator
         $defaultConfig = $this->getMockImageDefaultConfig();
 
         $defaultConfig->expects($this->any())
-            ->method('getMinHeight')
+            ->method('getMaxHeight')
             ->willReturn(400);
 
-        $this->assertFalse($this->validator->validate(300, $defaultConfig));
+        $this->assertFalse($this->validator->validate(500, $defaultConfig));
     }
 
     public function testConfigName()
     {
-        $this->assertEquals('min_height', $this->validator->getConfigName());
+        $this->assertEquals('max_height', $this->validator->getConfigName());
     }
 }

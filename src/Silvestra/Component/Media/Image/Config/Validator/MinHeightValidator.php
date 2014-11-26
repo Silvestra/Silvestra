@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Image\Validator;
+namespace Silvestra\Component\Media\Image\Config\Validator;
 
-use Silvestra\Component\Media\Image\ImageConfigValidatorInterface;
-use Silvestra\Component\Media\Image\ImageDefaultConfig;
+use Silvestra\Component\Media\Image\Config\ImageConfigValidatorInterface;
+use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 11/23/14 7:40 PM
+ * @since 11/23/14 7:38 PM
  */
-class MinWidthValidator implements ImageConfigValidatorInterface
+class MinHeightValidator implements ImageConfigValidatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function validate($value, ImageDefaultConfig $defaultConfig)
     {
-        return ($defaultConfig->getMinWidth() <= $value);
+        return ($defaultConfig->getMinHeight() <= $value);
     }
 
     /**
@@ -34,6 +34,6 @@ class MinWidthValidator implements ImageConfigValidatorInterface
      */
     public function getConfigName()
     {
-        return 'min_width';
+        return 'min_height';
     }
 }

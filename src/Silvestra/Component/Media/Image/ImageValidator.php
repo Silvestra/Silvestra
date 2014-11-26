@@ -12,6 +12,8 @@
 namespace Silvestra\Component\Media\Image;
 
 use Silvestra\Component\Media\Exception\InvalidImageConfigException;
+use Silvestra\Component\Media\Image\Config\ImageConfigValidatorInterface;
+use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

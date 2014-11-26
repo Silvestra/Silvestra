@@ -7,47 +7,47 @@
     <services>
 
         <service id="silvestra_media.image_config_validator.cropper_coordinates"
-                 class="Silvestra\Component\Media\Image\Validator\CropperCoordinatesValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\CropperCoordinatesValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="cropper_coordinates"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.cropper_enabled"
-                 class="Silvestra\Component\Media\Image\Validator\CropperEnabledValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\CropperEnabledValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="cropper_coordinates"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.max_file_size"
-                 class="Silvestra\Component\Media\Image\Validator\MaxFileSizeValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\MaxFileSizeValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="max_file_size"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.max_height"
-                 class="Silvestra\Component\Media\Image\Validator\MaxHeightValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\MaxHeightValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="max_height"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.max_width"
-                 class="Silvestra\Component\Media\Image\Validator\MaxWidthValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\MaxWidthValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="max_width"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.mime_types"
-                 class="Silvestra\Component\Media\Image\Validator\MimeTypesValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\MimeTypesValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="mime_types"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.min_height"
-                 class="Silvestra\Component\Media\Image\Validator\MinHeightValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\MinHeightValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="min_height"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.min_width"
-                 class="Silvestra\Component\Media\Image\Validator\MinWidthValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\MinWidthValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="min_width"/>
         </service>
 
         <service id="silvestra_media.image_config_validator.resize_strategy"
-                 class="Silvestra\Component\Media\Image\Validator\ResizeStrategyValidator" public="false">
+                 class="Silvestra\Component\Media\Image\Config\Validator\ResizeStrategyValidator" public="false">
             <tag name="silvestra_media_image_config_validator" alias="resize_strategy"/>
         </service>
 

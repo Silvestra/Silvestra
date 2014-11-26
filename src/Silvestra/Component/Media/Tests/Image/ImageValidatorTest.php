@@ -11,9 +11,9 @@
 
 namespace Silvestra\Component\Media\Tests\Image;
 
-use Silvestra\Component\Media\Image\ImageDefaultConfig;
+use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 use Silvestra\Component\Media\Image\ImageValidator;
-use Silvestra\Component\Media\Image\Validator\MaxFileSizeValidator;
+use Silvestra\Component\Media\Image\Config\Validator\MaxFileSizeValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -37,7 +37,7 @@ class ImageValidatorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->defaultConfig = $this->getMockBuilder('Silvestra\\Component\\Media\\Image\\ImageDefaultConfig')
+        $this->defaultConfig = $this->getMockBuilder('Silvestra\\Component\\Media\\Image\\Config\\ImageDefaultConfig')
             ->disableOriginalConstructor()
             ->getMock();
 

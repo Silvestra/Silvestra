@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Image\Validator;
+namespace Silvestra\Component\Media\Image\Config\Validator;
 
 use Silvestra\Component\Media\Exception\InvalidArgumentException;
-use Silvestra\Component\Media\Image\ImageConfigValidatorInterface;
-use Silvestra\Component\Media\Image\ImageDefaultConfig;
+use Silvestra\Component\Media\Image\Config\ImageConfigValidatorInterface;
+use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

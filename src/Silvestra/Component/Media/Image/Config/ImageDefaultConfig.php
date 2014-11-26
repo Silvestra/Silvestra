@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Image;
+namespace Silvestra\Component\Media\Image\Config;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

@@ -11,7 +11,7 @@
 
 namespace Silvestra\Component\Media\Form\Type;
 
-use Silvestra\Component\Media\Image\ImageDefaultConfig;
+use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 use Silvestra\Component\Media\Media;
 use Silvestra\Component\Media\Token\TokenGenerator;
 use Symfony\Component\Form\AbstractType;

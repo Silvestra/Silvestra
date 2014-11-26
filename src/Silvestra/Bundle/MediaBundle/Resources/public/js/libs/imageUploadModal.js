@@ -28,7 +28,7 @@ function MediaImageUploadModal($modal) {
 
                 FileAPI.upload({
                     url: Routing.generate('silvestra_media_image_uploader_upload'),
-                    data: { config: $config },
+                    data: { config: $config, $token: $uploadToken },
                     files: { image: $files[0] },
                     imageTransform: {
                         maxWidth: $imageWidth,

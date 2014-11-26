@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Image\Validator;
+namespace Silvestra\Component\Media\Image\Config\Validator;
 
-use Silvestra\Component\Media\Image\ImageConfigValidatorInterface;
-use Silvestra\Component\Media\Image\ImageDefaultConfig;
+use Silvestra\Component\Media\Image\Config\ImageConfigValidatorInterface;
+use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
+use Silvestra\Component\Media\Media;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 11/23/14 7:44 PM
  */
-class MaxFileSizeValidator implements ImageConfigValidatorInterface
+class ResizeStrategyValidator implements ImageConfigValidatorInterface
 {
 
     /**
@@ -27,7 +28,7 @@ class MaxFileSizeValidator implements ImageConfigValidatorInterface
      */
     public function validate($value, ImageDefaultConfig $defaultConfig)
     {
-        return ($defaultConfig->getMaxFileSize() >= $value);
+        return in_array($value, Media::getResizeStrategies());
     }
 
     /**
@@ -35,6 +36,6 @@ class MaxFileSizeValidator implements ImageConfigValidatorInterface
      */
     public function getConfigName()
     {
-        return 'max_file_size';
+        return 'resize_strategy';
     }
 }
