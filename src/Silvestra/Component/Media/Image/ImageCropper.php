@@ -50,7 +50,11 @@ class ImageCropper
         $imageFile = $imagine->open($image->getOriginalPath());
 
         $imageFile->crop($this->getStartPoint($coordinates['x1'], $coordinates['y1']), $this->getBox($coordinates));
-        $imageFile->save($this->fileSystem->getAbsoluteFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR));
+
+        $absolutePath = $this->fileSystem->getAbsoluteFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
+
+        $this->fileSystem->mkdir($absolutePath);
+        $imageFile->save($absolutePath);
 
         return $this->fileSystem->getRelativeFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
     }
@@ -62,8 +66,8 @@ class ImageCropper
 
     private function getBox(array $coordinates)
     {
-        $height = $coordinates['y1'] - $coordinates['y2'];
-        $width = $coordinates['x1'] - $coordinates['x2'];
+        $height = abs($coordinates['y1'] - $coordinates['y2']);
+        $width = abs($coordinates['x1'] - $coordinates['x2']);
 
         return new Box($width, $height);
     }
