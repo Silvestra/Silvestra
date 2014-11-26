@@ -10,8 +10,12 @@
             <argument>%kernel.root_dir%/../web</argument>
         </service>
 
-        <service id="silvestra_media.image.handler.upload" class="Silvestra\Component\Media\Handler\ImageUploadHandler" public="false">
+        <service id="silvestra_media.image_handler.crop" class="Silvestra\Component\Media\Handler\ImageCropHandler" public="false">
             <argument type="service" id="silvestra_media.image.cropper" />
+            <argument type="service" id="silvestra_media.manager.image" />
+        </service>
+
+        <service id="silvestra_media.image_handler.upload" class="Silvestra\Component\Media\Handler\ImageUploadHandler" public="false">
             <argument type="service" id="silvestra_media.manager.image" />
             <argument type="service" id="silvestra_media.image.uploader" />
             <argument type="service" id="validator" />

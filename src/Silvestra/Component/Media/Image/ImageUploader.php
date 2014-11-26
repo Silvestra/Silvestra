@@ -56,28 +56,6 @@ class ImageUploader
     }
 
     /**
-     * Update image.
-     *
-     * @param UploadedFile $uploadedImage
-     *
-     * @return ImageInterface
-     */
-    public function updateImage(UploadedFile $uploadedImage)
-    {
-        $image = $this->imageManager->findByFilename($uploadedImage->getClientOriginalName());
-
-        if (null !== $image) {
-            $image->setMimeType($uploadedImage->getClientMimeType());
-            $image->setSize($uploadedImage->getClientSize());
-            $image->setUpdatedAt(new \DateTime());
-
-            $uploadedImage->move($this->filesystem->getActualFileDir($image->getFilename()), $image->getFilename());
-        }
-
-        return $image;
-    }
-
-    /**
      * Create image.
      *
      * @param UploadedFile $uploadedImage
@@ -92,8 +70,11 @@ class ImageUploader
         $image->setFilename($filename);
         $image->setMimeType($uploadedImage->getClientMimeType());
         $image->setOriginalPath($this->filesystem->getRelativeFilePath($filename));
+        $image->setPath($image->getOriginalPath());
         $image->setSize($uploadedImage->getClientSize());
+        $image->setTemporary(true);
 
+        $this->imageManager->add($image);
         $uploadedImage->move($this->filesystem->getActualFileDir($filename), $image->getFilename());
 
         return $image;

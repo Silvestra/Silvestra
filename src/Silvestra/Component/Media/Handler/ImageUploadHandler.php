@@ -11,7 +11,6 @@
 
 namespace Silvestra\Component\Media\Handler;
 
-use Silvestra\Component\Media\Image\ImageCropper;
 use Silvestra\Component\Media\Image\ImageUploader;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -25,11 +24,6 @@ use Symfony\Component\Validator\ValidatorInterface;
  */
 class ImageUploadHandler
 {
-    /**
-     * @var ImageCropper
-     */
-    private $imageCropper;
-
     /**
      * @var ImageManagerInterface
      */
@@ -48,52 +42,34 @@ class ImageUploadHandler
     /**
      * Constructor.
      *
-     * @param ImageCropper $imageCropper
      * @param ImageManagerInterface $imageManager
      * @param ImageUploader $imageUploader
      * @param ValidatorInterface $validator
      */
     public function __construct(
-        ImageCropper $imageCropper,
         ImageManagerInterface $imageManager,
         ImageUploader $imageUploader,
         ValidatorInterface $validator
     ) {
-        $this->imageCropper = $imageCropper;
         $this->imageManager = $imageManager;
         $this->imageUploader = $imageUploader;
         $this->validator = $validator;
     }
 
-    public function process(UploadedFile $uploadedImage, array $config, $isNew)
+    public function process(UploadedFile $uploadedImage, array $config)
     {
         if ($errors = $this->validateUploadImage($uploadedImage, $config)) {
             return array('errors' => $errors);
         }
 
-        $image = null;
-
-        if (false === $isNew) {
-            $this->imageUploader->updateImage($uploadedImage);
-        }
-
-        if (null === $image) {
-            $image = $this->imageUploader->createImage($uploadedImage);
-
-            $image->setTemporary(true);
-            $this->imageManager->add($image);
-        }
-
-        if ($config['cropper_enabled']) {
-            // TODO
-            $image->setPath($image->getOriginalPath());
-        } else {
-            $image->setPath($image->getOriginalPath());
-        }
+        $image = $this->imageUploader->createImage($uploadedImage);
 
         $this->imageManager->save();
 
-        return array();
+        return array(
+            'original_path' => $image->getOriginalPath(),
+            'filename' => $image->getFilename(),
+        );
     }
 
     /**
@@ -127,13 +103,11 @@ class ImageUploadHandler
         $options = array(
             'maxSize' => '5M',
             'mimeTypes' => $config['mime_types'],
+            'maxHeight' => $config['max_height'],
+            'maxWidth' => $config['max_width'],
+            'minHeight' => $config['min_height'],
+            'minWidth' => $config['min_width'],
         );
-
-        $options['maxHeight'] = $config['max_height'];
-        $options['maxWidth'] = $config['max_width'];
-        $options['minHeight'] = $config['min_height'];
-        $options['minWidth'] = $config['min_width'];
-
 
         return new Assert\Image($options);
     }

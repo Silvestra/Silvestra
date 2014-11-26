@@ -17,35 +17,12 @@ function MediaImageUploadModal($modal, $settings) {
     var $files;
     var $imageHeight;
     var $imageWidth;
-    var $image;
-    var $isNewImage = false;
+    var $filename;
 
     FileAPI.event.on($input, 'change', function ($event) {
         $files = FileAPI.getFiles($event);
 
         if (validateFileType($files[0].type)) {
-            $image = getImage($files[0]);
-
-            $image.get(function ($error, $img) {
-                $imageHeight = $img.height;
-                $imageWidth = $img.width;
-                $dropzone.html($img);
-                setDialogWidth($img.width + 36);
-
-                if ($settings.cropper_enabled) {
-                    initCropper($dropzone.find('img:first, canvas:first'), $settings.cropper_coordinates);
-                }
-            });
-        } else {
-            $files = null;
-        }
-    });
-
-
-    $uploadCropButton.on('click', function ($event) {
-        $event.preventDefault();
-
-        if ($image) {
             var $config = {
                 mime_types: $settings.mime_types,
                 max_file_size: $settings.max_file_size,
@@ -58,28 +35,53 @@ function MediaImageUploadModal($modal, $settings) {
                 cropper_coordinates: $cropperCoord
             };
 
+            FileAPI.getInfo($files[0], function ($error, $info) {
+                $imageHeight = $settings.max_height < $info.height ? $settings.max_height : $info.height;
+                $imageWidth = $settings.max_width < $info.width ? $settings.max_width : $info.width;
 
-            var xhr = FileAPI.upload({
-                url: Routing.generate('silvestra_media_image_uploader_upload'),
-                data: { config: $config, is_new: $isNewImage },
-                files: { image: $files[0] },
-                imageTransform: {
-                    maxWidth: $imageWidth,
-                    maxHeight: $imageHeight,
-                    strategy: $settings.resize_strategy
-                },
-                imageOriginal: false,
-                progress: function ($event, $file, $xhr, $options){
-                    $modal.find('.progress-bar:first').css('width', parseInt($event.loaded / $event.total * 100, 10) + '%');
-                },
-                complete: function (err, xhr) {
-                    if (!err) {
-                        var result = xhr.responseText;
-                        // ...
+                FileAPI.upload({
+                    url: Routing.generate('silvestra_media_image_uploader_upload'),
+                    data: { config: $config },
+                    files: { image: $files[0] },
+                    imageTransform: {
+                        maxWidth: $imageWidth,
+                        maxHeight: $imageHeight,
+                        strategy: $settings.resize_strategy
+                    },
+                    progress: function ($event, $file, $xhr, $options) {
+                        $modal.find('.progress-bar:first').css('width', parseInt($event.loaded / $event.total * 100, 10) + '%');
+                    },
+                    complete: function ($error, $xhr) {
+                        if (!$error) {
+                            var $response = jQuery.parseJSON($xhr.response);
+                            if (!$response.errors) {
+                                var $image = new Image();
+                                $image.src = $response.original_path;
+                                $filename = $response.filename;
+
+                                $dropzone.html($image);
+                                $image.onload = function() {
+                                    setDialogWidth(this.width + 36);
+
+                                    if ($settings.cropper_enabled) {
+                                        initCropper($dropzone.find('img:first, canvas:first'), $settings.cropper_coordinates);
+                                    }
+                                }
+                            }
+
+                        }
                     }
-                }
+                });
             });
         }
+//        else {
+//            $files = null;
+//        }
+    });
+
+
+    $uploadCropButton.on('click', function ($event) {
+        $event.preventDefault();
     });
 
 
@@ -88,8 +90,7 @@ function MediaImageUploadModal($modal, $settings) {
         $input.click();
     });
 
-    this.show = function ($imageWidget, $isNew) {
-        $isNewImage = $isNew;
+    this.show = function ($imageWidget) {
 
         $modal.modal('show');
     };

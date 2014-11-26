@@ -25,8 +25,6 @@ use Silvestra\Component\Media\Model\ImageInterface;
  */
 class ImageCropper
 {
-    const SUB_DIR_NAME = 'cropper';
-
     /**
      * @var Filesystem
      */
@@ -50,12 +48,11 @@ class ImageCropper
 
         $imagine = new Imagine();
         $imageFile = $imagine->open($image->getOriginalPath());
-        $path = $this->getCroppedImagePath($image->getFilename());
 
         $imageFile->crop($this->getStartPoint($coordinates['x1'], $coordinates['y1']), $this->getBox($coordinates));
-        $imageFile->save($path);
+        $imageFile->save($this->fileSystem->getAbsoluteFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR));
 
-        return $path;
+        return $this->fileSystem->getRelativeFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
     }
 
     private function getStartPoint($x, $y)
@@ -69,28 +66,5 @@ class ImageCropper
         $width = $coordinates['x1'] - $coordinates['x2'];
 
         return new Box($width, $height);
-    }
-
-    /**
-     * Get cropped image path.
-     *
-     * @param string $filename
-     *
-     * @return string
-     */
-    private function getCroppedImagePath($filename)
-    {
-        return $this->getCropperRootDir() . DIRECTORY_SEPARATOR .
-                $this->fileSystem->getFileDirPrefix($filename) . DIRECTORY_SEPARATOR . $filename;
-    }
-
-    /**
-     * Get cropper root dir.
-     *
-     * @return string
-     */
-    public function getCropperRootDir()
-    {
-        return $this->fileSystem->getMediaRootDir() . DIRECTORY_SEPARATOR . self::SUB_DIR_NAME;
     }
 }
