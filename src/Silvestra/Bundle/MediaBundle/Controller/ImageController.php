@@ -27,7 +27,7 @@ class ImageController extends ContainerAware
     {
         $builder = $this->container->get('form.factory')->createBuilder();
 
-        $builder->add('images1', 'silvestra_media_gallery');
+        $builder->add('images1', 'silvestra_media_gallery', array('cropper_enabled' => false));
 //        $builder->add('images2', 'silvestra_media_gallery');
 //        $builder->add('image1', 'silvestra_media_image');
 //        $builder->add('image2', 'silvestra_media_image');

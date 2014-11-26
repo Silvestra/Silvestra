@@ -14,10 +14,13 @@ namespace Silvestra\Bundle\MediaBundle\Controller;
 use Silvestra\Component\Media\Exception\InvalidImageConfigException;
 use Silvestra\Component\Media\Handler\ImageUploadHandler;
 use Silvestra\Component\Media\Handler\UploaderHandler;
+use Silvestra\Component\Media\Image\Config\ImageConfigHelper;
 use Silvestra\Component\Media\Image\ImageValidator;
+use Silvestra\Component\Media\Token\TokenValidator;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ImageUploaderController extends ContainerAware
 {
@@ -29,28 +32,44 @@ class ImageUploaderController extends ContainerAware
     /**
      * @var ImageUploadHandler
      */
-    private $imageUploadHandler;
+    private $uploadHandler;
+
+    /**
+     * @var TokenValidator
+     */
+    private $tokenValidator;
 
     /**
      * Constructor.
      *
      * @param ImageValidator $imageValidator
-     * @param ImageUploadHandler $imageUploadHandler
+     * @param ImageUploadHandler $uploadHandler
+     * @param TokenValidator $tokenValidator
      */
-    public function __construct(ImageValidator $imageValidator, ImageUploadHandler $imageUploadHandler)
-    {
+    public function __construct(
+        ImageValidator $imageValidator,
+        ImageUploadHandler $uploadHandler,
+        TokenValidator $tokenValidator
+    ) {
         $this->imageValidator = $imageValidator;
-        $this->imageUploadHandler = $imageUploadHandler;
+        $this->uploadHandler = $uploadHandler;
+        $this->tokenValidator = $tokenValidator;
     }
 
     public function uploadAction(Request $request)
     {
         $config = $request->get('config', array());
 
-        if (!$this->imageValidator->validateConfig($config)) {
+        if (false === $this->imageValidator->configIsValid($config)) {
             throw new InvalidImageConfigException('Image config is not valid!');
         }
 
-        return new JsonResponse($this->imageUploadHandler->process($request->files->get('image', null), $config));
+        $config = ImageConfigHelper::normalize($config);
+
+        if (false === $this->tokenValidator->isValid($request->get('token'), $config)) {
+            throw new NotFoundHttpException('Invalid upload token!');
+        }
+
+        return new JsonResponse($this->uploadHandler->process($request->files->get('image', null), $config));
     }
 }

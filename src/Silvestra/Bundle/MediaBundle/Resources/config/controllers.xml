@@ -15,6 +15,7 @@
         <service id="silvestra_media.controllers.image_uploader" class="Silvestra\Bundle\MediaBundle\Controller\ImageUploaderController">
             <argument type="service" id="silvestra_media.image.validator" />
             <argument type="service" id="silvestra_media.image_handler.upload" />
+            <argument type="service" id="silvestra_media.token.validator" />
         </service>
 
     </services>

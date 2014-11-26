@@ -35,11 +35,11 @@ class TokenValidatorTest extends \PHPUnit_Framework_TestCase
         $this->validator = new TokenValidator(new TokenGenerator(Media::NAME));
     }
 
-    public function testValidate()
+    public function testIsValid()
     {
         $data = array('Silvestra' => 'Media');
 
-        $this->assertFalse($this->validator->validate('test', $data));
-        $this->assertTrue($this->validator->validate(sha1(Media::NAME . serialize($data)), $data));
+        $this->assertFalse($this->validator->isValid('test', $data));
+        $this->assertTrue($this->validator->isValid(sha1(Media::NAME . serialize($data)), $data));
     }
 }

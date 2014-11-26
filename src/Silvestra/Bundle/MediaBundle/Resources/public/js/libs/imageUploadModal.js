@@ -28,7 +28,7 @@ function MediaImageUploadModal($modal) {
 
                 FileAPI.upload({
                     url: Routing.generate('silvestra_media_image_uploader_upload'),
-                    data: { config: $config, $token: $uploadToken },
+                    data: { config: $config, token: $uploadToken },
                     files: { image: $files[0] },
                     imageTransform: {
                         maxWidth: $imageWidth,
@@ -51,7 +51,7 @@ function MediaImageUploadModal($modal) {
                                     setDialogWidth(this.width + 36);
 
                                     if ($config.cropper_enabled) {
-                                        initCropper($dropzone.find('img:first, canvas:first'));
+                                        initCropper($dropzone.find('img:first'));
                                     }
                                 }
                             }

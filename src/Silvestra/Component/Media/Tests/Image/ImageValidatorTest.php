@@ -44,25 +44,25 @@ class ImageValidatorTest extends \PHPUnit_Framework_TestCase
         $this->validator = new ImageValidator($this->defaultConfig);
     }
 
-    public function testValidateConfig()
+    public function testConfigIsValid()
     {
         $config = array('max_file_size' => 5);
         $this->validator->addConfigValidator(new MaxFileSizeValidator());
 
-        $this->assertFalse($this->validator->validateConfig($config));
+        $this->assertFalse($this->validator->configIsValid($config));
 
         $this->defaultConfig->expects($this->any())
             ->method('getMaxFileSize')
             ->willReturn(5);
 
-        $this->assertTrue($this->validator->validateConfig($config));
+        $this->assertTrue($this->validator->configIsValid($config));
     }
 
-    public function testValidateConfigException()
+    public function testConfigIsValidException()
     {
         $this->setExpectedException('Silvestra\\Component\\Media\\Exception\\InvalidImageConfigException');
 
         $this->validator->addConfigValidator(new MaxFileSizeValidator());
-        $this->validator->validateConfig(array());
+        $this->validator->configIsValid(array());
     }
 }

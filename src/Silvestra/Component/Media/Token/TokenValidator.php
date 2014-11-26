@@ -34,14 +34,14 @@ class TokenValidator
     }
 
     /**
-     * Validate token.
+     * Check if token is valid.
      *
      * @param string $token
      * @param mixed $value
      *
      * @return bool
      */
-    public function validate($token, $value)
+    public function isValid($token, $value)
     {
         return $token === $this->generator->generate($value);
     }

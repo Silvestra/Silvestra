@@ -54,7 +54,7 @@ class ImageValidator
     }
 
     /**
-     * Validate image config.
+     * Check if image config is valid.
      *
      * @param array $config
      *
@@ -62,7 +62,7 @@ class ImageValidator
      *
      * @throws InvalidImageConfigException
      */
-    public function validateConfig(array $config)
+    public function configIsValid(array $config)
     {
         $isValid = true;
 
