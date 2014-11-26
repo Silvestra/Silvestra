@@ -60,7 +60,7 @@ class ImageUploaderController extends ContainerAware
     {
         $config = $request->get('config', array());
 
-        if (false === $this->imageValidator->configIsValid($config)) {
+        if (false === $this->imageValidator->isConfigValid($config)) {
             throw new InvalidImageConfigException('Image config is not valid!');
         }
 
