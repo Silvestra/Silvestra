@@ -9,8 +9,10 @@
         <!--Silvestra media image form type-->
         <service id="silvestra_media.form_type.image" class="Silvestra\Component\Media\Form\Type\ImageType">
             <tag name="form.type" alias="silvestra_media_image" />
+
             <argument>%silvestra_media.model.image.class%</argument>
             <argument type="service" id="silvestra_media.image.default_config" />
+            <argument type="service" id="silvestra_media.token.generator" />
         </service>
 
     </services>

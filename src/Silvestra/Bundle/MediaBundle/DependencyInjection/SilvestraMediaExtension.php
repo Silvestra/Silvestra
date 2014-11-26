@@ -34,15 +34,16 @@ class SilvestraMediaExtension extends Extension
         $loader->load('image/config-validator.xml');
         $loader->load('image/services.xml');
         $loader->load('services.xml');
+        $loader->load('token.xml');
 
         if (!in_array(strtolower($config['db_driver']), array('mongodb', 'orm'))) {
             throw new \InvalidArgumentException(sprintf('Invalid db driver "%s".', $config['db_driver']));
         }
         $loader->load('db_driver/' . sprintf('%s.xml', $config['db_driver']));
 
-        $container->setParameter('silvestra_media.model.image.class', $config['class']['model']['image']);
-
-        $container->setAlias('silvestra_media.manager.image', $config['image_manager']);
+        $container->setAlias($this->getAlias() . '.manager.image', $config['image_manager']);
+        $container->setParameter($this->getAlias() . '.model.image.class', $config['class']['model']['image']);
+        $container->setParameter($this->getAlias() . '.token.key', $config['token']['key']);
 
         if ($rootDir = $config['filesystem']['root_dir']) {
             $this->setFilesystemRootDir($rootDir, $container);
@@ -59,7 +60,7 @@ class SilvestraMediaExtension extends Extension
      */
     private function setFilesystemRootDir($rootDir, ContainerBuilder $container)
     {
-        $definition = $container->getDefinition('silvestra_media.filesystem');
+        $definition = $container->getDefinition($this->getAlias() . '.filesystem');
 
         $definition->replaceArgument(0, $rootDir);
     }

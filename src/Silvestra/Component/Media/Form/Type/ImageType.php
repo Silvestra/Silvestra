@@ -13,6 +13,7 @@ namespace Silvestra\Component\Media\Form\Type;
 
 use Silvestra\Component\Media\Image\ImageDefaultConfig;
 use Silvestra\Component\Media\Media;
+use Silvestra\Component\Media\Token\TokenGenerator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -28,25 +29,32 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ImageType extends AbstractType
 {
     /**
+     * @var string
+     */
+    private $imageClass;
+
+    /**
      * @var ImageDefaultConfig
      */
     private $defaultConfig;
 
     /**
-     * @var string
+     * @var TokenGenerator
      */
-    private $imageClass;
+    private $tokenGenerator;
 
     /**
      * Constructor.
      *
      * @param string $imageClass
      * @param ImageDefaultConfig $defaultConfig
+     * @param TokenGenerator $tokenGenerator
      */
-    public function __construct($imageClass, ImageDefaultConfig $defaultConfig)
+    public function __construct($imageClass, ImageDefaultConfig $defaultConfig, TokenGenerator $tokenGenerator)
     {
         $this->imageClass = $imageClass;
         $this->defaultConfig = $defaultConfig;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     /**
@@ -64,7 +72,7 @@ class ImageType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $settings = array(
+        $config = array(
             'mime_types' => $options['mime_types'],
             'max_file_size' => $options['max_file_size'],
             'max_height' => $options['max_height'],
@@ -76,7 +84,8 @@ class ImageType extends AbstractType
             'cropper_coordinates' => $options['cropper_coordinates'],
         );
 
-        $view->vars['settings'] = json_encode($settings);
+        $view->vars['config'] = json_encode($config);
+        $view->vars['upload_token'] = $this->tokenGenerator->generate($config);
     }
 
     /**

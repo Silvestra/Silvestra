@@ -35,7 +35,10 @@ class CropperCoordinatesValidatorTest extends AbstractConfigValidator
 
     public function testValidate()
     {
-        $this->assertTrue($this->validator->validate(array(), $this->getMockImageDefaultConfig()));
+        $mock = $this->getMockImageDefaultConfig();
+
+        $this->assertFalse($this->validator->validate(array(), $mock));
+        $this->assertTrue($this->validator->validate(array(1, 2, 3, 4), $mock));
     }
 
     public function testValidateWithInvalidArgument()

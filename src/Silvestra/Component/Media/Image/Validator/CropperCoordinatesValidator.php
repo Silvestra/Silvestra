@@ -32,7 +32,7 @@ class CropperCoordinatesValidator implements ImageConfigValidatorInterface
             throw new InvalidArgumentException('Cropper coordinates must be array!');
         }
 
-        return true;
+        return (4 === count($value));
     }
 
     /**

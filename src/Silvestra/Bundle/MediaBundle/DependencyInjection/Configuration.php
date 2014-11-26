@@ -63,6 +63,12 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
+                ->arrayNode('token')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('key')->defaultValue(Media::NAME)->end()
+                    ->end()
+                ->end()
+
             ->end();
 
         return $treeBuilder;

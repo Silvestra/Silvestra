@@ -51,8 +51,6 @@ class ImageUploaderController extends ContainerAware
             throw new InvalidImageConfigException('Image config is not valid!');
         }
 
-        $data = $this->imageUploadHandler->process($request->files->get('image', null), $config);
-
-        return new JsonResponse($data);
+        return new JsonResponse($this->imageUploadHandler->process($request->files->get('image', null), $config));
     }
 }
