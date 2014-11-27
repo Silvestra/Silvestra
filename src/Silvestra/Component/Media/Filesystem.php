@@ -123,6 +123,16 @@ class Filesystem
     }
 
     /**
+     * Get root dir.
+     *
+     * @return string
+     */
+    public function getRootDir()
+    {
+        return $this->rootDir;
+    }
+
+    /**
      * Creates a directory.
      *
      * @param string $dir

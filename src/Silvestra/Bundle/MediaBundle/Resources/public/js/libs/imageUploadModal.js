@@ -66,7 +66,24 @@ function MediaImageUploadModal($modal) {
 
     $uploadCropButton.on('click', function ($event) {
         $event.preventDefault();
-        console.log($config.cropper_coordinates);
+
+        if ($filename && $config.cropper_enabled) {
+            $dropzone.fadeTo(300, 0.4);
+            $.ajax({
+                url: Routing.generate('silvestra_media_image_cropper_crop'),
+                type: 'POST',
+                data: { coordinates: $config.cropper_coordinates, filename: $filename },
+                success: function ($response) {
+                    console.log($response);
+
+                    $dropzone.fadeTo(0, 1);
+                },
+                error: function ($request, $status, $error) {
+                    console.log($request.responseText);
+                    $dropzone.fadeTo(0, 1);
+                }
+            });
+        }
     });
 
 
@@ -104,6 +121,7 @@ function MediaImageUploadModal($modal) {
     };
 
     var setCropperCordinates = function ($coordinates) {
+        console.log($coordinates);
         $config.cropper_coordinates.x1 = $coordinates['x'];
         $config.cropper_coordinates.y1 = $coordinates['y'];
         $config.cropper_coordinates.x2 = $coordinates['x2'];

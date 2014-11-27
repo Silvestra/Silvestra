@@ -28,35 +28,36 @@ class ImageCropper
     /**
      * @var Filesystem
      */
-    private $fileSystem;
+    private $filesystem;
 
     /**
      * Constructor.
      *
-     * @param Filesystem $fileSystem
+     * @param Filesystem $filesystem
      */
-    public function __construct(Filesystem $fileSystem)
+    public function __construct(Filesystem $filesystem)
     {
-        $this->fileSystem = $fileSystem;
+        $this->filesystem = $filesystem;
     }
 
     public function crop(ImageInterface $image, array $coordinates)
     {
-        if (!file_exists($image->getOriginalPath())) {
-            throw new NotFoundImageException(sprintf('Not found image in %s', $image->getOriginalPath()));
+        $absolutePath = $this->filesystem->getRootDir() . $image->getOriginalPath();
+
+        if (false === file_exists($absolutePath)) {
+            throw new NotFoundImageException(sprintf('Not found image in %s', $absolutePath));
         }
 
+        $this->filesystem
+            ->mkdir($this->filesystem->getActualFileDir($image->getFilename(), Filesystem::CROPPER_SUB_DIR));
+
         $imagine = new Imagine();
-        $imageFile = $imagine->open($image->getOriginalPath());
 
-        $imageFile->crop($this->getStartPoint($coordinates['x1'], $coordinates['y1']), $this->getBox($coordinates));
+        $imagine->open($absolutePath)
+            ->crop($this->getStartPoint($coordinates['x1'], $coordinates['y1']), $this->getBox($coordinates))
+            ->save($this->filesystem->getAbsoluteFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR));
 
-        $absolutePath = $this->fileSystem->getAbsoluteFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
-
-        $this->fileSystem->mkdir($absolutePath);
-        $imageFile->save($absolutePath);
-
-        return $this->fileSystem->getRelativeFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
+        return $this->filesystem->getRelativeFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
     }
 
     private function getStartPoint($x, $y)

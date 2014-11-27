@@ -11,6 +11,7 @@
 
 namespace Silvestra\Component\Media\Tests\Image;
 
+use Imagine\Gd\Imagine;
 use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Image\ImageCropper;
 use Silvestra\Component\Media\Model\Image;
@@ -49,9 +50,17 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
 
     public function testCrop()
     {
+        $coordinates = array('x1' => 0, 'y1' => 0, 'x2' => 20, 'y2' => 40);
         $image = $this->createImage();
+        $absolutePath = $this->tempDir . $this->cropper->crop($image, $coordinates);
 
-        $this->cropper->crop($image, array('x1' => '0', 'y1' => 0, 'x2' => 20, 'y2' => 20));
+        $this->assertFileExists($absolutePath);
+
+        $imagine = new Imagine();
+        $size = $imagine->open($absolutePath)->getSize();
+
+        $this->assertEquals(40, $size->getHeight());
+        $this->assertEquals(20, $size->getWidth());
     }
 
     /**
@@ -62,7 +71,7 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
         $image = new Image();
 
         $image->setFilename('silvestra.png');
-        $image->setOriginalPath(dirname(__FILE__) . '/../Fixtures/silvestra.png');
+        $image->setOriginalPath('/../Fixtures/silvestra.png');
 
         return $image;
     }
