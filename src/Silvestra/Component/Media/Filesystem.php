@@ -154,7 +154,7 @@ class Filesystem
      */
     public function getAbsoluteFilePath($filename, $subDir = self::UPLOADER_SUB_DIR)
     {
-        return $this->rootDir . $this->getRelativeFilePath($filename, $subDir);
+        return $this->getRootDir() . $this->getRelativeFilePath($filename, $subDir);
     }
 
     /**

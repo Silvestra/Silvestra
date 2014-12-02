@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Image;
+namespace Silvestra\Component\Media\Extension\Image;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
 use Silvestra\Component\Media\Exception\NotFoundImageException;
 use Silvestra\Component\Media\Filesystem;
+use Silvestra\Component\Media\Image\ImageCropperInterface;
 use Silvestra\Component\Media\Model\ImageInterface;
 
 /**
@@ -23,7 +24,7 @@ use Silvestra\Component\Media\Model\ImageInterface;
  *
  * @since 11/24/14 10:06 PM
  */
-class ImageCropper
+class ImageCropper implements ImageCropperInterface
 {
     /**
      * @var Filesystem
@@ -40,6 +41,9 @@ class ImageCropper
         $this->filesystem = $filesystem;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function crop(ImageInterface $image, array $coordinates)
     {
         $absolutePath = $this->filesystem->getRootDir() . $image->getOriginalPath();
@@ -60,11 +64,26 @@ class ImageCropper
         return $this->filesystem->getRelativeFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
     }
 
+    /**
+     * Get start point.
+     *
+     * @param int $x
+     * @param int $y
+     *
+     * @return Point
+     */
     private function getStartPoint($x, $y)
     {
         return new Point($x, $y);
     }
 
+    /**
+     * Get box.
+     *
+     * @param array $coordinates
+     *
+     * @return Box
+     */
     private function getBox(array $coordinates)
     {
         $height = abs($coordinates['y1'] - $coordinates['y2']);

@@ -85,6 +85,22 @@ class FilesystemTest extends \PHPUnit_Framework_TestCase
         $this->assertFileExists($dir);
     }
 
+    public function testGetRelativeFilePath()
+    {
+        $this->assertEquals(
+            '/silvestra_media/uploader/s/i/l/v/e/silvestra.png',
+            $this->filesystem->getRelativeFilePath('silvestra.png')
+        );
+    }
+
+    public function testGetAbsoluteFilePath()
+    {
+        $this->assertEquals(
+            $this->getMediaRootDir() . '/uploader/s/i/l/v/e/silvestra.png',
+            $this->filesystem->getAbsoluteFilePath('silvestra.png')
+        );
+    }
+
     private function getMediaRootDir()
     {
         return $this->tempDir . Media::NAME;

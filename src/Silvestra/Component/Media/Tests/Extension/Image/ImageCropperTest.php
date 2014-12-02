@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Media\Tests\Image;
+namespace Silvestra\Component\Media\Tests\Extension\Image;
 
 use Imagine\Gd\Imagine;
 use Silvestra\Component\Media\Filesystem;
-use Silvestra\Component\Media\Image\ImageCropper;
+use Silvestra\Component\Media\Extension\Image\ImageCropper;
 use Silvestra\Component\Media\Model\Image;
+use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -27,6 +28,11 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
      * @var Filesystem
      */
     private $filesystem;
+
+    /**
+     * @var SymfonyFilesystem
+     */
+    private $symfonyFilesystem;
 
     /**
      * @var ImageCropper
@@ -44,6 +50,10 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->tempDir = sys_get_temp_dir() . '/sivestra';
+        $this->symfonyFilesystem = new SymfonyFilesystem();
+
+        $this->symfonyFilesystem->remove($this->tempDir);
+
         $this->filesystem = new Filesystem($this->tempDir);
         $this->cropper = new ImageCropper($this->filesystem);
     }
@@ -64,6 +74,14 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function tearDown()
+    {
+        $this->symfonyFilesystem->remove($this->tempDir);
+    }
+
+    /**
      * @return Image
      */
     private function createImage()
@@ -71,7 +89,11 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
         $image = new Image();
 
         $image->setFilename('silvestra.png');
-        $image->setOriginalPath('/../Fixtures/silvestra.png');
+        $image->setOriginalPath($this->filesystem->getRelativeFilePath($image->getFilename()));
+        $this->symfonyFilesystem->copy(
+            dirname(__FILE__) . '/../../Fixtures/silvestra.png',
+            $this->filesystem->getActualFileDir($image->getFilename()) . '/' . $image->getFilename()
+        );
 
         return $image;
     }

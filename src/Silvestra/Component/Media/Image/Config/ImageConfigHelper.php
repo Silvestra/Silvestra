@@ -18,6 +18,13 @@ namespace Silvestra\Component\Media\Image\Config;
  */
 class ImageConfigHelper
 {
+    /**
+     * Normalize image config.
+     *
+     * @param array $config
+     *
+     * @return array
+     */
     public static function normalize(array $config)
     {
         $config['mime_types'] = (array)$config['mime_types'];

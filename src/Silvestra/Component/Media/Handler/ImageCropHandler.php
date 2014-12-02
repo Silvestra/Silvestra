@@ -11,7 +11,7 @@
 
 namespace Silvestra\Component\Media\Handler;
 
-use Silvestra\Component\Media\Image\ImageCropper;
+use Silvestra\Component\Media\Image\ImageCropperInterface;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ImageCropHandler
 {
     /**
-     * @var ImageCropper
+     * @var ImageCropperInterface
      */
     private $imageCropper;
 
@@ -35,10 +35,10 @@ class ImageCropHandler
     /**
      * Constructor.
      *
-     * @param ImageCropper $imageCropper
+     * @param ImageCropperInterface $imageCropper
      * @param ImageManagerInterface $imageManager
      */
-    public function __construct(ImageCropper $imageCropper, ImageManagerInterface $imageManager)
+    public function __construct(ImageCropperInterface $imageCropper, ImageManagerInterface $imageManager)
     {
         $this->imageCropper = $imageCropper;
         $this->imageManager = $imageManager;
