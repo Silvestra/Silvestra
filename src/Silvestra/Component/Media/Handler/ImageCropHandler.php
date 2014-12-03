@@ -12,8 +12,8 @@
 namespace Silvestra\Component\Media\Handler;
 
 use Silvestra\Component\Media\Image\ImageCropperInterface;
+use Silvestra\Component\Media\Model\ImageInterface;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -48,19 +48,12 @@ class ImageCropHandler
      * Process image crop.
      *
      * @param array $coordinates
-     * @param $filename
+     * @param ImageInterface $image
      *
      * @return array
-     *
-     * @throws NotFoundHttpException
      */
-    public function process(array $coordinates, $filename)
+    public function process(array $coordinates, ImageInterface $image)
     {
-        $image = $this->imageManager->findByFilename($filename);
-        if (null === $image) {
-            throw new NotFoundHttpException('Image not found!');
-        }
-
         $path = $this->imageCropper->crop($image, $coordinates);
 
         $image->setCropperCoordinates($coordinates);

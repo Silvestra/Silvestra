@@ -16,6 +16,7 @@ function MediaImageUploadModal($modal) {
 
     var $config;
     var $filename;
+    var $currentImageWidget;
     var $uploadToken;
 
     FileAPI.event.on($input, 'change', function ($event) {
@@ -74,7 +75,7 @@ function MediaImageUploadModal($modal) {
                 type: 'POST',
                 data: { coordinates: $config.cropper_coordinates, filename: $filename },
                 success: function ($response) {
-                    console.log($response);
+                    $currentImageWidget.find('img:first').attr('src', $response.thumbnail_path);
 
                     $dropzone.fadeTo(0, 1);
                 },
@@ -95,6 +96,7 @@ function MediaImageUploadModal($modal) {
     this.show = function ($imageWidget) {
         $config = $imageWidget.data('config');
         $uploadToken = $imageWidget.data('token');
+        $currentImageWidget = $imageWidget;
 
         $modal.modal('show');
     };

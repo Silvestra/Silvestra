@@ -11,6 +11,8 @@
 
 namespace Silvestra\Component\Media\Image;
 
+use Silvestra\Component\Media\Model\ImageInterface;
+
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -24,7 +26,7 @@ interface ImageResizerInterface
     /**
      * Resize image.
      *
-     * @param string $path
+     * @param ImageInterface $image
      * @param int $with
      * @param int $height
      * @param string $mode
@@ -32,5 +34,5 @@ interface ImageResizerInterface
      *
      * @return string
      */
-    public function resize($path, $with, $height, $mode, $force = false);
+    public function resize(ImageInterface $image, $with, $height, $mode, $force = false);
 }

@@ -11,7 +11,10 @@
 
 namespace Silvestra\Bundle\MediaBundle\Controller;
 
+use Silvestra\Component\Media\Exception\NotFoundImageException;
 use Silvestra\Component\Media\Handler\ImageCropHandler;
+use Silvestra\Component\Media\Image\ImageResizerInterface;
+use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,13 +32,30 @@ class ImageCropperController
     private $imageCropHandler;
 
     /**
+     * @var ImageManagerInterface
+     */
+    private $imageManager;
+
+    /**
+     * @var ImageResizerInterface
+     */
+    private $imageResizer;
+
+    /**
      * Constructor.
      *
      * @param ImageCropHandler $imageCropHandler
+     * @param ImageManagerInterface $imageManager
+     * @param ImageResizerInterface $imageResizer
      */
-    public function __construct(ImageCropHandler $imageCropHandler)
-    {
+    public function __construct(
+        ImageCropHandler $imageCropHandler,
+        ImageManagerInterface $imageManager,
+        ImageResizerInterface $imageResizer
+    ) {
         $this->imageCropHandler = $imageCropHandler;
+        $this->imageManager = $imageManager;
+        $this->imageResizer = $imageResizer;
     }
 
     public function cropAction(Request $request)
@@ -47,6 +67,15 @@ class ImageCropperController
             throw new NotFoundHttpException('Invalid coordinates or filename request parameters!');
         }
 
-        return new JsonResponse($this->imageCropHandler->process($coordinates, $filename));
+        $image = $this->imageManager->findByFilename($filename);
+        if (null === $image) {
+            throw new NotFoundImageException('Image not found!');
+        }
+
+        $data = $this->imageCropHandler->process($coordinates, $image);
+        $data['thumbnail_path'] = $this->imageResizer
+            ->resize($image, 150, 150, ImageResizerInterface::THUMBNAIL_OUTBOUND);
+
+        return new JsonResponse($data);
     }
 }
