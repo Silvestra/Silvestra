@@ -1,7 +1,5 @@
-Silvestra
+Silvestra ![Silvestra](https://github.com/Silvestra/logo/blob/master/logo/white_bg_50.png?raw=true)
 =========
-
-![Silvestra](https://github.com/Silvestra/logo/blob/master/logo/white_bg.png?raw=true)
 
 [![Build Status](https://scrutinizer-ci.com/g/Silvestra/Silvestra/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Silvestra/Silvestra/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Silvestra/Silvestra/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Silvestra/Silvestra/?branch=master)
