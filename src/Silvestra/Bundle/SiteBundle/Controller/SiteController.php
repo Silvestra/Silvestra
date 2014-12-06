@@ -91,7 +91,8 @@ class SiteController
         $form = $this->formFactory->create($site);
 
         if ($this->formHandler->process($request, $form)) {
-            $this->formHandler->onSuccess($form->getData());
+            $this->siteManager->save();
+            $this->formHandler->onSuccess();
 
             return new RedirectResponse($this->router->generate('silvestra_site'));
         }

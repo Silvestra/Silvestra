@@ -11,6 +11,7 @@
 
 namespace Silvestra\Component\Media\Form\Type;
 
+use Silvestra\Component\Media\Form\DataTransformer\ImageTransformer;
 use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 use Silvestra\Component\Media\Media;
 use Silvestra\Component\Media\Token\TokenGenerator;
@@ -44,17 +45,28 @@ class ImageType extends AbstractType
     private $tokenGenerator;
 
     /**
+     * @var ImageTransformer
+     */
+    private $transformer;
+
+    /**
      * Constructor.
      *
      * @param string $imageClass
      * @param ImageDefaultConfig $defaultConfig
      * @param TokenGenerator $tokenGenerator
+     * @param ImageTransformer $transformer
      */
-    public function __construct($imageClass, ImageDefaultConfig $defaultConfig, TokenGenerator $tokenGenerator)
-    {
+    public function __construct(
+        $imageClass,
+        ImageDefaultConfig $defaultConfig,
+        TokenGenerator $tokenGenerator,
+        ImageTransformer $transformer
+    ) {
         $this->imageClass = $imageClass;
         $this->defaultConfig = $defaultConfig;
         $this->tokenGenerator = $tokenGenerator;
+        $this->transformer = $transformer;
     }
 
     /**
@@ -62,9 +74,13 @@ class ImageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('cropperCoordinates', 'hidden');
+        $builder->add(
+            'filename',
+            'hidden',
+            array('attr' => array('class' => 'silvestra-image-filename'))
+        );
 
-        $builder->add('originalPath', 'hidden');
+        $builder->addModelTransformer($this->transformer);
     }
 
     /**
@@ -97,7 +113,6 @@ class ImageType extends AbstractType
             array(
                 'data_class' => $this->imageClass,
                 'label' => false,
-
                 'mime_types' => $this->defaultConfig->getAvailableMimeTypes(),
                 'max_file_size' => $this->defaultConfig->getMaxFileSize(),
                 'max_height' => $this->defaultConfig->getMaxHeight(),
@@ -107,13 +122,13 @@ class ImageType extends AbstractType
                 'resize_strategy' => $this->defaultConfig->getDefaultResizeStrategy(),
                 'cropper_enabled' => $this->defaultConfig->isDefaultCropperEnabled(),
                 'cropper_coordinates' => function (Options $options) {
-                    return array(
-                        'x1' => 0,
-                        'y1' => 0,
-                        'x2' => $options['max_width'],
-                        'y2' => $options['max_height'],
-                    );
-                }
+                        return array(
+                            'x1' => 0,
+                            'y1' => 0,
+                            'x2' => $options['max_width'],
+                            'y2' => $options['max_height'],
+                        );
+                    }
             )
         );
 
@@ -122,32 +137,32 @@ class ImageType extends AbstractType
         $resolver->setAllowedValues(
             array(
                 'mime_types' => function ($mimeTypes) use ($defaultConfig) {
-                    foreach ($mimeTypes as $type) {
-                        if (!in_array($type, $defaultConfig->getAvailableMimeTypes())) {
-                            return false;
+                        foreach ($mimeTypes as $type) {
+                            if (!in_array($type, $defaultConfig->getAvailableMimeTypes())) {
+                                return false;
+                            }
                         }
-                    }
 
-                    return true;
-                },
+                        return true;
+                    },
                 'max_file_size' => function ($maxFileSize) use ($defaultConfig) {
-                    return ($defaultConfig->getMaxFileSize() >= $maxFileSize);
-                },
+                        return ($defaultConfig->getMaxFileSize() >= $maxFileSize);
+                    },
                 'max_height' => function ($maxHeight) use ($defaultConfig) {
-                    return ($defaultConfig->getMaxHeight() >= $maxHeight);
-                },
+                        return ($defaultConfig->getMaxHeight() >= $maxHeight);
+                    },
                 'max_width' => function ($maxWidth) use ($defaultConfig) {
-                    return ($defaultConfig->getMaxWidth() >= $maxWidth);
-                },
+                        return ($defaultConfig->getMaxWidth() >= $maxWidth);
+                    },
                 'min_height' => function ($minHeight) use ($defaultConfig) {
-                    return ($defaultConfig->getMinHeight() <= $minHeight);
-                },
+                        return ($defaultConfig->getMinHeight() <= $minHeight);
+                    },
                 'min_width' => function ($minWidth) use ($defaultConfig) {
-                    return ($defaultConfig->getMinWidth() <= $minWidth);
-                },
+                        return ($defaultConfig->getMinWidth() <= $minWidth);
+                    },
                 'resize_strategy' => function ($resizeStrategy) {
-                    return in_array($resizeStrategy, Media::getResizeStrategies());
-                },
+                        return in_array($resizeStrategy, Media::getResizeStrategies());
+                    },
             )
         );
     }

@@ -8,5 +8,7 @@
  */
 
 $(document).ready(function () {
-    $('div.silvestra-media-gallery').mediaGallery();
+    $('.silvestra-media-gallery').mediaGallery();
+
+    $('.silvestra-media-image').mediaImage();
 });

@@ -1,7 +1,9 @@
 {% extends 'SilvestraSiteBundle::layout.html.twig' %}
 
 {% block content %}
-    {{ form_start(form) }}
-        {{ form_rest(form) }}
-    {{ form_end(form) }}
+    <div class="row">
+        {{ form_start(form) }}
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock content %}

@@ -12,7 +12,9 @@
 namespace Silvestra\Component\Media\Form\DataTransformer;
 
 use Silvestra\Component\Media\Model\ImageInterface;
+use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -21,6 +23,20 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class ImageTransformer implements DataTransformerInterface
 {
+    /**
+     * @var ImageManagerInterface
+     */
+    private $imageManager;
+
+    /**
+     * Constructor.
+     *
+     * @param ImageManagerInterface $imageManager
+     */
+    public function __construct(ImageManagerInterface $imageManager)
+    {
+        $this->imageManager = $imageManager;
+    }
 
     /**
      * Transform.
@@ -40,10 +56,22 @@ class ImageTransformer implements DataTransformerInterface
      * @param ImageInterface $image
      *
      * @return ImageInterface
+     *
+     * @throws TransformationFailedException
      */
     public function reverseTransform($image)
     {
-        $image->setCropperCoordinates(json_decode($image->getCropperCoordinates(), true));
+        $filename = $image->getFilename();
+
+        if (empty($filename)) {
+            return null;
+        }
+
+        $image = $this->imageManager->findByFilename($filename);
+
+        if (null === $image) {
+            throw new TransformationFailedException();
+        }
 
         return $image;
     }

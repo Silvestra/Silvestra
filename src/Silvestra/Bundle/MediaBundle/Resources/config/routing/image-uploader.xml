@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="silvestra_media_image_uploader_upload" path="/media/image/upload">
+    <route id="silvestra_media.image_uploader_upload" path="/media/image-upload">
         <default key="_controller">silvestra_media.controller.image_uploader:uploadAction</default>
         <option key="expose">true</option>
     </route>

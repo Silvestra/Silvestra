@@ -54,7 +54,7 @@ class ImageResizer implements ImageResizerInterface
     {
         $cacheKey = $this->getCacheKey($image->getPath()) . DIRECTORY_SEPARATOR . $this->getCacheKey($with . $height . $mode);
 
-        if (false === $force && $this->imageCache->contains($image->getFilename(), $cacheKey)) {
+        if ((false === $force) && $this->imageCache->contains($image->getFilename(), $cacheKey)) {
             return $this->imageCache->getRelativePath($image->getFilename(), $cacheKey);
         }
 
