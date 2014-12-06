@@ -18,13 +18,14 @@ function MediaImageModal() {
 
     this.show = function ($imageWidget) {
         $config = $imageWidget.data('config');
+        $filename = $imageWidget.find('.silvestra-image-filename:first').val();
         $uploadToken = $imageWidget.data('token');
         $currentImageWidget = $imageWidget;
 
         $.ajax({
             url: Routing.generate('silvestra_media.image_modal'),
             type: 'GET',
-//            data: { coordinates: $config.cropper_coordinates, filename: $filename },
+            data: { filename: $filename },
             success: function ($response) {
                 $modal = $($response);
                 init();

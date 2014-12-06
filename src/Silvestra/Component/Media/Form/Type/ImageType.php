@@ -101,6 +101,7 @@ class ImageType extends AbstractType
         );
 
         $view->vars['config'] = json_encode($config);
+        $view->vars['image_path'] = $form->getData() ? $form->getData()->getPath() : null;
         $view->vars['upload_token'] = $this->tokenGenerator->generate($config);
     }
 

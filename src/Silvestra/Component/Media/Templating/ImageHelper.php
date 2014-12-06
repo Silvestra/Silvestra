@@ -11,6 +11,8 @@
 
 namespace Silvestra\Component\Media\Templating;
 
+use Silvestra\Component\Media\Filesystem;
+use Silvestra\Component\Media\Image\ImageResizerInterface;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
@@ -19,35 +21,60 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
  *
  * @since 12/6/14 6:33 PM
  */
-class ImageHelper extends TemplatingHelper
+class ImageHelper extends TemplatingHelper implements ImageHelperInterface
 {
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
     /**
      * @var ImageManagerInterface
      */
     private $imageManager;
 
     /**
+     * @var ImageResizerInterface
+     */
+    private $imageResizer;
+
+    /**
+     * @var string
+     */
+    private $noImagePath;
+
+    /**
      * Constructor.
      *
+     * @param Filesystem $filesystem
      * @param ImageManagerInterface $imageManager
+     * @param ImageResizerInterface $imageResizer
+     * @param string $noImagePath
      */
-    public function __construct(ImageManagerInterface $imageManager)
-    {
+    public function __construct(
+        Filesystem $filesystem,
+        ImageManagerInterface $imageManager,
+        ImageResizerInterface $imageResizer,
+        $noImagePath
+    ) {
+        $this->filesystem = $filesystem;
         $this->imageManager = $imageManager;
+        $this->imageResizer = $imageResizer;
+        $this->noImagePath = $noImagePath;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function renderImageHtmlTag($filename, array $size, array $attributes = array())
+    public function renderImageHtmlTag($filename, array $size, $mode = null, array $attributes = array())
     {
-        $path = $this->getImagePath($filename);
-
-        if ((null === $filename) || (false === file_exists($path))) {
-
+        if (null === $mode) {
+            $mode = ImageResizerInterface::THUMBNAIL_OUTBOUND;
         }
 
-        return sprintf('<img src="%s" />', $path);
+        $path = $this->imageResizer->resize($this->getImagePath($filename), $size[0], $size[1], $mode);
+
+        return sprintf('<img src="%s" %s />', $path, $this->normalizeAttributes($attributes));
     }
 
     /**
@@ -55,15 +82,15 @@ class ImageHelper extends TemplatingHelper
      *
      * @param string $filename
      *
-     * @return null|string
+     * @return string
      */
     private function getImagePath($filename)
     {
         if (empty($filename)) {
-            return null;
+            return $this->noImagePath;
         }
 
-        if (file_exists($filename)) {
+        if (file_exists($this->filesystem->getRootDir() . $filename)) {
             return $filename;
         }
 
@@ -73,7 +100,21 @@ class ImageHelper extends TemplatingHelper
             return $image->getPath();
         }
 
-        return null;
+        return $this->noImagePath;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    private function normalizeAttributes(array $attributes)
+    {
+        $string = '';
+
+        foreach ($attributes as $name => $value) {
+            $string .= sprintf('%s="%s" ', $name, $value);
+        }
+
+        return rtrim($string);
     }
 
     /**

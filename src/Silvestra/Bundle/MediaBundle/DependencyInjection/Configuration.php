@@ -60,6 +60,7 @@ class Configuration implements ConfigurationInterface
                         ->integerNode('max_width')->defaultValue(1024)->end()
                         ->integerNode('min_height')->defaultValue(0)->end()
                         ->integerNode('min_width')->defaultValue(0)->end()
+                        ->scalarNode('no_image')->defaultValue('/bundles/silvestramedia/image/noimage.png')->end()
                     ->end()
                 ->end()
 

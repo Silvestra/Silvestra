@@ -23,9 +23,10 @@ interface ImageHelperInterface
      *
      * @param string $filename
      * @param array $size
+     * @param null|string $mode
      * @param array $attributes
      *
      * @return string
      */
-    public function renderImageHtmlTag($filename, array $size, array $attributes = array());
+    public function renderImageHtmlTag($filename, array $size, $mode = null, array $attributes = array());
 }

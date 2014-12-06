@@ -34,6 +34,7 @@ class SilvestraMediaExtension extends Extension
         $loader->load('image/config-validator.xml');
         $loader->load('image/services.xml');
         $loader->load('services.xml');
+        $loader->load('templating.xml');
         $loader->load('token.xml');
 
         if (!in_array(strtolower($config['db_driver']), array('mongodb', 'orm'))) {
@@ -42,8 +43,10 @@ class SilvestraMediaExtension extends Extension
         $loader->load('db_driver/' . sprintf('%s.xml', $config['db_driver']));
 
         $container->setAlias($this->getAlias() . '.manager.image', $config['image_manager']);
+
         $container->setParameter($this->getAlias() . '.model.image.class', $config['class']['model']['image']);
         $container->setParameter($this->getAlias() . '.token.key', $config['token']['key']);
+        $container->setParameter($this->getAlias() . '.no_image', $config['image']['no_image']);
 
         if ($rootDir = $config['filesystem']['root_dir']) {
             $this->setFilesystemRootDir($rootDir, $container);

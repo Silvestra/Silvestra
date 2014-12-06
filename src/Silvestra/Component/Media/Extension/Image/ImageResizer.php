@@ -16,7 +16,6 @@ use Imagine\Image\Box;
 use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Image\Cache\ImageCacheInterface;
 use Silvestra\Component\Media\Image\ImageResizerInterface;
-use Silvestra\Component\Media\Model\ImageInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -50,41 +49,58 @@ class ImageResizer implements ImageResizerInterface
     /**
      * {@inheritdoc}
      */
-    public function resize(ImageInterface $image, $with, $height, $mode, $force = false)
+    public function resize($imagePath, $width, $height, $mode, $force = false)
     {
-        $cacheKey = $this->getCacheKey($image->getPath()) . DIRECTORY_SEPARATOR . $this->getCacheKey($with . $height . $mode);
+        $cacheKey = $this->getCacheKey($imagePath, $width, $height, $mode);
+        $filename = $this->getFilename($imagePath);
 
-        if ((false === $force) && $this->imageCache->contains($image->getFilename(), $cacheKey)) {
-            return $this->imageCache->getRelativePath($image->getFilename(), $cacheKey);
+        if ((false === $force) && $this->imageCache->contains($filename, $cacheKey)) {
+            return $this->imageCache->getRelativePath($filename, $cacheKey);
         }
 
-        $cacheAbsolutePath = $this->imageCache->getAbsolutePath($image->getFilename(), $cacheKey);
+        $cacheAbsolutePath = $this->imageCache->getAbsolutePath($filename, $cacheKey);
         $imagine = new Imagine();
 
         $this->filesystem->mkdir(dirname($cacheAbsolutePath));
 
-        $imagineImage = $imagine->open($this->filesystem->getRootDir() . $image->getPath());
+        $imagineImage = $imagine->open($this->filesystem->getRootDir() . $imagePath);
 
 //        if (ImageResizerInterface::THUMBNAIL_INSET === $mode) {
 //            $imagineImage->resize($this->getBox($with, $height), $mode);
 //        } else {
-            $imagineImage->thumbnail($this->getBox($with, $height), $mode);
+            $imagineImage->thumbnail($this->getBox($width, $height), $mode);
 //        }
+
         $imagineImage->save($cacheAbsolutePath, array('quality' => 100));
 
-        return $this->imageCache->getRelativePath($image->getFilename(), $cacheKey);
+        return $this->imageCache->getRelativePath($filename, $cacheKey);
     }
 
     /**
      * Get cache key.
      *
-     * @param string $value
+     * @param string $imagePath
+     * @param int $width
+     * @param int $height
+     * @param string $mode
      *
      * @return string
      */
-    private function getCacheKey($value)
+    private function getCacheKey($imagePath, $width, $height, $mode)
     {
-        return md5($value);
+        return md5($imagePath) . DIRECTORY_SEPARATOR . md5($width . $height . $mode);
+    }
+
+    /**
+     * Get filename.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    private function getFilename($path)
+    {
+        return basename($path);
     }
 
     /**

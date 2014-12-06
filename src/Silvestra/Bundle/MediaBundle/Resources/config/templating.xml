@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Silvestra media image templating helper-->
+        <service id="silvestra_media.templating.image_helper" class="Silvestra\Component\Media\Templating\ImageHelper" public="false">
+            <tag name="templating.helper" alias="silvestra_media_image" />
+
+            <argument type="service" id="silvestra_media.filesystem" />
+            <argument type="service" id="silvestra_media.manager.image" />
+            <argument type="service" id="silvestra_media.image.resizer" />
+            <argument>%silvestra_media.no_image%</argument>
+        </service>
+
+        <!--Silvestra media image twig extension-->
+        <service class="Silvestra\Bundle\MediaBundle\Twig\Extension\ImageExtension" public="true">
+            <tag name="twig.extension" alias="silvestra_alert" />
+
+            <argument type="service" id="silvestra_media.templating.image_helper" />
+        </service>
+
+    </services>
+
+</container>
