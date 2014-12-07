@@ -1,0 +1,38 @@
+{% trans_default_domain 'SilvestraMediaBundle' %}
+
+<div class="modal fade image-upload-modal" tabindex="-1" role="dialog" aria-labelledby="image-upload-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">{{ 'image_upload_modal.close'|trans }}</span>
+                </button>
+                <h4 class="modal-title" id="image-upload-modal-label">{{ 'image_upload_modal.insert_image_file'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="dropzone" data-coordinates="{{ (image is not empty ? image.cropperCoordinates : {})|json_encode }}">
+                    {% if image is empty %}
+                    <p>{{ 'image_upload_modal.drop_our_image_file_here'|trans }}</p>
+                    <p>{{ 'image_upload_modal.or'|trans }}</p>
+                    {% else %}
+                        <img src="{{ image.originalPath }}" />
+                    {% endif %}
+                </div>
+                <div class="text-center select-image-zone">
+                    <span class="btn btn-info btn-lg image-upload-button">
+                        <i class="fa fa-download"></i>
+                        <span>{{ 'image_upload_modal.select_image_file'|trans }}</span>
+                    </span>
+                    <input id="file-upload" type="file" />
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-default" data-dismiss="modal">{{ 'image_upload_modal.close'|trans }}</a>
+                <a href="javascript:;" class="btn btn-success" id="image-upload-crop"><i class="fa fa-crop"></i> {{ 'image_upload_modal.image_crop'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>

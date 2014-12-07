@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Silvestra media image controller-->
+        <service id="silvestra_media.controller.image" class="Silvestra\Bundle\MediaBundle\Controller\ImageController">
+            <argument type="service" id="silvestra_media.manager.image" />
+            <argument type="service" id="templating" />
+        </service>
+
+        <!--Silvestra media image cropper controller-->
+        <service id="silvestra_media.controller.image_cropper" class="Silvestra\Bundle\MediaBundle\Controller\ImageCropperController">
+            <argument type="service" id="silvestra_media.image_handler.crop" />
+            <argument type="service" id="silvestra_media.manager.image" />
+            <argument type="service" id="silvestra_media.image.resizer" />
+        </service>
+
+        <!--Silvestra media image uploader controller-->
+        <service id="silvestra_media.controller.image_uploader" class="Silvestra\Bundle\MediaBundle\Controller\ImageUploaderController">
+            <argument type="service" id="silvestra_media.image.validator" />
+            <argument type="service" id="silvestra_media.image_handler.upload" />
+            <argument type="service" id="silvestra_media.token.validator" />
+        </service>
+
+    </services>
+
+</container>

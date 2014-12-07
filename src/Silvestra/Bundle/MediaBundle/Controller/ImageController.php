@@ -11,61 +11,49 @@
 
 namespace Silvestra\Bundle\MediaBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 9/11/14 9:27 PM
  */
-class ImageController extends ContainerAware
+class ImageController
 {
-    public function indexAction(Request $request)
+    /**
+     * @var ImageManagerInterface
+     */
+    private $imageManager;
+
+    /**
+     * @var EngineInterface
+     */
+    private $templating;
+
+    /**
+     * Constructor.
+     *
+     * @param ImageManagerInterface $imageManager
+     * @param EngineInterface $templating
+     */
+    public function __construct(ImageManagerInterface $imageManager, EngineInterface $templating)
     {
-        $builder = $this->container->get('form.factory')->createBuilder();
+        $this->imageManager = $imageManager;
+        $this->templating = $templating;
+    }
 
-        $builder->add('images1', 'silvestra_media_gallery');
-//        $builder->add('images2', 'silvestra_media_gallery');
-//        $builder->add('image1', 'silvestra_media_image');
-//        $builder->add('image2', 'silvestra_media_image');
-//        $builder->add('file', 'file', array('required' => false));
-        $builder->add('submit', 'submit');
+    public function modalAction(Request $request)
+    {
+        $image = null;
 
-        $form = $builder->getForm();
-
-        if ($request->isMethod('POST')) {
-            $data = $request->files->get('form');
-            /** @var UploadedFile $file */
-            $file = $data['images1']['images'][0]['image'];
-            $form->submit($request);
-            if ($form->isValid()) {
-//                var_dump($form->getData()['images1']);
-//                var_dump($form->getData()); die;
-            }
-
-//            var_dump($form->getErrors(true)); die;
+        if (null !== $filename = $request->get('filename', null)) {
+            $image = $this->imageManager->findByFilename($filename);
         }
 
-        return $this->renderResponse(
-            'SilvestraMediaBundle:Image:index.html.twig',
-            array(
-                'form' => $form->createView(),
-                'page_header' => 'Test',
-            )
-        );
-    }
-
-    public function uploadAction(Request $request)
-    {
-
-    }
-
-    public function cropAction(Request $request)
-    {
-
+        return $this->renderResponse('SilvestraMediaBundle:Form:modal.html.twig', array('image' => $image));
     }
 
     /**
@@ -78,6 +66,6 @@ class ImageController extends ContainerAware
      */
     private function renderResponse($name, array $parameters = array())
     {
-        return new Response($this->container->get('templating')->render($name, $parameters));
+        return new Response($this->templating->render($name, $parameters));
     }
 }

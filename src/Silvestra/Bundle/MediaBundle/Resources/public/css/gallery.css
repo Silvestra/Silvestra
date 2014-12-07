@@ -17,6 +17,11 @@
     text-align: center;
 }
 
+.silvestra-media-image .image img {
+    height: 150px;
+    width: 150px;
+}
+
 .silvestra-media-image span.remove-image {
     cursor: hand;
     cursor: pointer;
@@ -33,7 +38,7 @@
     margin-left: -7px;
 }
 
-.image-upload-modal .drop-zone {
+.image-upload-modal .dropzone {
     margin-bottom: 10px;
     min-height: 120px;
     position: relative;
@@ -43,7 +48,7 @@
     color: #bbb;
 }
 
-.image-upload-modal .drop-zone p {
+.image-upload-modal .dropzone p {
     text-align: center;
     font-weight: 800;
     margin-top: 20px;

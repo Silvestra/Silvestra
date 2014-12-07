@@ -9,34 +9,30 @@
 
 $.fn.mediaGallery = function () {
     var $self = $(this);
-    var $imageUploadModal = new MediaImageUploadModal();
 
     $self.each(function () {
         var $gallery = $(this);
-        var $addImageButton = $gallery.find('a.add-image-button:first');
-        var $settings = $gallery.data('settings');
-
-        $gallery.data('index', $gallery.find(':input').length);
+        var $addImageButton = $gallery.find('.add-image-button:first');
+        var $imageUploadModal = new MediaImageModal();
 
         $addImageButton.click(function () {
-            $imageUploadModal.show(addImageWidget($gallery), $settings);
+            var $imageWidget = addImageWidget($gallery);
+            $imageUploadModal.show($imageWidget);
         });
 
-        $gallery.on('click', 'div.silvestra-media-image > .image', function() {
-
-            $imageUploadModal.show($(this).closest('div.silvestra-media-image'), $settings);
-        });
-
-        $gallery.on('click', 'span.remove-image', function() {
-            removeImageWidget($(this).closest('div.silvestra-media-image'));
-        });
+//        $gallery.on('click', '.silvestra-media-image > .image', function() {
+//            $imageUploadModal.show($(this).closest('.silvestra-media-image'), $settings);
+//        });
+//
+//        $gallery.on('click', '.remove-image', function() {
+//            removeImageWidget($(this).closest('div.silvestra-media-image'));
+//        });
     });
 
     var addImageWidget = function ($gallery) {
         var $index = $gallery.data('index');
         var $newImageWidget = $($gallery.data('prototype').replace(/__name__/g, $index));
 
-        $newImageWidget.hide();
         $gallery.data('index', $index + 1);
         $gallery.find('div.images:first').prepend($newImageWidget);
 

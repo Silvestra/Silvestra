@@ -81,13 +81,9 @@ class SiteFormHandler
 
     /**
      * On success.
-     *
-     * @param SiteInterface $site
      */
-    public function onSuccess(SiteInterface $site)
+    public function onSuccess()
     {
-        $this->siteManager->save();
-
         $alert = $this->alertManager->create();
 
         $alert->addSuccess($this->translator->trans('success.site_save', array(), 'SilvestraSite'));

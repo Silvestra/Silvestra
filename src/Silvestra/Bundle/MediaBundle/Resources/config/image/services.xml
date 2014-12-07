@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="silvestra_media.image.default_config" class="Silvestra\Component\Media\Image\Config\ImageDefaultConfig" public="false" />
+
+        <service id="silvestra_media.image.cache" class="Silvestra\Component\Media\Image\Cache\ImageCache" public="false">
+            <argument type="service" id="silvestra_media.filesystem" />
+        </service>
+
+        <service id="silvestra_media.image.cropper.gd" class="Silvestra\Component\Media\Extension\Image\GdImageCropper" public="false">
+            <argument type="service" id="silvestra_media.filesystem" />
+        </service>
+
+        <service id="silvestra_media.image.generator" class="Silvestra\Component\Media\Image\ImageGenerator" public="false">
+            <argument type="service" id="silvestra_media.manager.image" />
+        </service>
+
+        <service id="silvestra_media.image.resizer.gd" class="Silvestra\Component\Media\Extension\Image\GdImageResizer" public="false">
+            <argument type="service" id="silvestra_media.filesystem" />
+            <argument type="service" id="silvestra_media.image.cache" />
+        </service>
+
+        <service id="silvestra_media.image.uploader" class="Silvestra\Component\Media\Image\ImageUploader" public="false">
+            <argument type="service" id="silvestra_media.filesystem" />
+            <argument type="service" id="silvestra_media.image.generator" />
+            <argument type="service" id="silvestra_media.manager.image" />
+        </service>
+
+        <service id="silvestra_media.image.validator" class="Silvestra\Component\Media\Image\ImageValidator" public="false">
+            <argument type="service" id="silvestra_media.image.default_config" />
+        </service>
+
+    </services>
+
+</container>

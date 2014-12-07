@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Silvestra\Component\Media\Model\Image">
+
+        <field name="cropperCoordinates" column="cropper_coordinates" type="array" nullable="true" />
+
+        <field name="filename" column="filename" type="string" length="255" nullable="false" unique="true" />
+
+        <field name="mimeType" column="mime_type" type="string" length="255" nullable="false" />
+
+        <field name="originalPath" column="original_path" type="string" length="511" nullable="false" />
+
+        <field name="path" column="path" type="string" length="511" nullable="false" />
+
+        <field name="size" column="size" type="integer" nullable="false" />
+
+        <field name="temporary" column="temporary" type="boolean" nullable="false" />
+
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="false" />
+
+        <field name="createdAt" column="created_at" type="datetime" nullable="false" />
+
+    </mapped-superclass>
+
+</doctrine-mapping>

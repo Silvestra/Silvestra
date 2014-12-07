@@ -28,6 +28,11 @@
         "Trsteel/ckeditor-bundle": "~1.2",
         "twig/extensions": "~1.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2",
+        "squizlabs/php_codesniffer": "~1.5",
+        "imagine/imagine": "~0.6"
+    },
     "replace": {
         "silvestra/cache": "self.version",
         "silvestra/form": "self.version",
@@ -45,10 +50,6 @@
         "silvestra/seo-bundle": "self.version",
         "silvestra/text-bundle": "self.version",
         "silvestra/text-node-bundle": "self.version"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~4.2",
-        "squizlabs/php_codesniffer": "~1.5"
     },
     "autoload": {
         "psr-4": {

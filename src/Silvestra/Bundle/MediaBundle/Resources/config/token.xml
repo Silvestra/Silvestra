@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Silvestra media token generator-->
+        <service id="silvestra_media.token.generator" class="Silvestra\Component\Media\Token\TokenGenerator" public="false">
+            <argument>%silvestra_media.token.key%</argument>
+        </service>
+
+        <!--Silvestra media token validator-->
+        <service id="silvestra_media.token.validator" class="Silvestra\Component\Media\Token\TokenValidator" public="false">
+            <argument type="service" id="silvestra_media.token.generator" />
+        </service>
+
+    </services>
+
+</container>

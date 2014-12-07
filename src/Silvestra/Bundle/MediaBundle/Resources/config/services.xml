@@ -4,21 +4,23 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-
-    <parameters>
-        <parameter key="silvestra_media.filesystem.class">Silvestra\Component\Media\Filesystem</parameter>
-        <parameter key="silvestra_media.uploader_handler.class">Silvestra\Component\Media\Uploader\UploaderHandler</parameter>
-    </parameters>
-
     <services>
-        <service id="silvestra_media.filesystem" class="%silvestra_media.filesystem.class%">
+
+        <service id="silvestra_media.filesystem" class="Silvestra\Component\Media\Filesystem" public="false">
             <argument>%kernel.root_dir%/../web</argument>
         </service>
 
-        <service id="silvestra_media.uploader_handler" class="%silvestra_media.uploader_handler.class%">
-            <argument type="service" id="silvestra_media.filesystem" />
+        <service id="silvestra_media.image_handler.crop" class="Silvestra\Component\Media\Handler\ImageCropHandler" public="false">
+            <argument type="service" id="silvestra_media.image.cropper" />
+            <argument type="service" id="silvestra_media.manager.image" />
+        </service>
+
+        <service id="silvestra_media.image_handler.upload" class="Silvestra\Component\Media\Handler\ImageUploadHandler" public="false">
+            <argument type="service" id="silvestra_media.manager.image" />
+            <argument type="service" id="silvestra_media.image.uploader" />
             <argument type="service" id="validator" />
         </service>
+
     </services>
 
 </container>

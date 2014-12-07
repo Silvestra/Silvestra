@@ -6,18 +6,18 @@
 
     <services>
 
-        <!--Alert manager-->
+        <!--Silvestra alert manager-->
         <service id="silvestra_notification.manager.alert" class="Silvestra\Component\Notification\AlertManager" public="true">
             <argument type="service" id="session.flash_bag" />
         </service>
 
-        <!--Alert templating helper-->
+        <!--Silvestra alert templating helper-->
         <service id="silvestra_notification.templating_helper.alert" class="Silvestra\Bundle\NotificationBundle\Twig\AlertHelper" public="false">
             <tag name="templating.helper" alias="silvestra_alert" />
             <argument type="service" id="twig" />
         </service>
 
-        <!--Alert twig extension-->
+        <!--Silvestra alert twig extension-->
         <service class="Silvestra\Bundle\NotificationBundle\Twig\Extension\AlertExtension">
             <tag name="twig.extension" alias="silvestra_alert" />
             <argument type="service" id="silvestra_notification.templating_helper.alert" />
