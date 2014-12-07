@@ -16,7 +16,7 @@ namespace Silvestra\Component\Media\Tests\Extension\Image;
  *
  * @since 12/2/14 11:43 PM
  */
-class ImageResizerTest extends \PHPUnit_Framework_TestCase
+class GdImageResizerTest extends \PHPUnit_Framework_TestCase
 {
     public function test()
     {

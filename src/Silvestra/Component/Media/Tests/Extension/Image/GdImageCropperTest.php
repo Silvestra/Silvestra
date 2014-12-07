@@ -13,7 +13,7 @@ namespace Silvestra\Component\Media\Tests\Extension\Image;
 
 use Imagine\Gd\Imagine;
 use Silvestra\Component\Media\Filesystem;
-use Silvestra\Component\Media\Extension\Image\ImageCropper;
+use Silvestra\Component\Media\Extension\Image\GdImageCropper;
 use Silvestra\Component\Media\Model\Image;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
@@ -22,7 +22,7 @@ use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
  *
  * @since 11/27/14 12:15 AM
  */
-class ImageCropperTest extends \PHPUnit_Framework_TestCase
+class GdImageCropperTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Filesystem
@@ -35,7 +35,7 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
     private $symfonyFilesystem;
 
     /**
-     * @var ImageCropper
+     * @var GdImageCropper
      */
     private $cropper;
 
@@ -55,7 +55,7 @@ class ImageCropperTest extends \PHPUnit_Framework_TestCase
         $this->symfonyFilesystem->remove($this->tempDir);
 
         $this->filesystem = new Filesystem($this->tempDir);
-        $this->cropper = new ImageCropper($this->filesystem);
+        $this->cropper = new GdImageCropper($this->filesystem);
     }
 
     public function testCrop()
