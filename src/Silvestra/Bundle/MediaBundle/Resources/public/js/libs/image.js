@@ -11,24 +11,17 @@ $.fn.mediaImage = function () {
     var $self = $(this);
 
     $self.each(function () {
-        var $image = $(this);
-        console.log($image);
+        var $imageWidget = $(this);
         var $imageUploadModal = new MediaImageModal();
 
-        $image.click(function () {
-            $imageUploadModal.show($image);
+        $imageWidget.on('click', '.image', function () {
+            $imageUploadModal.show($imageWidget);
         });
 
-//        $gallery.on('click', '.silvestra-media-image > .image', function() {
-//            $imageUploadModal.show($(this).closest('.silvestra-media-image'), $settings);
-//        });
-//
-//        $gallery.on('click', '.remove-image', function() {
-//            removeImageWidget($(this).closest('div.silvestra-media-image'));
-//        });
+        $imageWidget.on('click', '.remove-image', function() {
+            $imageWidget.find('.silvestra-image-filename:first').val('');
+            $(this).hide();
+            $imageWidget.find('img:first').attr('src', $imageWidget.data('noimage'));
+        });
     });
-
-    var removeImageWidget = function ($imageWidget) {
-        $imageWidget.remove();
-    };
 };

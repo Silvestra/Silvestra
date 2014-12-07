@@ -61,6 +61,8 @@ class Configuration implements ConfigurationInterface
                         ->integerNode('min_height')->defaultValue(0)->end()
                         ->integerNode('min_width')->defaultValue(0)->end()
                         ->scalarNode('no_image')->defaultValue('/bundles/silvestramedia/image/noimage.png')->end()
+                        ->scalarNode('cropper')->defaultValue('silvestra_media.image.cropper.gd')->end()
+                        ->scalarNode('resizer')->defaultValue('silvestra_media.image.resizer.gd')->end()
                     ->end()
                 ->end()
 

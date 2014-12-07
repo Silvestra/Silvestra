@@ -43,6 +43,8 @@ class SilvestraMediaExtension extends Extension
         $loader->load('db_driver/' . sprintf('%s.xml', $config['db_driver']));
 
         $container->setAlias($this->getAlias() . '.manager.image', $config['image_manager']);
+        $container->setAlias($this->getAlias() . '.image.cropper', $config['image']['cropper']);
+        $container->setAlias($this->getAlias() . '.image.resizer', $config['image']['resizer']);
 
         $container->setParameter($this->getAlias() . '.model.image.class', $config['class']['model']['image']);
         $container->setParameter($this->getAlias() . '.token.key', $config['token']['key']);

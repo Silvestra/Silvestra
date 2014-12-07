@@ -40,7 +40,7 @@ function MediaImageModal() {
     };
 
     var init = function () {
-        var $dropzone = $modal.find('.drop-zone:first');
+        var $dropzone = $modal.find('.dropzone:first');
         var $input =  $modal.find('#file-upload:first');
         var $uploadButton = $modal.find('.image-upload-button:first');
         var $uploadCropButton = $modal.find('#image-upload-crop:first');
@@ -82,7 +82,6 @@ function MediaImageModal() {
                                         }
                                     }
                                 }
-
                             }
                         }
                     });
@@ -103,6 +102,8 @@ function MediaImageModal() {
                     success: function ($response) {
                         $currentImageWidget.find('img:first').attr('src', $response.thumbnail_path);
                         $currentImageWidget.find('.silvestra-image-filename:first').val($filename);
+                        $currentImageWidget.find('.remove-image:first').show();
+                        $modal.hide();
 
                         $dropzone.fadeTo(0, 1);
                     },

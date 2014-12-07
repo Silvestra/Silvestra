@@ -11,7 +11,7 @@
 
 namespace Silvestra\Bundle\MediaBundle\Twig\Extension;
 
-use Silvestra\Component\Media\Templating\ImageHelperInterface;
+use Silvestra\Component\Media\Templating\ImageTemplatingHelperInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -21,16 +21,16 @@ use Silvestra\Component\Media\Templating\ImageHelperInterface;
 class ImageExtension extends \Twig_Extension
 {
     /**
-     * @var ImageHelperInterface
+     * @var ImageTemplatingHelperInterface
      */
     private $imageHelper;
 
     /**
      * Constructor.
      *
-     * @param ImageHelperInterface $imageHelper
+     * @param ImageTemplatingHelperInterface $imageHelper
      */
-    public function __construct(ImageHelperInterface $imageHelper)
+    public function __construct(ImageTemplatingHelperInterface $imageHelper)
     {
         $this->imageHelper = $imageHelper;
     }
@@ -44,6 +44,11 @@ class ImageExtension extends \Twig_Extension
             new \Twig_SimpleFunction(
                 'silvestra_image_html_tag',
                 array($this->imageHelper, 'renderImageHtmlTag'),
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction(
+                'silvestra_resize_image',
+                array($this->imageHelper, 'resizeImage'),
                 array('is_safe' => array('html'))
             ),
         );

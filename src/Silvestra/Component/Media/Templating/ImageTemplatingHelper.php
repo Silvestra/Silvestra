@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
  *
  * @since 12/6/14 6:33 PM
  */
-class ImageHelper extends TemplatingHelper implements ImageHelperInterface
+class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingHelperInterface
 {
     /**
      * @var Filesystem
@@ -68,13 +68,27 @@ class ImageHelper extends TemplatingHelper implements ImageHelperInterface
      */
     public function renderImageHtmlTag($filename, array $size, $mode = null, array $attributes = array())
     {
+        $path = $this->resizeImage($filename, $size, $mode);
+
+        return sprintf('<img src="%s" %s />', $path, $this->normalizeAttributes($attributes));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resizeImage($filename, array $size, $mode = null)
+    {
         if (null === $mode) {
             $mode = ImageResizerInterface::THUMBNAIL_OUTBOUND;
         }
 
-        $path = $this->imageResizer->resize($this->getImagePath($filename), $size[0], $size[1], $mode);
+        $path = $this->getImagePath($filename);
 
-        return sprintf('<img src="%s" %s />', $path, $this->normalizeAttributes($attributes));
+        if (empty($size)) {
+            return $path;
+        }
+
+        return $this->imageResizer->resize($path, $size[0], $size[1], $mode);
     }
 
     /**

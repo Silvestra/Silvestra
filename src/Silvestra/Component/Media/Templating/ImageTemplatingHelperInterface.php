@@ -16,7 +16,7 @@ namespace Silvestra\Component\Media\Templating;
  *
  * @since 12/6/14 6:38 PM
  */
-interface ImageHelperInterface
+interface ImageTemplatingHelperInterface
 {
     /**
      * Render image html tag.
@@ -29,4 +29,15 @@ interface ImageHelperInterface
      * @return string
      */
     public function renderImageHtmlTag($filename, array $size, $mode = null, array $attributes = array());
+
+    /**
+     * Resize image.
+     *
+     * @param string $filename
+     * @param array $size
+     * @param null|string $mode
+     *
+     * @return string
+     */
+    public function resizeImage($filename, array $size, $mode = null);
 }

@@ -10,9 +10,13 @@
                 <h4 class="modal-title" id="image-upload-modal-label">{{ 'image_upload_modal.insert_image_file'|trans }}</h4>
             </div>
             <div class="modal-body">
-                <div class="drop-zone" data-loading_image_file_failed="{{ 'image_upload_modal.error.loading_image_file_failed'|trans }}" data-not_support_url_or_file_reader="{{ 'image_upload_modal.error.not_support_url_or_file_reader'|trans }}">
+                <div class="dropzone" data-coordinates="{{ (image is not empty ? image.cropperCoordinates : {})|json_encode }}">
+                    {% if image is empty %}
                     <p>{{ 'image_upload_modal.drop_our_image_file_here'|trans }}</p>
                     <p>{{ 'image_upload_modal.or'|trans }}</p>
+                    {% else %}
+                        <img src="{{ image.originalPath }}" />
+                    {% endif %}
                 </div>
                 <div class="text-center select-image-zone">
                     <span class="btn btn-info btn-lg image-upload-button">

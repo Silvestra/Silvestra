@@ -35,6 +35,11 @@ class ImageType extends AbstractType
     private $imageClass;
 
     /**
+     * @var string
+     */
+    private $noImage;
+
+    /**
      * @var ImageDefaultConfig
      */
     private $defaultConfig;
@@ -53,17 +58,20 @@ class ImageType extends AbstractType
      * Constructor.
      *
      * @param string $imageClass
+     * @param string $noImage
      * @param ImageDefaultConfig $defaultConfig
      * @param TokenGenerator $tokenGenerator
      * @param ImageTransformer $transformer
      */
     public function __construct(
         $imageClass,
+        $noImage,
         ImageDefaultConfig $defaultConfig,
         TokenGenerator $tokenGenerator,
         ImageTransformer $transformer
     ) {
         $this->imageClass = $imageClass;
+        $this->noImage = $noImage;
         $this->defaultConfig = $defaultConfig;
         $this->tokenGenerator = $tokenGenerator;
         $this->transformer = $transformer;
@@ -103,6 +111,7 @@ class ImageType extends AbstractType
         $view->vars['config'] = json_encode($config);
         $view->vars['image_path'] = $form->getData() ? $form->getData()->getPath() : null;
         $view->vars['upload_token'] = $this->tokenGenerator->generate($config);
+        $view->vars['no_image'] = $this->noImage;
     }
 
     /**
@@ -123,13 +132,13 @@ class ImageType extends AbstractType
                 'resize_strategy' => $this->defaultConfig->getDefaultResizeStrategy(),
                 'cropper_enabled' => $this->defaultConfig->isDefaultCropperEnabled(),
                 'cropper_coordinates' => function (Options $options) {
-                        return array(
-                            'x1' => 0,
-                            'y1' => 0,
-                            'x2' => $options['max_width'],
-                            'y2' => $options['max_height'],
-                        );
-                    }
+                    return array(
+                        'x1' => 0,
+                        'y1' => 0,
+                        'x2' => $options['max_width'],
+                        'y2' => $options['max_height'],
+                    );
+                }
             )
         );
 
@@ -138,32 +147,32 @@ class ImageType extends AbstractType
         $resolver->setAllowedValues(
             array(
                 'mime_types' => function ($mimeTypes) use ($defaultConfig) {
-                        foreach ($mimeTypes as $type) {
-                            if (!in_array($type, $defaultConfig->getAvailableMimeTypes())) {
-                                return false;
-                            }
+                    foreach ($mimeTypes as $type) {
+                        if (!in_array($type, $defaultConfig->getAvailableMimeTypes())) {
+                            return false;
                         }
+                    }
 
-                        return true;
-                    },
+                    return true;
+                },
                 'max_file_size' => function ($maxFileSize) use ($defaultConfig) {
-                        return ($defaultConfig->getMaxFileSize() >= $maxFileSize);
-                    },
+                    return ($defaultConfig->getMaxFileSize() >= $maxFileSize);
+                },
                 'max_height' => function ($maxHeight) use ($defaultConfig) {
-                        return ($defaultConfig->getMaxHeight() >= $maxHeight);
-                    },
+                    return ($defaultConfig->getMaxHeight() >= $maxHeight);
+                },
                 'max_width' => function ($maxWidth) use ($defaultConfig) {
-                        return ($defaultConfig->getMaxWidth() >= $maxWidth);
-                    },
+                    return ($defaultConfig->getMaxWidth() >= $maxWidth);
+                },
                 'min_height' => function ($minHeight) use ($defaultConfig) {
-                        return ($defaultConfig->getMinHeight() <= $minHeight);
-                    },
+                    return ($defaultConfig->getMinHeight() <= $minHeight);
+                },
                 'min_width' => function ($minWidth) use ($defaultConfig) {
-                        return ($defaultConfig->getMinWidth() <= $minWidth);
-                    },
+                    return ($defaultConfig->getMinWidth() <= $minWidth);
+                },
                 'resize_strategy' => function ($resizeStrategy) {
-                        return in_array($resizeStrategy, Media::getResizeStrategies());
-                    },
+                    return in_array($resizeStrategy, Media::getResizeStrategies());
+                },
             )
         );
     }

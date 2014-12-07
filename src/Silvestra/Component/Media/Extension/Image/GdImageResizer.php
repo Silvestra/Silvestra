@@ -22,7 +22,7 @@ use Silvestra\Component\Media\Image\ImageResizerInterface;
  *
  * @since 12/2/14 10:49 PM
  */
-class ImageResizer implements ImageResizerInterface
+class GdImageResizer implements ImageResizerInterface
 {
     /**
      * @var Filesystem
