@@ -1,0 +1,7 @@
+{% extends 'SilvestraBannerBundle::layout.html.twig' %}
+
+{% set page_header = 'title.banner.create'|trans({}, 'SilvestraBanner') %}
+
+{% block content %}
+    {% include 'SilvestraBannerBundle:Banner:form.html.twig' %}
+{% endblock content %}

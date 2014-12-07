@@ -1,0 +1,36 @@
+{% extends 'SilvestraBannerBundle::layout.html.twig' %}
+
+{% trans_default_domain 'SilvestraBanner' %}
+
+{% set page_header = 'title.banner_zone.list'|trans %}
+
+{% block content %}
+    <div class="row" style="margin-bottom: 10px;">
+        <a class="btn btn-primary" href="{{ url('silvestra_banner.banner_zone_create') }}">{{ 'button.create'|trans }}</a>
+    </div>
+
+    {% for banner_zone in banner_zones %}
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="{{ url('silvestra_banner.banner_list', {zoneId: banner_zone.id}) }}">
+                        <strong>{{ banner_zone.name }}</strong>
+                    </a>
+                    <span class="pull-right">
+                        <strong>{{ 'width'|trans }}:</strong> {{ banner_zone.width }}
+                        <strong>{{ 'height'|trans }}:</strong> {{ banner_zone.height }}
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <strong>{{ 'width'|trans }}:</strong> {{ banner_zone.width }}
+                    <strong>{{ 'height'|trans }}:</strong> {{ banner_zone.height }}
+
+                </div>
+                <div class="panel-footer">
+                    <a href="{{ url('silvestra_banner.banner_zone_edit', {zoneId: banner_zone.id}) }}">{{ 'button.edit'|trans }}</a>
+                    <a href="{{ url('silvestra_banner.banner_zone_delete', {zoneId: banner_zone.id}) }}">{{ 'button.delete'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
