@@ -1,0 +1,42 @@
+form:
+  banner:
+    title: Antraštė
+    description: Aprašymas
+    language: Publikavimo kalba
+    code: Kodas
+    position: Pozicija
+    uri: Absoliutus adresas
+    blank: Atidaryti naujame lange
+    publish: Publikuoti
+    publish_from: Publikuoti nuo
+    publish_to: Publikuoti iki
+  banner_zone:
+    name: Pavadinimas
+    slug: Raktas
+    width: Plotis
+    height: Aukštis
+  button:
+    save: Išsaugoti
+    cancel: Atšaukti
+  empty_data: Pasirinkite
+
+title:
+  banner:
+    list: Reklaminiai skydeliai: %name%
+    create: Kūrimas naujo reklaminio skydelio
+  banner_zone:
+    list: Reklaminių skydelių zonos
+    create: Kūrimas naujos reklaminio skydelio zonos
+    edit: Redagavimas reklaminio skydelio zonos
+
+success:
+  save_banner_zone: Sėkmingai išsaugojote reklaminio skydelio zonos informaciją!
+  save_banner: Sėkmingai išsaugojote reklaminio skydelio informaciją!
+
+button:
+  create: Sukurti naują
+  edit: Redaguoti
+  delete: Trinti
+
+yes: Taip
+no: Ne

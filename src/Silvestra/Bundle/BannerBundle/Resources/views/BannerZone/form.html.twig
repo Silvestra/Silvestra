@@ -1,0 +1,14 @@
+{{ form_start(form, {attr: {class: 'form-horizontal'}}) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.slug) }}
+    {{ form_row(form.width) }}
+    {{ form_row(form.height) }}
+
+    <div class="form-group">
+        {{ form_row(form.submit, {attr: {class: 'pull-left'}}) }}
+        <a class="btn btn-default pull-left" href="{{ url('silvestra_banner.banner_zone_list') }}" style="margin-left: 10px;">
+            {{ 'form.button.cancel'|trans({}, 'SilvestraBanner') }}
+        </a>
+    </div>
+    {{ form_rest(form) }}
+{{ form_end(form) }}

@@ -1,0 +1,17 @@
+form:
+  banner_zone:
+    name: Name
+    slug: Key
+    width: Width
+    height: Height
+  button:
+    save: Save
+    cancel: Cancel
+  empty_data: Select
+
+title:
+  create: Create banner zone
+  edit: Edit banner zone
+
+success:
+  save_banner_zone: Sėkmingai išsaugojote reklaminio skydelio zonos informaciją!

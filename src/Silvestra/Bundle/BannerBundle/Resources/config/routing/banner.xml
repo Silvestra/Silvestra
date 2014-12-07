@@ -1,0 +1,27 @@
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <!--Silvestra banner list action-->
+    <route id="silvestra_banner.banner_list" path="/banners/{zoneId}">
+        <default key="_controller">silvestra_banner.controller.banner:listAction</default>
+    </route>
+
+    <!--Silvestra banner create action-->
+    <route id="silvestra_banner.banner_create" path="/banner/create/{zoneId}">
+        <default key="_controller">silvestra_banner.controller.banner:createAction</default>
+    </route>
+
+
+    <!--Silvestra banner edit action-->
+    <route id="silvestra_banner.banner_edit" path="/banner/edit/{bannerId}">
+        <default key="_controller">silvestra_banner.controller.banner:editAction</default>
+    </route>
+
+    <!--Silvestra banner delete action-->
+    <route id="silvestra_banner.banner_delete" path="/banner/delete/{bannerId}">
+        <default key="_controller">silvestra_banner.controller.banner:deleteAction</default>
+    </route>
+
+</routes>
