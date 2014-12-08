@@ -1,7 +1,6 @@
 {% trans_default_domain 'SilvestraMediaBundle' %}
 
 {% block silvestra_media_image_widget -%}
-    {% set force_error = true %}
     {% set vars = form.vars %}
 
     <div class="silvestra-media-image" data-config="{{ vars.config }}" data-token="{{ vars.upload_token }}" data-noimage="{{ silvestra_resize_image(vars.no_image, [150, 150]) }}">
