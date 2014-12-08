@@ -39,4 +39,3 @@ class LocaleTemplatingHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Lithuanian', $this->helper->getLocaleDisplayName('lt'));
     }
 }
- 

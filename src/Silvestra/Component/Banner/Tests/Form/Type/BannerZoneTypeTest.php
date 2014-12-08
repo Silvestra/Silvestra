@@ -40,7 +40,11 @@ class BannerZoneTypeTest extends AbstractTypeTest
         $this->factory = Forms::createFormFactoryBuilder()
             ->addTypeExtension($this->createValidatorExtension())
             ->addTypeGuesser($this->getMockValidatorTypeGuesser())
-            ->addTypes(array(new BannerZoneType('Silvestra\\Component\\Banner\\Model\\BannerZone', $this->zoneProvider)))
+            ->addTypes(
+                array(
+                    new BannerZoneType('Silvestra\\Component\\Banner\\Model\\BannerZone', $this->zoneProvider)
+                )
+            )
             ->getFormFactory();
         $this->builder = $this->createFormBuilder();
     }
@@ -79,4 +83,3 @@ class BannerZoneTypeTest extends AbstractTypeTest
         $this->assertEquals($formData['height'], $bannerZone->getHeight());
     }
 }
- 
