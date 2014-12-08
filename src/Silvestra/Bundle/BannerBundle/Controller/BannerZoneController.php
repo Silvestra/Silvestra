@@ -13,6 +13,7 @@ namespace Silvestra\Bundle\BannerBundle\Controller;
 
 use Silvestra\Component\Banner\Form\Factory\BannerZoneFormFactory;
 use Silvestra\Component\Banner\Form\Handler\BannerZoneFormHandler;
+use Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,11 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class BannerZoneController
 {
+    /**
+     * @var BannerZoneDeleteHandler
+     */
+    private $deleteHandler;
+
     /**
      * @var BannerZoneFormFactory
      */
@@ -49,17 +55,20 @@ class BannerZoneController
     /**
      * Constructor.
      *
+     * @param BannerZoneDeleteHandler $deleteHandler
      * @param BannerZoneFormFactory $factory
      * @param BannerZoneFormHandler $handler
      * @param BannerZoneManagerInterface $manager
      * @param EngineInterface $templating
      */
     public function __construct(
+        BannerZoneDeleteHandler $deleteHandler,
         BannerZoneFormFactory $factory,
         BannerZoneFormHandler $handler,
         BannerZoneManagerInterface $manager,
         EngineInterface $templating
     ) {
+        $this->deleteHandler = $deleteHandler;
         $this->factory = $factory;
         $this->handler = $handler;
         $this->manager = $manager;
@@ -115,7 +124,13 @@ class BannerZoneController
 
     public function deleteAction(Request $request, $zoneId)
     {
+        if ($this->deleteHandler->process($zoneId, $request)) {
+            $this->manager->save();
 
+            return $this->deleteHandler->onSuccess();
+        }
+
+        return $this->deleteHandler->onError();
     }
 
     /**

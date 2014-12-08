@@ -13,6 +13,7 @@ namespace Silvestra\Bundle\BannerBundle\Controller;
 
 use Silvestra\Component\Banner\Form\Factory\BannerFormFactory;
 use Silvestra\Component\Banner\Form\Handler\BannerFormHandler;
+use Silvestra\Bundle\BannerBundle\Handler\BannerDeleteHandler;
 use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerManagerInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
@@ -32,6 +33,11 @@ class BannerController
      * @var BannerManagerInterface
      */
     private $bannerManager;
+
+    /**
+     * @var BannerDeleteHandler
+     */
+    private $bannerDeleteHandler;
 
     /**
      * @var BannerZoneManagerInterface
@@ -57,6 +63,7 @@ class BannerController
      * Constructor.
      *
      * @param BannerManagerInterface $bannerManager
+     * @param BannerDeleteHandler $bannerDeleteHandler
      * @param BannerZoneManagerInterface $bannerZoneManager
      * @param BannerFormFactory $factory
      * @param BannerFormHandler $handler
@@ -64,12 +71,14 @@ class BannerController
      */
     public function __construct(
         BannerManagerInterface $bannerManager,
+        BannerDeleteHandler $bannerDeleteHandler,
         BannerZoneManagerInterface $bannerZoneManager,
         BannerFormFactory $factory,
         BannerFormHandler $handler,
         EngineInterface $templating
     ) {
         $this->bannerManager = $bannerManager;
+        $this->bannerDeleteHandler = $bannerDeleteHandler;
         $this->bannerZoneManager = $bannerZoneManager;
         $this->factory = $factory;
         $this->handler = $handler;
@@ -135,7 +144,13 @@ class BannerController
 
     public function deleteAction(Request $request, $bannerId)
     {
+        if ($this->bannerDeleteHandler->process($bannerId, $request)) {
+            $this->bannerManager->save();
 
+            return $this->bannerDeleteHandler->onSuccess();
+        }
+
+        return $this->bannerDeleteHandler->onError();
     }
 
     /**

@@ -55,7 +55,9 @@
                 </div>
                 <div class="panel-footer">
                     <a href="{{ url('silvestra_banner.banner_edit', {bannerId: banner.id}) }}">{{ 'button.edit'|trans }}</a>
-                    <a href="{{ url('silvestra_banner.banner_delete', {bannerId: banner.id}) }}">{{ 'button.delete'|trans }}</a>
+                    <a class="silvestra-banner-delete" href="{{ url('silvestra_banner.banner_delete', {bannerId: banner.id}) }}" data-close-button="{{ 'button.close'|trans }}" data-confirm-button="{{ 'button.yes'|trans }}" data-title="{{ 'delete_question.banner'|trans({'%title%': banner.title}) }}" data-error-title="{{ 'an_error_occurred'|trans }}">
+                        {{ 'button.delete'|trans }}
+                    </a>
                 </div>
             </div>
         </div>

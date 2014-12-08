@@ -9,6 +9,7 @@
         <!--Silvestra banner controller-->
         <service id="silvestra_banner.controller.banner" class="Silvestra\Bundle\BannerBundle\Controller\BannerController" public="true">
             <argument type="service" id="silvestra_banner.manager.banner" />
+            <argument type="service" id="silvestra_banner.delete_handler.banner" />
             <argument type="service" id="silvestra_banner.manager.banner_zone" />
             <argument type="service" id="silvestra_banner.form_factory.banner" />
             <argument type="service" id="silvestra_banner.form_handler.banner" />
@@ -17,6 +18,7 @@
 
         <!--Silvestra banner zone controller-->
         <service id="silvestra_banner.controller.banner_zone" class="Silvestra\Bundle\BannerBundle\Controller\BannerZoneController" public="true">
+            <argument type="service" id="silvestra_banner.delete_handler.banner_zone" />
             <argument type="service" id="silvestra_banner.form_factory.banner_zone" />
             <argument type="service" id="silvestra_banner.form_handler.banner_zone" />
             <argument type="service" id="silvestra_banner.manager.banner_zone" />

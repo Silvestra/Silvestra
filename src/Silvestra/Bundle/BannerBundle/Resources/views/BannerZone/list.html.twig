@@ -28,7 +28,9 @@
                 </div>
                 <div class="panel-footer">
                     <a href="{{ url('silvestra_banner.banner_zone_edit', {zoneId: banner_zone.id}) }}">{{ 'button.edit'|trans }}</a>
-                    <a href="{{ url('silvestra_banner.banner_zone_delete', {zoneId: banner_zone.id}) }}">{{ 'button.delete'|trans }}</a>
+                    <a class="silvestra-banner-zone-delete" href="{{ url('silvestra_banner.banner_zone_delete', {zoneId: banner_zone.id}) }}" data-close-button="{{ 'button.close'|trans }}" data-confirm-button="{{ 'button.yes'|trans }}" data-title="{{ 'delete_question.banner_zone'|trans({'%name%': banner_zone.name}) }}" data-error-title="{{ 'an_error_occurred'|trans }}">
+                        {{ 'button.delete'|trans }}
+                    </a>
                 </div>
             </div>
         </div>

@@ -32,12 +32,22 @@ title:
 
 success:
   save_banner_zone: Sėkmingai išsaugojote reklaminio skydelio zonos informaciją!
+  delete_banner_zone: Sėkmingai ištrynėte reklaminio skydelio zonos informaciją!
   save_banner: Sėkmingai išsaugojote reklaminio skydelio informaciją!
+  delete_banner: Sėkmingai ištrynėte reklaminio skydelio informaciją!
 
 button:
   create: Sukurti naują
   edit: Redaguoti
   delete: Trinti
+  close: Uždaryti
+  yes: Taip, tikrai
 
 yes: Taip
 no: Ne
+
+delete_question:
+  banner: Ar tikrai norite trinti reklaminį skydelį: %title%?
+  banner_zone: Ar tikrai norite trinti reklaminio skydelio zoną: %name%?
+
+an_error_occurred: Įvyko klaida

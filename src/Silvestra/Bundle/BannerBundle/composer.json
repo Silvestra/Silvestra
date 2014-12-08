@@ -22,6 +22,11 @@
     "require-dev": {
         "phpunit/phpunit": "~4.2"
     },
+    "suggest": {
+        "components/bootstrap": "Bootstrap library.",
+        "components/jquery": "JQuery library.",
+        "silvestra/bootstrap-sweetalert": "Bootstrap sweet alert library"
+    },
     "autoload": {
         "psr-4": {
             "Silvestra\\Bundle\\BannerBundle\\": ""

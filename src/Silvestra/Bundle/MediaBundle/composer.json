@@ -27,7 +27,8 @@
         "components/bootstrap": "Bootstrap library.",
         "components/font-awesome": "Font awesome library.",
         "components/jquery": "JQuery library.",
-        "silvestra/jcrop": "Jcrop library"
+        "silvestra/jcrop": "Jcrop library",
+        "silvestra/FileAPI": "FileAPI library"
     },
     "autoload": {
         "psr-4": {

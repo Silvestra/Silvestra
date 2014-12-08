@@ -26,6 +26,16 @@
             <argument type="service" id="translator" />
         </service>
 
+        <service id="silvestra_banner.delete_handler.banner" class="Silvestra\Bundle\BannerBundle\Handler\BannerDeleteHandler" public="false">
+            <argument type="service" id="silvestra_banner.manager.banner" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <service id="silvestra_banner.delete_handler.banner_zone" class="Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler" public="false">
+            <argument type="service" id="silvestra_banner.manager.banner_zone" />
+            <argument type="service" id="translator" />
+        </service>
+
     </services>
 
 </container>
