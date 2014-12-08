@@ -73,6 +73,8 @@ class ImageTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
+        $image->setTemporary(false);
+
         return $image;
     }
 }
