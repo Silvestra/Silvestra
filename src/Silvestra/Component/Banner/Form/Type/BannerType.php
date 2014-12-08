@@ -150,6 +150,7 @@ class BannerType extends AbstractType
             'silvestra_media_image',
             array(
                 'required' => false,
+                'constraints' => array(new Assert\NotBlank())
             )
         );
 

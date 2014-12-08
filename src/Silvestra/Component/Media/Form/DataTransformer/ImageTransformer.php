@@ -61,6 +61,10 @@ class ImageTransformer implements DataTransformerInterface
      */
     public function reverseTransform($image)
     {
+        if (null === $image) {
+            return null;
+        }
+
         $filename = $image->getFilename();
 
         if (empty($filename)) {

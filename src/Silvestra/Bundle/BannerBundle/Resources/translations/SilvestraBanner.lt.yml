@@ -24,6 +24,7 @@ title:
   banner:
     list: Reklaminiai skydeliai: %name%
     create: Kūrimas naujo reklaminio skydelio
+    edit: Redagavimas reklaminio skydelio
   banner_zone:
     list: Reklaminių skydelių zonos
     create: Kūrimas naujos reklaminio skydelio zonos

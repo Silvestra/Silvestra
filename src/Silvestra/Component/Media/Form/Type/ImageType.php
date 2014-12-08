@@ -138,7 +138,8 @@ class ImageType extends AbstractType
                         'x2' => $options['max_width'],
                         'y2' => $options['max_height'],
                     );
-                }
+                },
+                'error_bubbling' => false,
             )
         );
 
