@@ -17,41 +17,45 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <strong>{{ 'form.banner.script'|trans }}:</strong> <span>{{ (banner.script is empty ? 'no' : 'yes')|trans }}</span>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.script'|trans }}:</strong> <span>{{ (banner.script is empty ? 'no' : 'yes')|trans }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.position'|trans }}:</strong> <span>{{ banner.position }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.uri'|trans }}:</strong> <span>{{ banner.uri|truncate }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.blank'|trans }}:</strong> <span>{{ (banner.blank ? 'yes' : 'no')|trans }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.publish'|trans }}:</strong> <span>{{ (banner.publish ? 'yes' : 'no')|trans }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.language'|trans }}:</strong> <span>{{ banner.lang|silvestra_locale_display_name }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.publish_from'|trans }}:</strong> <span>{{ banner.publishFrom is empty ? '' : banner.publishFrom|date }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>{{ 'form.banner.publish_to'|trans }}:</strong> <span>{{ banner.publishTo is empty ? '' : banner.publishTo|date }}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <strong>{{ 'form.banner.position'|trans }}:</strong> <span>{{ banner.position }}</span>
-                        </div>
-                        <div class="col-md-4">
-                            <strong>{{ 'form.banner.language'|trans }}:</strong> <span>{{ banner.lang|silvestra_locale_display_name }}</span>
+                        <div class="col-md-3">
+                            {{ silvestra_image_html_tag(banner.image.path, [100, 100]) }}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <strong>{{ 'form.banner.uri'|trans }}:</strong> <span>{{ banner.uri }}</span>
-                        </div>
-                        <div class="col-md-4">
-                            <strong>{{ 'form.banner.blank'|trans }}:</strong> <span>{{ (banner.blank ? 'yes' : 'no')|trans }}</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <strong>{{ 'form.banner.publish'|trans }}:</strong> <span>{{ (banner.publish ? 'yes' : 'no')|trans }}</span>
-                        </div>
-                        <div class="col-md-4">
-                            <strong>{{ 'form.banner.publish_from'|trans }}:</strong> <span>{{ banner.publishFrom is empty ? '' : banner.publishFrom|date }}</span>
-                        </div>
-                        <div class="col-md-4">
-                            <strong>{{ 'form.banner.publish_to'|trans }}:</strong> <span>{{ banner.publishTo is empty ? '' : banner.publishTo|date }}</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            {#Resize don't work#}
-                            {{ silvestra_image_html_tag(banner.image.path, [null, 100]) }}
-                        </div>
-                    </div>
+
                 </div>
                 <div class="panel-footer">
                     <a href="{{ url('silvestra_banner.banner_edit', {bannerId: banner.id}) }}">{{ 'button.edit'|trans }}</a>
