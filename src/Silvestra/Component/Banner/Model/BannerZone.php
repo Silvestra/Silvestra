@@ -30,6 +30,11 @@ class BannerZone implements BannerZoneInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $slug;
 
     /**
@@ -90,6 +95,24 @@ class BannerZone implements BannerZoneInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**

@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <strong>{{ 'form.banner.code'|trans }}:</strong> <span>{{ banner.code }}</span>
+                            <strong>{{ 'form.banner.script'|trans }}:</strong> <span>{{ (banner.script is empty ? 'no' : 'yes')|trans }}</span>
                         </div>
                         <div class="col-md-4">
                             <strong>{{ 'form.banner.position'|trans }}:</strong> <span>{{ banner.position }}</span>

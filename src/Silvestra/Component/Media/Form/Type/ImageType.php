@@ -17,6 +17,8 @@ use Silvestra\Component\Media\Media;
 use Silvestra\Component\Media\Token\TokenGenerator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
@@ -87,6 +89,13 @@ class ImageType extends AbstractType
             'hidden',
             array('attr' => array('class' => 'silvestra-image-filename'))
         );
+
+        $postSetDataListener = function (FormEvent $event) {
+            $form = $event->getForm();
+
+            $this->transformer->setPreFilename($form->get('filename')->getData());
+        };
+        $builder->addEventListener(FormEvents::POST_SET_DATA, $postSetDataListener);
 
         $builder->addModelTransformer($this->transformer);
     }

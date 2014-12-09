@@ -3,15 +3,16 @@ form:
     title: Antraštė
     description: Aprašymas
     language: Publikavimo kalba
-    code: Kodas
     position: Pozicija
     uri: Absoliutus adresas
     blank: Atidaryti naujame lange
     publish: Publikuoti
     publish_from: Publikuoti nuo
     publish_to: Publikuoti iki
+    script: Kodas (script)
   banner_zone:
     name: Pavadinimas
+    code: Kodas
     slug: Raktas
     width: Plotis
     height: Aukštis

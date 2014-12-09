@@ -80,16 +80,6 @@ class BannerType extends AbstractType
         );
 
         $builder->add(
-            'code',
-            'text',
-            array(
-                'label' => 'form.banner.code',
-                'required' => false,
-                'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('max' => 511)))
-            )
-        );
-
-        $builder->add(
             'uri',
             'text',
             array(
@@ -151,6 +141,15 @@ class BannerType extends AbstractType
             array(
                 'required' => false,
                 'constraints' => array(new Assert\NotBlank())
+            )
+        );
+
+        $builder->add(
+            'script',
+            'textarea',
+            array(
+                'label' => 'form.banner.script',
+                'required' => false,
             )
         );
 

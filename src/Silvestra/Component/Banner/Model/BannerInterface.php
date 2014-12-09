@@ -59,20 +59,20 @@ interface BannerInterface
     public function getDescription();
 
     /**
-     * Set code.
+     * Set script.
      *
-     * @param string $code
+     * @param string $script
      *
      * @return BannerInterface
      */
-    public function setCode($code);
+    public function setScript($script);
 
     /**
-     * Get code.
+     * Get script.
      *
      * @return string
      */
-    public function getCode();
+    public function getScript();
 
     /**
      * Set uri.

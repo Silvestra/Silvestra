@@ -37,7 +37,7 @@ class Banner implements BannerInterface
     /**
      * @var string
      */
-    protected $code;
+    protected $script;
 
     /**
      * @var string
@@ -150,9 +150,9 @@ class Banner implements BannerInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setScript($script)
     {
-        $this->code = $code;
+        $this->script = $script;
 
         return $this;
     }
@@ -160,9 +160,9 @@ class Banner implements BannerInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getScript()
     {
-        return $this->code;
+        return $this->script;
     }
 
     /**

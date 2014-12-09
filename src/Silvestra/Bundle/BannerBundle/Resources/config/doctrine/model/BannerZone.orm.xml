@@ -18,6 +18,8 @@
 
         <field name="name" column="name" type="string" length="255" nullable="false" />
 
+        <field name="code" column="code" type="string" length="255" nullable="false" />
+
         <field name="slug" column="slug" type="string" length="255" nullable="false" />
 
         <field name="width" column="width" type="integer" nullable="false" />

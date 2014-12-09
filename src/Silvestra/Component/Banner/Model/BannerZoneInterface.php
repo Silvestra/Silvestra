@@ -40,6 +40,23 @@ interface BannerZoneInterface
      */
     public function getName();
 
+
+    /**
+     * Set code.
+     *
+     * @param string $code
+     *
+     * @return BannerZoneInterface
+     */
+    public function setCode($code);
+
+    /**
+     * Get code.
+     *
+     * @return string
+     */
+    public function getCode();
+
     /**
      * Set slug.
      *

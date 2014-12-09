@@ -1,7 +1,6 @@
 {{ form_start(form, {attr: {class: 'form-horizontal'}}) }}
     {{ form_row(form.title) }}
     {{ form_row(form.description) }}
-    {{ form_row(form.code) }}
     {{ form_row(form.position) }}
     {{ form_row(form.uri) }}
     {{ form_row(form.blank) }}
@@ -10,6 +9,7 @@
     {{ form_row(form.publishTo) }}
     {{ form_row(form.publish) }}
     {{ form_row(form.image) }}
+    {{ form_row(form.script) }}
 
     <div class="form-group">
         {{ form_row(form.submit, {attr: {class: 'pull-left'}}) }}
