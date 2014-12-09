@@ -13,7 +13,7 @@ namespace Silvestra\Bundle\MediaBundle\Controller;
 
 use Silvestra\Component\Media\Exception\NotFoundImageException;
 use Silvestra\Component\Media\Handler\ImageCropHandler;
-use Silvestra\Component\Media\Image\ImageResizerInterface;
+use Silvestra\Component\Media\Image\Resizer\ImageResizerInterface;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,7 +74,7 @@ class ImageCropperController
 
         $data = $this->imageCropHandler->process($coordinates, $image);
         $data['thumbnail_path'] = $this->imageResizer
-            ->resize($image->getPath(), 150, 150, ImageResizerInterface::THUMBNAIL_OUTBOUND);
+            ->resize($image->getPath(), array(150, 150), ImageResizerInterface::OUTBOUND);
 
         return new JsonResponse($data);
     }

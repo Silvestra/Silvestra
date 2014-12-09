@@ -12,7 +12,7 @@
 namespace Silvestra\Component\Media\Templating;
 
 use Silvestra\Component\Media\Filesystem;
-use Silvestra\Component\Media\Image\ImageResizerInterface;
+use Silvestra\Component\Media\Image\Resizer\ImageResizerInterface;
 use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
@@ -79,7 +79,7 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     public function resizeImage($filename, array $size, $mode = null)
     {
         if (null === $mode) {
-            $mode = ImageResizerInterface::THUMBNAIL_OUTBOUND;
+            $mode = ImageResizerInterface::OUTBOUND;
         }
 
         $path = $this->getImagePath($filename);
@@ -88,7 +88,7 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
             return $path;
         }
 
-        return $this->imageResizer->resize($path, $size[0], $size[1], $mode);
+        return $this->imageResizer->resize($path, $size, $mode);
     }
 
     /**

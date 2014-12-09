@@ -18,19 +18,18 @@ namespace Silvestra\Component\Media\Image\Resizer;
  */
 interface ImageResizerInterface
 {
-    const THUMBNAIL_INSET    = 'inset';
-    const THUMBNAIL_OUTBOUND = 'outbound';
+    const INSET    = 'inset';
+    const OUTBOUND = 'outbound';
 
     /**
      * Resize image.
      *
      * @param string $imagePath
-     * @param int $width
-     * @param int $height
+     * @param array $size
      * @param string $mode
      * @param bool $force
      *
      * @return string
      */
-    public function resize($imagePath, $width, $height, $mode, $force = false);
+    public function resize($imagePath, array $size, $mode, $force = false);
 }

@@ -18,7 +18,15 @@ namespace Silvestra\Component\Media\Image\Resizer;
  */
 class ImageResizerHelper
 {
-    public function calculateBoxSize(array $imageSize, array $size)
+    /**
+     * Get box size.
+     *
+     * @param array $imageSize
+     * @param array $size
+     *
+     * @return array
+     */
+    public function getBoxSize(array $imageSize, array $size)
     {
         list($width, $height) = $size;
 
@@ -51,7 +59,15 @@ class ImageResizerHelper
         return $size;
     }
 
-    public function calculateImageSizeByBox(array $imageSize, array $boxSize)
+    /**
+     * Get image size in box.
+     *
+     * @param array $imageSize
+     * @param array $boxSize
+     *
+     * @return array
+     */
+    public function getImageSizeInBox(array $imageSize, array $boxSize)
     {
         list($imageWidth, $imageHeight) = $imageSize;
         list($boxWidth, $boxHeight) = $boxSize;
