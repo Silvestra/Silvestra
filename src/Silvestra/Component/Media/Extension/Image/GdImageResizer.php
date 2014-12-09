@@ -84,7 +84,7 @@ class GdImageResizer implements ImageResizerInterface
 
             $palette = new RGB();
             $box = $imagine->create($box, $palette->color('#FFFFFF', 100));
-            $imagineImage = $box->paste($imagineImage, $this->getImagePointInBox($imageSizeInBox, $boxSize));
+            $imagineImage = $box->paste($imagineImage, $this->getPointInBox($imageSizeInBox, $boxSize));
         } else {
             $imagineImage = $imagineImage->thumbnail($box);
         }
@@ -136,22 +136,28 @@ class GdImageResizer implements ImageResizerInterface
         return new Box($width, $height);
     }
 
-    private function getImagePointInBox(array $imageSize, array $boxSize)
+    /**
+     * Get point in box.
+     *
+     * @param array $imageSize
+     * @param array $boxSize
+     *
+     * @return Point
+     */
+    private function getPointInBox(array $imageSize, array $boxSize)
     {
+        $width = 0;
+        $height = 0;
+
         list($imageWidth, $imageHeight) = $imageSize;
         list($boxWidth, $boxHeight) = $boxSize;
 
-
         if ($imageWidth < $boxWidth) {
             $width = floor(($boxWidth - $imageWidth) / 2);
-        } else {
-            $width = 0;
         }
 
         if ($imageHeight < $boxHeight) {
             $height = floor(($boxHeight - $imageHeight) / 2);
-        } else {
-            $height = 0;
         }
 
         return new Point($width, $height);
