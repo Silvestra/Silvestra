@@ -79,7 +79,7 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     public function resizeImage($filename, array $size, $mode = null)
     {
         if (null === $mode) {
-            $mode = ImageResizerInterface::OUTBOUND;
+            $mode = ImageResizerInterface::INSET;
         }
 
         $path = $this->getImagePath($filename);

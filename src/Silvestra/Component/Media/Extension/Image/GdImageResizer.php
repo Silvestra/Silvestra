@@ -13,8 +13,7 @@ namespace Silvestra\Component\Media\Extension\Image;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
-use Imagine\Image\Palette\RGB as RGBPalette;
-use Imagine\Image\Palette\Color\RGB;
+use Imagine\Image\Palette\RGB;
 use Imagine\Image\Point;
 use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Image\Cache\ImageCacheInterface;
@@ -77,19 +76,18 @@ class GdImageResizer implements ImageResizerInterface
         $imagineImage = $imagine->open($this->filesystem->getRootDir() . $imagePath);
         $imageSize = array($imagineImage->getSize()->getWidth(), $imagineImage->getSize()->getHeight());
         $boxSize = $this->resizeHelper->getBoxSize($imageSize, $size);
-//        $box = new Box($boxSize[0], $boxSize[1]);
+        $box = $this->getBox($boxSize[0], $boxSize[1]);
 
+        if (ImageResizerInterface::INSET === $mode) {
+            $imageSizeInBox = $this->resizeHelper->getImageSizeInBox($imageSize, $boxSize);
+            $imagineImage->resize($this->getBox($imageSizeInBox[0], $imageSizeInBox[1]));
 
-//        if (ImageResizerInterface::THUMBNAIL_INSET === $mode) {
-
-        $imageSizeInBox = $this->resizeHelper->getImageSizeInBox($imageSize, $boxSize);
-        $imagineImage->resize(new Box($imageSizeInBox[0], $imageSizeInBox[1]));
-
-//        $box = $imagine->create($box, new RGB(new RGBPalette(), array('#fff'), 100));
-//        $imagineImage = $box->paste($imagineImage, new Point($point[0], $point[1]));
-//        } else {
-//            $imagineImage->thumbnail($this->getBox($width, $height), $mode);
-//        }
+            $palette = new RGB();
+            $box = $imagine->create($box, $palette->color('#FFFFFF', 100));
+            $imagineImage = $box->paste($imagineImage, $this->getImagePointInBox($imageSizeInBox, $boxSize));
+        } else {
+            $imagineImage = $imagineImage->thumbnail($box);
+        }
 
         $this->filesystem->mkdir(dirname($cacheAbsolutePath));
         $imagineImage->save($cacheAbsolutePath, array('quality' => 100));
@@ -136,5 +134,26 @@ class GdImageResizer implements ImageResizerInterface
     private function getBox($width, $height)
     {
         return new Box($width, $height);
+    }
+
+    private function getImagePointInBox(array $imageSize, array $boxSize)
+    {
+        list($imageWidth, $imageHeight) = $imageSize;
+        list($boxWidth, $boxHeight) = $boxSize;
+
+
+        if ($imageWidth < $boxWidth) {
+            $width = floor(($boxWidth - $imageWidth) / 2);
+        } else {
+            $width = 0;
+        }
+
+        if ($imageHeight < $boxHeight) {
+            $height = floor(($boxHeight - $imageHeight) / 2);
+        } else {
+            $height = 0;
+        }
+
+        return new Point($width, $height);
     }
 }
