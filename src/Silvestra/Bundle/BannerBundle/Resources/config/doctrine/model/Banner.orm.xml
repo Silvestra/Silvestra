@@ -20,7 +20,7 @@
 
         <field name="description" column="description" type="text" nullable="true" />
 
-        <field name="code" column="code" type="string" length="511" nullable="true" />
+        <field name="script" column="script" type="text" length="511" nullable="true" />
 
         <field name="uri" column="uri" type="string" length="511" nullable="false" />
 

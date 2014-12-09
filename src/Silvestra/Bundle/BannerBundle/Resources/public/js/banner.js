@@ -40,6 +40,4 @@ $(document).ready(function () {
             });
         });
     });
-
-
 });

@@ -61,6 +61,16 @@ class BannerZoneType extends AbstractType
             )
         );
 
+        $builder->add(
+            'code',
+            'text',
+            array(
+                'label' => 'form.banner_zone.code',
+                'required' => false,
+                'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('max' => 255)))
+            )
+        );
+
         $slug = $builder->getData() ? $builder->getData()->getSlug() : null;
 
         $builder->add(

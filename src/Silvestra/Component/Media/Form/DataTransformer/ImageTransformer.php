@@ -29,6 +29,11 @@ class ImageTransformer implements DataTransformerInterface
     private $imageManager;
 
     /**
+     * @var string
+     */
+    private $preFilename;
+
+    /**
      * Constructor.
      *
      * @param ImageManagerInterface $imageManager
@@ -36,6 +41,14 @@ class ImageTransformer implements DataTransformerInterface
     public function __construct(ImageManagerInterface $imageManager)
     {
         $this->imageManager = $imageManager;
+    }
+
+    /**
+     * @param string $preFilename
+     */
+    public function setPreFilename($preFilename)
+    {
+        $this->preFilename = $preFilename;
     }
 
     /**
@@ -69,6 +82,10 @@ class ImageTransformer implements DataTransformerInterface
 
         if (empty($filename)) {
             return null;
+        }
+
+        if ($this->preFilename && ($this->preFilename !== $filename)) {
+            $this->imageManager->remove($image);
         }
 
         $image = $this->imageManager->findByFilename($filename);
