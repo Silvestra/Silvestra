@@ -5,65 +5,68 @@
 {% set page_header = 'title.banner.list'|trans({'%name%': banner_zone.name}) %}
 
 {% block content %}
-    <div class="row" style="margin-bottom: 10px;">
+    <div class="row">
         <a class="btn btn-primary" href="{{ url('silvestra_banner.banner_create', {zoneId: banner_zone.id}) }}">{{ 'button.create'|trans }}</a>
     </div>
 
-    {% for banner in banners %}
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>{{ banner.title }}</strong>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.script'|trans }}:</strong> <span>{{ (banner.script is empty ? 'no' : 'yes')|trans }}</span>
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.position'|trans }}:</strong> <span>{{ banner.position }}</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.uri'|trans }}:</strong> <span>{{ banner.uri|truncate }}</span>
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.blank'|trans }}:</strong> <span>{{ (banner.blank ? 'yes' : 'no')|trans }}</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.publish'|trans }}:</strong> <span>{{ (banner.publish ? 'yes' : 'no')|trans }}</span>
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.language'|trans }}:</strong> <span>{{ banner.lang|silvestra_locale_display_name }}</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.publish_from'|trans }}:</strong> <span>{{ banner.publishFrom is empty ? '' : banner.publishFrom|date }}</span>
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>{{ 'form.banner.publish_to'|trans }}:</strong> <span>{{ banner.publishTo is empty ? '' : banner.publishTo|date }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            {{ silvestra_image_html_tag(banner.image.path, [100, 100]) }}
-                        </div>
+    <div class=" silvestra-banner-list">
+        {% for banner in banners %}
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>{{ banner.title }}</strong>
                     </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.script'|trans }}:</strong> <span>{{ (banner.script is empty ? 'no' : 'yes')|trans }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.position'|trans }}:</strong> <span>{{ banner.position }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.uri'|trans }}:</strong> <span>{{ banner.uri|truncate }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.blank'|trans }}:</strong> <span>{{ (banner.blank ? 'yes' : 'no')|trans }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.publish'|trans }}:</strong> <span>{{ (banner.publish ? 'yes' : 'no')|trans }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.language'|trans }}:</strong> <span>{{ banner.lang|silvestra_locale_display_name }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.publish_from'|trans }}:</strong> <span>{{ banner.publishFrom is empty ? '' : banner.publishFrom|date }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>{{ 'form.banner.publish_to'|trans }}:</strong> <span>{{ banner.publishTo is empty ? '' : banner.publishTo|date }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                {{ silvestra_image_html_tag(banner.image.path, [100, 100], null, {class: 'silvestra-banner-image'}) }}
+                            </div>
+                        </div>
 
-                </div>
-                <div class="panel-footer">
-                    <a href="{{ url('silvestra_banner.banner_edit', {bannerId: banner.id}) }}">{{ 'button.edit'|trans }}</a>
-                    <a class="silvestra-banner-delete" href="{{ url('silvestra_banner.banner_delete', {bannerId: banner.id}) }}" data-close-button="{{ 'button.close'|trans }}" data-confirm-button="{{ 'button.yes'|trans }}" data-title="{{ 'delete_question.banner'|trans({'%title%': banner.title}) }}" data-error-title="{{ 'an_error_occurred'|trans }}">
-                        {{ 'button.delete'|trans }}
-                    </a>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{{ url('silvestra_banner.banner_edit', {bannerId: banner.id}) }}">{{ 'button.edit'|trans }}</a>
+                        <a class="silvestra-banner-delete" href="{{ url('silvestra_banner.banner_delete', {bannerId: banner.id}) }}" data-close-button="{{ 'button.close'|trans }}" data-confirm-button="{{ 'button.yes'|trans }}" data-title="{{ 'delete_question.banner'|trans({'%title%': banner.title}) }}" data-error-title="{{ 'an_error_occurred'|trans }}">
+                            {{ 'button.delete'|trans }}
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 {% endblock content %}
