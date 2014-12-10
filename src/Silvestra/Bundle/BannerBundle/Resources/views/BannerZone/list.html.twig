@@ -25,7 +25,9 @@
                     </div>
                     <div class="panel-body">
                         {% for banner in banner_zone.banners %}
-                            {{ silvestra_image_html_tag(banner.image.path, [150, 150], null, {class: 'silvestra-banner-image'}) }}
+                            <a href="{{ url('silvestra_banner.banner_edit', {bannerId: banner.id}) }}">
+                                {{ silvestra_image_html_tag(banner.image.path, [150, 150], null, {class: 'silvestra-banner-image'}) }}
+                            </a>
                         {% endfor %}
                     </div>
                     <div class="panel-footer">
