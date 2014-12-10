@@ -85,7 +85,7 @@ class BannerType extends AbstractType
             array(
                 'label' => 'form.banner.uri',
                 'required' => false,
-                'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('max' => 511), new Assert\Url()))
+                'constraints' => array(new Assert\NotBlank(), new Assert\Length(array('max' => 511)), new Assert\Url())
             )
         );
 
