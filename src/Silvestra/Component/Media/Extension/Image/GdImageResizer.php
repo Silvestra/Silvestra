@@ -13,9 +13,12 @@ namespace Silvestra\Component\Media\Extension\Image;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
+use Imagine\Image\Palette\RGB;
+use Imagine\Image\Point;
 use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Image\Cache\ImageCacheInterface;
-use Silvestra\Component\Media\Image\ImageResizerInterface;
+use Silvestra\Component\Media\Image\Resizer\ImageResizerHelper;
+use Silvestra\Component\Media\Image\Resizer\ImageResizerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -35,24 +38,34 @@ class GdImageResizer implements ImageResizerInterface
     private $imageCache;
 
     /**
+     * @var ImageResizerHelper
+     */
+    private $resizeHelper;
+
+    /**
      * Constructor.
      *
      * @param Filesystem $filesystem
      * @param ImageCacheInterface $imageCache
+     * @param ImageResizerHelper $resizeHelper
      */
-    public function __construct(Filesystem $filesystem, ImageCacheInterface $imageCache)
-    {
+    public function __construct(
+        Filesystem $filesystem,
+        ImageCacheInterface $imageCache,
+        ImageResizerHelper $resizeHelper
+    ) {
         $this->filesystem = $filesystem;
         $this->imageCache = $imageCache;
+        $this->resizeHelper = $resizeHelper;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function resize($imagePath, $width, $height, $mode, $force = false)
+    public function resize($imagePath, array $size, $mode, $force = false)
     {
-        $cacheKey = $this->getCacheKey($imagePath, $width, $height, $mode);
-        $filename = $this->getFilename($imagePath);
+        $cacheKey = $this->getCacheKey($imagePath, $size, $mode);
+        $filename = basename($imagePath);
 
         if ((false === $force) && $this->imageCache->contains($filename, $cacheKey)) {
             return $this->imageCache->getRelativePath($filename, $cacheKey);
@@ -60,17 +73,23 @@ class GdImageResizer implements ImageResizerInterface
 
         $cacheAbsolutePath = $this->imageCache->getAbsolutePath($filename, $cacheKey);
         $imagine = new Imagine();
+        $imagineImage = $imagine->open($this->filesystem->getRootDir() . $imagePath);
+        $imageSize = array($imagineImage->getSize()->getWidth(), $imagineImage->getSize()->getHeight());
+        $boxSize = $this->resizeHelper->getBoxSize($imageSize, $size);
+        $box = $this->getBox($boxSize[0], $boxSize[1]);
+
+        if (ImageResizerInterface::INSET === $mode) {
+            $imageSizeInBox = $this->resizeHelper->getImageSizeInBox($imageSize, $boxSize);
+            $imagineImage->resize($this->getBox($imageSizeInBox[0], $imageSizeInBox[1]));
+
+            $palette = new RGB();
+            $box = $imagine->create($box, $palette->color('#FFFFFF', 100));
+            $imagineImage = $box->paste($imagineImage, $this->getPointInBox($imageSizeInBox, $boxSize));
+        } else {
+            $imagineImage = $imagineImage->thumbnail($box);
+        }
 
         $this->filesystem->mkdir(dirname($cacheAbsolutePath));
-
-        $imagineImage = $imagine->open($this->filesystem->getRootDir() . $imagePath);
-
-//        if (ImageResizerInterface::THUMBNAIL_INSET === $mode) {
-//            $imagineImage->resize($this->getBox($with, $height), $mode);
-//        } else {
-            $imagineImage->thumbnail($this->getBox($width, $height), $mode);
-//        }
-
         $imagineImage->save($cacheAbsolutePath, array('quality' => 100));
 
         return $this->imageCache->getRelativePath($filename, $cacheKey);
@@ -80,27 +99,16 @@ class GdImageResizer implements ImageResizerInterface
      * Get cache key.
      *
      * @param string $imagePath
-     * @param int $width
-     * @param int $height
+     * @param array $size
      * @param string $mode
      *
      * @return string
      */
-    private function getCacheKey($imagePath, $width, $height, $mode)
+    private function getCacheKey($imagePath, array $size, $mode)
     {
-        return md5($imagePath) . DIRECTORY_SEPARATOR . md5($width . $height . $mode);
-    }
+        list($width, $height) = $size;
 
-    /**
-     * Get filename.
-     *
-     * @param string $path
-     *
-     * @return string
-     */
-    private function getFilename($path)
-    {
-        return basename($path);
+        return md5($imagePath) . DIRECTORY_SEPARATOR . md5($width . $height . $mode);
     }
 
     /**
@@ -114,5 +122,32 @@ class GdImageResizer implements ImageResizerInterface
     private function getBox($width, $height)
     {
         return new Box($width, $height);
+    }
+
+    /**
+     * Get point in box.
+     *
+     * @param array $imageSize
+     * @param array $boxSize
+     *
+     * @return Point
+     */
+    private function getPointInBox(array $imageSize, array $boxSize)
+    {
+        $width = 0;
+        $height = 0;
+
+        list($imageWidth, $imageHeight) = $imageSize;
+        list($boxWidth, $boxHeight) = $boxSize;
+
+        if ($imageWidth < $boxWidth) {
+            $width = floor(($boxWidth - $imageWidth) / 2);
+        }
+
+        if ($imageHeight < $boxHeight) {
+            $height = floor(($boxHeight - $imageHeight) / 2);
+        }
+
+        return new Point($width, $height);
     }
 }

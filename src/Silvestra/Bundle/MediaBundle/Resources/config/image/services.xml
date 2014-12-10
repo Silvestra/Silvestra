@@ -23,7 +23,10 @@
         <service id="silvestra_media.image.resizer.gd" class="Silvestra\Component\Media\Extension\Image\GdImageResizer" public="false">
             <argument type="service" id="silvestra_media.filesystem" />
             <argument type="service" id="silvestra_media.image.cache" />
+            <argument type="service" id="silvestra_media.image.resizer_helper" />
         </service>
+
+        <service id="silvestra_media.image.resizer_helper" class="Silvestra\Component\Media\Image\Resizer\ImageResizerHelper" public="false" />
 
         <service id="silvestra_media.image.uploader" class="Silvestra\Component\Media\Image\ImageUploader" public="false">
             <argument type="service" id="silvestra_media.filesystem" />
