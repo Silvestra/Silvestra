@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+
+        <!--Silvestra admin menu builder-->
+        <service id="silvestra_admin.builder.menu" class="Silvestra\Component\Admin\Menu\AdminMenuBuilder" public="false">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <!--Silvestra admin menu twig helper-->
+        <service id="silvestra_admin.templating_helper.admin_menu" class="Silvestra\Bundle\AdminBundle\Twig\AdminMenuHelper" public="true">
+            <tag name="templating.helper" alias="silvestra_admin_menu" />
+            <argument type="service" id="twig" />
+        </service>
+
+        <!--Silvestra admin menu twig extension-->
+        <service class="Silvestra\Bundle\AdminBundle\Twig\Extension\AdminMenuExtension" public="true" >
+            <tag name="twig.extension" alias="silvestra_admin_menu" />
+            <argument type="service" id="silvestra_admin.builder.menu" />
+            <argument type="service" id="silvestra_admin.templating_helper.admin_menu" />
+        </service>
+
+    </services>
+
+</container>

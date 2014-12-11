@@ -9,21 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Admin\Menu\Event;
-
-use Silvestra\Component\Admin\Menu\AdminMenuItem;
+namespace Silvestra\Component\Admin\Templating;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 12/11/14 1:48 AM
+ * @since 14.12.11 17.12
  */
-interface AdminMenuEventInterface
+interface AdminMenuHelperInterface
 {
     /**
-     * Add admin menu item.
+     * Render admin menu.
      *
-     * @param AdminMenuItem $item
+     * @param string $name
+     * @param array $menu
+     *
+     * @return string
      */
-    public function addItem(AdminMenuItem $item);
+    public function render($name, array $menu);
 }

@@ -51,7 +51,7 @@ class AdminMenuItem
      * @param string $icon
      * @param int $priority
      */
-    public function __construct($title, $uri, $icon, $priority = 0)
+    public function __construct($title, $uri, $icon = null, $priority = 0)
     {
         $this->title = $title;
         $this->uri = $uri;

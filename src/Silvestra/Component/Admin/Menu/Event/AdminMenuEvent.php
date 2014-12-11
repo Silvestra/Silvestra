@@ -11,6 +11,7 @@
 
 namespace Silvestra\Component\Admin\Menu\Event;
 
+use Silvestra\Component\Admin\Menu\AdminMenuItem;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

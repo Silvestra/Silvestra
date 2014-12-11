@@ -7,7 +7,7 @@
     <services>
 
         <!--Silvestra locale templating helper-->
-        <service id="silvestra_locale.templating_helper.locale" class="Silvestra\Component\Locale\Templating\LocaleTemplatingHelper" public="false">
+        <service id="silvestra_locale.templating_helper.locale" class="Silvestra\Component\Locale\Templating\LocaleTemplatingHelper" public="true">
             <tag name="templating.helper" alias="silvestra_locale" />
         </service>
 

@@ -13,25 +13,41 @@ namespace Silvestra\Component\Admin\Menu;
 
 use Silvestra\Component\Admin\Admin;
 use Silvestra\Component\Admin\Menu\Event\AdminMenuEvent;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 12/11/14 1:44 AM
  */
-class AdminMenuFactory
+class AdminMenuBuilder
 {
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     private $eventDispatcher;
 
-    public function create()
+    /**
+     * Constructor.
+     *
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * Build admin menu.
+     *
+     * @return array|AdminMenuItem[]
+     */
+    public function build()
     {
         $event = new AdminMenuEvent();
 
         $this->eventDispatcher->dispatch(Admin::MENU, $event);
 
+        return $event->getItems();
     }
 }

@@ -12,7 +12,7 @@
         </service>
 
         <!--Silvestra alert templating helper-->
-        <service id="silvestra_notification.templating_helper.alert" class="Silvestra\Bundle\NotificationBundle\Twig\AlertHelper" public="false">
+        <service id="silvestra_notification.templating_helper.alert" class="Silvestra\Bundle\NotificationBundle\Twig\AlertHelper" public="true">
             <tag name="templating.helper" alias="silvestra_alert" />
             <argument type="service" id="twig" />
         </service>

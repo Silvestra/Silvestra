@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\BannerBundle\EventListener;
+namespace Silvestra\Bundle\AdminBundle\EventListener;
 
 use Silvestra\Component\Admin\Menu\AdminMenuItem;
 use Silvestra\Component\Admin\Menu\Event\AdminMenuEventInterface;
@@ -18,7 +18,7 @@ use Silvestra\Component\Admin\Menu\Event\AdminMenuSubscriber;
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 10/28/14 10:46 PM
+ * @since 14.12.11 18.01
  */
 class AdminMenuListener extends AdminMenuSubscriber
 {
@@ -30,10 +30,19 @@ class AdminMenuListener extends AdminMenuSubscriber
     {
         $event->addItem(
             new AdminMenuItem(
-                $this->translator->trans('title.banner_zone.list', array(), 'SilvestraBanner'),
-                $this->router->generate('silvestra_banner.banner_zone_list'),
-                'image'
+                $this->translator->trans('menu.home', array(), 'SilvestraAdminBundle'),
+                $this->router->generate('silvestra_admin.homepage'),
+                'dashboard'
+            )
+        );
+
+        $event->addItem(
+            new AdminMenuItem(
+                $this->translator->trans('menu.sitemap', array(), 'SilvestraAdminBundle'),
+                $this->router->generate('tadcka_sitemap'),
+                'sitemap'
             )
         );
     }
 }
+ 

@@ -42,7 +42,7 @@ class Builder extends ContainerAware
 
         $home = $menu->addChild(
             $this->getTranslator()->trans('menu.home', array(), 'SilvestraAdminBundle'),
-            array('route' => 'silvestra_admin_homepage')
+            array('route' => 'silvestra_admin.homepage')
         );
         $home->setLabelAttribute('menu_logo', 'fa-dashboard');
 
