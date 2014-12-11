@@ -81,4 +81,3 @@ class AdminMenuExtension extends \Twig_Extension
         return 'silvestra_admin_menu';
     }
 }
- 
