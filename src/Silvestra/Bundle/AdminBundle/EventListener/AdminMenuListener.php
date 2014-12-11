@@ -30,19 +30,11 @@ class AdminMenuListener extends AdminMenuSubscriber
     {
         $event->addItem(
             new AdminMenuItem(
-                $this->translator->trans('menu.home', array(), 'SilvestraAdminBundle'),
-                $this->router->generate('silvestra_admin.homepage'),
-                'dashboard'
-            )
-        );
-
-        $event->addItem(
-            new AdminMenuItem(
-                $this->translator->trans('menu.sitemap', array(), 'SilvestraAdminBundle'),
-                $this->router->generate('tadcka_sitemap'),
-                'sitemap'
+                $this->translateTitle('menu.home', array(), 'SilvestraAdminBundle'),
+                $this->generateRoute('silvestra_admin.homepage'),
+                'dashboard',
+                1000
             )
         );
     }
 }
- 

@@ -15,7 +15,6 @@
         "doctrine/orm": "~2.4",
         "doctrine/doctrine-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "knplabs/knp-menu-bundle": "~2.0",
         "nercury/translation-editor-bundle": "~0.1",
         "symfony/assetic-bundle": "~2.3",
         "symfony/framework-bundle": ">=2.3",

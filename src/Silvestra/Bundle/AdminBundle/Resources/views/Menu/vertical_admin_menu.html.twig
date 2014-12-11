@@ -1,12 +1,14 @@
 <ul class="nav" id="side-menu">
 {% for item in menu -%}
     <li>
-        <a href="{{ item.uri }}">{% if item.icon is not empty %}<i class="fa fa-{{ item.icon }} fa-fw"></i> {% endif %}{{ item.title }}</a>
+        <a href="{{ item.uri }}">
+            {% if item.icon is not empty %}<i class="fa fa-{{ item.icon }} fa-fw"></i> {% endif %}{{ item.title }}{% if item.children is not empty -%}<span class="fa arrow"></span>{% endif %}
+        </a>
         {% if item.children is not empty -%}
         <ul class="nav nav-second-level collapse">
         {% for child in item.children -%}
             <li>
-                <a href="{{ child.uri }}">{{ child.title }}</a>
+                <a href="{{ child.uri }}">{% if child.icon is not empty %}<i class="fa fa-{{ child.icon }} fa-fw"></i> {% endif %}{{ child.title }}</a>
             </li>
         {%- endfor %}
         </ul>

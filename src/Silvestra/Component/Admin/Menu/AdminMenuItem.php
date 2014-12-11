@@ -116,6 +116,17 @@ class AdminMenuItem
      */
     public function getChildren()
     {
+        uasort(
+            $this->children,
+            function (AdminMenuItem $first, AdminMenuItem $second) {
+                if ($first->getPriority() <= $second->getPriority()) {
+                    return 1;
+                }
+
+                return -1;
+            }
+        );
+
         return $this->children;
     }
 

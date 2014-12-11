@@ -27,12 +27,29 @@ class AdminMenuListener extends AdminMenuSubscriber
      */
     public function build(AdminMenuEventInterface $event)
     {
-        $event->addItem(
+        $siteMenu = new AdminMenuItem(
+            $this->translateTitle('site', array(), 'SilvestraSite'),
+            'javascript:;',
+            'globe',
+            900
+        );
+
+        $siteMenu->addChild(
             new AdminMenuItem(
-                $this->translator->trans('site', array(), 'SilvestraBanner'),
-                $this->router->generate('silvestra_site'),
-                'globe'
+                $this->translateTitle('menu.general_information', array(), 'SilvestraSite'),
+                $this->generateRoute('silvestra_site'),
+                'info-circle'
             )
         );
+
+        $siteMenu->addChild(
+            new AdminMenuItem(
+                $this->translateTitle('menu.sitemap', array(), 'SilvestraSite'),
+                $this->generateRoute('tadcka_sitemap'),
+                'sitemap'
+            )
+        );
+
+        $event->addItem($siteMenu);
     }
 }

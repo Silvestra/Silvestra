@@ -59,5 +59,31 @@ abstract class AdminMenuSubscriber implements EventSubscriberInterface
     {
         return array(Admin::MENU => 'build');
     }
+
+    /**
+     * Generate route.
+     *
+     * @param string $name
+     * @param array $parameters
+     *
+     * @return string
+     */
+    protected function generateRoute($name, $parameters = array())
+    {
+        return $this->router->generate($name, $parameters);
+    }
+
+    /**
+     * Translate title.
+     *
+     * @param string $id
+     * @param array $parameters
+     * @param null|string $domain
+     *
+     * @return string
+     */
+    protected function translateTitle($id, array $parameters = array(), $domain = null)
+    {
+        return $this->translator->trans($id, $parameters, $domain);
+    }
 }
- 

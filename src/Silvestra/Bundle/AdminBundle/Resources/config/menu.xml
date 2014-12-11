@@ -25,6 +25,15 @@
             <argument type="service" id="silvestra_admin.templating_helper.admin_menu" />
         </service>
 
+        <service id="silvestra_admin.subscriber.admin_menu" class="Silvestra\Component\Admin\Menu\Event\AdminMenuSubscriber" abstract="true">
+            <argument type="service" id="router" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <service id="silvestra_admin.listener.admin_menu" class="Silvestra\Bundle\AdminBundle\EventListener\AdminMenuListener" parent="silvestra_admin.subscriber.admin_menu">
+            <tag name="kernel.event_subscriber" />
+        </service>
+
     </services>
 
 </container>

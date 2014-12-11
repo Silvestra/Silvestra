@@ -41,6 +41,17 @@ class AdminMenuEvent extends Event implements AdminMenuEventInterface
      */
     public function getItems()
     {
+        uasort(
+            $this->items,
+            function (AdminMenuItem $first, AdminMenuItem $second) {
+                if ($first->getPriority() <= $second->getPriority()) {
+                    return 1;
+                }
+
+                return -1;
+            }
+        );
+
         return $this->items;
     }
 }

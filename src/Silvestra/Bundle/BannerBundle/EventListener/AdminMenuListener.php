@@ -30,8 +30,8 @@ class AdminMenuListener extends AdminMenuSubscriber
     {
         $event->addItem(
             new AdminMenuItem(
-                $this->translator->trans('title.banner_zone.list', array(), 'SilvestraBanner'),
-                $this->router->generate('silvestra_banner.banner_zone_list'),
+                $this->translateTitle('title.banner_zone.list', array(), 'SilvestraBanner'),
+                $this->generateRoute('silvestra_banner.banner_zone_list'),
                 'image'
             )
         );

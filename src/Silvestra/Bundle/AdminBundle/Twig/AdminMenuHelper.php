@@ -19,7 +19,7 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
  *
  * @since 14.12.11 17.03
  */
-abstract class AdminMenuHelper extends TemplatingHelper implements AdminMenuHelperInterface
+class AdminMenuHelper extends TemplatingHelper implements AdminMenuHelperInterface
 {
     /**
      * @var \Twig_Environment
