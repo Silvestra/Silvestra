@@ -21,9 +21,8 @@
         </service>
 
         <!--Silvestra admin menu event listener-->
-        <service id="silvestra_banner.event_listener.admin_menu" class="Silvestra\Bundle\BannerBundle\EventListener\AdminMenuListener">
-            <tag name="kernel.event_listener" event="silvestra_admin.menu" method="onAdminMenu" />
-            <argument type="service" id="translator" />
+        <service id="silvestra_banner.listener.admin_menu" class="Silvestra\Bundle\BannerBundle\EventListener\AdminMenuListener" parent="silvestra_admin.subscriber.admin_menu">
+            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="silvestra_banner.delete_handler.banner" class="Silvestra\Bundle\BannerBundle\Handler\BannerDeleteHandler" public="false">

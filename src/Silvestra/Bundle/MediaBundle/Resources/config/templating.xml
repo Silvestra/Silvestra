@@ -7,7 +7,7 @@
     <services>
 
         <!--Silvestra media image templating helper-->
-        <service id="silvestra_media.templating.image_helper" class="Silvestra\Component\Media\Templating\ImageTemplatingHelper" public="false">
+        <service id="silvestra_media.templating.image_helper" class="Silvestra\Component\Media\Templating\ImageTemplatingHelper" public="true">
             <tag name="templating.helper" alias="silvestra_media_image" />
 
             <argument type="service" id="silvestra_media.filesystem" />

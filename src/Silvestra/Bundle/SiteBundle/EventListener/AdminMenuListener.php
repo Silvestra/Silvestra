@@ -11,40 +11,45 @@
 
 namespace Silvestra\Bundle\SiteBundle\EventListener;
 
-use Silvestra\Bundle\AdminBundle\Event\AdminMenuEvent;
-use Symfony\Component\Translation\TranslatorInterface;
+use Silvestra\Component\Admin\Menu\AdminMenuItem;
+use Silvestra\Component\Admin\Menu\Event\AdminMenuEventInterface;
+use Silvestra\Component\Admin\Menu\Event\AdminMenuSubscriber;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 10/28/14 10:46 PM
  */
-class AdminMenuListener
+class AdminMenuListener extends AdminMenuSubscriber
 {
     /**
-     * @var TranslatorInterface
+     * {@inheritdoc}
      */
-    private $translator;
-
-    /**
-     * Constructor.
-     *
-     * @param TranslatorInterface $translator
-     */
-    public function __construct(TranslatorInterface $translator)
+    public function build(AdminMenuEventInterface $event)
     {
-        $this->translator = $translator;
-    }
-
-    /**
-     * @param AdminMenuEvent $event
-     */
-    public function onAdminMenu(AdminMenuEvent $event)
-    {
-        $tradedoublerMapper = $event->getMenu()->addChild(
-            $this->translator->trans('site', array(), 'SilvestraSite'),
-            array('route' => 'silvestra_site')
+        $siteMenu = new AdminMenuItem(
+            $this->translateTitle('site', array(), 'SilvestraSite'),
+            'javascript:;',
+            'globe',
+            900
         );
-        $tradedoublerMapper->setLabelAttribute('menu_logo', 'fa-globe');
+
+        $siteMenu->addChild(
+            new AdminMenuItem(
+                $this->translateTitle('menu.general_information', array(), 'SilvestraSite'),
+                $this->generateRoute('silvestra_site'),
+                'info-circle'
+            )
+        );
+
+        $siteMenu->addChild(
+            new AdminMenuItem(
+                $this->translateTitle('menu.sitemap', array(), 'SilvestraSite'),
+                $this->generateRoute('tadcka_sitemap'),
+                'sitemap'
+            )
+        );
+
+        $event->addItem($siteMenu);
     }
 }

@@ -8,3 +8,7 @@ site: Svetainė
 
 success:
   site_save: Sėkmingai išsaugoti svetainės duomenys!
+
+menu:
+  general_information: Bendra informacija
+  sitemap: Medis
