@@ -140,7 +140,15 @@ class Filesystem
     public function mkdir($dir)
     {
         if (!is_dir($dir)) {
-            @mkdir($dir, $this->mode, true);
+            if (false === @mkdir($dir, $this->mode, true)) {
+                $error = error_get_last();
+                if (!is_dir($dir)) {
+                    if ($error) {
+                        throw new IOException(sprintf('Failed to create "%s": %s.', $dir, $error['message']), 0, null, $dir);
+                    }
+                    throw new IOException(sprintf('Failed to create "%s"', $dir), 0, null, $dir);
+                }
+            }
         }
     }
 
