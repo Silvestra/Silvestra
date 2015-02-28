@@ -82,14 +82,15 @@ class TextNodeFormHandler
     /**
      * On edit text node success.
      *
+     * @param string $locale
      * @param NodeInterface $node
      *
      * @return string
      */
-    public function onSuccess(NodeInterface $node)
+    public function onSuccess($locale, NodeInterface $node)
     {
+        $this->eventDispatcher->dispatch(TadckaTreeEvents::NODE_EDIT_SUCCESS, new TreeNodeEvent($locale, $node));
         $this->textNodeManager->save();
-        $this->eventDispatcher->dispatch(TadckaTreeEvents::NODE_EDIT_SUCCESS, new TreeNodeEvent($node));
 
         return $this->translator->trans('success.text_node_save', array(), 'SilvestraTextNodeBundle');
     }

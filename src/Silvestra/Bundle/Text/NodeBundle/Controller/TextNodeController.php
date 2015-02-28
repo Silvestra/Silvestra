@@ -94,7 +94,7 @@ class TextNodeController
         $messages = new Messages();
 
         if ($this->formHandler->process($request, $form)) {
-            $messages->addSuccess($this->formHandler->onSuccess($node));
+            $messages->addSuccess($this->formHandler->onSuccess($request->getLocale(), $node));
         }
 
         if ('json' === $request->getRequestFormat()) {

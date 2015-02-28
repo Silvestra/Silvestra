@@ -11,11 +11,12 @@
 
 namespace Silvestra\Bundle\FrontendBundle\Controller;
 
+use Silvestra\Component\Seo\Model\SeoMetadataInterface;
 use Silvestra\Component\Seo\SeoPresentationInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Templating\EngineInterface;
 use Tadcka\Component\Tree\Model\NodeInterface;
 use Tadcka\Component\Tree\Model\NodeTranslationInterface;
 use Tadcka\Bundle\SitemapBundle\Provider\PageNodeProviderInterface;
@@ -25,27 +26,73 @@ use Tadcka\Bundle\SitemapBundle\Provider\PageNodeProviderInterface;
  *
  * @since 9/7/14 1:00 PM
  */
-abstract class FrontendController extends ContainerAware
+abstract class FrontendController
 {
     /**
-     * Get page provider.
-     *
-     * @return PageNodeProviderInterface
+     * @var array
      */
-    private function getPageNodeProvider()
+    private $controllers;
+
+    /**
+     * @var PageNodeProviderInterface
+     */
+    private $pageNodeProvider;
+
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
+    /**
+     * @var SeoPresentationInterface
+     */
+    private $seoPresentation;
+
+    /**
+     * @var EngineInterface
+     */
+    private $templating;
+
+    /**
+     * @param array $controllers
+     */
+    public function setControllers(array $controllers)
     {
-        return $this->container->get('tadcka_sitemap.provider.page_node');
+        $this->controllers = $controllers;
     }
 
     /**
-     * Get router.
-     *
-     * @return RouterInterface
+     * @param PageNodeProviderInterface $pageNodeProvider
      */
-    protected function getRouter()
+    public function setPageNodeProvider(PageNodeProviderInterface $pageNodeProvider)
     {
-        return $this->container->get('router');
+        $this->pageNodeProvider = $pageNodeProvider;
     }
+
+    /**
+     * @param RouterInterface $router
+     */
+    public function setRouter(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
+    /**
+     * @param SeoPresentationInterface $seoPresentation
+     */
+    public function setSeoPresentation(SeoPresentationInterface $seoPresentation)
+    {
+        $this->seoPresentation = $seoPresentation;
+    }
+
+    /**
+     * @param EngineInterface $templating
+     */
+    public function setTemplating(EngineInterface $templating)
+    {
+        $this->templating = $templating;
+    }
+
 
     /**
      * Get page node or 404.
@@ -56,7 +103,7 @@ abstract class FrontendController extends ContainerAware
      */
     protected function getPageNodeOr404(Request $request)
     {
-        return $this->getPageNodeProvider()->getNodeOr404($request);
+        return $this->pageNodeProvider->getNodeOr404($request);
     }
 
     /**
@@ -68,17 +115,17 @@ abstract class FrontendController extends ContainerAware
      */
     protected function getPageNodeTranslationOr404(Request $request)
     {
-        return $this->getPageNodeProvider()->getNodeTranslationOr404($request);
+        return $this->pageNodeProvider->getNodeTranslationOr404($request);
     }
 
     /**
-     * Get seo presentation.
+     * Update page seo.
      *
-     * @return SeoPresentationInterface
+     * @param SeoMetadataInterface $seoMetadata
      */
-    protected function getSeoPresentation()
+    protected function updatePageSeo(SeoMetadataInterface $seoMetadata)
     {
-        return $this->container->get('silvestra_seo.presentation');
+        return $this->seoPresentation->updateSeoPage($seoMetadata);
     }
 
     /**
@@ -91,7 +138,7 @@ abstract class FrontendController extends ContainerAware
      */
     protected function renderResponse($name, array $parameters = array())
     {
-        return new Response($this->container->get('templating')->render($name, $parameters));
+        return new Response($this->templating->render($name, $parameters));
     }
 
     /**
@@ -101,9 +148,7 @@ abstract class FrontendController extends ContainerAware
      */
     protected function getConfig()
     {
-        $config = $this->container->getParameter('silvestra_frontend.controllers');
-
-        return $config[$this->getName()];
+        return $this->controllers[$this->getName()];
     }
 
     /**

@@ -30,6 +30,6 @@ class SilvestraFrontendExtension extends Extension
         $loader->load('services.xml');
 
 
-        $container->setParameter('silvestra_frontend.controllers', $config['controllers']);
+        $container->setParameter($this->getAlias() . '.controllers', $config['controllers']);
     }
 }

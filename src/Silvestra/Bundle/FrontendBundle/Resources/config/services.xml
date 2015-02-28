@@ -4,17 +4,27 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
-    <parameters>
-        <parameter key="silvestra_frontend.example.class">Silvestra\Bundle\FrontendBundle\Example</parameter>
-    </parameters>
-
     <services>
-        <service id="silvestra_frontend.example" class="%silvestra_frontend.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+
+        <!--Silvestra frontend controller-->
+        <service id="silvestra_frontend.controller" class="Silvestra\Bundle\FrontendBundle\Controller\FrontendController" abstract="true">
+            <call method="setControllers">
+                <argument>%silvestra_frontend.controllers%</argument>
+            </call>
+            <call method="setPageNodeProvider">
+                <argument type="service" id="tadcka_sitemap.provider.page_node" />
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router" />
+            </call>
+            <call method="setSeoPresentation">
+                <argument type="service" id="silvestra_seo.presentation" />
+            </call>
+            <call method="setTemplating">
+                <argument type="service" id="templating" />
+            </call>
         </service>
+
     </services>
-    -->
+
 </container>
