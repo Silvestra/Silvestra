@@ -13,6 +13,8 @@
 
         <field name="mimeType" column="mime_type" type="string" length="255" nullable="false" />
 
+        <field name="orderNr" column="order_nr" type="integer" nullable="false" />
+
         <field name="originalPath" column="original_path" type="string" length="511" nullable="false" />
 
         <field name="path" column="path" type="string" length="511" nullable="false" />

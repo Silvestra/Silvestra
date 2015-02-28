@@ -74,6 +74,22 @@ interface ImageInterface
     public function getFilename();
 
     /**
+     * Set order nr.
+     *
+     * @param int $orderNr
+     *
+     * @return ImageInterface
+     */
+    public function setOrderNr($orderNr);
+
+    /**
+     * Get order nr.
+     *
+     * @return int
+     */
+    public function getOrderNr();
+
+    /**
      * Set original path.
      *
      * @param string $originalPath

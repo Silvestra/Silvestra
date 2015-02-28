@@ -39,6 +39,11 @@ class Image implements ImageInterface
     protected $filename;
 
     /**
+     * @var int
+     */
+    protected $orderNr;
+
+    /**
      * @var string
      */
     protected $originalPath;
@@ -134,6 +139,24 @@ class Image implements ImageInterface
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOrderNr($orderNr)
+    {
+        $this->orderNr = $orderNr;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderNr()
+    {
+        return $this->orderNr;
     }
 
     /**
