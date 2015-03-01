@@ -64,7 +64,7 @@ class GdImageResizer implements ImageResizerInterface
      */
     public function resize($imagePath, array $size, $mode, $force = false)
     {
-        $cacheKey = $this->getCacheKey($imagePath, $size, $mode);
+        $cacheKey = $this->getCacheKey($size, $mode);
         $filename = basename($imagePath);
 
         if ((false === $force) && $this->imageCache->contains($filename, $cacheKey)) {
@@ -98,17 +98,16 @@ class GdImageResizer implements ImageResizerInterface
     /**
      * Get cache key.
      *
-     * @param string $imagePath
      * @param array $size
      * @param string $mode
      *
      * @return string
      */
-    private function getCacheKey($imagePath, array $size, $mode)
+    private function getCacheKey(array $size, $mode)
     {
         list($width, $height) = $size;
 
-        return md5($imagePath) . DIRECTORY_SEPARATOR . md5($width . $height . $mode);
+        return md5($width . $height . $mode);
     }
 
     /**

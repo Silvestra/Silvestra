@@ -57,7 +57,13 @@ class ImageCache implements ImageCacheInterface
      */
     public function getRelativePath($filename, $key)
     {
-        $parts = array(Media::NAME, Filesystem::CACHE_SUB_DIR, trim($key, DIRECTORY_SEPARATOR), $filename);
+        $parts = array(
+            Media::NAME,
+            Filesystem::CACHE_SUB_DIR,
+            $this->filesystem->getFileDirPrefix($filename),
+            trim($key, DIRECTORY_SEPARATOR),
+            $filename
+        );
 
         return DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $parts);
     }

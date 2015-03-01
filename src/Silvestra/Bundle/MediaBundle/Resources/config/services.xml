@@ -21,6 +21,10 @@
             <argument type="service" id="validator" />
         </service>
 
+        <service id="silvestra_media.manager.image.in_memory" class="Silvestra\Component\Media\Manager\InMemoryImageManager" public="true">
+            <argument type="service" id="silvestra_media.manager.image.default" />
+        </service>
+
     </services>
 
 </container>
