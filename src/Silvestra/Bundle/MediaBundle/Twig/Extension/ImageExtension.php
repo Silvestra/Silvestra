@@ -48,8 +48,7 @@ class ImageExtension extends \Twig_Extension
             ),
             new \Twig_SimpleFunction(
                 'silvestra_resize_image',
-                array($this->imageHelper, 'resizeImage'),
-                array('is_safe' => array('html'))
+                array($this->imageHelper, 'resizeImage')
             ),
         );
     }
