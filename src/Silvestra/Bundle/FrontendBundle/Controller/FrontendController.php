@@ -119,6 +119,20 @@ abstract class FrontendController
     }
 
     /**
+     * Generate url.
+     *
+     * @param string $name
+     * @param array $parameters
+     * @param bool $referenceType
+     *
+     * @return string
+     */
+    protected function generateUrl($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH)
+    {
+        return $this->router->generate($name, $parameters, $referenceType);
+    }
+
+    /**
      * Update page seo.
      *
      * @param SeoMetadataInterface $seoMetadata
