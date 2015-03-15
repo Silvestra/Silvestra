@@ -129,6 +129,19 @@ abstract class FrontendController
     }
 
     /**
+     * Render.
+     *
+     * @param string $name
+     * @param array $parameters
+     *
+     * @return string
+     */
+    protected function render($name, array $parameters = array())
+    {
+        return $this->templating->render($name, $parameters);
+    }
+
+    /**
      * Render response.
      *
      * @param string $name
