@@ -91,8 +91,7 @@ class SiteController
         $form = $this->formFactory->create($site);
 
         if ($this->formHandler->process($request, $form)) {
-            $this->siteManager->save();
-            $this->formHandler->onSuccess();
+            $this->formHandler->onSuccess($request->getLocale(), $site);
 
             return new RedirectResponse($this->router->generate('silvestra_site'));
         }

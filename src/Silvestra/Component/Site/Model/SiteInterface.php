@@ -18,6 +18,7 @@ use Silvestra\Component\Seo\Model\SeoMetadataInterface;
  */
 interface SiteInterface
 {
+    const SITE = 'silvestra_site';
 
     /**
      * Set domain.
