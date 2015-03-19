@@ -103,7 +103,6 @@ class SeoEngine implements SeoEngineInterface
             foreach ((array) $metadatas as $name => $metadata) {
                 list($content, $extras) = $metadata;
 
-                $this->normalize($content);
                 $name = $this->normalize($name);
                 if (false === empty($content)) {
                     $meta .= sprintf("<meta %s=\"%s\" content=\"%s\">\n", $type, $name, $this->normalize($content));
