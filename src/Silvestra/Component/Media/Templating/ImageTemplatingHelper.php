@@ -11,9 +11,7 @@
 
 namespace Silvestra\Component\Media\Templating;
 
-use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Image\Resizer\ImageResizerInterface;
-use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
 /**
@@ -23,15 +21,6 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
  */
 class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingHelperInterface
 {
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    /**
-     * @var ImageManagerInterface
-     */
-    private $imageManager;
 
     /**
      * @var ImageResizerInterface
@@ -46,19 +35,11 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     /**
      * Constructor.
      *
-     * @param Filesystem $filesystem
-     * @param ImageManagerInterface $imageManager
      * @param ImageResizerInterface $imageResizer
      * @param string $noImagePath
      */
-    public function __construct(
-        Filesystem $filesystem,
-        ImageManagerInterface $imageManager,
-        ImageResizerInterface $imageResizer,
-        $noImagePath
-    ) {
-        $this->filesystem = $filesystem;
-        $this->imageManager = $imageManager;
+    public function __construct(ImageResizerInterface $imageResizer, $noImagePath)
+    {
         $this->imageResizer = $imageResizer;
         $this->noImagePath = $noImagePath;
     }
@@ -66,9 +47,9 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     /**
      * {@inheritdoc}
      */
-    public function renderImageHtmlTag($filename, array $size, $mode = null, array $attributes = array())
+    public function renderImageHtmlTag($path, array $size, $mode = null, array $attributes = array())
     {
-        $path = $this->resizeImage($filename, $size, $mode);
+        $path = $this->resizeImage($path, $size, $mode);
 
         return sprintf('<img src="%s" %s />', $path, $this->normalizeAttributes($attributes));
     }
@@ -76,13 +57,13 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     /**
      * {@inheritdoc}
      */
-    public function resizeImage($filename, array $size, $mode = null)
+    public function resizeImage($path, array $size, $mode = null)
     {
         if (null === $mode) {
             $mode = ImageResizerInterface::INSET;
         }
 
-        $path = $this->getImagePath($filename);
+        $path = $this->getImagePath($path);
 
         if (empty($size)) {
             return $path;
@@ -94,24 +75,14 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     /**
      * Get image path.
      *
-     * @param string $filename
+     * @param string $path
      *
      * @return string
      */
-    private function getImagePath($filename)
+    private function getImagePath($path)
     {
-        if (empty($filename)) {
-            return $this->noImagePath;
-        }
-
-        if (file_exists($this->filesystem->getRootDir() . $filename)) {
-            return $filename;
-        }
-
-        $image = $this->imageManager->findByFilename($filename);
-
-        if (null !== $image) {
-            return $image->getPath();
+        if ($path && file_exists($path)) {
+            return $path;
         }
 
         return $this->noImagePath;
