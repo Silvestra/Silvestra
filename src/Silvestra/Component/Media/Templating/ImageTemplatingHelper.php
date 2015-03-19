@@ -11,6 +11,7 @@
 
 namespace Silvestra\Component\Media\Templating;
 
+use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Image\Resizer\ImageResizerInterface;
 use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
@@ -21,6 +22,10 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
  */
 class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingHelperInterface
 {
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
 
     /**
      * @var ImageResizerInterface
@@ -35,11 +40,13 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     /**
      * Constructor.
      *
+     * @param Filesystem $filesystem
      * @param ImageResizerInterface $imageResizer
      * @param string $noImagePath
      */
-    public function __construct(ImageResizerInterface $imageResizer, $noImagePath)
+    public function __construct(Filesystem $filesystem, ImageResizerInterface $imageResizer, $noImagePath)
     {
+        $this->filesystem = $filesystem;
         $this->imageResizer = $imageResizer;
         $this->noImagePath = $noImagePath;
     }
@@ -81,7 +88,7 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
      */
     private function getImagePath($path)
     {
-        if ($path && file_exists($path)) {
+        if ($path && file_exists($this->filesystem->getRootDir() . $path)) {
             return $path;
         }
 
