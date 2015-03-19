@@ -103,6 +103,7 @@ class SeoEngine implements SeoEngineInterface
             foreach ((array) $metadatas as $name => $metadata) {
                 list($content, $extras) = $metadata;
 
+                $this->normalize($content);
                 $name = $this->normalize($name);
                 if (false === empty($content)) {
                     $meta .= sprintf("<meta %s=\"%s\" content=\"%s\">\n", $type, $name, $this->normalize($content));
@@ -132,6 +133,6 @@ class SeoEngine implements SeoEngineInterface
      */
     private function normalize($string)
     {
-        return htmlentities(strip_tags($string), ENT_COMPAT, $this->encoding);
+        return str_replace("'", '', str_replace('"', '', strip_tags($string)));
     }
 }
