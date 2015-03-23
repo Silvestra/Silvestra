@@ -63,7 +63,7 @@ class ImageCacheTest extends \PHPUnit_Framework_TestCase
     public function testGetAbsolutePath()
     {
         $this->assertEquals(
-            $this->tempDir . '/' . Media::NAME . '/cache/qwer/tawer/silvestra.png',
+            $this->tempDir . '/' . Media::NAME . '/cache/s/i/l/v/e/qwer/tawer/silvestra.png',
             $this->imageCache->getAbsolutePath(self::FILENAME, self::KEY)
         );
     }
