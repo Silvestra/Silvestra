@@ -91,6 +91,7 @@ class InMemoryImageManager extends ImageManager
      */
     public function clear()
     {
+        $this->images = array();
         $this->defaultManager->clear();
     }
 

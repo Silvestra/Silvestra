@@ -132,6 +132,6 @@ class SeoEngine implements SeoEngineInterface
      */
     private function normalize($string)
     {
-        return htmlentities(strip_tags($string), ENT_COMPAT, $this->encoding);
+        return str_replace("'", '', str_replace('"', '', strip_tags($string)));
     }
 }

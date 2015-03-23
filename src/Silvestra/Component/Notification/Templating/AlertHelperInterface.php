@@ -21,10 +21,10 @@ interface AlertHelperInterface
     /**
      * Render alert template.
      *
-     * @param string $template
      * @param array $context
+     * @param string $template
      *
      * @return string
      */
-    public function render($template, array $context);
+    public function render(array $context, $template = null);
 }

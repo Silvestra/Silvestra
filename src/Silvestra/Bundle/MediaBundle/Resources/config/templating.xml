@@ -11,7 +11,6 @@
             <tag name="templating.helper" alias="silvestra_media_image" />
 
             <argument type="service" id="silvestra_media.filesystem" />
-            <argument type="service" id="silvestra_media.manager.image" />
             <argument type="service" id="silvestra_media.image.resizer" />
             <argument>%silvestra_media.no_image%</argument>
         </service>

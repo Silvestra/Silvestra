@@ -32,22 +32,15 @@ class AlertExtension extends \Twig_Extension
     private $alertManager;
 
     /**
-     * @var string
-     */
-    private $alertTemplate;
-
-    /**
      * Constructor.
      *
      * @param AlertHelperInterface $alertHelper
      * @param AlertManager $alertManager
-     * @param string $alertTemplate
      */
-    public function __construct(AlertHelperInterface $alertHelper, AlertManager $alertManager, $alertTemplate)
+    public function __construct(AlertHelperInterface $alertHelper, AlertManager $alertManager)
     {
         $this->alertHelper = $alertHelper;
         $this->alertManager = $alertManager;
-        $this->alertTemplate = $alertTemplate;
     }
 
     /**
@@ -81,7 +74,7 @@ class AlertExtension extends \Twig_Extension
         $alert = $this->alertManager->getAlert();
         $options['alerts'] = $alert ? $alert->all() : array();
 
-        return $this->alertHelper->render($this->getTemplate($options), $options);
+        return $this->alertHelper->render($options, $this->getTemplate($options));
     }
 
     /**
@@ -95,7 +88,7 @@ class AlertExtension extends \Twig_Extension
     {
         $options['alerts'] = $this->alertManager->getFlashAlerts();
 
-        return $this->alertHelper->render($this->getTemplate($options), $options);
+        return $this->alertHelper->render($options, $this->getTemplate($options));
     }
 
     /**
@@ -119,6 +112,6 @@ class AlertExtension extends \Twig_Extension
             return $options['template'];
         }
 
-        return $this->alertTemplate;
+        return null;
     }
 }
