@@ -11,8 +11,6 @@
 
 namespace Silvestra\Component\Sitemap\Dumper;
 
-use Silvestra\Component\Sitemap\Profile\ProfileInterface;
-
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -23,8 +21,6 @@ interface DumperInterface
 
     /**
      * Dump all sitemap content.
-     *
-     * @param ProfileInterface $profile
      */
-    public function dump(ProfileInterface $profile);
+    public function dump();
 }

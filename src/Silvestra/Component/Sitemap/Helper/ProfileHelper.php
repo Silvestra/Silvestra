@@ -11,7 +11,6 @@
 
 namespace Silvestra\Component\Sitemap\Helper;
 
-use Silvestra\Component\Sitemap\Profile\ProfileInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -44,6 +43,30 @@ class ProfileHelper
     }
 
     /**
+     * Get path.
+     *
+     * @param string $filename
+     *
+     * @return string
+     */
+    public function getFilePath($filename)
+    {
+        return rtrim($this->target, '/\\') . DIRECTORY_SEPARATOR . $filename;
+    }
+
+    /**
+     * Get url.
+     *
+     * @param string $filename
+     *
+     * @return string
+     */
+    public function getFileUrl($filename)
+    {
+        return $this->getSchemeAndHost() . '/' . $filename;
+    }
+
+    /**
      * Get scheme and host.
      *
      * @return string
@@ -51,29 +74,5 @@ class ProfileHelper
     public function getSchemeAndHost()
     {
         return $this->router->getContext()->getScheme() . '://' . $this->router->getContext()->getHost();
-    }
-
-    /**
-     * Get get sitemap path.
-     *
-     * @param ProfileInterface $profile
-     *
-     * @return string
-     */
-    public function getSitemapPath(ProfileInterface $profile)
-    {
-        return rtrim($this->target, '/\\') . DIRECTORY_SEPARATOR . $profile->getName();
-    }
-
-    /**
-     * Get sitemap url.
-     *
-     * @param ProfileInterface $profile
-     *
-     * @return string
-     */
-    public function getSitemapUrl(ProfileInterface $profile)
-    {
-        return $this->getSchemeAndHost() . '/' . $profile->getName();
     }
 }

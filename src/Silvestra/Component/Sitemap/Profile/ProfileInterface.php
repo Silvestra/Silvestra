@@ -11,7 +11,7 @@
 
 namespace Silvestra\Component\Sitemap\Profile;
 
-use Silvestra\Component\Sitemap\Entry\EntryInterface;
+use Silvestra\Component\Sitemap\Entry\UrlEntryInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -20,12 +20,13 @@ use Silvestra\Component\Sitemap\Entry\EntryInterface;
  */
 interface ProfileInterface
 {
+
     /**
      * Get entries.
      *
-     * @return array|EntryInterface[]
+     * @return array|UrlEntryInterface[]
      */
-    public function getEntries();
+    public function getUrlEntries();
 
     /**
      * Get sitemap xml name.

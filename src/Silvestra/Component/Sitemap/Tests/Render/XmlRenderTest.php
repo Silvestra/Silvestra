@@ -59,7 +59,10 @@ EOF;
 
     public function testRenderSitemap_WithEntries()
     {
-        $entries = array(new UrlEntry('www.silvestra.org', new \DateTime('2015-03-03'), 'weekly', 0.6));
+        $entries = array(
+            new UrlEntry('www.silvestra.org', new \DateTime('2015-03-03'), 'weekly', 0.6),
+            new UrlEntry('www.silvestra.org')
+        );
         $xml = <<<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -68,6 +71,9 @@ EOF;
         <lastmod>2015-03-03</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>www.silvestra.org</loc>
     </url>
 </urlset>
 

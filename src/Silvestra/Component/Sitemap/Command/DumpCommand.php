@@ -12,11 +12,7 @@
 namespace Silvestra\Component\Sitemap\Command;
 
 use Silvestra\Component\Sitemap\Dumper\SitemapDumper;
-use Silvestra\Component\Sitemap\Dumper\SitemapIndexDumper;
-use Silvestra\Component\Sitemap\Entry\SitemapEntry;
 use Silvestra\Component\Sitemap\Helper\ProfileHelper;
-use Silvestra\Component\Sitemap\Profile\ProfileRegistry;
-use Silvestra\Component\Sitemap\Profile\SitemapIndexProfile;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,15 +26,16 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class DumpCommand extends Command
 {
+
+    /**
+     * @var SitemapDumper
+     */
+    private $dumper;
+
     /**
      * @var ProfileHelper
      */
     private $helper;
-
-    /**
-     * @var ProfileRegistry
-     */
-    private $registry;
 
     /**
      * @var RouterInterface
@@ -46,36 +43,17 @@ class DumpCommand extends Command
     private $router;
 
     /**
-     * @var SitemapDumper
-     */
-    private $sitemapDumper;
-
-    /**
-     * @var SitemapIndexDumper
-     */
-    private $sitemapIndexDumper;
-
-    /**
      * Constructor.
      *
+     * @param SitemapDumper $dumper
      * @param ProfileHelper $helper
-     * @param ProfileRegistry $registry
      * @param RouterInterface $router
-     * @param SitemapDumper $sitemapDumper
-     * @param SitemapIndexDumper $sitemapIndexDumper
      */
-    public function __construct(
-        ProfileHelper $helper,
-        ProfileRegistry $registry,
-        RouterInterface $router,
-        SitemapDumper $sitemapDumper,
-        SitemapIndexDumper $sitemapIndexDumper
-    ) {
+    public function __construct(SitemapDumper $dumper, ProfileHelper $helper, RouterInterface $router)
+    {
+        $this->dumper = $dumper;
         $this->helper = $helper;
-        $this->registry = $registry;
         $this->router = $router;
-        $this->sitemapDumper = $sitemapDumper;
-        $this->sitemapIndexDumper = $sitemapIndexDumper;
 
         parent::__construct();
     }
@@ -88,7 +66,11 @@ class DumpCommand extends Command
         $this
             ->setName('silvestra:sitemap:dump')
             ->setDescription('Dumps your sitemap(s) to the filesystem (defaults to web/)')
-            ->addArgument('host', InputArgument::REQUIRED, 'The full hostname for your website (ie http://www.google.com).')
+            ->addArgument(
+                'host',
+                InputArgument::REQUIRED,
+                'The full hostname for your website (ie http://www.google.com).'
+            )
         ;
     }
 
@@ -99,21 +81,11 @@ class DumpCommand extends Command
     {
         $this->setHost($input->getArgument('host'));
 
-        $entries = array();
-        $now = new \DateTime();
-
-        foreach ($this->registry->getProfiles() as $profile) {
-            $this->sitemapDumper->dump($profile);
-            $entries[] = new SitemapEntry($this->helper->getSitemapUrl($profile), $now);
-        }
-
-        $sitemapIndexProfile = new SitemapIndexProfile($entries);
-        $this->sitemapIndexDumper->dump($sitemapIndexProfile);
+        $this->dumper->dump();
 
         $output->writeln(
-            '<header>[Sitemap]</header> <body>Sitemap ' .
-            $sitemapIndexProfile->getName() .
-            ' built in . ' . $this->helper->getSitemapPath($sitemapIndexProfile) . ' </body>'
+            '<header>[Sitemap]</header> <body>Sitemap '. SitemapDumper::NAME .
+            ' built in . ' . $this->helper->getFilePath(SitemapDumper::NAME) . ' </body>'
         );
     }
 

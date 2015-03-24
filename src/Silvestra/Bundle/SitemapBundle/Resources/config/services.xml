@@ -9,20 +9,14 @@
         <service id="silvestra_sitemap.command.dump" class="Silvestra\Component\Sitemap\Command\DumpCommand">
             <tag name="console.command" />
 
-            <argument type="service" id="silvestra_sitemap.helper.profile" />
-            <argument type="service" id="silvestra_sitemap.registry.profile" />
-            <argument type="service" id="router" />
             <argument type="service" id="silvestra_sitemap.dumper.sitemap" />
-            <argument type="service" id="silvestra_sitemap.dumper.sitemap_index" />
+            <argument type="service" id="silvestra_sitemap.helper.profile" />
+            <argument type="service" id="router" />
         </service>
 
         <service id="silvestra_sitemap.dumper.sitemap" class="Silvestra\Component\Sitemap\Dumper\SitemapDumper" public="false">
             <argument type="service" id="silvestra_sitemap.helper.profile" />
-            <argument type="service" id="silvestra_sitemap.render" />
-        </service>
-
-        <service id="silvestra_sitemap.dumper.sitemap_index" class="Silvestra\Component\Sitemap\Dumper\SitemapIndexDumper" public="false">
-            <argument type="service" id="silvestra_sitemap.helper.profile" />
+            <argument type="service" id="silvestra_sitemap.registry.profile" />
             <argument type="service" id="silvestra_sitemap.render" />
         </service>
 
