@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -79,7 +79,6 @@ class DumpCommand extends Command
 
         parent::__construct();
     }
-
 
     /**
      * {@inheritdoc}
