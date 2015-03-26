@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Silvestra package.
+ * This file is part of the Evispa package.
  *
- * (c) Tadas Gliaubicas <tadcka89@gmail.com>
+ * (c) Evispa <info@evispa.lt>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,11 +12,11 @@
 namespace Silvestra\Component\Paginator;
 
 /**
- * @author Tadas Gliaubicas <tadcka89@gmail.com>
+ * @author Tadas Gliaubicas <tadas@evispa.lt>
  *
- * @since 15.3.4 15.57
+ * @since 15.3.26 14.16
  */
-class Pagination
+class Pagination implements \Iterator
 {
 
     /**
@@ -27,81 +27,88 @@ class Pagination
     /**
      * @var int
      */
+    private $perPage;
+
+    /**
+     * @var int
+     */
+    private $pageCount;
+
+    /**
+     * @var int
+     */
     private $totalCount;
 
-    /**
-     * @var int
-     */
-    private $numItemsPerPage;
-    /**
-     * @var int
-     */
-    private $offset = 0;
 
     /**
      * @var int
      */
-    private $itemsInPage = 0;
-
-    /**
-     * @var int
-     */
-    private $pageCount = 1;
+    private $page;
 
     /**
      * Constructor.
      *
      * @param int $currentPage
-     * @param int $numItemsPerPage
+     * @param int $perPage
      * @param int $totalCount
      */
-    public function __construct($currentPage, $numItemsPerPage, $totalCount)
+    public function __construct($currentPage, $perPage, $totalCount)
     {
         $this->currentPage = $currentPage;
-        $this->numItemsPerPage = $numItemsPerPage;
+        $this->perPage = $perPage;
         $this->totalCount = $totalCount;
 
-        $this->init();
+        $this->pageCount = intval(ceil($totalCount/ $perPage));
     }
-    /**
-     * Initialize.
-     */
-    private function init()
-    {
-        if (0 !== $this->totalCount) {
-            $leftItems = $this->totalCount % $this->numItemsPerPage;
 
-            if (1 > $this->currentPage) {
-                $this->currentPage = 1;
-            }
-            $this->offset = ($this->currentPage - 1) * $this->numItemsPerPage;
-            if ($this->currentPage === $this->getPageCount() && $leftItems > 0) {
-                $this->itemsInPage = $leftItems;
-            } else {
-                $this->itemsInPage = $this->numItemsPerPage;
-            }
-        }
-    }
+
     /**
-     * Get total items.
-     *
-     * @return int
+     * {@inheritdoc}
      */
-    public function getTotalCount()
+    public function current()
     {
-        return $this->totalCount;
+        return array(
+            'active' => $this->currentPage === $this->page,
+            'first' => 1 === $this->page,
+            'last' => $this->totalCount === $this->page,
+            'page' => $this->page,
+        );
     }
+
     /**
-     * Get items per page.
-     *
-     * @return int
+     * {@inheritdoc}
      */
-    public function getNumItemsPerPage()
+    public function next()
     {
-        return $this->numItemsPerPage;
+        $this->page++;
     }
+
     /**
-     * Get current page.
+     * {@inheritdoc}
+     */
+    public function key()
+    {
+        return $this->page;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function valid()
+    {
+        return $this->pageCount >= $this->page;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rewind()
+    {
+        $this->page = 1;
+    }
+
+    /**
+     * Get pagination current page.
      *
      * @return int
      */
@@ -109,49 +116,44 @@ class Pagination
     {
         return $this->currentPage;
     }
+
     /**
-     * Get page count.
+     * Get pagination per page.
      *
      * @return int
      */
-    public function getPageCount()
+    public function getPerPage()
     {
-        return intval(ceil($this->totalCount / $this->numItemsPerPage));
+        return $this->perPage;
     }
+
     /**
-     * Get items in page.
-     *
-     * @return int
-     */
-    public function getItemsInPage()
-    {
-        return $this->itemsInPage;
-    }
-    /**
-     * Get first item offset.
+     * Get pagination offset.
      *
      * @return int
      */
     public function getOffset()
     {
-        return $this->offset;
+        return ($this->currentPage - 1) * $this->perPage;
     }
+
     /**
-     * Is this page last.
+     * Get pagination page count.
      *
-     * @return bool
+     * @return int
      */
-    public function isLastPage()
+    public function getPageCount()
     {
-        return (int)$this->currentPage === (int)$this->pageCount;
+        return $this->pageCount;
     }
+
     /**
-     * Is this page first.
+     * Get pagination total count.
      *
-     * @return bool
+     * @return int
      */
-    public function isFirstPage()
+    public function getTotalCount()
     {
-        return (int)$this->currentPage === 1;
+        return $this->totalCount;
     }
 }

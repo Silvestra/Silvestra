@@ -1,0 +1,54 @@
+{% if pagination is not null and pagination.getTotalPages() > 1 %}
+    {% set route_name = route_name is defined ? route_name : null %}
+    {% set route_parameters = route_parameters is defined ? route_parameters : [] %}
+    {% set max_near_pages = max_near_pages is defined ? max_near_pages : 2 %}
+
+    <div class="{{ pagination_class }}">
+        <ul class="{{ pagination_links_class }}">
+            {% if not pagination.isFirstPage() %}
+                <li>
+                    <a href="{{ tadcka_pagination_url(app.request, route_name, {page: 1}|merge(route_parameters)) }}" data-page="1" class="{{ pagination_link_class }}">&lt;&lt;</a>
+                </li>
+                <li>
+                    <a href="{{ tadcka_pagination_url(app.request, route_name, {page: pagination.getCurrentPage() - 1}|merge(route_parameters)) }}" data-page="{{ pagination.getCurrentPage() - 1 }}" class="{{ pagination_link_class }}">&lt;</a>
+                </li>
+            {% endif %}
+
+            {% set pages_before = pagination.getCurrentPage() - 1 > max_near_pages ? max_near_pages : pagination.getCurrentPage() - 1 %}
+
+            {% if pages_before > 0 %}
+                {% for page in pagination.getCurrentPage() - pages_before .. pagination.getCurrentPage() - 1 %}
+                    <li>
+                        <a href="{{ tadcka_pagination_url(app.request, route_name, {page: page}|merge(route_parameters)) }}" data-page="{{ page }}" class="{{ pagination_link_class }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+
+            <li class="active"><a href="javascript:">{{ pagination.getCurrentPage() }}</a></li>
+
+            {% set pages_after = pagination.getTotalPages() - pagination.getCurrentPage() > max_near_pages ? max_near_pages : pagination.getTotalPages() - pagination.getCurrentPage() %}
+
+            {% if pages_after > 0 %}
+                {% for page in pagination.getCurrentPage() + 1 .. pagination.getCurrentPage() + pages_after %}
+                    <li>
+                        <a href="{{ tadcka_pagination_url(app.request, route_name, {page: page}|merge(route_parameters)) }}" data-page="{{ page }}" class="{{ pagination_link_class }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+
+            {% if not pagination.isLastPage() %}
+                <li>
+                    <a href="{{ tadcka_pagination_url(app.request, route_name, {page: pagination.getCurrentPage() + 1}|merge(route_parameters)) }}" data-page="{{ pagination.getCurrentPage() + 1 }}" class="{{ pagination_link_class }}">&gt;</a>
+                </li>
+                <li>
+                    <a href="{{ tadcka_pagination_url(app.request, route_name, {page: pagination.getTotalPages()}|merge(route_parameters)) }}" data-page="{{ pagination.getTotalPages() }}" class="{{ pagination_link_class }}">&gt;&gt;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div>
+        <span>
+            {{ 'pagination_information'|trans({'%from%': pagination.getOffset() + 1, '%to%': pagination.getOffset() + pagination.getItemsInPage(), '%total%': pagination.getTotalItems()}, 'TadckaPaginatorBundle') }}
+        </span>
+    </div>
+{% endif %}
