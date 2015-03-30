@@ -32,5 +32,6 @@ class SilvestraSitemapExtension extends Extension
 
         $container->setAlias($this->getAlias() . '.render', $config['render']);
         $container->setParameter($this->getAlias() . '.target', $config['target']);
+        $container->setParameter($this->getAlias() . '.max_per_sitemap', $config['max_per_sitemap']);
     }
 }

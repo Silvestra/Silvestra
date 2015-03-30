@@ -16,6 +16,7 @@
 
         <service id="silvestra_sitemap.dumper.sitemap" class="Silvestra\Component\Sitemap\Dumper\SitemapDumper" public="false">
             <argument type="service" id="silvestra_sitemap.helper.profile" />
+            <argument>%silvestra_sitemap.max_per_sitemap%</argument>
             <argument type="service" id="silvestra_sitemap.registry.profile" />
             <argument type="service" id="silvestra_sitemap.render" />
         </service>

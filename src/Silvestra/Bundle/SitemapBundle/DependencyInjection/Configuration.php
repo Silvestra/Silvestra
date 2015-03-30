@@ -27,7 +27,10 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('max_per_sitemap')->defaultValue(10000)->end()
+
                 ->scalarNode('render')->defaultValue('silvestra_sitemap.render.xml')->cannotBeEmpty()->end()
+
                 ->scalarNode('target')->defaultValue('%kernel.root_dir%/../web')->cannotBeEmpty()->end()
             ->end();
 

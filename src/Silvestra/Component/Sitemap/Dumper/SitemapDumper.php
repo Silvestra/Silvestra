@@ -12,8 +12,10 @@
 namespace Silvestra\Component\Sitemap\Dumper;
 
 use Silvestra\Component\Sitemap\Entry\SitemapEntry;
+use Silvestra\Component\Sitemap\Entry\UrlEntryInterface;
 use Silvestra\Component\Sitemap\Exception\DumperException;
 use Silvestra\Component\Sitemap\Helper\ProfileHelper;
+use Silvestra\Component\Sitemap\Profile\ProfileInterface;
 use Silvestra\Component\Sitemap\Profile\ProfileRegistry;
 use Silvestra\Component\Sitemap\Render\RenderInterface;
 
@@ -33,6 +35,11 @@ class SitemapDumper implements DumperInterface
     private $helper;
 
     /**
+     * @var int
+     */
+    private $maxPerSitemap;
+
+    /**
      * @var ProfileRegistry
      */
     private $registry;
@@ -46,11 +53,17 @@ class SitemapDumper implements DumperInterface
      * Constructor.
      *
      * @param ProfileHelper $helper
+     * @param int $maxPerSitemap
      * @param ProfileRegistry $registry
      * @param RenderInterface $render
      */
-    public function __construct(ProfileHelper $helper, ProfileRegistry $registry, RenderInterface $render)
-    {
+    public function __construct(
+        ProfileHelper $helper,
+        $maxPerSitemap,
+        ProfileRegistry $registry,
+        RenderInterface $render
+    ) {
+        $this->maxPerSitemap = $maxPerSitemap;
         $this->helper = $helper;
         $this->registry = $registry;
         $this->render = $render;
@@ -61,22 +74,89 @@ class SitemapDumper implements DumperInterface
      */
     public function dump()
     {
-        $entries = array();
-        $now = new \DateTime();
+        $sitemapEntries = array();
 
         foreach ($this->registry->getProfiles() as $profile) {
-            $this->writeFile(
-                $this->helper->getFilePath($profile->getName()),
-                $this->render->renderSitemap($profile->getUrlEntries())
-            );
-
-            $entries[] = new SitemapEntry($this->helper->getFileUrl($profile->getName()), $now);
+            $sitemapEntries = array_merge($sitemapEntries, $this->getSitemapEntries($profile));
         }
 
         $this->writeFile(
             $this->helper->getFilePath(self::NAME),
-            $this->render->renderSitemapIndex($entries)
+            $this->render->renderSitemapIndex($sitemapEntries)
         );
+    }
+
+
+    /**
+     * Get sitemap entries.
+     *
+     * @param ProfileInterface $profile
+     *
+     * @return array|SitemapEntry[]
+     */
+    private function getSitemapEntries(ProfileInterface $profile)
+    {
+        $now = new \DateTime();
+        $urlEntries = $profile->getUrlEntries();
+        $numberOfSitemap = $this->getNumberOfSitemap($urlEntries);
+
+        if (1 === $numberOfSitemap) {
+            $this->writeFile(
+                $this->helper->getFilePath($this->getFilename($profile)),
+                $this->render->renderSitemap($urlEntries)
+            );
+
+            return array(new SitemapEntry($this->helper->getFileUrl($this->getFilename($profile)), $now));
+        }
+
+
+        $sitemapEntries = array();
+
+        for ($number = 0; $number < $numberOfSitemap; $number++) {
+            $filename = $this->getFilename($profile, $number);
+            $entries = array_slice($urlEntries, $number * $this->maxPerSitemap, $this->maxPerSitemap);
+
+            $this->writeFile($this->helper->getFilePath($filename), $this->render->renderSitemap($entries));
+
+            $sitemapEntries[] = new SitemapEntry($this->helper->getFileUrl($filename), $now);
+        }
+
+        return $sitemapEntries;
+    }
+
+    /**
+     * Get number of sitemap.
+     *
+     * @param array|UrlEntryInterface[] $urlEntries
+     *
+     * @return int
+     */
+    private function getNumberOfSitemap(array $urlEntries)
+    {
+        $total = count($urlEntries);
+
+        if ($total <= $this->maxPerSitemap) {
+            return 1;
+        }
+
+        return intval(ceil($total / $this->maxPerSitemap));
+    }
+
+    /**
+     * Get filename.
+     *
+     * @param ProfileInterface $profile
+     * @param null|int $number
+     *
+     * @return string
+     */
+    private function getFilename(ProfileInterface $profile, $number = null)
+    {
+        if (null === $number) {
+            return $profile->getName() . '.xml';
+        }
+
+        return $profile->getName() . '-' . $number . '.xml';
     }
 
     /**
