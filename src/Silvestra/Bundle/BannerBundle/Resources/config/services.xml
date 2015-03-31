@@ -13,13 +13,6 @@
         <!--Silvestra banner zone registry-->
         <service id="silvestra_banner.registry.banner_zone" class="Silvestra\Component\Banner\Registry\BannerZoneRegistry" public="false" />
 
-        <!--Silvestra banner zone provider-->
-        <service id="silvestra_banner.provider.banner_zone" class="Silvestra\Component\Banner\Provider\BannerZoneProvider" public="true">
-            <argument type="service" id="silvestra_banner.manager.banner_zone" />
-            <argument type="service" id="silvestra_banner.registry.banner_zone" />
-            <argument type="service" id="translator" />
-        </service>
-
         <!--Silvestra admin menu event listener-->
         <service id="silvestra_banner.listener.admin_menu" class="Silvestra\Bundle\BannerBundle\EventListener\AdminMenuListener" parent="silvestra_admin.subscriber.admin_menu">
             <tag name="kernel.event_subscriber" />
@@ -32,6 +25,12 @@
 
         <service id="silvestra_banner.delete_handler.banner_zone" class="Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler" public="false">
             <argument type="service" id="silvestra_banner.manager.banner_zone" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <service id="silvestra_banner.synchronizer.banner_zone" class="Silvestra\Component\Banner\BannerZoneSynchronizer" public="false">
+            <argument type="service" id="silvestra_banner.manager.banner_zone" />
+            <argument type="service" id="silvestra_banner.registry.banner_zone" />
             <argument type="service" id="translator" />
         </service>
 

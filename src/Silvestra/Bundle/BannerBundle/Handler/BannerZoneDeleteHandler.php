@@ -56,10 +56,10 @@ class BannerZoneDeleteHandler
     public function process($bannerZoneId, Request $request)
     {
         if ($request->isMethod('DELETE')) {
-            $banner = $this->manager->findById($bannerZoneId);
+            $zone = $this->manager->findById($bannerZoneId);
 
-            if (null !== $banner) {
-                $this->manager->remove($banner);
+            if ((null !== $zone) && (false === $zone->isSystem())) {
+                $this->manager->remove($zone);
 
                 return true;
             }

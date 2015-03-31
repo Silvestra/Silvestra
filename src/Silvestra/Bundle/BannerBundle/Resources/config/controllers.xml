@@ -22,6 +22,7 @@
             <argument type="service" id="silvestra_banner.form_factory.banner_zone" />
             <argument type="service" id="silvestra_banner.form_handler.banner_zone" />
             <argument type="service" id="silvestra_banner.manager.banner_zone" />
+            <argument type="service" id="silvestra_banner.synchronizer.banner_zone" />
             <argument type="service" id="templating" />
         </service>
 

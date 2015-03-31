@@ -48,6 +48,11 @@ class BannerZone implements BannerZoneInterface
     protected $height;
 
     /**
+     * @var bool
+     */
+    protected $system;
+
+    /**
      * @var array|BannerInterface[]
      */
     protected $banners;
@@ -69,6 +74,7 @@ class BannerZone implements BannerZoneInterface
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
+        $this->system = false;
     }
 
     /**
@@ -167,6 +173,24 @@ class BannerZone implements BannerZoneInterface
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSystem($system)
+    {
+        $this->system = $system;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSystem()
+    {
+        return $this->system;
     }
 
     /**

@@ -97,6 +97,27 @@ class BannerZoneManager extends BaseBannerZoneManager
     /**
      * {@inheritdoc}
      */
+    public function findSystemSlugs()
+    {
+        $qb = $this->repository->createQueryBuilder('bz');
+
+        $qb->andWhere($qb->expr()->eq('bz.system', true));
+
+        $qb->select('bz.slug');
+
+        $result = $qb->getQuery()->getArrayResult();
+
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row['slug'];
+        }
+
+        return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function add(BannerZoneInterface $bannerZone, $save = false)
     {
         $this->em->persist($bannerZone);

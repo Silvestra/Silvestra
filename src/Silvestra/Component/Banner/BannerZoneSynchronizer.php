@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Silvestra package.
+ * This file is part of the Tadcka package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Banner\Provider;
+namespace Silvestra\Component\Banner;
 
+use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
 use Silvestra\Component\Banner\Registry\BannerZoneConfig;
 use Silvestra\Component\Banner\Registry\BannerZoneRegistry;
@@ -19,10 +20,11 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 12/5/14 10:42 PM
+ * @since 3/31/15 11:12 PM
  */
-class BannerZoneProvider implements BannerZoneProviderInterface
+class BannerZoneSynchronizer
 {
+
     /**
      * @var BannerZoneManagerInterface
      */
@@ -56,38 +58,49 @@ class BannerZoneProvider implements BannerZoneProviderInterface
     }
 
     /**
-     * {@inheritdoc}
+     *
      */
-    public function getConfigChoices($slug)
+    public function synchronize()
     {
-        $existingSlugs = $this->manager->findExistingSlugs();
-        $list = array();
+        $existingSystemZones = $this->manager->findSystemSlugs();
 
+        $newZones = array();
         foreach ($this->registry->getConfigs() as $config) {
-            if (($slug && ($slug === $config->getSlug())) || !in_array($config->getSlug(), $existingSlugs)) {
-                $list[$config->getSlug()] = $this->getConfigName($config);
+            if (false === in_array($config->getSlug(), $existingSystemZones)) {
+                $newZones[] = $this->createZone($config);
             }
         }
 
-        return $list;
+        if (0 < count($newZones)) {
+            $this->manager->save();
+        }
     }
 
-
     /**
-     * Get banner zone config name.
+     * Create banner zone.
      *
      * @param BannerZoneConfig $config
      *
-     * @return string
+     * @return BannerZoneInterface
      */
-    private function getConfigName(BannerZoneConfig $config)
+    private function createZone(BannerZoneConfig $config)
     {
+        list($width, $height) = $config->getSize();
+        $zone = $this->manager->create();
         $name = $config->getName();
 
-        if ($domain = $config->getTranslationDomain()) {
-            $name = $this->translator->trans($name, array(), $domain);
+        if ($config->getTranslationDomain()) {
+            $name = $this->translator->trans($name, array(), $config->getTranslationDomain());
         }
+        $zone->setName($name);
+        $zone->setCode($config->getSlug());
+        $zone->setSlug($config->getSlug());
+        $zone->setWidth($width);
+        $zone->setHeight($height);
+        $zone->setSystem(true);
 
-        return $name;
+        $this->manager->add($zone);
+
+        return $zone;
     }
 }

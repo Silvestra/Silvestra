@@ -59,7 +59,10 @@ class GdImageCropper implements ImageCropperInterface
 
         $imagine->open($absolutePath)
             ->crop($this->getStartPoint($coordinates['x1'], $coordinates['y1']), $this->getBox($coordinates))
-            ->save($this->filesystem->getAbsoluteFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR));
+            ->save(
+                $this->filesystem->getAbsoluteFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR),
+                ImageOptionHelper::getOption($image->getFilename())
+            );
 
         return $this->filesystem->getRelativeFilePath($image->getFilename(), Filesystem::CROPPER_SUB_DIR);
     }

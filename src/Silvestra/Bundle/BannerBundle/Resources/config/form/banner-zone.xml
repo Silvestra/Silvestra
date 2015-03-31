@@ -23,8 +23,8 @@
         <!--Silvestra banner zone form type-->
         <service id="silvestra_banner.form_type.banner_zone" class="Silvestra\Component\Banner\Form\Type\BannerZoneType" public="true">
             <tag name="form.type" alias="silvestra_banner_zone" />
+
             <argument>%silvestra_banner.model.banner_zone.class%</argument>
-            <argument type="service" id="silvestra_banner.provider.banner_zone" />
         </service>
 
     </services>

@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\BannerBundle\Controller;
 
+use Silvestra\Component\Banner\BannerZoneSynchronizer;
 use Silvestra\Component\Banner\Form\Factory\BannerZoneFormFactory;
 use Silvestra\Component\Banner\Form\Handler\BannerZoneFormHandler;
 use Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler;
@@ -48,6 +49,11 @@ class BannerZoneController
     private $manager;
 
     /**
+     * @var BannerZoneSynchronizer
+     */
+    private $synchronizer;
+
+    /**
      * @var EngineInterface
      */
     private $templating;
@@ -59,6 +65,7 @@ class BannerZoneController
      * @param BannerZoneFormFactory $factory
      * @param BannerZoneFormHandler $handler
      * @param BannerZoneManagerInterface $manager
+     * @param BannerZoneSynchronizer $synchronizer
      * @param EngineInterface $templating
      */
     public function __construct(
@@ -66,17 +73,21 @@ class BannerZoneController
         BannerZoneFormFactory $factory,
         BannerZoneFormHandler $handler,
         BannerZoneManagerInterface $manager,
+        BannerZoneSynchronizer $synchronizer,
         EngineInterface $templating
     ) {
         $this->deleteHandler = $deleteHandler;
         $this->factory = $factory;
         $this->handler = $handler;
         $this->manager = $manager;
+        $this->synchronizer = $synchronizer;
         $this->templating = $templating;
     }
 
     public function listAction()
     {
+        $this->synchronizer->synchronize();
+
         return $this->renderResponse(
             'SilvestraBannerBundle:BannerZone:list.html.twig',
             array('banner_zones' => $this->manager->findAll())

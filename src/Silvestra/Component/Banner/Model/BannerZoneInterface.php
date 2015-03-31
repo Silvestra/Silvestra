@@ -106,6 +106,22 @@ interface BannerZoneInterface
     public function getHeight();
 
     /**
+     * Set system.
+     *
+     * @param bool $system
+     *
+     * @return BannerZoneInterface
+     */
+    public function setSystem($system);
+
+    /**
+     * Check or is system.
+     *
+     * @return bool
+     */
+    public function isSystem();
+
+    /**
      * Set banners.
      *
      * @param array|BannerInterface[] $banners

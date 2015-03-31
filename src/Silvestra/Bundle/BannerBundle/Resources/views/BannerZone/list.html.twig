@@ -18,9 +18,9 @@
                             <strong>{{ banner_zone.name }}</strong>
                         </a>
                         <span class="pull-right">
+                            <strong>{{ 'form.banner_zone.code'|trans }}:</strong> {{ banner_zone.code }}
                             <strong>{{ 'form.banner_zone.width'|trans }}:</strong> {{ banner_zone.width }}
                             <strong>{{ 'form.banner_zone.height'|trans }}:</strong> {{ banner_zone.height }}
-                            <strong>{{ 'form.banner_zone.code'|trans }}:</strong> {{ banner_zone.height }}
                         </span>
                     </div>
                     <div class="panel-body">
@@ -32,9 +32,11 @@
                     </div>
                     <div class="panel-footer">
                         <a href="{{ url('silvestra_banner.banner_zone_edit', {zoneId: banner_zone.id}) }}">{{ 'button.edit'|trans }}</a>
-                        <a class="silvestra-banner-zone-delete" href="{{ url('silvestra_banner.banner_zone_delete', {zoneId: banner_zone.id}) }}" data-close-button="{{ 'button.close'|trans }}" data-confirm-button="{{ 'button.yes'|trans }}" data-title="{{ 'delete_question.banner_zone'|trans({'%name%': banner_zone.name}) }}" data-error-title="{{ 'an_error_occurred'|trans }}">
-                            {{ 'button.delete'|trans }}
-                        </a>
+                        {% if not banner_zone.isSystem %}
+                            <a class="silvestra-banner-zone-delete" href="{{ url('silvestra_banner.banner_zone_delete', {zoneId: banner_zone.id}) }}" data-close-button="{{ 'button.close'|trans }}" data-confirm-button="{{ 'button.yes'|trans }}" data-title="{{ 'delete_question.banner_zone'|trans({'%name%': banner_zone.name}) }}" data-error-title="{{ 'an_error_occurred'|trans }}">
+                                {{ 'button.delete'|trans }}
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
