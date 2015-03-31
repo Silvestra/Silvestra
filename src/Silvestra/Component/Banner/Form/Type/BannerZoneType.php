@@ -43,6 +43,8 @@ class BannerZoneType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $isSystem = $builder->getData() ? $builder->getData()->isSystem() : false;
+
         $builder->add(
             'name',
             'text',
@@ -70,7 +72,7 @@ class BannerZoneType extends AbstractType
                 'label' => 'form.banner_zone.slug',
                 'required' => false,
                 'constraints' => array(new Assert\NotBlank()),
-                'disabled' => $builder->getData()->isSystem()
+                'disabled' => $isSystem
             )
         );
 
@@ -81,7 +83,7 @@ class BannerZoneType extends AbstractType
                 'label' => 'form.banner_zone.width',
                 'required' => false,
                 'constraints' => array(new Assert\NotBlank()),
-                'disabled' => $builder->getData()->isSystem()
+                'disabled' => $isSystem
             )
         );
 
@@ -92,7 +94,7 @@ class BannerZoneType extends AbstractType
                 'label' => 'form.banner_zone.height',
                 'required' => false,
                 'constraints' => array(new Assert\NotBlank()),
-                'disabled' => $builder->getData()->isSystem()
+                'disabled' => $isSystem
             )
         );
 
