@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\BannerBundle\Handler;
 
+use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,18 +49,17 @@ class BannerZoneDeleteHandler
     /**
      * Process banner delete.
      *
-     * @param int $bannerZoneId
+     * @param BannerZoneInterface $bannerZone
      * @param Request $request
      *
      * @return bool
      */
-    public function process($bannerZoneId, Request $request)
+    public function process($bannerZone, Request $request)
     {
         if ($request->isMethod('DELETE')) {
-            $zone = $this->manager->findById($bannerZoneId);
 
-            if ((null !== $zone) && (false === $zone->isSystem())) {
-                $this->manager->remove($zone);
+            if (false === $bannerZone->isSystem()) {
+                $this->manager->remove($bannerZone);
 
                 return true;
             }

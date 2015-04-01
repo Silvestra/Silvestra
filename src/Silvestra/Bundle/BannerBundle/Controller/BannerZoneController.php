@@ -12,10 +12,14 @@
 namespace Silvestra\Bundle\BannerBundle\Controller;
 
 use Silvestra\Component\Banner\BannerZoneSynchronizer;
+use Silvestra\Component\Banner\Event\BannerZoneEvent;
+use Silvestra\Component\Banner\Event\BannerZoneEvents;
 use Silvestra\Component\Banner\Form\Factory\BannerZoneFormFactory;
 use Silvestra\Component\Banner\Form\Handler\BannerZoneFormHandler;
 use Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler;
+use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,10 +32,16 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class BannerZoneController
 {
+
     /**
      * @var BannerZoneDeleteHandler
      */
     private $deleteHandler;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
 
     /**
      * @var BannerZoneFormFactory
@@ -62,6 +72,7 @@ class BannerZoneController
      * Constructor.
      *
      * @param BannerZoneDeleteHandler $deleteHandler
+     * @param EventDispatcherInterface $eventDispatcher
      * @param BannerZoneFormFactory $factory
      * @param BannerZoneFormHandler $handler
      * @param BannerZoneManagerInterface $manager
@@ -70,6 +81,7 @@ class BannerZoneController
      */
     public function __construct(
         BannerZoneDeleteHandler $deleteHandler,
+        EventDispatcherInterface $eventDispatcher,
         BannerZoneFormFactory $factory,
         BannerZoneFormHandler $handler,
         BannerZoneManagerInterface $manager,
@@ -77,6 +89,7 @@ class BannerZoneController
         EngineInterface $templating
     ) {
         $this->deleteHandler = $deleteHandler;
+        $this->eventDispatcher = $eventDispatcher;
         $this->factory = $factory;
         $this->handler = $handler;
         $this->manager = $manager;
@@ -84,9 +97,9 @@ class BannerZoneController
         $this->templating = $templating;
     }
 
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $this->synchronizer->synchronize();
+        $this->synchronizer->synchronize($request->getLocale());
 
         return $this->renderResponse(
             'SilvestraBannerBundle:BannerZone:list.html.twig',
@@ -101,6 +114,7 @@ class BannerZoneController
 
         if ($this->handler->process($form, $request)) {
             $this->manager->save();
+            $this->eventDispatcher->dispatch(BannerZoneEvents::CREATE, $this->createEvent($bannerZone, $request));
 
             return $this->handler->onSuccess();
         }
@@ -123,6 +137,7 @@ class BannerZoneController
 
         if ($this->handler->process($form, $request)) {
             $this->manager->save();
+            $this->eventDispatcher->dispatch(BannerZoneEvents::EDIT, $this->createEvent($bannerZone, $request));
 
             return $this->handler->onSuccess();
         }
@@ -135,8 +150,11 @@ class BannerZoneController
 
     public function deleteAction(Request $request, $zoneId)
     {
-        if ($this->deleteHandler->process($zoneId, $request)) {
+        $bannerZone = $this->manager->findById($zoneId);
+
+        if ($this->deleteHandler->process($bannerZone, $request)) {
             $this->manager->save();
+            $this->eventDispatcher->dispatch(BannerZoneEvents::DELETE, $this->createEvent($bannerZone, $request));
 
             return $this->deleteHandler->onSuccess();
         }
@@ -155,5 +173,18 @@ class BannerZoneController
     private function renderResponse($name, array $parameters = array())
     {
         return new Response($this->templating->render($name, $parameters));
+    }
+
+    /**
+     * Create banner zone event.
+     *
+     * @param BannerZoneInterface $bannerZone
+     * @param Request $request
+     *
+     * @return BannerZoneEvent
+     */
+    private function createEvent($bannerZone, Request $request)
+    {
+        return new BannerZoneEvent($bannerZone, $request->getLocale());
     }
 }

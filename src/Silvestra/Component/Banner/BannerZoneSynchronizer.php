@@ -11,10 +11,13 @@
 
 namespace Silvestra\Component\Banner;
 
+use Silvestra\Component\Banner\Event\BannerEvents;
+use Silvestra\Component\Banner\Event\BannerZoneEvent;
 use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
 use Silvestra\Component\Banner\Registry\BannerZoneConfig;
 use Silvestra\Component\Banner\Registry\BannerZoneRegistry;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -24,6 +27,11 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class BannerZoneSynchronizer
 {
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
 
     /**
      * @var BannerZoneManagerInterface
@@ -43,31 +51,39 @@ class BannerZoneSynchronizer
     /**
      * Constructor.
      *
+     * @param EventDispatcherInterface $eventDispatcher
      * @param BannerZoneManagerInterface $manager
      * @param BannerZoneRegistry $registry
      * @param TranslatorInterface $translator
      */
     public function __construct(
+        EventDispatcherInterface $eventDispatcher,
         BannerZoneManagerInterface $manager,
         BannerZoneRegistry $registry,
         TranslatorInterface $translator
     ) {
+        $this->eventDispatcher = $eventDispatcher;
         $this->manager = $manager;
         $this->registry = $registry;
         $this->translator = $translator;
     }
 
     /**
+     * Synchronize system banner zones.
      *
+     * @param string $locale
      */
-    public function synchronize()
+    public function synchronize($locale)
     {
         $existingSystemZones = $this->manager->findSystemSlugs();
 
         $newZones = array();
         foreach ($this->registry->getConfigs() as $config) {
             if (false === in_array($config->getSlug(), $existingSystemZones)) {
-                $newZones[] = $this->createZone($config);
+                $zone = $this->createZone($config);
+                $this->eventDispatcher->dispatch(BannerEvents::CREATE, new BannerZoneEvent($zone, $locale));
+
+                $newZones[] = $zone;
             }
         }
 

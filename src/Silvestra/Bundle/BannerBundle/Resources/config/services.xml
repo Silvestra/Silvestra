@@ -29,6 +29,7 @@
         </service>
 
         <service id="silvestra_banner.synchronizer.banner_zone" class="Silvestra\Component\Banner\BannerZoneSynchronizer" public="false">
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="silvestra_banner.manager.banner_zone" />
             <argument type="service" id="silvestra_banner.registry.banner_zone" />
             <argument type="service" id="translator" />
