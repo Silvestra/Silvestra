@@ -80,15 +80,16 @@ class BannerZoneSynchronizer
         $newZones = array();
         foreach ($this->registry->getConfigs() as $config) {
             if (false === in_array($config->getSlug(), $existingSystemZones)) {
-                $zone = $this->createZone($config);
-                $this->eventDispatcher->dispatch(BannerEvents::CREATE, new BannerZoneEvent($zone, $locale));
-
-                $newZones[] = $zone;
+                $newZones[] = $this->createZone($config);
             }
         }
 
         if (0 < count($newZones)) {
             $this->manager->save();
+
+            foreach ($newZones as $zone) {
+                $this->eventDispatcher->dispatch(BannerEvents::CREATE, new BannerZoneEvent($zone, $locale));
+            }
         }
     }
 
