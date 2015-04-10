@@ -104,6 +104,22 @@ class SeoEngineTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test method: renderLinks().
+     */
+    public function testRenderLinks()
+    {
+        $this->assertEquals('', $this->seoEngine->renderLinks());
+
+        $this->seoPage->addLink('prev', 'www.silvestra?page=1');
+        $this->seoPage->addLink('next', 'www.silvestra?page=3');
+
+        $this->assertEquals(
+            "<link rel=\"prev\" href=\"www.silvestra?page=1\"/>\n<link rel=\"next\" href=\"www.silvestra?page=3\"/>\n",
+            $this->seoEngine->renderLinks()
+        );
+    }
+
+    /**
      * Test method: renderMeta().
      */
     public function testRenderMeta()

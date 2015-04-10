@@ -47,6 +47,13 @@ interface SeoEngineInterface
     public function renderLinkCanonical();
 
     /**
+     * Render links.
+     *
+     * @return string
+     */
+    public function renderLinks();
+
+    /**
      * Render meta.
      *
      * @return string

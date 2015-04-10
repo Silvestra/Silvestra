@@ -96,6 +96,19 @@ class SeoEngine implements SeoEngineInterface
     /**
      * {@inheritdoc}
      */
+    public function renderLinks()
+    {
+        $links = '';
+        foreach ($this->seoPage->getLinks() as $rel => $href) {
+            $links .= sprintf("<link rel=\"%s\" href=\"%s\"/>\n", $rel, $href);
+        }
+
+        return $links;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function renderMeta()
     {
         $meta = '';

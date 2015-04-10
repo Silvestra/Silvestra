@@ -43,6 +43,11 @@ class SeoPage implements SeoPageInterface
     /**
      * @var array
      */
+    protected $links = array();
+
+    /**
+     * @var array
+     */
     protected $metas;
 
     /**
@@ -168,6 +173,32 @@ class SeoPage implements SeoPageInterface
     public function getLinkCanonical()
     {
         return $this->linkCanonical;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLinks($links)
+    {
+        $this->links = $links;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLinks()
+    {
+        return $this->links;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addLink($rel, $href)
+    {
+        $this->links[$rel] = $href;
     }
 
     /**
