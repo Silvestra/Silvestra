@@ -15,22 +15,16 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="silvestra_site.form_factory.site.class">Silvestra\Component\Site\Form\Factory\SiteFormFactory</parameter>
-        <parameter key="silvestra_site.form_handler.site.class">Silvestra\Component\Site\Form\Handler\SiteFormHandler</parameter>
-        <parameter key="silvestra_site.form_type.site.class">Silvestra\Component\Site\Form\Type\SiteType</parameter>
-    </parameters>
-
     <services>
 
         <!--Silvestra site form factory-->
-        <service id="silvestra_site.form_factory.site" class="%silvestra_site.form_factory.site.class%">
+        <service id="silvestra_site.form_factory.site" class="Silvestra\Component\Site\Form\Factory\SiteFormFactory">
             <argument type="service" id="form.factory" />
             <argument type="service" id="router" />
         </service>
 
         <!--Silvestra site form handler-->
-        <service id="silvestra_site.form_handler.site" class="%silvestra_site.form_handler.site.class%">
+        <service id="silvestra_site.form_handler.site" class="Silvestra\Component\Site\Form\Handler\SiteFormHandler">
             <argument type="service" id="silvestra_notification.manager.alert" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="silvestra_site.manager.site" />
@@ -38,8 +32,9 @@
         </service>
 
         <!--Silvestra site form type-->
-        <service id="silvestra_site.form_type.site" class="%silvestra_site.form_type.site.class%">
+        <service id="silvestra_site.form_type.site" class="Silvestra\Component\Site\Form\Type\SiteType">
             <tag name="form.type" alias="silvestra_site" />
+
             <argument>%silvestra_site.model.site.class%</argument>
         </service>
 

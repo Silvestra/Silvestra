@@ -17,24 +17,25 @@
 
     <services>
 
-        <!--Default seo page-->
+        <!--Silvestra default seo page-->
         <service id="silvestra_seo.page.default" class="Silvestra\Component\Seo\SeoPage" public="true" />
 
-        <!--Default seo presentation-->
+        <!--Silvestra default seo presentation-->
         <service id="silvestra_seo.presentation.default" class="Silvestra\Component\Seo\SeoPresentation" public="true">
             <argument>%silvestra_seo.page.encoding%</argument>
             <argument type="service" id="silvestra_seo.page" />
         </service>
 
-        <!--Seo templating-->
+        <!--Silvestra seo templating-->
         <service id="silvestra_seo.templating" class="Silvestra\Component\Seo\Templating\SeoEngine" public="false">
             <argument>%silvestra_seo.page.encoding%</argument>
             <argument type="service" id="silvestra_seo.page" />
         </service>
 
-        <!--Seo twig extension-->
+        <!--Silvestra seo twig extension-->
         <service class="Silvestra\Bundle\SeoBundle\Twig\Extension\SeoExtension">
             <tag name="twig.extension" alias="silvestra_seo" />
+
             <argument type="service" id="silvestra_seo.templating" />
         </service>
 

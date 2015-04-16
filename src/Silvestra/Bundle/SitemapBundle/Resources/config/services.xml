@@ -1,11 +1,21 @@
 <?xml version="1.0" ?>
 
+<!--
+ This file is part of the Silvestra package.
+
+ (c) Tadas Gliaubicas <tadcka89@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
 
+        <!--Silvestra sitemap dump command-->
         <service id="silvestra_sitemap.command.dump" class="Silvestra\Component\Sitemap\Command\DumpCommand">
             <tag name="console.command" />
 
@@ -14,6 +24,7 @@
             <argument type="service" id="router" />
         </service>
 
+        <!--Silvestra sitemap dumper-->
         <service id="silvestra_sitemap.dumper.sitemap" class="Silvestra\Component\Sitemap\Dumper\SitemapDumper" public="false">
             <argument type="service" id="silvestra_sitemap.helper.profile" />
             <argument>%silvestra_sitemap.max_per_sitemap%</argument>
@@ -21,13 +32,16 @@
             <argument type="service" id="silvestra_sitemap.render" />
         </service>
 
+        <!--Silvestra sitemap profile helper-->
         <service id="silvestra_sitemap.helper.profile" class="Silvestra\Component\Sitemap\Helper\ProfileHelper" public="false">
             <argument type="service" id="router" />
             <argument>%silvestra_sitemap.target%</argument>
         </service>
 
+        <!--Silvestra sitemap profile registry-->
         <service id="silvestra_sitemap.registry.profile" class="Silvestra\Component\Sitemap\Profile\ProfileRegistry" public="false" />
 
+        <!--Silvestra sitemap xml render-->
         <service id="silvestra_sitemap.render.xml" class="Silvestra\Component\Sitemap\Render\XmlRender" public="false" />
 
     </services>

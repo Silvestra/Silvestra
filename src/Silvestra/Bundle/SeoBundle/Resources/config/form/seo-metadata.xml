@@ -15,14 +15,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="silvestra_seo.form_type.seo_metadata.class">Silvestra\Component\Seo\Form\Type\SeoMetadataType</parameter>
-    </parameters>
-
     <services>
 
         <!--Silvestra seo metadata form type-->
-        <service id="silvestra_seo.form_type.seo_metadata" class="%silvestra_seo.form_type.seo_metadata.class%">
+        <service id="silvestra_seo.form_type.seo_metadata" class="Silvestra\Component\Seo\Form\Type\SeoMetadataType">
             <tag name="form.type" alias="silvestra_seo_metadata" />
             <argument>%silvestra_seo.model.seo_metadata.class%</argument>
         </service>
