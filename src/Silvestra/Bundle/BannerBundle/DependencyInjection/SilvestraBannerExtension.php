@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Loader;
 
 class SilvestraBannerExtension extends Extension
 {
+
     /**
      * {@inheritdoc}
      */

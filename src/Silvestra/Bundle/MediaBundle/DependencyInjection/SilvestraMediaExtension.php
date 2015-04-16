@@ -19,6 +19,7 @@ use Symfony\Component\DependencyInjection\Loader;
 
 class SilvestraMediaExtension extends Extension
 {
+
     /**
      * {@inheritDoc}
      */
