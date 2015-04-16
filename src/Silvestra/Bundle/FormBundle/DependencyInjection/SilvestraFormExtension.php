@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Loader;
 
 class SilvestraFormExtension extends Extension
 {
+
     /**
      * {@inheritdoc}
      */
@@ -29,6 +30,5 @@ class SilvestraFormExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('form/key-value.xml');
         $loader->load('form/tag.xml');
-        $loader->load('services.xml');
     }
 }

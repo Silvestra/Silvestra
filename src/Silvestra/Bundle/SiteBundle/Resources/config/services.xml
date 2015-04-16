@@ -22,7 +22,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <!--Seo presentation-->
+        <!--Silvestra site seo presentation-->
         <service id="silvestra_site.presentation" class="Silvestra\Component\Site\Seo\SeoPresentation" public="true">
             <argument>%silvestra_seo.page.encoding%</argument>
             <argument type="service" id="silvestra_seo.page" />

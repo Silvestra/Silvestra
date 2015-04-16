@@ -1,26 +1,41 @@
 <?xml version="1.0" ?>
 
+<!--
+/*
+ * This file is part of the Silvestra package.
+ *
+ * (c) Tadcka <tadcka89@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
 
+        <!--Silvestra media filesystem-->
         <service id="silvestra_media.filesystem" class="Silvestra\Component\Media\Filesystem" public="false">
             <argument>%kernel.root_dir%/../web</argument>
         </service>
 
+        <!--Silvestra image crop handler-->
         <service id="silvestra_media.image_handler.crop" class="Silvestra\Component\Media\Handler\ImageCropHandler" public="false">
             <argument type="service" id="silvestra_media.image.cropper" />
             <argument type="service" id="silvestra_media.manager.image" />
         </service>
 
+        <!--Silvestra image upload handler-->
         <service id="silvestra_media.image_handler.upload" class="Silvestra\Component\Media\Handler\ImageUploadHandler" public="false">
             <argument type="service" id="silvestra_media.manager.image" />
             <argument type="service" id="silvestra_media.image.uploader" />
             <argument type="service" id="validator" />
         </service>
 
+        <!--Silvestra in memory image manager-->
         <service id="silvestra_media.manager.image.in_memory" class="Silvestra\Component\Media\Manager\InMemoryImageManager" public="true">
             <argument type="service" id="silvestra_media.manager.image.default" />
         </service>

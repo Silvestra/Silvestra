@@ -1,5 +1,16 @@
 <?xml version="1.0" ?>
 
+<!--
+/*
+ * This file is part of the Silvestra package.
+ *
+ * (c) Tadcka <tadcka89@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
@@ -18,16 +29,19 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
+        <!--Silvestra banner delete handler-->
         <service id="silvestra_banner.delete_handler.banner" class="Silvestra\Bundle\BannerBundle\Handler\BannerDeleteHandler" public="false">
             <argument type="service" id="silvestra_banner.manager.banner" />
             <argument type="service" id="translator" />
         </service>
 
+        <!--Silvestra banner zone delete handler-->
         <service id="silvestra_banner.delete_handler.banner_zone" class="Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler" public="false">
             <argument type="service" id="silvestra_banner.manager.banner_zone" />
             <argument type="service" id="translator" />
         </service>
 
+        <!--Silvestra banner zone synchronizer-->
         <service id="silvestra_banner.synchronizer.banner_zone" class="Silvestra\Component\Banner\BannerZoneSynchronizer" public="false">
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="silvestra_banner.manager.banner_zone" />
