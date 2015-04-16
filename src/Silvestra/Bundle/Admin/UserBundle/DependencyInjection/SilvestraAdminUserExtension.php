@@ -16,6 +16,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SilvestraAdminUserExtension extends Extension
 {
+
     /**
      * {@inheritDoc}
      */

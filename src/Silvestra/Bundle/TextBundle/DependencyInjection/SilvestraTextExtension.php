@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Loader;
 
 class SilvestraTextExtension extends Extension
 {
+
     /**
      * {@inheritdoc}
      */
