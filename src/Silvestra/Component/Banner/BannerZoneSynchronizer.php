@@ -11,8 +11,8 @@
 
 namespace Silvestra\Component\Banner;
 
-use Silvestra\Component\Banner\Event\BannerEvents;
 use Silvestra\Component\Banner\Event\BannerZoneEvent;
+use Silvestra\Component\Banner\Event\BannerZoneEvents;
 use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
 use Silvestra\Component\Banner\Registry\BannerZoneConfig;
@@ -88,7 +88,7 @@ class BannerZoneSynchronizer
             $this->manager->save();
 
             foreach ($newZones as $zone) {
-                $this->eventDispatcher->dispatch(BannerEvents::CREATE, new BannerZoneEvent($zone, $locale));
+                $this->eventDispatcher->dispatch(BannerZoneEvents::CREATE, new BannerZoneEvent($zone, $locale));
             }
         }
     }
