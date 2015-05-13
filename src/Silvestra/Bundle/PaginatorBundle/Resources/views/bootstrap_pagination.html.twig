@@ -1,0 +1,25 @@
+<ul class="pagination">
+    <li>
+        <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&lt;&lt;</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&lt;</span>
+        </a>
+    </li>
+{% for page in pagination %}
+    <li{% if page.active %} class="disabled"{% endif %}><a href="#">{{ page.page }}</a></li>
+{% endfor %}
+    <li>
+        <a href="#" aria-label="Next">
+            <span aria-hidden="true">&gt;</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" aria-label="Next">
+            <span aria-hidden="true">&gt;&gt;</span>
+        </a>
+    </li>
+</ul>
