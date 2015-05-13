@@ -1,0 +1,31 @@
+{
+    "name":         "silvestra/paginator",
+    "homepage":     "https://github.com/Silvestra/Paginator",
+    "description":  "Silvestra paginator component",
+    "keywords":     ["Paginator, Pagination"],
+    "type":         "library",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":   "Tadas Gliaubicas",
+            "email":  "tadcka89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Component\\Paginator\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
