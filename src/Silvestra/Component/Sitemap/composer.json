@@ -1,8 +1,8 @@
 {
-    "name":         "silvestra/paginator",
-    "homepage":     "https://github.com/Silvestra/Paginator",
-    "description":  "Silvestra paginator component",
-    "keywords":     ["Paginator", "Pagination"],
+    "name":         "silvestra/sitemap",
+    "homepage":     "https://github.com/Silvestra/Sitemap",
+    "description":  "Silvestra sitemap component",
+    "keywords":     ["Sitemap"],
     "type":         "library",
     "license":      "MIT",
     "authors": [
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Silvestra\\Component\\Paginator\\": ""
+            "Silvestra\\Component\\Sitemap\\": ""
         }
     },
     "extra": {

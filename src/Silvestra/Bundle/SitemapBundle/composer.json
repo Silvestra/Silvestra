@@ -1,9 +1,9 @@
 {
-    "name":         "silvestra/paginator",
-    "homepage":     "https://github.com/Silvestra/Paginator",
-    "description":  "Silvestra paginator component",
-    "keywords":     ["Paginator", "Pagination"],
-    "type":         "library",
+    "name":         "silvestra/sitemap-bundle",
+    "homepage":     "https://github.com/Silvestra/SitemapBundle",
+    "description":  "Silvestra sitemap bundle",
+    "keywords":     ["Sitemap"],
+    "type":         "symfony-bundle",
     "license":      "MIT",
     "authors": [
         {
@@ -13,14 +13,16 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "symfony/framework-bundle" : ">=2.3",
+        "silvestra/sitemap": "0.1.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2"
     },
     "autoload": {
         "psr-4": {
-            "Silvestra\\Component\\Paginator\\": ""
+            "Silvestra\\Bundle\\SitemapBundle\\": ""
         }
     },
     "extra": {
