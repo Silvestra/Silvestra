@@ -24,6 +24,14 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('silvestra_paginator');
 
+        $rootNode
+            ->children()
+                // Default template
+                ->scalarNode('default_template')
+                    ->defaultValue('SilvestraPaginatorBundle:Pagination:bootstrap.html.twig')
+                    ->cannotBeEmpty()->end()
+            ->end();
+
         return $treeBuilder;
     }
 }

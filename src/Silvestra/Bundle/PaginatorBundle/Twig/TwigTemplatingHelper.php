@@ -12,9 +12,7 @@
 namespace Silvestra\Bundle\PaginatorBundle\Twig;
 
 use Silvestra\Component\Paginator\Pagination;
-use Silvestra\Component\Paginator\Request\PaginatorTemplatingHelperInterface;
-use Silvestra\Component\Paginator\Url\UrlHelper;
-use Symfony\Component\HttpFoundation\Request;
+use Silvestra\Component\Paginator\TemplatingHelperInterface;
 use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
 /**
@@ -22,7 +20,7 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
  *
  * @since 15.3.4 15.57
  */
-class PaginatorTemplatingHelper extends TemplatingHelper implements PaginatorTemplatingHelperInterface
+class TwigTemplatingHelper extends TemplatingHelper implements TemplatingHelperInterface
 {
 
     /**
@@ -36,31 +34,15 @@ class PaginatorTemplatingHelper extends TemplatingHelper implements PaginatorTem
     private $twig;
 
     /**
-     * @var UrlHelper
-     */
-    private $urlHelper;
-
-    /**
      * Constructor.
      *
      * @param string $template
      * @param \Twig_Environment $twig
-     * @param UrlHelper $urlHelper
      */
-    public function __construct($template, \Twig_Environment $twig, UrlHelper $urlHelper)
+    public function __construct($template, \Twig_Environment $twig)
     {
         $this->template = $template;
         $this->twig = $twig;
-        $this->urlHelper = $urlHelper;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath(Request $request, $routeName = null, array $parameters = array())
-    {
-        return $this->urlHelper->getRelativeUrl($request, $parameters);
     }
 
     /**
@@ -71,6 +53,8 @@ class PaginatorTemplatingHelper extends TemplatingHelper implements PaginatorTem
         if (null === $template) {
             $template = $this->template;
         }
+
+        $parameters['pagination'] = $pagination;
 
         return $this->twig->render($template, $parameters);
     }

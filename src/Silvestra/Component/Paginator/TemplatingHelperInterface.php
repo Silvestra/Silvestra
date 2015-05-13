@@ -9,31 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Paginator\Request;
-
-use Silvestra\Component\Paginator\Pagination;
-use Symfony\Component\HttpFoundation\Request;
+namespace Silvestra\Component\Paginator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 15.3.4 15.57
  */
-interface PaginatorTemplatingHelperInterface
+interface TemplatingHelperInterface
 {
-    /**
-     * Get pagination relative url.
-     *
-     * @param Request $request
-     * @param null|string $routeName
-     * @param array $parameters
-     *
-     * @return string
-     */
-    public function getPath(Request $request, $routeName = null, array $parameters = array());
 
     /**
-     * Render pagination
+     * Render pagination.
      *
      * @param Pagination $pagination
      * @param array $parameters

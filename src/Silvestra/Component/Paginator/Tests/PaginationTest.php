@@ -21,45 +21,52 @@ use Silvestra\Component\Paginator\Pagination;
  */
 class PaginationTest extends TestCase
 {
+
     public function testPagination_WithFirstPage()
     {
         $pagination = new Pagination(1, 1, 5);
         foreach ($pagination as $page) {
-            if (1 === $page['page']) {
-                $this->assertTrue($page['active']);
-                $this->assertTrue($page['first']);
-                $this->assertFalse($page['last']);
+            if (1 === $page) {
+                $this->assertTrue($pagination->isActivePage());
+            } else {
+                $this->assertFalse($pagination->isActivePage());
             }
         }
 
         $this->assertEquals(0, $pagination->getOffset());
+        $this->assertTrue($pagination->isFirstPage());
+        $this->assertFalse($pagination->isLastPage());
     }
 
     public function testPagination_WithMiddlePage()
     {
         $pagination = new Pagination(3, 1, 5);
         foreach ($pagination as $page) {
-            if (3 === $page['page']) {
-                $this->assertTrue($page['active']);
-                $this->assertFalse($page['first']);
-                $this->assertFalse($page['last']);
+            if (3 === $page) {
+                $this->assertTrue($pagination->isActivePage());
+            } else {
+                $this->assertFalse($pagination->isActivePage());
             }
         }
 
         $this->assertEquals(2, $pagination->getOffset());
+        $this->assertFalse($pagination->isFirstPage());
+        $this->assertFalse($pagination->isLastPage());
     }
 
     public function testPagination_WithLastPage()
     {
         $pagination = new Pagination(5, 1, 5);
         foreach ($pagination as $page) {
-            if (5 === $page['page']) {
-                $this->assertTrue($page['active']);
-                $this->assertFalse($page['first']);
-                $this->assertTrue($page['last']);
+            if (5 === $page) {
+                $this->assertTrue($pagination->isActivePage());
+            } else {
+                $this->assertFalse($pagination->isActivePage());
             }
         }
 
         $this->assertEquals(4, $pagination->getOffset());
+        $this->assertFalse($pagination->isFirstPage());
+        $this->assertTrue($pagination->isLastPage());
     }
 }

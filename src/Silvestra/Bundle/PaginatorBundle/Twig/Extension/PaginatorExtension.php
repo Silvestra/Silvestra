@@ -11,7 +11,8 @@
 
 namespace Silvestra\Bundle\PaginatorBundle\Twig\Extension;
 
-use Silvestra\Bundle\PaginatorBundle\Twig\PaginatorTemplatingHelper;
+use Silvestra\Bundle\PaginatorBundle\Twig\TwigTemplatingHelper;
+use Silvestra\Component\Paginator\UrlHelper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -20,21 +21,28 @@ use Silvestra\Bundle\PaginatorBundle\Twig\PaginatorTemplatingHelper;
  */
 class PaginatorExtension extends \Twig_Extension
 {
+
     /**
-     * @var PaginatorTemplatingHelper
+     * @var TwigTemplatingHelper
      */
-    private $helper;
+    private $twigHelper;
+
+    /**
+     * @var UrlHelper
+     */
+    private $urlHelper;
 
     /**
      * Constructor.
      *
-     * @param PaginatorTemplatingHelper $helper
+     * @param TwigTemplatingHelper $twigHelper
+     * @param UrlHelper $urlHelper
      */
-    public function __construct(PaginatorTemplatingHelper $helper)
+    public function __construct(TwigTemplatingHelper $twigHelper, UrlHelper $urlHelper)
     {
-        $this->helper = $helper;
+        $this->twigHelper = $twigHelper;
+        $this->urlHelper = $urlHelper;
     }
-
 
     /**
      * {@inheritdoc}
@@ -43,13 +51,13 @@ class PaginatorExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction(
-                'silvestra_paginator_path',
-                array($this->helper, 'getPath')
+                'silvestra_paginator_render',
+                array($this->twigHelper, 'render'),
+                array('is_safe' => array('html'))
             ),
             new \Twig_SimpleFunction(
-                'silvestra_paginator_render',
-                array($this->helper, 'renderPagination'),
-                array('is_safe' => array('html'))
+                'silvestra_paginator_url',
+                array($this->urlHelper, 'getRelativeUrl')
             ),
         );
     }

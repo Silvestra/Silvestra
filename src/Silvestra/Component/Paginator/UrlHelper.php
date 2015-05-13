@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Paginator\Url;
+namespace Silvestra\Component\Paginator;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -39,31 +39,27 @@ class UrlHelper
     /**
      * Get relative url.
      *
+     * @param string $page
      * @param Request $request
-     * @param null|string $routeName
-     * @param array $parameters
      *
      * @return string
      */
-    public function getRelativeUrl(Request $request, $routeName = null, array $parameters = array())
+    public function getRelativeUrl($page, Request $request)
     {
-        $parameters = array_merge($this->getUrlParameters($request), $parameters);
-
-        if (null === $routeName) {
-            $routeName = $request->attributes->get('_route');
-        }
-
-        return $this->router->generate($routeName, $parameters);
+        return $this->router->generate(
+            $request->attributes->get('_route'),
+            array_merge($this->getParametersFromRequest($request), array('page' => $page))
+        );
     }
 
     /**
-     * Get url parameters.
+     * Get parameters from request.
      *
      * @param Request $request
      *
      * @return array
      */
-    private function getUrlParameters(Request $request)
+    private function getParametersFromRequest(Request $request)
     {
         $parameters = $request->query->all();
         if ($routeParameters = $request->attributes->get('_route_params')) {

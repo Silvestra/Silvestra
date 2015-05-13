@@ -1,0 +1,33 @@
+{% trans_default_domain 'SilvestraPaginator' %}
+
+<ul class="pagination">
+    <li>
+        <a href="{{ silvestra_paginator_url(1, app.request) }}" title="{{ 'first_page'|trans }}">
+            <span>&lt;&lt;</span>
+        </a>
+    </li>
+{% if not pagination.isFirstPage %}
+    <li>
+        <a href="{{ silvestra_paginator_url((pagination.getCurrentPage - 1), app.request) }}" title="{{ 'previous_page'|trans }}">
+            <span>&lt;</span>
+        </a>
+    </li>
+{% endif %}
+{% for page in pagination if page > (pagination.getCurrentPage - 3) and page < (pagination.getCurrentPage + 3) %}
+    <li{% if pagination.isActivePage %} class="disabled"{% endif %}>
+        <a href="{{ silvestra_paginator_url(page, app.request) }}">{{ page }}</a>
+    </li>
+{% endfor %}
+{% if not pagination.isLastPage %}
+    <li>
+        <a href="{{ silvestra_paginator_url((pagination.getCurrentPage + 1), app.request) }}" title="{{ 'next_page'|trans }}">
+            <span>&gt;</span>
+        </a>
+    </li>
+{% endif %}
+    <li>
+        <a href="{{ silvestra_paginator_url(pagination.getPageCount, app.request) }}" title="{{ 'last_page'|trans }}">
+            <span>&gt;&gt;</span>
+        </a>
+    </li>
+</ul>

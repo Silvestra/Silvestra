@@ -54,9 +54,9 @@ class Pagination implements \Iterator
      */
     public function __construct($currentPage, $perPage, $totalCount)
     {
-        $this->currentPage = $currentPage;
-        $this->perPage = $perPage;
-        $this->totalCount = $totalCount;
+        $this->currentPage = (int)$currentPage;
+        $this->perPage = (int)$perPage;
+        $this->totalCount = (int)$totalCount;
 
         $this->pageCount = intval(ceil($totalCount/ $perPage));
     }
@@ -67,12 +67,7 @@ class Pagination implements \Iterator
      */
     public function current()
     {
-        return array(
-            'active' => $this->currentPage === $this->page,
-            'first' => 1 === $this->page,
-            'last' => $this->totalCount === $this->page,
-            'page' => $this->page,
-        );
+        return $this->page;
     }
 
     /**
@@ -105,6 +100,36 @@ class Pagination implements \Iterator
     public function rewind()
     {
         $this->page = 1;
+    }
+
+    /**
+     * Checks or is active page.
+     *
+     * @return bool
+     */
+    public function isActivePage()
+    {
+        return $this->currentPage === $this->page;
+    }
+
+    /**
+     * Checks or is first page.
+     *
+     * @return bool
+     */
+    public function isFirstPage()
+    {
+        return 1 === $this->currentPage;
+    }
+
+    /**
+     * Checks or is last page.
+     *
+     * @return bool
+     */
+    public function isLastPage()
+    {
+        return $this->pageCount === $this->currentPage;
     }
 
     /**

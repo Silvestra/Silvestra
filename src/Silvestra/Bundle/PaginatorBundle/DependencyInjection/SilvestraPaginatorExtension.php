@@ -28,5 +28,7 @@ class SilvestraPaginatorExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+
+        $container->setParameter($this->getAlias() . '.default_template', $config['default_template']);
     }
 }
