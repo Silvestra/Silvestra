@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\SiteBundle\Doctrine\EntityManager;
+namespace Silvestra\Bundle\SiteBundle\Doctrine\ORM\EntityManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -61,7 +61,10 @@ class SiteManager extends BaseSiteManager
         $qb->setMaxResults(1);
         $qb->select('s, sm');
 
-        return $qb->getQuery()->getOneOrNullResult();
+        $q = $qb->getQuery();
+        $q->useResultCache(true, 3600, SiteInterface::SITE);
+
+        return $q->getOneOrNullResult();
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -91,6 +91,7 @@ class InMemoryImageManager extends ImageManager
      */
     public function clear()
     {
+        $this->images = array();
         $this->defaultManager->clear();
     }
 

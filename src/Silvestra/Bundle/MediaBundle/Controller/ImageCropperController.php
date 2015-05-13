@@ -74,7 +74,7 @@ class ImageCropperController
 
         $data = $this->imageCropHandler->process($coordinates, $image);
         $data['thumbnail_path'] = $this->imageResizer
-            ->resize($image->getPath(), array(150, 150), ImageResizerInterface::OUTBOUND);
+            ->resize($image->getPath(), array(150, 150), ImageResizerInterface::INSET);
 
         return new JsonResponse($data);
     }

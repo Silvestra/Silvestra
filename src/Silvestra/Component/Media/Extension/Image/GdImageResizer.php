@@ -90,7 +90,7 @@ class GdImageResizer implements ImageResizerInterface
         }
 
         $this->filesystem->mkdir(dirname($cacheAbsolutePath));
-        $imagineImage->save($cacheAbsolutePath, array('quality' => 100));
+        $imagineImage->save($cacheAbsolutePath, ImageOptionHelper::getOption($filename));
 
         return $this->imageCache->getRelativePath($filename, $cacheKey);
     }

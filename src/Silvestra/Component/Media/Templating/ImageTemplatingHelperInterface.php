@@ -21,23 +21,23 @@ interface ImageTemplatingHelperInterface
     /**
      * Render image html tag.
      *
-     * @param string $filename
+     * @param string $path
      * @param array $size
      * @param null|string $mode
      * @param array $attributes
      *
      * @return string
      */
-    public function renderImageHtmlTag($filename, array $size, $mode = null, array $attributes = array());
+    public function renderImageHtmlTag($path, array $size, $mode = null, array $attributes = array());
 
     /**
      * Resize image.
      *
-     * @param string $filename
+     * @param string $path
      * @param array $size
      * @param null|string $mode
      *
      * @return string
      */
-    public function resizeImage($filename, array $size, $mode = null);
+    public function resizeImage($path, array $size, $mode = null);
 }

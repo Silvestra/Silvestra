@@ -11,7 +11,6 @@
 
 namespace Silvestra\Component\Banner\Form\Type;
 
-use Silvestra\Component\Banner\Provider\BannerZoneProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -27,23 +26,16 @@ class BannerZoneType extends AbstractType
     /**
      * @var string
      */
-    private $bannerZoneClass;
-
-    /**
-     * @var BannerZoneProviderInterface
-     */
-    private $bannerZoneProvider;
+    private $class;
 
     /**
      * Constructor.
      *
-     * @param string $bannerZoneClass
-     * @param BannerZoneProviderInterface $bannerZoneProvider
+     * @param string $class
      */
-    public function __construct($bannerZoneClass, BannerZoneProviderInterface $bannerZoneProvider)
+    public function __construct($class)
     {
-        $this->bannerZoneClass = $bannerZoneClass;
-        $this->bannerZoneProvider = $bannerZoneProvider;
+        $this->class = $class;
     }
 
     /**
@@ -51,6 +43,8 @@ class BannerZoneType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $isSystem = $builder->getData() ? $builder->getData()->isSystem() : false;
+
         $builder->add(
             'name',
             'text',
@@ -71,17 +65,14 @@ class BannerZoneType extends AbstractType
             )
         );
 
-        $slug = $builder->getData() ? $builder->getData()->getSlug() : null;
-
         $builder->add(
             'slug',
-            'choice',
+            'text',
             array(
                 'label' => 'form.banner_zone.slug',
                 'required' => false,
-                'choices' => $this->bannerZoneProvider->getConfigChoices($slug),
-                'empty_value' => 'form.empty_data',
-                'constraints' => array(new Assert\NotBlank())
+                'constraints' => array(new Assert\NotBlank()),
+                'disabled' => $isSystem
             )
         );
 
@@ -91,7 +82,8 @@ class BannerZoneType extends AbstractType
             array(
                 'label' => 'form.banner_zone.width',
                 'required' => false,
-                'constraints' => array(new Assert\NotBlank())
+                'constraints' => array(new Assert\NotBlank()),
+                'disabled' => $isSystem
             )
         );
 
@@ -101,7 +93,8 @@ class BannerZoneType extends AbstractType
             array(
                 'label' => 'form.banner_zone.height',
                 'required' => false,
-                'constraints' => array(new Assert\NotBlank())
+                'constraints' => array(new Assert\NotBlank()),
+                'disabled' => $isSystem
             )
         );
 
@@ -115,7 +108,7 @@ class BannerZoneType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => $this->bannerZoneClass,
+                'data_class' => $this->class,
                 'translation_domain' => 'SilvestraBanner'
             )
         );

@@ -34,17 +34,22 @@ class BannerZoneConfig
     private $translationDomain;
 
     /**
+     * @var array
+     */
+    private $size;
+
+    /**
      * Constructor.
      *
      * @param string $name
      * @param string $slug
-     * @param null|string $translationDomain
+     * @param array $size
      */
-    public function __construct($name, $slug, $translationDomain = null)
+    public function __construct($name, $slug, array $size)
     {
         $this->name = $name;
         $this->slug = $slug;
-        $this->translationDomain = $translationDomain;
+        $this->size = $size;
     }
 
     /**
@@ -65,6 +70,26 @@ class BannerZoneConfig
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Get banner size.
+     *
+     * @return array
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set translation domain.
+     *
+     * @param string $translationDomain
+     */
+    public function setTranslationDomain($translationDomain)
+    {
+        $this->translationDomain = $translationDomain;
     }
 
     /**

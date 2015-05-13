@@ -20,11 +20,13 @@
 
         <field name="code" column="code" type="string" length="255" nullable="false" />
 
-        <field name="slug" column="slug" type="string" length="255" nullable="false" />
+        <field name="slug" column="slug" type="string" length="255" nullable="false" unique="true" />
 
         <field name="width" column="width" type="integer" nullable="false" />
 
         <field name="height" column="height" type="integer" nullable="false" />
+
+        <field name="system" column="system" type="boolean" nullable="false" />
 
         <field name="createdAt" column="created_at" type="datetime" nullable="false" />
 

@@ -69,13 +69,17 @@ class ImageUploader
 
         $image->setFilename($filename);
         $image->setMimeType($uploadedImage->getClientMimeType());
+        $image->setOrderNr(1);
         $image->setOriginalPath($this->filesystem->getRelativeFilePath($filename));
         $image->setPath($image->getOriginalPath());
         $image->setSize($uploadedImage->getClientSize());
         $image->setTemporary(true);
 
         $this->imageManager->add($image);
-        $uploadedImage->move($this->filesystem->getActualFileDir($filename), $image->getFilename());
+
+        $fileDir = $this->filesystem->getActualFileDir($filename);
+
+        $uploadedImage->move($fileDir, $image->getFilename());
 
         return $image;
     }

@@ -119,7 +119,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'publishFrom',
-            'datetime',
+            'date',
             array(
                 'label' => 'form.banner.publish_from',
                 'required' => false,
@@ -128,7 +128,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'publishTo',
-            'datetime',
+            'date',
             array(
                 'label' => 'form.banner.publish_to',
                 'required' => false,
@@ -140,7 +140,6 @@ class BannerType extends AbstractType
             'silvestra_media_image',
             array(
                 'required' => false,
-                'constraints' => array(new Assert\NotBlank())
             )
         );
 

@@ -43,7 +43,12 @@ function MediaImageModal() {
         var $dropzone = $modal.find('.dropzone:first');
         var $input =  $modal.find('#file-upload:first');
         var $uploadButton = $modal.find('.image-upload-button:first');
-        var $uploadCropButton = $modal.find('#image-upload-crop:first');
+        var $uploadCropButton = $modal.find('#image-upload-crop:first')
+
+        $cropperCoordinates = $dropzone.data('coordinates');
+        if (!$cropperCoordinates.length) {
+            $cropperCoordinates = $config.cropper_coordinates;
+        }
 
         FileAPI.event.on($input[0], 'change', function ($event) {
             var $files = FileAPI.getFiles($event);
@@ -103,7 +108,7 @@ function MediaImageModal() {
                         $currentImageWidget.find('img:first').attr('src', $response.thumbnail_path);
                         $currentImageWidget.find('.silvestra-image-filename:first').val($filename);
                         $currentImageWidget.find('.remove-image:first').show();
-                        $modal.hide();
+                        $modal.modal('hide');
 
                         $dropzone.fadeTo(0, 1);
                     },

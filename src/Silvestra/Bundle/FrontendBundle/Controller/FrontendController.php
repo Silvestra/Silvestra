@@ -119,6 +119,20 @@ abstract class FrontendController
     }
 
     /**
+     * Generate url.
+     *
+     * @param string $name
+     * @param array $parameters
+     * @param bool $referenceType
+     *
+     * @return string
+     */
+    protected function generateUrl($name, $parameters = array(), $referenceType = RouterInterface::ABSOLUTE_PATH)
+    {
+        return $this->router->generate($name, $parameters, $referenceType);
+    }
+
+    /**
      * Update page seo.
      *
      * @param SeoMetadataInterface $seoMetadata
@@ -126,6 +140,19 @@ abstract class FrontendController
     protected function updatePageSeo(SeoMetadataInterface $seoMetadata)
     {
         return $this->seoPresentation->updateSeoPage($seoMetadata);
+    }
+
+    /**
+     * Render.
+     *
+     * @param string $name
+     * @param array $parameters
+     *
+     * @return string
+     */
+    protected function render($name, array $parameters = array())
+    {
+        return $this->templating->render($name, $parameters);
     }
 
     /**

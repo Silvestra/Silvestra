@@ -64,7 +64,14 @@ class BannerManager extends BaseBannerManager
      */
     public function findManyByZone(BannerZoneInterface $bannerZone)
     {
-        return $this->repository->findBy(array('zone' => $bannerZone));
+        $qb = $this->repository->createQueryBuilder('b');
+
+        $qb->andWhere($qb->expr()->eq('b.zone', ':banner_zone'))
+            ->setParameter('banner_zone', $bannerZone);
+        $qb->orderBy('b.position');
+        $qb->select('b');
+
+        return $qb->getQuery()->getResult();
     }
 
     /**

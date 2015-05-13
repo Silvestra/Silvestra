@@ -1,5 +1,16 @@
 <?xml version="1.0" ?>
 
+<!--
+/*
+ * This file is part of the Silvestra package.
+ *
+ * (c) Tadcka <tadcka89@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
@@ -14,15 +25,17 @@
         <!--Silvestra alert templating helper-->
         <service id="silvestra_notification.templating_helper.alert" class="Silvestra\Bundle\NotificationBundle\Twig\AlertHelper" public="true">
             <tag name="templating.helper" alias="silvestra_alert" />
+
+            <argument>%silvestra_notification.alert.template%</argument>
             <argument type="service" id="twig" />
         </service>
 
         <!--Silvestra alert twig extension-->
         <service class="Silvestra\Bundle\NotificationBundle\Twig\Extension\AlertExtension">
             <tag name="twig.extension" alias="silvestra_alert" />
+
             <argument type="service" id="silvestra_notification.templating_helper.alert" />
             <argument type="service" id="silvestra_notification.manager.alert" />
-            <argument>%silvestra_notification.alert.template%</argument>
         </service>
 
     </services>

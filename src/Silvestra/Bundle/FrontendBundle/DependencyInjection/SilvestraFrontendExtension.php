@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Loader;
 
 class SilvestraFrontendExtension extends Extension
 {
+
     /**
      * {@inheritDoc}
      */
@@ -28,7 +29,6 @@ class SilvestraFrontendExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
 
         $container->setParameter($this->getAlias() . '.controllers', $config['controllers']);
     }

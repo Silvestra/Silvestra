@@ -14,6 +14,9 @@ namespace Silvestra\Component\Site\Form\Handler;
 use Silvestra\Component\Notification\AlertManager;
 use Silvestra\Component\Site\Model\Manager\SiteManagerInterface;
 use Silvestra\Component\Site\Model\SiteInterface;
+use Silvestra\Component\Site\SiteEvent;
+use Silvestra\Component\Site\SiteEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -26,14 +29,19 @@ use Symfony\Component\Translation\TranslatorInterface;
 class SiteFormHandler
 {
     /**
-     * @var SiteManagerInterface
-     */
-    private $siteManager;
-
-    /**
      * @var AlertManager
      */
     private $alertManager;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var SiteManagerInterface
+     */
+    private $siteManager;
 
     /**
      * @var TranslatorInterface
@@ -43,15 +51,18 @@ class SiteFormHandler
     /**
      * Constructor.
      *
-     * @param SiteManagerInterface $siteManager
      * @param AlertManager $alertManager
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param SiteManagerInterface $siteManager
      * @param TranslatorInterface $translator
      */
     public function __construct(
-        SiteManagerInterface $siteManager,
         AlertManager $alertManager,
+        EventDispatcherInterface $eventDispatcher,
+        SiteManagerInterface $siteManager,
         TranslatorInterface $translator
     ) {
+        $this->eventDispatcher = $eventDispatcher;
         $this->siteManager = $siteManager;
         $this->alertManager = $alertManager;
         $this->translator = $translator;
@@ -81,11 +92,16 @@ class SiteFormHandler
 
     /**
      * On success.
+     *
+     * @param string $locale
+     * @param SiteInterface $site
      */
-    public function onSuccess()
+    public function onSuccess($locale, SiteInterface $site)
     {
-        $alert = $this->alertManager->create();
+        $this->siteManager->save();
+        $this->eventDispatcher->dispatch(SiteEvents::EDIT_SUCCESS, new SiteEvent($locale, $site));
 
+        $alert = $this->alertManager->create();
         $alert->addSuccess($this->translator->trans('success.site_save', array(), 'SilvestraSite'));
         $this->alertManager->setFlashAlert($alert);
     }

@@ -51,6 +51,13 @@ interface BannerZoneManagerInterface
     public function findExistingSlugs();
 
     /**
+     * Find system banner zone slugs.
+     *
+     * @return array
+     */
+    public function findSystemSlugs();
+
+    /**
      * Create new BannerZone object.
      *
      * @return BannerZoneInterface

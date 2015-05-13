@@ -75,6 +75,6 @@ class BannerZoneRegistryTest extends \PHPUnit_Framework_TestCase
 
     private function createConfig($slug)
     {
-        return new BannerZoneConfig('Silvestra', $slug);
+        return new BannerZoneConfig('Silvestra', $slug, array());
     }
 }

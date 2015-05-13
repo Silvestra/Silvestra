@@ -62,6 +62,11 @@ class SeoExtension extends \Twig_Extension
                 array('is_safe' => array('html'))
             ),
             new \Twig_SimpleFunction(
+                'silvestra_seo_links',
+                array($this->seoEngine, 'renderLinks'),
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction(
                 'silvestra_seo_meta',
                 array($this->seoEngine, 'renderMeta'),
                 array('is_safe' => array('html'))

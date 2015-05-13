@@ -13,14 +13,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="silvestra_text.manager.text.default.class">Silvestra\Bundle\TextBundle\Doctrine\EntityManager\TextManager</parameter>
-    </parameters>
-
     <services>
 
         <!--Silvestra default text manager-->
-        <service id="silvestra_text.manager.text.default" class="%silvestra_text.manager.text.default.class%">
+        <service id="silvestra_text.manager.text.default" class="Silvestra\Bundle\TextBundle\Doctrine\EntityManager\TextManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%silvestra_text.model.text.class%</argument>
         </service>

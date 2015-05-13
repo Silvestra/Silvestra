@@ -144,7 +144,12 @@ class Filesystem
                 $error = error_get_last();
                 if (!is_dir($dir)) {
                     if ($error) {
-                        throw new IOException(sprintf('Failed to create "%s": %s.', $dir, $error['message']), 0, null, $dir);
+                        throw new IOException(
+                            sprintf('Failed to create "%s": %s.', $dir, $error['message']),
+                            0,
+                            null,
+                            $dir
+                        );
                     }
                     throw new IOException(sprintf('Failed to create "%s"', $dir), 0, null, $dir);
                 }
@@ -177,7 +182,7 @@ class Filesystem
     {
         $pathParts = array(Media::NAME, $subDir, $this->getFileDirPrefix($filename), $filename);
 
-        return  DIRECTORY_SEPARATOR . $this->getPath($pathParts);
+        return DIRECTORY_SEPARATOR . $this->getPath($pathParts);
     }
 
     /**

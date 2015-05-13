@@ -13,6 +13,7 @@ namespace Silvestra\Bundle\NotificationBundle\Twig;
 
 use Silvestra\Component\Notification\Templating\AlertHelperInterface;
 use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
+use Twig_Environment as Environment;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -21,26 +22,38 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
  */
 class AlertHelper extends TemplatingHelper implements AlertHelperInterface
 {
+
     /**
-     * @var \Twig_Environment
+     * @var string
+     */
+    private $template;
+
+    /**
+     * @var Environment
      */
     private $twig;
 
     /**
      * Constructor.
      *
-     * @param \Twig_Environment $twig
+     * @param $template
+     * @param Environment $twig
      */
-    public function __construct(\Twig_Environment $twig)
+    public function __construct($template, Environment $twig)
     {
+        $this->template = $template;
         $this->twig = $twig;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function render($template, array $context = array())
+    public function render(array $context, $template = null)
     {
+        if (null === $template) {
+            $template = $this->template;
+        }
+
         return $this->twig->render($template, $context);
     }
 

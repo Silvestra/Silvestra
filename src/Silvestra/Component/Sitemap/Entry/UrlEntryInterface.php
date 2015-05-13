@@ -9,21 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Banner\Provider;
+namespace Silvestra\Component\Sitemap\Entry;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 12/5/14 10:44 PM
+ * @since 3/24/15 7:57 PM
  */
-interface BannerZoneProviderInterface
+interface UrlEntryInterface extends EntryInterface
 {
+
     /**
-     * Get banner zone config choices.
+     * Get change freq.
      *
-     * @param string $slug
-     *
-     * @return array
+     * @return string
      */
-    public function getConfigChoices($slug);
+    public function getChangeFreq();
+
+    /**
+     * Get priority
+     *
+     * @return float
+     */
+    public function getPriority();
 }

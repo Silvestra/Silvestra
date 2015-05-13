@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka package.
+ * This file is part of the Silvestra package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\BannerBundle\Handler;
 
+use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,18 +49,17 @@ class BannerZoneDeleteHandler
     /**
      * Process banner delete.
      *
-     * @param int $bannerZoneId
+     * @param BannerZoneInterface $bannerZone
      * @param Request $request
      *
      * @return bool
      */
-    public function process($bannerZoneId, Request $request)
+    public function process($bannerZone, Request $request)
     {
         if ($request->isMethod('DELETE')) {
-            $banner = $this->manager->findById($bannerZoneId);
 
-            if (null !== $banner) {
-                $this->manager->remove($banner);
+            if (false === $bannerZone->isSystem()) {
+                $this->manager->remove($bannerZone);
 
                 return true;
             }

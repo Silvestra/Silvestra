@@ -96,6 +96,19 @@ class SeoEngine implements SeoEngineInterface
     /**
      * {@inheritdoc}
      */
+    public function renderLinks()
+    {
+        $links = '';
+        foreach ($this->seoPage->getLinks() as $rel => $href) {
+            $links .= sprintf("<link rel=\"%s\" href=\"%s\"/>\n", $rel, $href);
+        }
+
+        return $links;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function renderMeta()
     {
         $meta = '';
@@ -132,6 +145,6 @@ class SeoEngine implements SeoEngineInterface
      */
     private function normalize($string)
     {
-        return htmlentities(strip_tags($string), ENT_COMPAT, $this->encoding);
+        return str_replace("'", '', str_replace('"', '', strip_tags($string)));
     }
 }

@@ -107,6 +107,30 @@ interface SeoPageInterface
     public function getLinkCanonical();
 
     /**
+     * Set links.
+     *
+     * @param array $links
+     *
+     * @return SeoPageInterface
+     */
+    public function setLinks($links);
+
+    /**
+     * Get links.
+     *
+     * @return array
+     */
+    public function getLinks();
+
+    /**
+     * Add link.
+     *
+     * @param string $rel
+     * @param string $href
+     */
+    public function addLink($rel, $href);
+
+    /**
      * Add meta.
      *
      * @param string $type

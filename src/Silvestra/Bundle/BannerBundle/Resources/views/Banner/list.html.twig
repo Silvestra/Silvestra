@@ -53,7 +53,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                {{ silvestra_image_html_tag(banner.image.path, [100, 100], null, {class: 'silvestra-banner-image'}) }}
+                                {% set image_path = banner.image is not empty ? banner.image.path : null %}
+                                {{ silvestra_image_html_tag(image_path, [100, 100], null, {class: 'silvestra-banner-image'}) }}
                             </div>
                         </div>
 
