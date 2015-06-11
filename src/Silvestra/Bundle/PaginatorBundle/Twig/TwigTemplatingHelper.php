@@ -50,6 +50,10 @@ class TwigTemplatingHelper extends TemplatingHelper implements TemplatingHelperI
      */
     public function render(Pagination $pagination, array $parameters = array(), $template = null)
     {
+        if (1 >= $pagination->getPageCount()) {
+            return '';
+        }
+
         if (null === $template) {
             $template = $this->template;
         }
