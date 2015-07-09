@@ -13,7 +13,7 @@
 
     <div class="form-group">
         {{ form_row(form.submit, {attr: {class: 'pull-left'}}) }}
-        <a class="btn btn-default pull-left silvestra-banner-cancel" href="{{ url('silvestra_banner.banner_list', {zoneId: zone_id}) }}">
+        <a class="btn btn-default pull-left silvestra-banner-cancel" href="{{ path('silvestra_banner.banner_list', {zoneId: zone_id}) }}">
             {{ 'form.button.cancel'|trans({}, 'SilvestraBanner') }}
         </a>
     </div>
