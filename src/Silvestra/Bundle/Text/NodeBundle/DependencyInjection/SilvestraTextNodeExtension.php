@@ -30,6 +30,7 @@ class SilvestraTextNodeExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('controllers.xml');
         $loader->load('form/text-node.xml');
+        $loader->load('handlers.xml');
         $loader->load('services.xml');
 
         if (!in_array(strtolower($config['db_driver']), array('mongodb', 'orm'))) {

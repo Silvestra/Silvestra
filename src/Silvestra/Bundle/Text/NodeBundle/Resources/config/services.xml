@@ -20,8 +20,7 @@
             <tag name="kernel.event_listener" event="tadcka_sitemap.node_edit" method="onSitemapNodeEdit" />
             <tag name="kernel.event_listener" event="tadcka_tree.node.pre_delete" method="onSitemapNodeDelete" />
 
-            <argument type="service" id="silvestra_text.manager.text" />
-            <argument type="service" id="silvestra_text_node.manager.text_node" />
+            <argument type="service" id="silvestra_text_node.handler.node" />
         </service>
 
     </services>

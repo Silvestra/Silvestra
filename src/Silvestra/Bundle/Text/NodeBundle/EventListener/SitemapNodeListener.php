@@ -11,8 +11,8 @@
 
 namespace Silvestra\Bundle\Text\NodeBundle\EventListener;
 
-use Silvestra\Bundle\Text\NodeBundle\Model\Manager\TextNodeManagerInterface;
-use Silvestra\Component\Text\Model\Manager\TextManagerInterface;
+use Silvestra\Bundle\Text\NodeBundle\Handler\NodeHandler;
+use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 use Tadcka\Bundle\SitemapBundle\Event\SitemapNodeEvent;
 use Tadcka\Bundle\SitemapBundle\Frontend\Model\Tab;
 use Tadcka\Component\Tree\Event\TreeNodeEvent;
@@ -22,26 +22,20 @@ use Tadcka\Component\Tree\Event\TreeNodeEvent;
  */
 class SitemapNodeListener
 {
-    /**
-     * @var TextManagerInterface
-     */
-    private $textManager;
 
     /**
-     * @var TextNodeManagerInterface
+     * @var NodeHandler
      */
-    private $textNodeManager;
+    private $nodeHandler;
 
     /**
      * Constructor.
      *
-     * @param TextManagerInterface $textManager
-     * @param TextNodeManagerInterface $textNodeManager
+     * @param NodeHandler $nodeHandler
      */
-    public function __construct(TextManagerInterface $textManager, TextNodeManagerInterface $textNodeManager)
+    public function __construct(NodeHandler $nodeHandler)
     {
-        $this->textManager = $textManager;
-        $this->textNodeManager = $textNodeManager;
+        $this->nodeHandler = $nodeHandler;
     }
 
     /**
@@ -52,8 +46,7 @@ class SitemapNodeListener
     public function onSitemapNodeEdit(SitemapNodeEvent $event)
     {
         $node = $event->getNode();
-
-        if ('text' === $node->getType()) {
+        if (TextNodeInterface::NODE_TYPE  === $node->getType()) {
             $tab = new Tab(
                 $event->getTranslator()->trans('text', array(), 'SilvestraTextNodeBundle'),
                 'silvestra_text_node',
@@ -75,12 +68,8 @@ class SitemapNodeListener
     public function onSitemapNodeDelete(TreeNodeEvent $event)
     {
         $node = $event->getNode();
-        if ('text' === $node->getType()) {
-            $textNode = $this->textNodeManager->findTextNodeByNode($node);
-            if (null !== $textNode) {
-                $this->textNodeManager->remove($textNode);
-                $this->textManager->remove($textNode->getText());
-            }
+        if (TextNodeInterface::NODE_TYPE === $node->getType()) {
+            $this->nodeHandler->onDeleteNode($node);
         }
     }
 }

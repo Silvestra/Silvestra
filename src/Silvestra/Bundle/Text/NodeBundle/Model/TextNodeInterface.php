@@ -17,6 +17,8 @@ use Tadcka\Component\Tree\Model\NodeInterface;
 interface TextNodeInterface
 {
 
+    const NODE_TYPE = 'text';
+
     /**
      * Set text.
      *

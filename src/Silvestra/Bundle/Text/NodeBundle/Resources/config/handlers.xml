@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<!--
+ This file is part of the Silvestra package.
+
+ (c) Tadas Gliaubicas <tadcka89@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Silvestra node handler-->
+        <service id="silvestra_text_node.handler.node" class="Silvestra\Bundle\Text\NodeBundle\Handler\NodeHandler" lazy="true" public="false">
+            <argument type="service" id="silvestra_text.manager.text" />
+            <argument type="service" id="silvestra_text_node.manager.text_node" />
+        </service>
+
+    </services>
+
+</container>
