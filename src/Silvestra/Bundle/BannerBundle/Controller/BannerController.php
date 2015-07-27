@@ -105,7 +105,7 @@ class BannerController
         return $this->templating->renderResponse(
             'SilvestraBannerBundle:Banner:list.html.twig',
             array(
-                'banners' => $this->bannerManager->findManyByZone($bannerZone),
+                'banners' => $this->bannerManager->findByZone($bannerZone),
                 'banner_zone' => $bannerZone,
             )
         );
