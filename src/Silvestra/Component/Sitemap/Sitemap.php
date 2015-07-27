@@ -9,27 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Component\Sitemap\Entry;
+namespace Silvestra\Component\Sitemap;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 3/24/15 8:13 PM
+ * @since 7/27/15 11:02 PM
  */
-interface EntryInterface
+class Sitemap
 {
-
-    /**
-     * Get url.
-     *
-     * @return string
-     */
-    public function getLoc();
-
-    /**
-     * Get last mod.
-     *
-     * @return string
-     */
-    public function getLastMod();
+    const FILENAME = 'sitemap.xml';
 }

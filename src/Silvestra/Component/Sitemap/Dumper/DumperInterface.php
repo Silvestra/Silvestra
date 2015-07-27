@@ -21,6 +21,8 @@ interface DumperInterface
 
     /**
      * Dump all sitemap content.
+     *
+     * @return string
      */
     public function dump();
 }

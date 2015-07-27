@@ -11,7 +11,7 @@
 
 namespace Silvestra\Component\Sitemap\Command;
 
-use Silvestra\Component\Sitemap\Dumper\SitemapDumper;
+use Silvestra\Component\Sitemap\Dumper\SitemapFileDumper;
 use Silvestra\Component\Sitemap\Helper\ProfileHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -28,7 +28,7 @@ class DumpCommand extends Command
 {
 
     /**
-     * @var SitemapDumper
+     * @var SitemapFileDumper
      */
     private $dumper;
 
@@ -45,17 +45,17 @@ class DumpCommand extends Command
     /**
      * Constructor.
      *
-     * @param SitemapDumper $dumper
+     * @param SitemapFileDumper $dumper
      * @param ProfileHelper $helper
      * @param RouterInterface $router
      */
-    public function __construct(SitemapDumper $dumper, ProfileHelper $helper, RouterInterface $router)
+    public function __construct(SitemapFileDumper $dumper, ProfileHelper $helper, RouterInterface $router)
     {
+        parent::__construct();
+
         $this->dumper = $dumper;
         $this->helper = $helper;
         $this->router = $router;
-
-        parent::__construct();
     }
 
     /**
@@ -83,10 +83,7 @@ class DumpCommand extends Command
 
         $this->dumper->dump();
 
-        $output->writeln(
-            '<header>[Sitemap]</header> <body>Sitemap '. SitemapDumper::NAME .
-            ' built in . ' . $this->helper->getFilePath(SitemapDumper::NAME) . ' </body>'
-        );
+        $output->writeln(sprintf('Finished dump sitemap'));
     }
 
     private function setHost($host)

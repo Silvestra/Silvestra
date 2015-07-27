@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+
+<!--
+ This file is part of the Silvestra package.
+
+ (c) Tadas Gliaubicas <tadcka89@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Silvestra sitemap dumper-->
+        <service id="silvestra_sitemap.dumper.sitemap"
+                 class="Silvestra\Component\Sitemap\Dumper\SitemapDumper"
+                 parent="silvestra_sitemap.dumper.sitemap_file"
+                 public="false"/>
+
+
+        <!--Silvestra sitemap file dumper-->
+        <service id="silvestra_sitemap.dumper.sitemap_file"
+                 class="Silvestra\Component\Sitemap\Dumper\SitemapFileDumper"
+                 public="false">
+            <argument type="service" id="silvestra_sitemap.helper.profile"/>
+            <argument>%silvestra_sitemap.max_per_sitemap%</argument>
+            <argument type="service" id="silvestra_sitemap.registry.profile"/>
+            <argument type="service" id="silvestra_sitemap.render"/>
+        </service>
+
+    </services>
+
+</container>
