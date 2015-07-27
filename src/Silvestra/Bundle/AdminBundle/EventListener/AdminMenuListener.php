@@ -31,7 +31,7 @@ class AdminMenuListener extends AdminMenuSubscriber
         $event->addItem(
             new AdminMenuItem(
                 $this->translateTitle('menu.home', array(), 'SilvestraAdminBundle'),
-                $this->generateRoute('silvestra_admin.homepage'),
+                $this->generateRoute('silvestra_admin_dashboard_index'),
                 'dashboard',
                 1000
             )

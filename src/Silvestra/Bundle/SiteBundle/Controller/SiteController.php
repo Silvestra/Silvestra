@@ -14,12 +14,10 @@ namespace Silvestra\Bundle\SiteBundle\Controller;
 use Silvestra\Component\Site\Form\Factory\SiteFormFactory;
 use Silvestra\Component\Site\Form\Handler\SiteFormHandler;
 use Silvestra\Component\Site\Model\Manager\SiteManagerInterface;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class SiteController
@@ -96,19 +94,7 @@ class SiteController
             return new RedirectResponse($this->router->generate('silvestra_site'));
         }
 
-        return new Response($this->renderSite($form));
-    }
-
-    /**
-     * Render site template.
-     *
-     * @param FormInterface $form
-     *
-     * @return string
-     */
-    private function renderSite(FormInterface $form)
-    {
-        return $this->templating->render(
+        return $this->templating->renderResponse(
             'SilvestraSiteBundle:Site:index.html.twig',
             array(
                 'form' => $form->createView(),

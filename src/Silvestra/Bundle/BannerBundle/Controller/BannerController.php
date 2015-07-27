@@ -20,11 +20,10 @@ use Silvestra\Component\Banner\Model\BannerInterface;
 use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerManagerInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Templating\EngineInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -47,22 +46,22 @@ class BannerController
     /**
      * @var BannerFormFactory
      */
-    private $factory;
+    private $formFactory;
 
     /**
      * @var BannerFormHandler
      */
-    private $handler;
+    private $formHandler;
 
     /**
      * @var BannerManagerInterface
      */
-    private $manager;
+    private $bannerManager;
 
     /**
      * @var BannerZoneManagerInterface
      */
-    private $zoneManager;
+    private $bannerZoneManager;
 
     /**
      * @var EngineInterface
@@ -74,39 +73,39 @@ class BannerController
      *
      * @param BannerDeleteHandler $deleteHandler
      * @param EventDispatcherInterface $eventDispatcher
-     * @param BannerFormFactory $factory
-     * @param BannerFormHandler $handler
-     * @param BannerManagerInterface $manager
-     * @param BannerZoneManagerInterface $zoneManager
+     * @param BannerFormFactory $formFactory
+     * @param BannerFormHandler $formHandler
+     * @param BannerManagerInterface $bannerManager
+     * @param BannerZoneManagerInterface $bannerZoneManager
      * @param EngineInterface $templating
      */
     public function __construct(
         BannerDeleteHandler $deleteHandler,
         EventDispatcherInterface $eventDispatcher,
-        BannerFormFactory $factory,
-        BannerFormHandler $handler,
-        BannerManagerInterface $manager,
-        BannerZoneManagerInterface $zoneManager,
+        BannerFormFactory $formFactory,
+        BannerFormHandler $formHandler,
+        BannerManagerInterface $bannerManager,
+        BannerZoneManagerInterface $bannerZoneManager,
         EngineInterface $templating
     ) {
         $this->deleteHandler = $deleteHandler;
         $this->eventDispatcher = $eventDispatcher;
-        $this->factory = $factory;
-        $this->handler = $handler;
-        $this->manager = $manager;
-        $this->zoneManager = $zoneManager;
+        $this->formFactory = $formFactory;
+        $this->formHandler = $formHandler;
+        $this->bannerManager = $bannerManager;
+        $this->bannerZoneManager = $bannerZoneManager;
         $this->templating = $templating;
     }
 
 
     public function listAction($zoneId)
     {
-        $bannerZone = $this->getBannerZone($zoneId);
+        $bannerZone = $this->getBannerZoneOr404($zoneId);
 
-        return $this->renderResponse(
+        return $this->templating->renderResponse(
             'SilvestraBannerBundle:Banner:list.html.twig',
             array(
-                'banners' => $this->manager->findManyByZone($bannerZone),
+                'banners' => $this->bannerManager->findManyByZone($bannerZone),
                 'banner_zone' => $bannerZone,
             )
         );
@@ -114,55 +113,56 @@ class BannerController
 
     public function createAction(Request $request, $zoneId)
     {
-        $bannerZone = $this->getBannerZone($zoneId);
-        $banner = $this->manager->create();
+        $bannerZone = $this->getBannerZoneOr404($zoneId);
+        $banner = $this->bannerManager->create();
 
         $banner->setZone($bannerZone);
 
-        $form = $this->factory->create($banner);
+        $form = $this->formFactory->create($banner);
 
-        if ($this->handler->process($form, $request)) {
-            $this->manager->save();
+        if ($this->formHandler->process($form, $request)) {
+            $this->bannerManager->save();
             $this->eventDispatcher->dispatch(BannerEvents::CREATE, $this->createEvent($banner, $request));
 
-            return $this->handler->onSuccess($banner);
+            return $this->formHandler->onSuccess($banner);
         }
 
-        return $this->renderResponse(
+        return $this->templating->renderResponse(
             'SilvestraBannerBundle:Banner:create.html.twig',
-            array('form' => $form->createView(), 'zone_id' => $zoneId)
+            array(
+                'form' => $form->createView(),
+                'zone_id' => $zoneId
+            )
         );
     }
 
     public function editAction(Request $request, $bannerId)
     {
-        $banner = $this->manager->findById($bannerId);
+        $banner = $this->getBannerOr404($bannerId);
+        $form = $this->formFactory->create($banner);
 
-        if (null === $banner) {
-            throw new NotFoundHttpException();
-        }
-
-        $form = $this->factory->create($banner);
-
-        if ($this->handler->process($form, $request)) {
-            $this->manager->save();
+        if ($this->formHandler->process($form, $request)) {
+            $this->bannerManager->save();
             $this->eventDispatcher->dispatch(BannerEvents::EDIT, $this->createEvent($banner, $request));
 
-            return $this->handler->onSuccess($banner);
+            return $this->formHandler->onSuccess($banner);
         }
 
-        return $this->renderResponse(
+        return $this->templating->renderResponse(
             'SilvestraBannerBundle:Banner:edit.html.twig',
-            array('form' => $form->createView(), 'zone_id' => $banner->getZone()->getId())
+            array(
+                'form' => $form->createView(),
+                'zone_id' => $banner->getZone()->getId()
+            )
         );
     }
 
     public function deleteAction(Request $request, $bannerId)
     {
-        $banner = $this->manager->findById($bannerId);
+        $banner = $this->getBannerOr404($bannerId);
 
-        if ((null !== $banner)  && $this->deleteHandler->process($banner, $request)) {
-            $this->manager->save();
+        if ($this->deleteHandler->process($banner, $request)) {
+            $this->bannerManager->save();
             $this->eventDispatcher->dispatch(BannerEvents::DELETE, $this->createEvent($banner, $request));
 
             return $this->deleteHandler->onSuccess();
@@ -172,36 +172,43 @@ class BannerController
     }
 
     /**
-     * Get banner zone.
+     * Get banner zone or 404.
      *
-     * @param integer $id
+     * @param int $bannerZoneId
      *
      * @return BannerZoneInterface
      *
      * @throws NotFoundHttpException
      */
-    private function getBannerZone($id)
+    private function getBannerZoneOr404($bannerZoneId)
     {
-        $bannerZone = $this->zoneManager->findById($id);
+        $bannerZone = $this->bannerZoneManager->findById($bannerZoneId);
 
         if (null === $bannerZone) {
-            throw new NotFoundHttpException(sprintf('Not fount %s banner zone', $id));
+            throw new NotFoundHttpException(sprintf('Not found %s banner zone', $bannerZoneId));
         }
 
         return $bannerZone;
     }
 
     /**
-     * Render response.
+     * Get banner or 404.
      *
-     * @param string $name
-     * @param array $parameters
+     * @param int $bannerId
      *
-     * @return Response
+     * @return BannerInterface
+     *
+     * @throws NotFoundHttpException
      */
-    private function renderResponse($name, array $parameters = array())
+    private function getBannerOr404($bannerId)
     {
-        return new Response($this->templating->render($name, $parameters));
+        $banner = $this->bannerManager->findById($bannerId);
+
+        if (null === $banner) {
+            throw new NotFoundHttpException(sprintf('Not found %s banner', $bannerId));
+        }
+
+        return $banner;
     }
 
     /**
