@@ -69,4 +69,11 @@ class PaginationTest extends TestCase
         $this->assertFalse($pagination->isFirstPage());
         $this->assertTrue($pagination->isLastPage());
     }
+
+    public function testPagination_WithTooMuchCurrentPage()
+    {
+        $pagination = new Pagination(3, 2, 4);
+
+        $this->assertEquals(2, $pagination->getCurrentPage());
+    }
 }

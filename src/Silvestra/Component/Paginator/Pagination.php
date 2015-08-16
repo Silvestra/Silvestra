@@ -59,6 +59,10 @@ class Pagination implements \Iterator
         $this->totalCount = (int)$totalCount;
 
         $this->pageCount = intval(ceil($totalCount/ $perPage));
+
+        if ($this->pageCount < ($this->currentPage)) {
+            $this->currentPage = $this->pageCount;
+        }
     }
 
 
