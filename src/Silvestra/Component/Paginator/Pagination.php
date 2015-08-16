@@ -193,8 +193,8 @@ class Pagination implements \Iterator
             $currentPage = 1;
         }
 
-        if ((0 < $totalPage) && ($totalPage < ($currentPage))) {
-            $currentPage = $this->pageCount;
+        if ((0 < $totalPage) && ($totalPage < $currentPage)) {
+            $currentPage = $totalPage;
         }
 
         $this->currentPage = $currentPage;
