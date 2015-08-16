@@ -54,17 +54,12 @@ class Pagination implements \Iterator
      */
     public function __construct($currentPage, $perPage, $totalCount)
     {
-        $this->currentPage = (int)$currentPage;
         $this->perPage = (int)$perPage;
         $this->totalCount = (int)$totalCount;
-
         $this->pageCount = intval(ceil($totalCount/ $perPage));
 
-        if ($this->pageCount < ($this->currentPage)) {
-            $this->currentPage = $this->pageCount;
-        }
+        $this->setCurrentPage((int)$currentPage, $this->pageCount);
     }
-
 
     /**
      * {@inheritdoc}
@@ -184,5 +179,24 @@ class Pagination implements \Iterator
     public function getTotalCount()
     {
         return $this->totalCount;
+    }
+
+    /**
+     * Set current page.
+     *
+     * @param int $currentPage
+     * @param int $totalPage
+     */
+    private function setCurrentPage($currentPage, $totalPage)
+    {
+        if (1 > $currentPage) {
+            $currentPage = 1;
+        }
+
+        if ((0 < $totalPage) && ($totalPage < ($currentPage))) {
+            $currentPage = $this->pageCount;
+        }
+
+        $this->currentPage = $currentPage;
     }
 }

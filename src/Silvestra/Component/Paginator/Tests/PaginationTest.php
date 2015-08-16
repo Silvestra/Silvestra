@@ -76,4 +76,20 @@ class PaginationTest extends TestCase
 
         $this->assertEquals(2, $pagination->getCurrentPage());
     }
+
+    public function testPagination_WithZeroTotalCount()
+    {
+        $pagination = new Pagination(1, 2, 0);
+
+        $this->assertEquals(1, $pagination->getCurrentPage());
+        $this->assertEquals(0, $pagination->getOffset());
+    }
+
+    public function testPagination_WithNegativeCurrentPage()
+    {
+        $pagination = new Pagination(-2, 2, 0);
+
+        $this->assertEquals(1, $pagination->getCurrentPage());
+        $this->assertEquals(0, $pagination->getOffset());
+    }
 }
