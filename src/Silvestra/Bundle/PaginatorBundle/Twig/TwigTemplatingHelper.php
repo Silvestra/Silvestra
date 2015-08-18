@@ -24,6 +24,11 @@ class TwigTemplatingHelper extends TemplatingHelper implements TemplatingHelperI
 {
 
     /**
+     * @var int
+     */
+    private $maxNearPages;
+
+    /**
      * @var string
      */
     private $template;
@@ -36,11 +41,13 @@ class TwigTemplatingHelper extends TemplatingHelper implements TemplatingHelperI
     /**
      * Constructor.
      *
+     * @param int $maxNearPages
      * @param string $template
      * @param \Twig_Environment $twig
      */
-    public function __construct($template, \Twig_Environment $twig)
+    public function __construct($maxNearPages, $template, \Twig_Environment $twig)
     {
+        $this->maxNearPages = $maxNearPages;
         $this->template = $template;
         $this->twig = $twig;
     }
@@ -59,6 +66,10 @@ class TwigTemplatingHelper extends TemplatingHelper implements TemplatingHelperI
         }
 
         $parameters['pagination'] = $pagination;
+
+        if (false === isset($parameters['max_near_pages'])) {
+            $parameters['max_near_pages'] = $this->maxNearPages;
+        }
 
         return $this->twig->render($template, $parameters);
     }

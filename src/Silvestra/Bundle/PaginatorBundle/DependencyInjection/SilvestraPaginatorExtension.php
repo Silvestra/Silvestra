@@ -30,5 +30,6 @@ class SilvestraPaginatorExtension extends Extension
         $loader->load('services.xml');
 
         $container->setParameter($this->getAlias() . '.default_template', $config['default_template']);
+        $container->setParameter($this->getAlias() . '.max_near_pages', $config['max_near_pages']);
     }
 }

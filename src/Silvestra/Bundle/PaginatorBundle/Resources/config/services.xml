@@ -24,6 +24,7 @@
 
         <!--Silvestra paginator twig helper-->
         <service id="silvestra_paginator.helper.twig" class="Silvestra\Bundle\PaginatorBundle\Twig\TwigTemplatingHelper">
+            <argument>%silvestra_paginator.max_near_pages%</argument>
             <argument>%silvestra_paginator.default_template%</argument>
             <argument type="service" id="twig" />
         </service>

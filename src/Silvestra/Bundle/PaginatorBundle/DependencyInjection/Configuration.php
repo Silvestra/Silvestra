@@ -30,6 +30,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('default_template')
                     ->defaultValue('SilvestraPaginatorBundle:Pagination:bootstrap.html.twig')
                     ->cannotBeEmpty()->end()
+
+                ->integerNode('max_near_pages')->defaultValue(3)->end()
             ->end();
 
         return $treeBuilder;
