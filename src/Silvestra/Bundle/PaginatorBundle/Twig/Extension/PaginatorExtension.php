@@ -56,7 +56,7 @@ class PaginatorExtension extends \Twig_Extension
                 array('is_safe' => array('html'))
             ),
             new \Twig_SimpleFunction(
-                'silvestra_paginator_url',
+                'silvestra_paginator_path',
                 array($this->urlHelper, 'getRelativeUrl')
             ),
         );
