@@ -15,7 +15,7 @@
 {% endif %}
 {% for page in pagination if page > (pagination.getCurrentPage - 3) and page < (pagination.getCurrentPage + 3) %}
     <li{% if pagination.isActivePage %} class="disabled"{% endif %}>
-        <a href="{{ silvestra_paginator_url(page, app.request) }}">{{ page }}</a>
+        <a href="{% if pagination.isActivePage %}javascript:;{% else %}{{ silvestra_paginator_url(page, app.request) }}{% endif %}">{{ page }}</a>
     </li>
 {% endfor %}
 {% if not pagination.isLastPage %}
