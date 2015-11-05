@@ -40,12 +40,15 @@ class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingH
     /**
      * Constructor.
      *
-     * @param Filesystem $filesystem
+     * @param Filesystem            $filesystem
      * @param ImageResizerInterface $imageResizer
-     * @param string $noImagePath
+     * @param string                $noImagePath
      */
-    public function __construct(Filesystem $filesystem, ImageResizerInterface $imageResizer, $noImagePath)
-    {
+    public function __construct(
+        Filesystem $filesystem,
+        ImageResizerInterface $imageResizer,
+        $noImagePath
+    ) {
         $this->filesystem = $filesystem;
         $this->imageResizer = $imageResizer;
         $this->noImagePath = $noImagePath;

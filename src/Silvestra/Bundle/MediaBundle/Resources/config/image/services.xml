@@ -35,6 +35,8 @@
             <argument type="service" id="silvestra_media.filesystem" />
             <argument type="service" id="silvestra_media.image.cache" />
             <argument type="service" id="silvestra_media.image.resizer_helper" />
+            <argument>%silvestra_media.resizer_background_color%</argument>
+            <argument>%silvestra_media.resizer_background_color_alpha%</argument>
         </service>
 
         <service id="silvestra_media.image.resizer_helper" class="Silvestra\Component\Media\Image\Resizer\ImageResizerHelper" public="false" />

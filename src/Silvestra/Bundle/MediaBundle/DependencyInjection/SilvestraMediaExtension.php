@@ -50,6 +50,14 @@ class SilvestraMediaExtension extends Extension
         $container->setParameter($this->getAlias() . '.model.image.class', $config['class']['model']['image']);
         $container->setParameter($this->getAlias() . '.token.key', $config['token']['key']);
         $container->setParameter($this->getAlias() . '.no_image', $config['image']['no_image']);
+        $container->setParameter(
+            $this->getAlias() . '.resizer_background_color',
+            $config['image']['resizer_background_color']
+        );
+        $container->setParameter(
+            $this->getAlias() . '.resizer_background_color_alpha',
+            $config['image']['resizer_background_color_alpha']
+        );
 
         if ($rootDir = $config['filesystem']['root_dir']) {
             $this->setFilesystemRootDir($rootDir, $container);
