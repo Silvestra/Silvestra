@@ -1,8 +1,8 @@
 form:
   seo_metadata:
     page_title: Page title
-    meta_description: Page description
-    meta_keywords: Page keywords
+    meta_description: Meta page description
+    meta_keywords: Meta page keywords
     meta_robots: Meta robot tags
     original_url: Original url
     extra_http: Meta http-equiv tags
