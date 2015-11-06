@@ -21,6 +21,7 @@
             <tag name="kernel.event_listener" event="tadcka_tree.node.pre_delete" method="onSitemapNodeDelete" />
 
             <argument type="service" id="silvestra_text_node.handler.node" />
+            <argument>%silvestra_text_node.types%</argument>
         </service>
 
     </services>
