@@ -63,7 +63,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('no_image')->defaultValue('/bundles/silvestramedia/image/noimage.png')->end()
                         ->scalarNode('cropper')->defaultValue('silvestra_media.image.cropper.gd')->end()
                         ->scalarNode('resizer')->defaultValue('silvestra_media.image.resizer.gd')->end()
-                        ->scalarNode('resizer_background_color')->isRequired()->defaultValue('#FFFFFF')->end()
+                        ->scalarNode('resizer_background_color')->defaultValue('#FFFFFF')->cannotBeEmpty()->end()
                         ->integerNode('resizer_background_color_alpha')->defaultValue(100)->end()
                     ->end()
                 ->end()
