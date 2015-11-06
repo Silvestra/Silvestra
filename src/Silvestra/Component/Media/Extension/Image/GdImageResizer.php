@@ -55,11 +55,11 @@ class GdImageResizer implements ImageResizerInterface
     /**
      * Constructor.
      *
-     * @param Filesystem          $filesystem
+     * @param Filesystem $filesystem
      * @param ImageCacheInterface $imageCache
-     * @param ImageResizerHelper  $resizeHelper
-     * @param string|array|int    $color
-     * @param int|null            $alpha
+     * @param ImageResizerHelper $resizeHelper
+     * @param string|int $color
+     * @param int|null $alpha
      */
     public function __construct(
         Filesystem $filesystem,
@@ -90,7 +90,7 @@ class GdImageResizer implements ImageResizerInterface
         $cacheAbsolutePath = $this->imageCache->getAbsolutePath($filename, $cacheKey);
         $imagine = new Imagine();
         $imagineImage = $imagine->open($this->filesystem->getRootDir() . $imagePath);
-        $imageSize = [$imagineImage->getSize()->getWidth(), $imagineImage->getSize()->getHeight()];
+        $imageSize = array($imagineImage->getSize()->getWidth(), $imagineImage->getSize()->getHeight());
         $boxSize = $this->resizeHelper->getBoxSize($imageSize, $size);
         $box = $this->getBox($boxSize[0], $boxSize[1]);
 
@@ -114,7 +114,7 @@ class GdImageResizer implements ImageResizerInterface
     /**
      * Get cache key.
      *
-     * @param array  $size
+     * @param array $size
      * @param string $mode
      *
      * @return string
