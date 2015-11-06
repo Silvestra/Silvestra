@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->end()
                 ->scalarNode('text_node_manager')->defaultValue('silvestra_text_node.manager.text_node.default')
                     ->cannotBeEmpty()->end()
+
                 ->arrayNode('class')->isRequired()
                     ->children()
                         ->arrayNode('model')->isRequired()
@@ -39,8 +40,11 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('node_types')->defaultValue(array(TextNodeInterface::NODE_TYPE))
-                    ->prototype('scalar')->cannotBeEmpty()
+
+                ->arrayNode('node_types')
+                    ->defaultValue(array(TextNodeInterface::NODE_TYPE))
+                    ->requiresAtLeastOneElement()
+                    ->prototype('scalar')->end()
                 ->end()
             ->end();
 

@@ -39,8 +39,8 @@ class SilvestraTextNodeExtension extends Extension
         $loader->load('db_driver/' . sprintf('%s.xml', $config['db_driver']));
 
         $container->setParameter('silvestra_text_node.model.text_node.class', $config['class']['model']['text_node']);
+        $container->setParameter('silvestra_text_node.types', $config['types']);
 
         $container->setAlias('silvestra_text_node.manager.text_node', $config['text_node_manager']);
-        $container->setAlias('silvestra_text_node.types', $config['types']);
     }
 }
