@@ -41,7 +41,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('node_types')
+                ->arrayNode('types')
                     ->defaultValue(array(TextNodeInterface::NODE_TYPE))
                     ->requiresAtLeastOneElement()
                     ->prototype('scalar')->end()
