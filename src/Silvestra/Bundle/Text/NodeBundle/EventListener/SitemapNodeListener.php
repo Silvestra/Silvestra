@@ -29,13 +29,19 @@ class SitemapNodeListener
     private $nodeHandler;
 
     /**
+     * @var array
+     */
+    private $textNodeTypes;
+
+    /**
      * Constructor.
      *
      * @param NodeHandler $nodeHandler
      */
-    public function __construct(NodeHandler $nodeHandler)
+    public function __construct(NodeHandler $nodeHandler, array $textNodeTypes)
     {
         $this->nodeHandler = $nodeHandler;
+        $this->textNodeTypes = $textNodeTypes;
     }
 
     /**
@@ -46,7 +52,8 @@ class SitemapNodeListener
     public function onSitemapNodeEdit(SitemapNodeEvent $event)
     {
         $node = $event->getNode();
-        if (TextNodeInterface::NODE_TYPE  === $node->getType()) {
+
+        if (in_array($node->getType(), $this->textNodeTypes)) {
             $tab = new Tab(
                 $event->getTranslator()->trans('text', array(), 'SilvestraTextNodeBundle'),
                 'silvestra_text_node',
