@@ -41,5 +41,6 @@ class SilvestraTextNodeExtension extends Extension
         $container->setParameter('silvestra_text_node.model.text_node.class', $config['class']['model']['text_node']);
 
         $container->setAlias('silvestra_text_node.manager.text_node', $config['text_node_manager']);
+        $container->setAlias('silvestra_text_node.types', $config['types']);
     }
 }

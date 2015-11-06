@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\Text\NodeBundle\DependencyInjection;
 
+use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -37,6 +38,9 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
+                ->end()
+                ->arrayNode('node_types')->defaultValue(array(TextNodeInterface::NODE_TYPE))
+                    ->prototype('scalar')->cannotBeEmpty()
                 ->end()
             ->end();
 
