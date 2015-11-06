@@ -42,5 +42,6 @@ class SilvestraTextExtension extends Extension
         );
 
         $container->setAlias('silvestra_text.manager.text', $config['text_manager']);
+        $container->setAlias('silvestra_text.node_types', $config['node_types']);
     }
 }
