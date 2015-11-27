@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
  */
 class AlertManager
 {
+    const FLASH_BAG_KEY = 'silvestra_notification_alerts';
+
     /**
      * @var Alert
      */
@@ -57,7 +59,7 @@ class AlertManager
      */
     public function setFlashAlert(Alert $alert)
     {
-        $this->flashBag->set('silvestra_notification_alerts', $alert->all());
+        $this->flashBag->set(self::FLASH_BAG_KEY, $alert->all());
     }
 
     /**
@@ -87,6 +89,16 @@ class AlertManager
      */
     public function getFlashAlerts()
     {
-        return $this->flashBag->get('silvestra_notification_alerts');
+        return $this->flashBag->get(self::FLASH_BAG_KEY);
+    }
+
+    /**
+     * Check for flash alerts.
+     *
+     * @return bool
+     */
+    public function hasFlashAlerts()
+    {
+        return 0 < count($this->flashBag->peek(self::FLASH_BAG_KEY));
     }
 }
