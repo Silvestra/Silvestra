@@ -59,6 +59,10 @@ class AlertExtension extends \Twig_Extension
                 array($this, 'renderFlash'),
                 array('is_safe' => array('html'))
             ),
+            new \Twig_SimpleFunction(
+                'silvestra_flash_alerts_has',
+                array($this->alertManager, 'hasFlashAlerts')
+            ),
         );
     }
 
@@ -87,6 +91,10 @@ class AlertExtension extends \Twig_Extension
     public function renderFlash($options = array())
     {
         $options['alerts'] = $this->alertManager->getFlashAlerts();
+
+        if (empty($options['alerts'])) {
+            return '';
+        }
 
         return $this->alertHelper->render($options, $this->getTemplate($options));
     }
