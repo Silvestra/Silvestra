@@ -75,7 +75,7 @@ class SeoEngine implements SeoEngineInterface
     {
         $langAlternatives = '';
         foreach ($this->seoPage->getLangAlternates() as $href => $hrefLang) {
-            $langAlternatives .= sprintf("<link rel=\"alternate\" href=\"%s\" hreflang=\"%s\"/>\n", $href, $hrefLang);
+            $langAlternatives .= sprintf("<link rel=\"alternate\" href=\"%s\" hreflang=\"%s\" />\n", $href, $hrefLang);
         }
 
         return $langAlternatives;
@@ -87,7 +87,7 @@ class SeoEngine implements SeoEngineInterface
     public function renderLinkCanonical()
     {
         if ($this->seoPage->getLinkCanonical()) {
-            return sprintf("<link rel=\"canonical\" href=\"%s\"/>\n", $this->seoPage->getLinkCanonical());
+            return sprintf("<link rel=\"canonical\" href=\"%s\" />\n", $this->seoPage->getLinkCanonical());
         }
 
         return '';
@@ -100,7 +100,7 @@ class SeoEngine implements SeoEngineInterface
     {
         $links = '';
         foreach ($this->seoPage->getLinks() as $rel => $href) {
-            $links .= sprintf("<link rel=\"%s\" href=\"%s\"/>\n", $rel, $href);
+            $links .= sprintf("<link rel=\"%s\" href=\"%s\" />\n", $rel, $href);
         }
 
         return $links;
@@ -118,9 +118,9 @@ class SeoEngine implements SeoEngineInterface
 
                 $name = $this->normalize($name);
                 if (false === empty($content)) {
-                    $meta .= sprintf("<meta %s=\"%s\" content=\"%s\">\n", $type, $name, $this->normalize($content));
+                    $meta .= sprintf("<meta %s=\"%s\" content=\"%s\" />\n", $type, $name, $this->normalize($content));
                 } else {
-                    $meta .= sprintf("<meta %s=\"%s\">\n", $type, $name);
+                    $meta .= sprintf("<meta %s=\"%s\" />\n", $type, $name);
                 }
             }
         }
