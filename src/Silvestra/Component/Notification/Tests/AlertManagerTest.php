@@ -13,6 +13,7 @@ namespace Silvestra\Component\Notification\Tests;
 
 use Silvestra\Component\Notification\AlertManager;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -27,17 +28,11 @@ class AlertManagerTest extends \PHPUnit_Framework_TestCase
     private $alertManager;
 
     /**
-     * @var FlashBag
-     */
-    private $flashBag;
-
-    /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        $this->flashBag = new FlashBag();
-        $this->alertManager = new AlertManager($this->flashBag);
+        $this->alertManager = new AlertManager($this->createSessionMock());
     }
 
     /**
@@ -71,5 +66,19 @@ class AlertManagerTest extends \PHPUnit_Framework_TestCase
         $this->alertManager->setFlashAlert($alert);
 
         $this->assertEquals($alert->all(), $this->alertManager->getFlashAlerts());
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|Session
+     */
+    private function createSessionMock()
+    {
+        $session = $this->getMock(Session::class);
+
+        $session
+            ->method('getFlashBag')
+            ->willReturn(new FlashBag());
+
+        return $session;
     }
 }

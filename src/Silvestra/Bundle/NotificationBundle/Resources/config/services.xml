@@ -19,7 +19,7 @@
 
         <!--Silvestra alert manager-->
         <service id="silvestra_notification.manager.alert" class="Silvestra\Component\Notification\AlertManager" public="true">
-            <argument type="service" id="session.flash_bag" />
+            <argument type="service" id="session" />
         </service>
 
         <!--Silvestra alert templating helper-->
