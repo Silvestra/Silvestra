@@ -51,9 +51,32 @@ class TextNodeManager extends BaseTextNodeManager
     /**
      * {@inheritdoc}
      */
+    public function findTextByNode(NodeInterface $node)
+    {
+        $textNode = $this->findTextNodeByNode($node);
+
+        if (null === $textNode) {
+            return null;
+        }
+
+        return $textNode->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findTextNodeByNode(NodeInterface $node)
     {
-        return $this->repository->findOneBy(array('node' => $node));
+        $qb = $this->repository->createQueryBuilder('tn');
+
+        $qb
+            ->select('tn, t, tr')
+            ->innerJoin('tn.text', 't')
+            ->leftJoin('t.translations', 'tr')
+            ->where($qb->expr()->eq('tn.node', ':node'))
+            ->setParameter('node', $node);
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**

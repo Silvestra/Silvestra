@@ -29,13 +29,13 @@ interface BannerManagerInterface
     public function findById($id);
 
     /**
-     * Find many banners by banner zone.
+     * Find banners by banner zone.
      *
      * @param BannerZoneInterface $bannerZone
      *
      * @return array|BannerInterface[]
      */
-    public function findManyByZone(BannerZoneInterface $bannerZone);
+    public function findByZone(BannerZoneInterface $bannerZone);
 
     /**
      * Create new Banner object.

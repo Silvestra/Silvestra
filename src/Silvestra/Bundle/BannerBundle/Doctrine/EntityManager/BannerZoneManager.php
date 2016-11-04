@@ -63,7 +63,14 @@ class BannerZoneManager extends BaseBannerZoneManager
      */
     public function findAll()
     {
-        return $this->repository->findAll();
+        $qb = $this->repository->createQueryBuilder('bz');
+
+        $qb
+            ->innerJoin('bz.banners', 'b')
+            ->innerJoin('b.image', 'i')
+            ->select('bz, b, i');
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -81,8 +88,9 @@ class BannerZoneManager extends BaseBannerZoneManager
     {
         $qb = $this->repository->createQueryBuilder('bz');
 
-        $qb->groupBy('bz.slug');
-        $qb->select('bz.slug');
+        $qb
+            ->groupBy('bz.slug')
+            ->select('bz.slug');
 
         $result = $qb->getQuery()->getResult();
         $data = array();
@@ -101,9 +109,9 @@ class BannerZoneManager extends BaseBannerZoneManager
     {
         $qb = $this->repository->createQueryBuilder('bz');
 
-        $qb->andWhere($qb->expr()->eq('bz.system', true));
-
-        $qb->select('bz.slug');
+        $qb
+            ->andWhere($qb->expr()->eq('bz.system', $qb->expr()->literal(1)))
+            ->select('bz.slug');
 
         $result = $qb->getQuery()->getArrayResult();
 

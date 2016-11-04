@@ -18,6 +18,7 @@ namespace Silvestra\Component\Sitemap\Entry;
  */
 interface EntryInterface
 {
+
     /**
      * Get url.
      *

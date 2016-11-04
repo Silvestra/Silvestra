@@ -28,6 +28,7 @@ class SilvestraCacheExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('controllers.xml');
         $loader->load('http-cache.xml');
 
         $container->setParameter('silvestra_cache.http_cache_dir', $this->getHttpCacheDir($config, $container));

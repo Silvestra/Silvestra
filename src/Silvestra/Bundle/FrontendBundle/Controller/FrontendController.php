@@ -25,6 +25,8 @@ use Tadcka\Bundle\SitemapBundle\Provider\PageNodeProviderInterface;
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
  * @since 9/7/14 1:00 PM
+ *
+ * @deprecated
  */
 abstract class FrontendController
 {

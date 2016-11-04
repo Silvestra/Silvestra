@@ -28,10 +28,15 @@ class SilvestraSitemapExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('controllers.xml');
         $loader->load('services.xml');
+        $loader->load('sitemap-dumpers.xml');
 
         $container->setAlias($this->getAlias() . '.render', $config['render']);
-        $container->setParameter($this->getAlias() . '.target', $config['target']);
+
+        $container->setParameter($this->getAlias() . '.http_cache', $config['http_cache']);
         $container->setParameter($this->getAlias() . '.max_per_sitemap', $config['max_per_sitemap']);
+        $container->setParameter($this->getAlias() . '.sitemap_dir', $config['sitemap_dir']);
+        $container->setParameter($this->getAlias() . '.web_dir', $config['web_dir']);
     }
 }

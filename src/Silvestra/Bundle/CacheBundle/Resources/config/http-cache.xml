@@ -18,7 +18,7 @@
     <services>
 
         <!--Silvestra http cache manager-->
-        <service id="silvestra_cache.http_cache.manager" class="Silvestra\Component\Cache\Http\HttpCacheManager">
+        <service id="silvestra_cache.manager.http_cache" class="Silvestra\Component\Cache\Http\HttpCacheManager">
             <argument type="service" id="filesystem" />
             <argument>%silvestra_cache.http_cache_dir%</argument>
         </service>

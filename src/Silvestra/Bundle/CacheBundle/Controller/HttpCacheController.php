@@ -12,33 +12,42 @@
 namespace Silvestra\Bundle\CacheBundle\Controller;
 
 use Silvestra\Component\Cache\Http\HttpCacheManager;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class HttpCacheController extends ContainerAware
+class HttpCacheController
 {
+
+    /**
+     * @var HttpCacheManager
+     */
+    private $httpCacheManager;
+
+    /**
+     * Constructor.
+     *
+     * @param HttpCacheManager $httpCacheManager
+     */
+    public function __construct(HttpCacheManager $httpCacheManager)
+    {
+        $this->httpCacheManager = $httpCacheManager;
+    }
+
     public function invalidateAllAction(Request $request)
     {
         if ($request->isMethod('DELETE')) {
+            $success = true;
+
             try {
-                $this->getHttpCacheManager()->invalidateAll();
+                $this->httpCacheManager->invalidateAll();
             } catch (\Exception $e) {
-                return new JsonResponse(array('success' => false));
+                $success = false;
             }
 
-            return new JsonResponse(array('success' => true));
+            return new JsonResponse(array('success' => $success));
         }
 
         throw new NotFoundHttpException();
-    }
-
-    /**
-     * @return HttpCacheManager
-     */
-    private function getHttpCacheManager()
-    {
-        return $this->container->get('silvestra_cache.http_cache.manager');
     }
 }

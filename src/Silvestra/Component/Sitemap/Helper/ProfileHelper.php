@@ -28,42 +28,54 @@ class ProfileHelper
     /**
      * @var string
      */
-    private $target;
+    private $sitemapDir;
+
+    /**
+     * @var string
+     */
+    private $webDir;
 
     /**
      * Constructor.
      *
      * @param RouterInterface $router
-     * @param $target
+     * @param string $sitemapDir
+     * @param string $webDir
      */
-    public function __construct(RouterInterface $router, $target)
+    public function __construct(RouterInterface $router, $sitemapDir, $webDir)
     {
         $this->router = $router;
-        $this->target = $target;
+        $this->sitemapDir = $this->rtrimDir($sitemapDir);
+        $this->webDir = $this->rtrimDir($webDir);
     }
 
     /**
-     * Get path.
+     * Get sitemap entry file path..
      *
      * @param string $filename
      *
      * @return string
      */
-    public function getFilePath($filename)
+    public function getSitemapEntryFilePath($filename)
     {
-        return rtrim($this->target, '/\\') . DIRECTORY_SEPARATOR . $filename;
+        return implode(DIRECTORY_SEPARATOR, array($this->webDir, $this->sitemapDir, $filename));
+    }
+
+    public function getSitemapIndexFilePath($filename)
+    {
+        return implode(DIRECTORY_SEPARATOR, array($this->webDir, $filename));
     }
 
     /**
-     * Get url.
+     * Get sitemap entry url.
      *
      * @param string $filename
      *
      * @return string
      */
-    public function getFileUrl($filename)
+    public function getSitemapEntryFileUrl($filename)
     {
-        return $this->getSchemeAndHost() . '/' . $filename;
+        return implode('/', array($this->getSchemeAndHost(), $this->sitemapDir, $filename));
     }
 
     /**
@@ -74,5 +86,15 @@ class ProfileHelper
     public function getSchemeAndHost()
     {
         return $this->router->getContext()->getScheme() . '://' . $this->router->getContext()->getHost();
+    }
+
+    /**
+     * @param $dir
+     *
+     * @return string
+     */
+    private function rtrimDir($dir)
+    {
+        return rtrim($dir, '/\\');
     }
 }

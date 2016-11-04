@@ -1,0 +1,33 @@
+{
+    "name":         "silvestra/paginator-bundle",
+    "homepage":     "https://github.com/Silvestra/PaginatorBundle",
+    "description":  "Silvestra paginator bundle",
+    "keywords":     ["Paginator", "Paginator"],
+    "type":         "symfony-bundle",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":   "Tadas Gliaubicas",
+            "email":  "tadcka89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle" : ">=2.3",
+        "silvestra/paginator": "0.1.*@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Bundle\\PaginatorBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

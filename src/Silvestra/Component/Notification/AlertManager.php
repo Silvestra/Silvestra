@@ -11,7 +11,7 @@
 
 namespace Silvestra\Component\Notification;
 
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -20,24 +20,26 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
  */
 class AlertManager
 {
+    const FLASH_BAG_KEY = 'silvestra_notification_alerts';
+
     /**
      * @var Alert
      */
     private $alert;
 
     /**
-     * @var FlashBagInterface
+     * @var Session
      */
-    private $flashBag;
+    private $session;
 
     /**
      * Constructor.
      *
-     * @param FlashBagInterface $flashBag
+     * @param Session $session
      */
-    public function __construct(FlashBagInterface $flashBag)
+    public function __construct(Session $session)
     {
-        $this->flashBag = $flashBag;
+        $this->session = $session;
     }
 
     /**
@@ -57,7 +59,7 @@ class AlertManager
      */
     public function setFlashAlert(Alert $alert)
     {
-        $this->flashBag->set('silvestra_notification_alerts', $alert->all());
+        $this->session->getFlashBag()->set(self::FLASH_BAG_KEY, $alert->all());
     }
 
     /**
@@ -87,6 +89,16 @@ class AlertManager
      */
     public function getFlashAlerts()
     {
-        return $this->flashBag->get('silvestra_notification_alerts');
+        return $this->session->getFlashBag()->get(self::FLASH_BAG_KEY);
+    }
+
+    /**
+     * Check for flash alerts.
+     *
+     * @return bool
+     */
+    public function hasFlashAlerts()
+    {
+        return 0 < count($this->session->getFlashBag()->peek(self::FLASH_BAG_KEY));
     }
 }

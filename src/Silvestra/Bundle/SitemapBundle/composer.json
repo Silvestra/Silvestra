@@ -1,0 +1,33 @@
+{
+    "name":         "silvestra/sitemap-bundle",
+    "homepage":     "https://github.com/Silvestra/SitemapBundle",
+    "description":  "Silvestra sitemap bundle",
+    "keywords":     ["Sitemap"],
+    "type":         "symfony-bundle",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":   "Tadas Gliaubicas",
+            "email":  "tadcka89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle" : ">=2.3",
+        "silvestra/sitemap": "0.1.*@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silvestra\\Bundle\\SitemapBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

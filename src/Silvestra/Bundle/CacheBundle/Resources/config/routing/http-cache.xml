@@ -6,7 +6,7 @@
 
     <!--Http cache invalidate all-->
     <route id="silvestra_http_cache_invalidate_all" path="/http-cache/invalidate-all">
-        <default key="_controller">SilvestraCacheBundle:HttpCache:invalidateAll</default>
+        <default key="_controller">silvestra_cache.controller.http_cache:invalidateAllAction</default>
     </route>
 
 </routes>

@@ -11,11 +11,22 @@
 
 namespace Silvestra\Bundle\Text\NodeBundle\Model\Manager;
 
+use Silvestra\Component\Text\Model\TextInterface;
 use Tadcka\Component\Tree\Model\NodeInterface;
 use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 
 interface TextNodeManagerInterface
 {
+
+    /**
+     * Find text by node.
+     *
+     * @param NodeInterface $node
+     *
+     * @return null|TextInterface
+     */
+    public function findTextByNode(NodeInterface $node);
+
     /**
      * Find text node by node.
      *

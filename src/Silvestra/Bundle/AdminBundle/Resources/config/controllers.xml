@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<!--
+/*
+ * This file is part of the Silvestra package.
+ *
+ * (c) Tadcka <tadcka89@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Silvestra admin-->
+        <service id="silvestra_admin.controller.admin" class="Silvestra\Bundle\AdminBundle\Controller\DashboardController" public="true">
+            <argument type="service" id="templating" />
+        </service>
+
+    </services>
+
+</container>

@@ -18,5 +18,4 @@ namespace Silvestra\Component\Sitemap\Entry;
  */
 interface SitemapEntryInterface extends EntryInterface
 {
-
 }

@@ -19,23 +19,16 @@
         <service id="silvestra_sitemap.command.dump" class="Silvestra\Component\Sitemap\Command\DumpCommand">
             <tag name="console.command" />
 
-            <argument type="service" id="silvestra_sitemap.dumper.sitemap" />
+            <argument type="service" id="silvestra_sitemap.dumper.sitemap_file" />
             <argument type="service" id="silvestra_sitemap.helper.profile" />
             <argument type="service" id="router" />
-        </service>
-
-        <!--Silvestra sitemap dumper-->
-        <service id="silvestra_sitemap.dumper.sitemap" class="Silvestra\Component\Sitemap\Dumper\SitemapDumper" public="false">
-            <argument type="service" id="silvestra_sitemap.helper.profile" />
-            <argument>%silvestra_sitemap.max_per_sitemap%</argument>
-            <argument type="service" id="silvestra_sitemap.registry.profile" />
-            <argument type="service" id="silvestra_sitemap.render" />
         </service>
 
         <!--Silvestra sitemap profile helper-->
         <service id="silvestra_sitemap.helper.profile" class="Silvestra\Component\Sitemap\Helper\ProfileHelper" public="false">
             <argument type="service" id="router" />
-            <argument>%silvestra_sitemap.target%</argument>
+            <argument>%silvestra_sitemap.sitemap_dir%</argument>
+            <argument>%silvestra_sitemap.web_dir%</argument>
         </service>
 
         <!--Silvestra sitemap profile registry-->

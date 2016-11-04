@@ -43,20 +43,36 @@ class GdImageResizer implements ImageResizerInterface
     private $resizeHelper;
 
     /**
+     * @var string|array|integer
+     */
+    private $color;
+
+    /**
+     * @var integer|null
+     */
+    private $alpha;
+
+    /**
      * Constructor.
      *
      * @param Filesystem $filesystem
      * @param ImageCacheInterface $imageCache
      * @param ImageResizerHelper $resizeHelper
+     * @param string|int $color
+     * @param int|null $alpha
      */
     public function __construct(
         Filesystem $filesystem,
         ImageCacheInterface $imageCache,
-        ImageResizerHelper $resizeHelper
+        ImageResizerHelper $resizeHelper,
+        $color,
+        $alpha
     ) {
         $this->filesystem = $filesystem;
         $this->imageCache = $imageCache;
         $this->resizeHelper = $resizeHelper;
+        $this->color = $color;
+        $this->alpha = $alpha;
     }
 
     /**
@@ -83,7 +99,7 @@ class GdImageResizer implements ImageResizerInterface
             $imagineImage->resize($this->getBox($imageSizeInBox[0], $imageSizeInBox[1]));
 
             $palette = new RGB();
-            $box = $imagine->create($box, $palette->color('#FFFFFF', 100));
+            $box = $imagine->create($box, $palette->color($this->color, $this->alpha));
             $imagineImage = $box->paste($imagineImage, $this->getPointInBox($imageSizeInBox, $boxSize));
         } else {
             $imagineImage = $imagineImage->thumbnail($box);
