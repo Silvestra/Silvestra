@@ -13,10 +13,11 @@ namespace Silvestra\Component\Form\Type;
 
 use Silvestra\Component\Form\DataTransformer\TagTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -33,7 +34,7 @@ class TagType extends AbstractType
     {
         $builder->add(
             'tags',
-            'collection',
+            CollectionType::class,
             array(
                 'type' => 'hidden',
                 'allow_add' => true,
@@ -63,7 +64,7 @@ class TagType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -79,7 +80,7 @@ class TagType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_tag';
     }

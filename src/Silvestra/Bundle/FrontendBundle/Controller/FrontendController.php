@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Templating\EngineInterface;
+use Tadcka\Bundle\SitemapBundle\Provider\PageNodeProviderInterface;
 use Tadcka\Component\Tree\Model\NodeInterface;
 use Tadcka\Component\Tree\Model\NodeTranslationInterface;
-use Tadcka\Bundle\SitemapBundle\Provider\PageNodeProviderInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
