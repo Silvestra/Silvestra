@@ -11,11 +11,11 @@
 
 namespace Silvestra\Bundle\BannerBundle\Controller;
 
+use Silvestra\Bundle\BannerBundle\Handler\BannerDeleteHandler;
 use Silvestra\Component\Banner\Event\BannerEvent;
 use Silvestra\Component\Banner\Event\BannerEvents;
 use Silvestra\Component\Banner\Form\Factory\BannerFormFactory;
 use Silvestra\Component\Banner\Form\Handler\BannerFormHandler;
-use Silvestra\Bundle\BannerBundle\Handler\BannerDeleteHandler;
 use Silvestra\Component\Banner\Model\BannerInterface;
 use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerManagerInterface;

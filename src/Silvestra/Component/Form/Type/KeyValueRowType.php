@@ -13,8 +13,10 @@ namespace Silvestra\Component\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -31,7 +33,7 @@ class KeyValueRowType extends AbstractType
         if (null === $options['allowed_keys']) {
             $builder->add(
                 'key',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'key_value_row.key',
                 )
@@ -39,7 +41,7 @@ class KeyValueRowType extends AbstractType
         } else {
             $builder->add(
                 'key',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choice_list' => new SimpleChoiceList($options['allowed_keys']),
                     'label' => 'key_value_row.key',
@@ -57,7 +59,7 @@ class KeyValueRowType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -74,7 +76,7 @@ class KeyValueRowType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_key_value_row';
     }

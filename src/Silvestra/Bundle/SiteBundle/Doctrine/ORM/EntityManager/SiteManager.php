@@ -13,8 +13,8 @@ namespace Silvestra\Bundle\SiteBundle\Doctrine\ORM\EntityManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Silvestra\Component\Site\Model\SiteInterface;
 use Silvestra\Component\Site\Model\Manager\SiteManager as BaseSiteManager;
+use Silvestra\Component\Site\Model\SiteInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

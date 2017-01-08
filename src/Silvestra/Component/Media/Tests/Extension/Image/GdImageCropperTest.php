@@ -12,8 +12,8 @@
 namespace Silvestra\Component\Media\Tests\Extension\Image;
 
 use Imagine\Gd\Imagine;
-use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Extension\Image\GdImageCropper;
+use Silvestra\Component\Media\Filesystem;
 use Silvestra\Component\Media\Model\Image;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 

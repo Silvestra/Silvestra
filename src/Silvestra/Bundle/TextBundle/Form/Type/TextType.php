@@ -12,8 +12,9 @@
 namespace Silvestra\Bundle\TextBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -51,7 +52,7 @@ class TextType extends AbstractType
 
         $builder->add(
             'submit',
-            'submit',
+            SubmitType::class,
             array(
                 'label' => 'form.button.submit'
             )
@@ -61,7 +62,7 @@ class TextType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
 
         $resolver->setDefaults(
@@ -75,7 +76,7 @@ class TextType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_text';
     }

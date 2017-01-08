@@ -11,12 +11,12 @@
 
 namespace Silvestra\Bundle\BannerBundle\Controller;
 
+use Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler;
 use Silvestra\Component\Banner\BannerZoneSynchronizer;
 use Silvestra\Component\Banner\Event\BannerZoneEvent;
 use Silvestra\Component\Banner\Event\BannerZoneEvents;
 use Silvestra\Component\Banner\Form\Factory\BannerZoneFormFactory;
 use Silvestra\Component\Banner\Form\Handler\BannerZoneFormHandler;
-use Silvestra\Bundle\BannerBundle\Handler\BannerZoneDeleteHandler;
 use Silvestra\Component\Banner\Model\BannerZoneInterface;
 use Silvestra\Component\Banner\Model\Manager\BannerZoneManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;

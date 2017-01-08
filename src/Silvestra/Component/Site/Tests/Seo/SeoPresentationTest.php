@@ -13,8 +13,8 @@ namespace Silvestra\Component\Site\Tests\Seo;
 
 use Silvestra\Component\Seo\Model\SeoMetadata;
 use Silvestra\Component\Seo\SeoPage;
-use Silvestra\Component\Site\Seo\SeoPresentation;
 use Silvestra\Component\Site\Model\Site;
+use Silvestra\Component\Site\Seo\SeoPresentation;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

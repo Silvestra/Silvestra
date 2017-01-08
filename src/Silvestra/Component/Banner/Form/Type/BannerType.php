@@ -13,8 +13,15 @@ namespace Silvestra\Component\Banner\Form\Type;
 
 use Silvestra\Component\Locale\Helper\LocaleHelper;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -53,7 +60,7 @@ class BannerType extends AbstractType
     {
         $builder->add(
             'title',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.banner.title',
                 'required' => false,
@@ -63,7 +70,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'description',
-            'textarea',
+            TextareaType::class,
             array(
                 'label' => 'form.banner.description',
                 'required' => false,
@@ -72,7 +79,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'lang',
-            'choice',
+            ChoiceType::class,
             array(
                 'label' => 'form.banner.language',
                 'choices' => $this->localeHelper->getDisplayLocales(),
@@ -81,7 +88,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'uri',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.banner.uri',
                 'required' => false,
@@ -91,7 +98,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'position',
-            'integer',
+            IntegerType::class,
             array(
                 'label' => 'form.banner.position',
                 'required' => false,
@@ -101,7 +108,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'blank',
-            'checkbox',
+            CheckboxType::class,
             array(
                 'label' => 'form.banner.blank',
                 'required' => false,
@@ -110,7 +117,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'publish',
-            'checkbox',
+            CheckboxType::class,
             array(
                 'label' => 'form.banner.publish',
                 'required' => false,
@@ -119,7 +126,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'publishFrom',
-            'date',
+            DateType::class,
             array(
                 'label' => 'form.banner.publish_from',
                 'required' => false,
@@ -128,7 +135,7 @@ class BannerType extends AbstractType
 
         $builder->add(
             'publishTo',
-            'date',
+            DateType::class,
             array(
                 'label' => 'form.banner.publish_to',
                 'required' => false,
@@ -145,20 +152,20 @@ class BannerType extends AbstractType
 
         $builder->add(
             'script',
-            'textarea',
+            TextareaType::class,
             array(
                 'label' => 'form.banner.script',
                 'required' => false,
             )
         );
 
-        $builder->add('submit', 'submit', array('label' => 'form.button.save'));
+        $builder->add('submit', SubmitType::class, array('label' => 'form.button.save'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -171,7 +178,7 @@ class BannerType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_banner';
     }

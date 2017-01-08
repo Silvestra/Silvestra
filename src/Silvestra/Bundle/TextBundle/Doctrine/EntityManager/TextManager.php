@@ -14,8 +14,8 @@ namespace Silvestra\Bundle\TextBundle\Doctrine\EntityManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
-use Silvestra\Component\Text\Model\TextInterface;
 use Silvestra\Component\Text\Model\Manager\TextManager as BaseTextManager;
+use Silvestra\Component\Text\Model\TextInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

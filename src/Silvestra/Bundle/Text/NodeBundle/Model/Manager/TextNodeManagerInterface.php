@@ -11,9 +11,9 @@
 
 namespace Silvestra\Bundle\Text\NodeBundle\Model\Manager;
 
+use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 use Silvestra\Component\Text\Model\TextInterface;
 use Tadcka\Component\Tree\Model\NodeInterface;
-use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 
 interface TextNodeManagerInterface
 {

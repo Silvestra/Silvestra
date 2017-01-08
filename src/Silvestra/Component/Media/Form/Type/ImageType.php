@@ -16,13 +16,14 @@ use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
 use Silvestra\Component\Media\Media;
 use Silvestra\Component\Media\Token\TokenGenerator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -86,7 +87,7 @@ class ImageType extends AbstractType
     {
         $builder->add(
             'filename',
-            'hidden',
+            HiddenType::class,
             array('attr' => array('class' => 'silvestra-image-filename'))
         );
 
@@ -126,7 +127,7 @@ class ImageType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -190,7 +191,7 @@ class ImageType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_media_image';
     }

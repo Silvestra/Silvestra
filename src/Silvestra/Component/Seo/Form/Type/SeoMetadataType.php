@@ -12,8 +12,10 @@
 namespace Silvestra\Component\Seo\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -45,7 +47,7 @@ class SeoMetadataType extends AbstractType
     {
         $builder->add(
             'title',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.seo_metadata.page_title',
                 'constraints' => array(new Assert\NotBlank()),
@@ -55,7 +57,7 @@ class SeoMetadataType extends AbstractType
 
         $builder->add(
             'originalUrl',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.seo_metadata.original_url',
                 'required' => false,
@@ -64,7 +66,7 @@ class SeoMetadataType extends AbstractType
 
         $builder->add(
             'metaDescription',
-            'textarea',
+            TextareaType::class,
             array(
                 'label' => 'form.seo_metadata.meta_description',
                 'required' => false,
@@ -83,7 +85,7 @@ class SeoMetadataType extends AbstractType
 
         $builder->add(
             'metaRobots',
-            'textarea',
+            TextareaType::class,
             array(
                 'label' => 'form.seo_metadata.meta_robots',
                 'required' => false,
@@ -124,7 +126,7 @@ class SeoMetadataType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -137,7 +139,7 @@ class SeoMetadataType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_seo_metadata';
     }
