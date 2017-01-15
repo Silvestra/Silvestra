@@ -18,13 +18,13 @@
     <services>
 
         <!--Silvestra banner zone form factory-->
-        <service id="silvestra_banner.form_factory.banner_zone" class="Silvestra\Component\Banner\Form\Factory\BannerZoneFormFactory" public="false">
+        <service id="silvestra_banner.form_factory.banner_zone" class="Silvestra\Bundle\BannerBundle\Form\Factory\BannerZoneFormFactory" public="false">
             <argument type="service" id="form.factory" />
             <argument type="service" id="router" />
         </service>
 
         <!--Silvestra banner zone form handler-->
-        <service id="silvestra_banner.form_handler.banner_zone" class="Silvestra\Component\Banner\Form\Handler\BannerZoneFormHandler" public="false">
+        <service id="silvestra_banner.form_handler.banner_zone" class="Silvestra\Bundle\BannerBundle\Form\Handler\BannerZoneFormHandler" public="false">
             <argument type="service" id="silvestra_notification.manager.alert" />
             <argument type="service" id="silvestra_banner.manager.banner_zone" />
             <argument type="service" id="router" />
@@ -32,7 +32,7 @@
         </service>
 
         <!--Silvestra banner zone form type-->
-        <service id="silvestra_banner.form_type.banner_zone" class="Silvestra\Component\Banner\Form\Type\BannerZoneType" public="true">
+        <service id="silvestra_banner.form_type.banner_zone" class="Silvestra\Bundle\BannerBundle\Form\Type\BannerZoneType" public="true">
             <tag name="form.type" alias="silvestra_banner_zone" />
 
             <argument>%silvestra_banner.model.banner_zone.class%</argument>

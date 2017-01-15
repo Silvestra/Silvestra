@@ -14,12 +14,6 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
-
-        "symfony/form": ">=2.3",
-        "symfony/options-resolver": ">=2.3",
-        "symfony/validator": ">=2.3",
-
-        "silvestra/form": "0.1.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2"

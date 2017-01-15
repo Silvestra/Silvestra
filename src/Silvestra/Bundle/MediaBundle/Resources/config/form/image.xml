@@ -18,12 +18,12 @@
     <services>
 
         <!--Silvestra media image transformer-->
-        <service id="silvestra_media.data_transformer.image" class="Silvestra\Component\Media\Form\DataTransformer\ImageTransformer">
+        <service id="silvestra_media.data_transformer.image" class="Silvestra\Bundle\MediaBundle\Form\DataTransformer\ImageTransformer">
             <argument type="service" id="silvestra_media.manager.image" />
         </service>
 
         <!--Silvestra media image form type-->
-        <service id="silvestra_media.form_type.image" class="Silvestra\Component\Media\Form\Type\ImageType">
+        <service id="silvestra_media.form_type.image" class="Silvestra\Bundle\MediaBundle\Form\Type\ImageType">
             <tag name="form.type" alias="silvestra_media_image" />
 
             <argument>%silvestra_media.model.image.class%</argument>

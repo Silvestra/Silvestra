@@ -18,7 +18,7 @@
     <services>
 
         <!--Silvestra media gallery form type-->
-        <service id="silvestra_media.form_type.gallery" class="Silvestra\Component\Media\Form\Type\GalleryType">
+        <service id="silvestra_media.form_type.gallery" class="Silvestra\Bundle\MediaBundle\Form\Type\GalleryType">
             <tag name="form.type" alias="silvestra_media_gallery" />
 
             <argument type="service" id="silvestra_media.image.default_config" />
