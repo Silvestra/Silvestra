@@ -16,8 +16,6 @@ use Silvestra\Component\Paginator\Pagination;
 
 /**
  * @author Tadas Gliaubicas <tadas@evispa.lt>
- *
- * @since 15.3.26 14.29
  */
 class PaginationTest extends TestCase
 {

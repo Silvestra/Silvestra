@@ -16,8 +16,6 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 14.12.11 17.03
  */
 class AdminMenuHelper extends TemplatingHelper implements AdminMenuHelperInterface
 {

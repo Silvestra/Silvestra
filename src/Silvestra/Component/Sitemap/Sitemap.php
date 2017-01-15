@@ -13,8 +13,6 @@ namespace Silvestra\Component\Sitemap;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 7/27/15 11:02 PM
  */
 class Sitemap
 {

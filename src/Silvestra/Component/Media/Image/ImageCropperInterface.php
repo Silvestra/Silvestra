@@ -16,8 +16,6 @@ use Silvestra\Component\Media\Model\ImageInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/2/14 10:52 PM
  */
 interface ImageCropperInterface
 {

@@ -19,8 +19,6 @@ use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/27/14 12:15 AM
  */
 class GdImageCropperTest extends \PHPUnit_Framework_TestCase
 {

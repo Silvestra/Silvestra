@@ -13,8 +13,6 @@ namespace Silvestra\Component\Admin\Menu;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/11/14 1:39 AM
  */
 class AdminMenuItem
 {

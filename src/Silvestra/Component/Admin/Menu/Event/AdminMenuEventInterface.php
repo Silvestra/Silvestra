@@ -15,8 +15,6 @@ use Silvestra\Component\Admin\Menu\AdminMenuItem;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/11/14 1:48 AM
  */
 interface AdminMenuEventInterface
 {

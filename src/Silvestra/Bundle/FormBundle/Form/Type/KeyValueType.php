@@ -22,8 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/7/14 11:53 PM
  */
 class KeyValueType extends AbstractType
 {

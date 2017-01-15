@@ -13,8 +13,6 @@ namespace Silvestra\Component\Seo\Exception;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/7/14 10:28 PM
  */
 class RuntimeException extends \RuntimeException
 {

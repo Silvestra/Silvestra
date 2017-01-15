@@ -18,8 +18,6 @@ use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/2/14 11:54 PM
  */
 class ImageCacheTest extends \PHPUnit_Framework_TestCase
 {

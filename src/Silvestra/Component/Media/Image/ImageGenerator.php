@@ -15,8 +15,6 @@ use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/24/14 9:25 PM
  */
 class ImageGenerator
 {

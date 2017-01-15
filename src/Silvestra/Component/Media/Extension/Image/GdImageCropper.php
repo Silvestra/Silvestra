@@ -21,8 +21,6 @@ use Silvestra\Component\Media\Model\ImageInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/24/14 10:06 PM
  */
 class GdImageCropper implements ImageCropperInterface
 {

@@ -22,8 +22,6 @@ use Tadcka\Component\Tree\TadckaTreeEvents;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/26/14 9:36 PM
  */
 class TextNodeFormHandler
 {

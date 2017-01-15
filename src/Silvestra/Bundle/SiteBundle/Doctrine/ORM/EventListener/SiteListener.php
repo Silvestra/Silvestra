@@ -19,8 +19,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/18/15 10:50 PM
  */
 class SiteListener implements EventSubscriberInterface
 {

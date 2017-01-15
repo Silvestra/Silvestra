@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Templating;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/6/14 6:38 PM
  */
 interface ImageTemplatingHelperInterface
 {

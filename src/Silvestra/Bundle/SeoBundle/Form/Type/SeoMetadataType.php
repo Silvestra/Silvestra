@@ -20,8 +20,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/15/14 12:15 AM
  */
 class SeoMetadataType extends AbstractType
 {

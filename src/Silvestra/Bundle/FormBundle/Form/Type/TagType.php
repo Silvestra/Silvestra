@@ -21,8 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/9/14 9:33 PM
  */
 class TagType extends AbstractType
 {

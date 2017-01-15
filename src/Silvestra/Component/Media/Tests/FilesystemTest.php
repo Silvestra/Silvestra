@@ -16,8 +16,6 @@ use Silvestra\Component\Media\Media;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 14.9.14 00.10
  */
 class FilesystemTest extends \PHPUnit_Framework_TestCase
 {

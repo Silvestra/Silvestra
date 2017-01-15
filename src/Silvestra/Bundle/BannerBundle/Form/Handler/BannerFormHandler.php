@@ -22,8 +22,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/6/14 1:47 PM
  */
 class BannerFormHandler
 {

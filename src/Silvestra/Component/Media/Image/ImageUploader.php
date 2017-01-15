@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/24/14 11:47 PM
  */
 class ImageUploader
 {

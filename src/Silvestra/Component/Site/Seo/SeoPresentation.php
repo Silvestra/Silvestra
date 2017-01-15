@@ -18,8 +18,7 @@ use Silvestra\Component\Site\Model\Manager\SiteManagerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/11/14 11:16 PM
+ 
  */
 class SeoPresentation extends BaseSeoPresentation
 {

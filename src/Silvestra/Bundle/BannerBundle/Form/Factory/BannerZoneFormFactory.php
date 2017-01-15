@@ -18,8 +18,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/5/14 11:41 PM
  */
 class BannerZoneFormFactory
 {

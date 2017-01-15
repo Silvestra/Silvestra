@@ -15,8 +15,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/10/14 12:31 AM
  */
 class TagTransformer implements DataTransformerInterface
 {

@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/10/14 12:21 AM
  */
 class FormThemeLoaderPass implements CompilerPassInterface
 {

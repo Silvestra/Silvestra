@@ -13,8 +13,6 @@ namespace Silvestra\Component\Sitemap\Entry;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 8:32 PM
  */
 class SitemapEntry extends AbstractEntry implements SitemapEntryInterface
 {

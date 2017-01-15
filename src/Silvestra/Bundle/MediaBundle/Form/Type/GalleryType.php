@@ -19,8 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/23/14 3:57 PM
  */
 class GalleryType extends AbstractType
 {

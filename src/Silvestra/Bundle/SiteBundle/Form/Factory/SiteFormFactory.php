@@ -18,8 +18,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/28/14 10:30 PM
  */
 class SiteFormFactory
 {

@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Image\Config;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/23/14 1:38 PM
  */
 class ImageDefaultConfig
 {

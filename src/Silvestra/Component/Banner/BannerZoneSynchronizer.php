@@ -22,8 +22,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/31/15 11:12 PM
  */
 class BannerZoneSynchronizer
 {

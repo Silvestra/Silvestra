@@ -16,8 +16,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 15.3.4 15.57
  */
 class UrlHelper
 {

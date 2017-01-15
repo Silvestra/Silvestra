@@ -16,8 +16,6 @@ use Silvestra\Component\Seo\Templating\SeoEngine;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/9/14 1:03 PM
  */
 class SeoEngineTest extends \PHPUnit_Framework_TestCase
 {

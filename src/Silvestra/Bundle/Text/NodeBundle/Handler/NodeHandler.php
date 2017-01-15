@@ -17,8 +17,6 @@ use Tadcka\Component\Tree\Model\NodeInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 7/22/15 9:34 PM
  */
 class NodeHandler
 {

@@ -16,8 +16,6 @@ use Silvestra\Component\Sitemap\Entry\UrlEntryInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 7:54 PM
  */
 class XmlRender implements RenderInterface
 {

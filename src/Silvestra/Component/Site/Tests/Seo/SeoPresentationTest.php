@@ -18,8 +18,6 @@ use Silvestra\Component\Site\Seo\SeoPresentation;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/11/14 11:26 PM
  */
 class SeoPresentationTest extends \PHPUnit_Framework_TestCase
 {

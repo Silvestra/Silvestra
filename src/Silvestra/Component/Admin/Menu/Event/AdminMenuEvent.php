@@ -16,8 +16,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/11/14 1:46 AM
  */
 class AdminMenuEvent extends Event implements AdminMenuEventInterface
 {

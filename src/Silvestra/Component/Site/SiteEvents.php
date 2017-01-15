@@ -13,8 +13,6 @@ namespace Silvestra\Component\Site;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/18/15 10:43 PM
  */
 class SiteEvents
 {

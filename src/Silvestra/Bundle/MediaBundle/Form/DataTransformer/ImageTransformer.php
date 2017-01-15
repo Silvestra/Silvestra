@@ -18,8 +18,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/23/14 4:04 PM
  */
 class ImageTransformer implements DataTransformerInterface
 {

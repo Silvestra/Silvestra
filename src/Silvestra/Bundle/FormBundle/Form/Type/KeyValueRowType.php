@@ -20,8 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/8/14 12:24 AM
  */
 class KeyValueRowType extends AbstractType
 {

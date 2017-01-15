@@ -17,8 +17,6 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 15.3.4 15.57
  */
 class TwigTemplatingHelper extends TemplatingHelper implements TemplatingHelperInterface
 {

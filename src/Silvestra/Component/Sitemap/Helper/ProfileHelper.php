@@ -15,8 +15,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 9:56 PM
  */
 class ProfileHelper
 {

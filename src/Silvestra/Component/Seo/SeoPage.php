@@ -15,8 +15,6 @@ use Silvestra\Component\Seo\Exception\RuntimeException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/7/14 9:57 PM
  */
 class SeoPage implements SeoPageInterface
 {

@@ -18,8 +18,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 14.12.11 18.23
  */
 abstract class AdminMenuSubscriber implements EventSubscriberInterface
 {

@@ -15,8 +15,6 @@ use Silvestra\Component\Media\Image\Config\Validator\MaxFileSizeValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/23/14 8:17 PM
  */
 class MaxFileSizeValidatorTest extends AbstractConfigValidator
 {

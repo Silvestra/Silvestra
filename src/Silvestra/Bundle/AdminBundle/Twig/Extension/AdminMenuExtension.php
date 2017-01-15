@@ -16,8 +16,6 @@ use Silvestra\Component\Admin\Templating\AdminMenuHelperInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 14.12.11 17.16
  */
 class AdminMenuExtension extends \Twig_Extension
 {

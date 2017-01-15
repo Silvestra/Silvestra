@@ -13,8 +13,6 @@ namespace Silvestra\Component\Banner\Event;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 4/1/15 8:04 PM
  */
 final class BannerEvents
 {

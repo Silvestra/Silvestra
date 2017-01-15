@@ -20,8 +20,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/28/14 10:02 PM
  */
 class SiteType extends AbstractType
 {

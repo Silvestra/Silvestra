@@ -15,8 +15,6 @@ use Silvestra\Component\Locale\Templating\LocaleTemplatingHelperInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/7/14 10:51 PM
  */
 class LocaleExtension extends \Twig_Extension
 {

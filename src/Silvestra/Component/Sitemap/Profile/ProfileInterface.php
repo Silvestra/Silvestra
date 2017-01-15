@@ -15,8 +15,6 @@ use Silvestra\Component\Sitemap\Entry\UrlEntryInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 8:09 PM
  */
 interface ProfileInterface
 {

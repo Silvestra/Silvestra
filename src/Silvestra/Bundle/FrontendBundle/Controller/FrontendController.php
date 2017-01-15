@@ -24,8 +24,6 @@ use Tadcka\Component\Tree\Model\NodeTranslationInterface;
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 9/7/14 1:00 PM
- *
  * @deprecated
  */
 abstract class FrontendController

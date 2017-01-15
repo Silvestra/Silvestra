@@ -13,8 +13,6 @@ namespace Silvestra\Component\Sitemap\Exception;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 8:41 PM
  */
 class DumperException extends \RuntimeException
 {

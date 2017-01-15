@@ -16,8 +16,6 @@ use Silvestra\Component\Media\Media;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/2/14 11:05 PM
  */
 class ImageCache implements ImageCacheInterface
 {

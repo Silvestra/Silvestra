@@ -13,8 +13,6 @@ namespace Silvestra\Component\Sitemap\Dumper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 7:47 PM
  */
 interface DumperInterface
 {

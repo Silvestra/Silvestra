@@ -23,8 +23,6 @@ use Symfony\Component\Form\Forms;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/5/14 10:50 PM
  */
 class BannerTypeTest extends AbstractTypeTest
 {

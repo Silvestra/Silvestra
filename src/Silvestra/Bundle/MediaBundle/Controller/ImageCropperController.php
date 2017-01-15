@@ -21,8 +21,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/26/14 8:22 PM
  */
 class ImageCropperController
 {

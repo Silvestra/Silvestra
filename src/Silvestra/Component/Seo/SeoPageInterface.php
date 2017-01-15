@@ -13,8 +13,6 @@ namespace Silvestra\Component\Seo;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/7/14 9:56 PM
  */
 interface SeoPageInterface
 {

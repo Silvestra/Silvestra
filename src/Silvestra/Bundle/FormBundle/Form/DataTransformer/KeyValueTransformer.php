@@ -17,8 +17,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/8/14 12:16 AM
  */
 class KeyValueTransformer implements DataTransformerInterface
 {

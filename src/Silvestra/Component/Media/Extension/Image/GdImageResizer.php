@@ -22,8 +22,6 @@ use Silvestra\Component\Media\Image\Resizer\ImageResizerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/2/14 10:49 PM
  */
 class GdImageResizer implements ImageResizerInterface
 {

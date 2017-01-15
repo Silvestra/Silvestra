@@ -18,8 +18,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/26/14 9:34 PM
  */
 class TextNodeFormFactory
 {

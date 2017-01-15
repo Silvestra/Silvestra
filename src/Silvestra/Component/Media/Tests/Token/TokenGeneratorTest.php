@@ -16,8 +16,6 @@ use Silvestra\Component\Media\Token\TokenGenerator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/26/14 9:05 PM
  */
 class TokenGeneratorTest extends \PHPUnit_Framework_TestCase
 {

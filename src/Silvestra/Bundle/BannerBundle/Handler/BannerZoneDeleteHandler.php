@@ -19,8 +19,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/9/14 12:15 AM
  */
 class BannerZoneDeleteHandler
 {

@@ -15,8 +15,6 @@ use Silvestra\Component\Seo\Model\SeoMetadataInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/9/14 12:17 PM
  */
 class SeoPresentation implements SeoPresentationInterface
 {

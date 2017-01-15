@@ -17,8 +17,6 @@ use Silvestra\Component\Media\Token\TokenValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/26/14 9:12 PM
  */
 class TokenValidatorTest extends \PHPUnit_Framework_TestCase
 {

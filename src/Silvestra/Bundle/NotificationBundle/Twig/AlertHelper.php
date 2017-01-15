@@ -17,8 +17,6 @@ use Twig_Environment as Environment;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/8/14 12:36 PM
  */
 class AlertHelper extends TemplatingHelper implements AlertHelperInterface
 {

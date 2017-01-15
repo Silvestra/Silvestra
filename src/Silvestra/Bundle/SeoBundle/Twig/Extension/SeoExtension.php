@@ -15,8 +15,6 @@ use Silvestra\Component\Seo\Templating\SeoEngineInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/22/14 1:43 AM
  */
 class SeoExtension extends \Twig_Extension
 {

@@ -15,8 +15,6 @@ use Silvestra\Component\Media\Templating\ImageTemplatingHelperInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/6/14 7:29 PM
  */
 class ImageExtension extends \Twig_Extension
 {

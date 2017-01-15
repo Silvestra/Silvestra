@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Tests\Extension\Image;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/2/14 11:43 PM
  */
 class GdImageResizerTest extends \PHPUnit_Framework_TestCase
 {

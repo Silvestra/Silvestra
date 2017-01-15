@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/23/14 2:01 PM
  */
 class Media
 {

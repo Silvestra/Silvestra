@@ -16,8 +16,6 @@ use Silvestra\Component\Media\Media;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/23/14 8:18 PM
  */
 class MimeTypesValidatorTest extends AbstractConfigValidator
 {

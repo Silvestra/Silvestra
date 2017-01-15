@@ -16,8 +16,6 @@ use Symfony\Component\Form\Forms;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/10/14 10:18 PM
  */
 class TagTypeTest extends AbstractTypeTest
 {

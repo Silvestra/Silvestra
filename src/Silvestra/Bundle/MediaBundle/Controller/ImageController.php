@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 9/11/14 9:27 PM
  */
 class ImageController
 {

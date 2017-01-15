@@ -17,8 +17,6 @@ use Silvestra\Component\Media\Image\ImageValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/23/14 8:47 PM
  */
 class ImageValidatorTest extends \PHPUnit_Framework_TestCase
 {

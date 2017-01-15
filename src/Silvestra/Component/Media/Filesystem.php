@@ -16,8 +16,6 @@ use Silvestra\Component\Media\Exception\IOException;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 14.9.14 00.07
  */
 class Filesystem
 {

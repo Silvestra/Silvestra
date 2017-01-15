@@ -26,8 +26,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/9/14 12:23 PM
  */
 class SeoMetadataTypeTest extends TypeTestCase
 {

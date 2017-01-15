@@ -13,8 +13,6 @@ namespace Silvestra\Component\Seo\Model;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 14.11.13 18.56
  */
 class AlternateLanguage implements AlternateLanguageInterface
 {

@@ -16,8 +16,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/18/15 10:42 PM
  */
 class SiteEvent extends Event
 {

@@ -13,8 +13,6 @@ namespace Silvestra\Component\Cache\Exception;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 14.10.21 13.39
  */
 class HttpCacheException extends \RuntimeException
 {

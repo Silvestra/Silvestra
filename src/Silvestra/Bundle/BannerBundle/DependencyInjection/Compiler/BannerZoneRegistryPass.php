@@ -17,8 +17,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/5/14 10:30 PM
  */
 class BannerZoneRegistryPass implements CompilerPassInterface
 {

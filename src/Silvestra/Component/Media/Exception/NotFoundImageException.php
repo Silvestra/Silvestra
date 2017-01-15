@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Exception;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/24/14 10:13 PM
  */
 class NotFoundImageException extends \RuntimeException
 {

@@ -13,8 +13,6 @@ namespace Silvestra\Component\Banner\Registry;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/3/14 1:39 AM
  */
 class BannerZoneRegistry
 {

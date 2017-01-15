@@ -17,8 +17,6 @@ use Symfony\Component\Templating\Helper\Helper as TemplatingHelper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/6/14 6:33 PM
  */
 class ImageTemplatingHelper extends TemplatingHelper implements ImageTemplatingHelperInterface
 {

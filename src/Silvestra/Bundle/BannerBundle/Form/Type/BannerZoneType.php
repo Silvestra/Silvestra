@@ -21,8 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/3/14 1:31 AM
  */
 class BannerZoneType extends AbstractType
 {

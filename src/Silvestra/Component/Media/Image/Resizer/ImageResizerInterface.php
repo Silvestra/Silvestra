@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Image\Resizer;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/2/14 10:53 PM
  */
 interface ImageResizerInterface
 {

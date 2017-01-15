@@ -18,8 +18,6 @@ use Silvestra\Component\Sitemap\Render\XmlRender;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 11:14 PM
  */
 class XmlRenderTest extends TestCase
 {

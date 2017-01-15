@@ -13,8 +13,6 @@ namespace Silvestra\Component\Locale\Helper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/6/14 4:28 PM
  */
 class LocaleHelper
 {

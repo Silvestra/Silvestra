@@ -17,8 +17,6 @@ use Silvestra\Component\Seo\SeoPresentation;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/11/14 10:49 PM
  */
 class SeoPresentationTest extends \PHPUnit_Framework_TestCase
 {

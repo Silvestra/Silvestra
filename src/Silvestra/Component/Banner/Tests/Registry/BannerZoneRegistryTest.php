@@ -16,8 +16,6 @@ use Silvestra\Component\Banner\Registry\BannerZoneRegistry;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/5/14 10:59 PM
  */
 class BannerZoneRegistryTest extends \PHPUnit_Framework_TestCase
 {

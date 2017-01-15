@@ -17,8 +17,6 @@ use Silvestra\Component\Admin\Menu\Event\AdminMenuSubscriber;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/28/14 10:46 PM
  */
 class AdminMenuListener extends AdminMenuSubscriber
 {

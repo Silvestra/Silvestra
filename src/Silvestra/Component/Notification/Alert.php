@@ -13,8 +13,6 @@ namespace Silvestra\Component\Notification;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/8/14 11:57 AM
  */
 class Alert
 {

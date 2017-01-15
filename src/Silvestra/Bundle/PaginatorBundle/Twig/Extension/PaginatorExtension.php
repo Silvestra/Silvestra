@@ -16,8 +16,6 @@ use Silvestra\Component\Paginator\UrlHelper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 15.3.4 15.57
  */
 class PaginatorExtension extends \Twig_Extension
 {

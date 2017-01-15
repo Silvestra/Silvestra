@@ -16,8 +16,6 @@ use Silvestra\Component\Notification\Templating\AlertHelperInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/8/14 1:00 PM
  */
 class AlertExtension extends \Twig_Extension
 {

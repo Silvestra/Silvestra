@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Image\Config;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/26/14 10:50 PM
  */
 class ImageConfigHelper
 {

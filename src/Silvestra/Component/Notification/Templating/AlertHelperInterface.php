@@ -13,8 +13,6 @@ namespace Silvestra\Component\Notification\Templating;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/8/14 12:40 PM
  */
 interface AlertHelperInterface
 {

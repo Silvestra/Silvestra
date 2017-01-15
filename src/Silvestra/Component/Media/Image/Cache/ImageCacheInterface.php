@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Image\Cache;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/2/14 11:16 PM
  */
 interface ImageCacheInterface
 {

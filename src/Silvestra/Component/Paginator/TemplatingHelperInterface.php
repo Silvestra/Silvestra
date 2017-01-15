@@ -13,8 +13,6 @@ namespace Silvestra\Component\Paginator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 15.3.4 15.57
  */
 interface TemplatingHelperInterface
 {

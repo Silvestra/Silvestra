@@ -13,8 +13,6 @@ namespace Silvestra\Component\Locale\Templating;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/7/14 10:48 PM
  */
 interface LocaleTemplatingHelperInterface
 {

@@ -13,8 +13,6 @@ namespace Silvestra\Component\Sitemap\Dumper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 7/27/15 11:18 PM
  */
 class SitemapDumper extends SitemapFileDumper
 {

@@ -15,8 +15,6 @@ use Silvestra\Bundle\FormBundle\Form\DataTransformer\TagTransformer;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/10/14 10:11 PM
  */
 class TagTransformerTest extends \PHPUnit_Framework_TestCase
 {

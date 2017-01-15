@@ -17,8 +17,6 @@ use Silvestra\Component\Media\Model\Manager\ImageManagerInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/1/15 12:14 PM
  */
 class InMemoryImageManager extends ImageManager
 {

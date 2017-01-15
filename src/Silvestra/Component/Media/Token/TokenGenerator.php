@@ -13,8 +13,6 @@ namespace Silvestra\Component\Media\Token;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/26/14 8:59 PM
  */
 class TokenGenerator
 {

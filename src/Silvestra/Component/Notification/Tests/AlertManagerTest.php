@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/8/14 12:23 PM
  */
 class AlertManagerTest extends \PHPUnit_Framework_TestCase
 {

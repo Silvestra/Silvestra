@@ -16,8 +16,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 4/1/15 7:59 PM
  */
 class BannerZoneEvent extends Event
 {

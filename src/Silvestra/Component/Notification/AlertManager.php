@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/8/14 12:19 PM
  */
 class AlertManager
 {

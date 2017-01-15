@@ -13,8 +13,6 @@ namespace Silvestra\Component\Paginator;
 
 /**
  * @author Tadas Gliaubicas <tadas@evispa.lt>
- *
- * @since 15.3.26 14.16
  */
 class Pagination implements \Iterator
 {

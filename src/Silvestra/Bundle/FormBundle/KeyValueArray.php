@@ -13,8 +13,6 @@ namespace Silvestra\Bundle\FormBundle;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 10/8/14 12:10 AM
  */
 class KeyValueArray implements \ArrayAccess
 {

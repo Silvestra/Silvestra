@@ -17,8 +17,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/11/14 1:44 AM
  */
 class AdminMenuBuilder
 {

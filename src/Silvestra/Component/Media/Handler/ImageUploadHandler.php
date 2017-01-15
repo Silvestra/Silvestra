@@ -19,8 +19,6 @@ use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 9/20/14 5:19 PM
  */
 class ImageUploadHandler
 {

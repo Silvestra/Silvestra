@@ -15,8 +15,6 @@ use Silvestra\Component\Locale\Templating\LocaleTemplatingHelper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/7/14 10:47 PM
  */
 class LocaleTemplatingHelperTest extends \PHPUnit_Framework_TestCase
 {

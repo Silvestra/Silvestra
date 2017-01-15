@@ -13,8 +13,6 @@ namespace Silvestra\Component\Admin;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 12/11/14 1:45 AM
  */
 class Admin
 {

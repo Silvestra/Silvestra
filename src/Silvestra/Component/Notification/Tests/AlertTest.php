@@ -15,8 +15,6 @@ use Silvestra\Component\Notification\Alert;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 11/8/14 12:11 PM
  */
 class AlertTest extends \PHPUnit_Framework_TestCase
 {

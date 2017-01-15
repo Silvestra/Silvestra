@@ -13,8 +13,6 @@ namespace Silvestra\Component\Sitemap\Profile;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 9:10 PM
  */
 class ProfileRegistry
 {

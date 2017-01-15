@@ -22,8 +22,6 @@ use Silvestra\Component\Sitemap\Sitemap;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
- *
- * @since 3/24/15 8:42 PM
  */
 class SitemapFileDumper implements DumperInterface
 {
