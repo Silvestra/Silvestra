@@ -13,8 +13,8 @@ namespace Silvestra\Bundle\SeoBundle\Doctrine\EntityManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Silvestra\Component\Seo\Model\SeoMetadataInterface;
 use Silvestra\Component\Seo\Model\Manager\SeoMetadataManager as BaseSeoMetadataManager;
+use Silvestra\Component\Seo\Model\SeoMetadataInterface;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>

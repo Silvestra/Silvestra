@@ -12,8 +12,11 @@
 namespace Silvestra\Component\Banner\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -47,7 +50,7 @@ class BannerZoneType extends AbstractType
 
         $builder->add(
             'name',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.banner_zone.name',
                 'required' => false,
@@ -57,7 +60,7 @@ class BannerZoneType extends AbstractType
 
         $builder->add(
             'code',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.banner_zone.code',
                 'required' => false,
@@ -67,7 +70,7 @@ class BannerZoneType extends AbstractType
 
         $builder->add(
             'slug',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.banner_zone.slug',
                 'required' => false,
@@ -78,7 +81,7 @@ class BannerZoneType extends AbstractType
 
         $builder->add(
             'width',
-            'integer',
+            IntegerType::class,
             array(
                 'label' => 'form.banner_zone.width',
                 'required' => false,
@@ -89,7 +92,7 @@ class BannerZoneType extends AbstractType
 
         $builder->add(
             'height',
-            'integer',
+            IntegerType::class,
             array(
                 'label' => 'form.banner_zone.height',
                 'required' => false,
@@ -98,13 +101,13 @@ class BannerZoneType extends AbstractType
             )
         );
 
-        $builder->add('submit', 'submit', array('label' => 'form.button.save'));
+        $builder->add('submit', SubmitType::class, array('label' => 'form.button.save'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -118,7 +121,7 @@ class BannerZoneType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_banner_zone';
     }

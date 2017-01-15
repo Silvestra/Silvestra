@@ -13,9 +13,9 @@ namespace Silvestra\Bundle\Text\NodeBundle\Doctrine\EntityManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Tadcka\Component\Tree\Model\NodeInterface;
-use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
 use Silvestra\Bundle\Text\NodeBundle\Model\Manager\TextNodeManager as BaseTextNodeManager;
+use Silvestra\Bundle\Text\NodeBundle\Model\TextNodeInterface;
+use Tadcka\Component\Tree\Model\NodeInterface;
 
 class TextNodeManager extends BaseTextNodeManager
 {

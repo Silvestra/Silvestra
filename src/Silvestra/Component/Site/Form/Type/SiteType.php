@@ -12,8 +12,10 @@
 namespace Silvestra\Component\Site\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -45,7 +47,7 @@ class SiteType extends AbstractType
     {
         $builder->add(
             'domain',
-            'text',
+            TextType::class,
             array(
                 'required' => false,
                 'label' => 'form.site.domain',
@@ -55,13 +57,13 @@ class SiteType extends AbstractType
 
         $builder->add('seoMetadata', 'translations', array('type' => 'silvestra_seo_metadata', 'label' => false));
 
-        $builder->add('submit', 'submit', array('label' => 'form.button.save'));
+        $builder->add('submit', SubmitType::class, array('label' => 'form.button.save'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -74,7 +76,7 @@ class SiteType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'silvestra_site';
     }

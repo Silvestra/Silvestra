@@ -12,8 +12,8 @@
 namespace Silvestra\Component\Media\Tests\Image;
 
 use Silvestra\Component\Media\Image\Config\ImageDefaultConfig;
-use Silvestra\Component\Media\Image\ImageValidator;
 use Silvestra\Component\Media\Image\Config\Validator\MaxFileSizeValidator;
+use Silvestra\Component\Media\Image\ImageValidator;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
