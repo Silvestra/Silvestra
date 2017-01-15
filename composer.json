@@ -51,7 +51,6 @@
         "silvestra/banner-bundle": "self.version",
         "silvestra/cache-bundle": "self.version",
         "silvestra/form-bundle": "self.version",
-        "silvestra/frontend-bundle": "self.version",
         "silvestra/locale-bundle": "self.version",
         "silvestra/media-bundle": "self.version",
         "silvestra/notification-bundle": "self.version",
