@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.5.9",
 
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "nercury/translation-editor-bundle": "~0.1",
