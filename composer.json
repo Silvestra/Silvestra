@@ -24,7 +24,7 @@
         "tadcka/jstree-bundle": "dev-master",
         "tadcka/routing": "dev-master",
         "tadcka/routing-bundle": "dev-master",
-        "tadcka/tree": "dev-master",
+        "tadcka/tree": "dev-remove-seo-dependency",
         "Trsteel/ckeditor-bundle": "~1.2",
         "twig/extensions": "~1.0"
     },
@@ -39,7 +39,6 @@
         "silvestra/admin": "self.version",
         "silvestra/banner": "self.version",
         "silvestra/cache": "self.version",
-        "silvestra/form": "self.version",
         "silvestra/locale": "self.version",
         "silvestra/media": "self.version",
         "silvestra/notification": "self.version",
@@ -71,7 +70,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1-dev"
+            "dev-master": "0.2-dev"
         }
     }
 }
