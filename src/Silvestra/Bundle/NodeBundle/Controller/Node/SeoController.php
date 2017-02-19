@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\NodeBundle\Controller;
+namespace Silvestra\Bundle\NodeBundle\Controller\Node;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ use Silvestra\Bundle\NodeBundle\Frontend\Message\Messages;
  *
  * @since  14.6.29 20.57
  */
-class NodeSeoController
+class SeoController
 {
     /**
      * @var NodeSeoFormFactory

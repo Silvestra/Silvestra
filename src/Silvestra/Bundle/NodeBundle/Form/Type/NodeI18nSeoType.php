@@ -11,9 +11,10 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Type;
 
+use Silvestra\Bundle\SeoBundle\Form\Type\SeoMetadataType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NodeI18nSeoType extends AbstractType
 {
@@ -40,7 +41,7 @@ class NodeI18nSeoType extends AbstractType
     {
         $builder->add(
             'seoMetadata',
-            'silvestra_seo_metadata',
+            SeoMetadataType::class,
             array(
                 'label' => false,
             )
@@ -50,12 +51,12 @@ class NodeI18nSeoType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => $this->nodeTranslationClass,
-                'translation_domain' => 'TadckaSitemapBundle',
+                'translation_domain' => 'SilvestraNode',
             )
         );
     }
@@ -65,6 +66,6 @@ class NodeI18nSeoType extends AbstractType
      */
     public function getName()
     {
-        return 'silvestra_node_node_i18n_seo';
+        return 'silvestra_node_i18n_seo';
     }
 }

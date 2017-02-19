@@ -11,10 +11,13 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Type;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsFormsType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Silvestra\Bundle\NodeBundle\Validator\Constraints as AssertSitemap;
 
@@ -33,7 +36,7 @@ class NodeType extends AbstractType
         if (false === $options['is_root']) {
             $builder->add(
                 'type',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => $options['node_types'],
                     'empty_value' => 'form.select',
@@ -45,7 +48,7 @@ class NodeType extends AbstractType
 
             $builder->add(
                 'priority',
-                'integer',
+                IntegerType::class,
                 array(
                     'required' => false,
                     'label' => 'form.node.priority',
@@ -55,29 +58,27 @@ class NodeType extends AbstractType
 
         $builder->add(
             'translations',
-            'translations',
+            TranslationsFormsType::class,
             array(
                 'label' => false,
-                'type' => new NodeTranslationType(),
+                'form_type' => NodeTranslationType::class,
                 'options' => array(
                     'data_class' => $options['translation_class'],
                 ),
             )
         );
-
-        $builder->add('submit', 'submit', array('label' => 'form.button.save'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setOptional(array('translation_class', 'node_types', 'is_root'));
 
         $resolver->setDefaults(
             array(
-                'translation_domain' => 'TadckaSitemapBundle',
+                'translation_domain' => 'SilvestraNode',
                 'attr' => array('class' => 'tadcka_node'),
                 'constraints' => function (Options $options) {
                     if (0 < count($options['node_types'])) {
@@ -93,8 +94,8 @@ class NodeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return 'tadcka_node';
+        return 'silvestra_node';
     }
 }

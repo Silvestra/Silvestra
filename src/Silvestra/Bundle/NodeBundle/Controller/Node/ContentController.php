@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\NodeBundle\Controller;
+namespace Silvestra\Bundle\NodeBundle\Controller\Node;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ use Silvestra\Bundle\NodeBundle\SilvestraNodeEvents;
  *
  * @since 10/24/14 12:04 AM
  */
-class NodeContentController
+class ContentController
 {
     /**
      * @var EventDispatcherInterface

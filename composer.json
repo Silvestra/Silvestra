@@ -12,6 +12,8 @@
     "require": {
         "php": ">=5.5.9",
 
+        "a2lix/auto-form-bundle": "dev-master",
+        "a2lix/translation-form-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "nercury/translation-editor-bundle": "~0.1",
         "symfony/assetic-bundle": "^2.8",

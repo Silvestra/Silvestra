@@ -12,9 +12,11 @@
 namespace Silvestra\Bundle\NodeBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Trsteel\CkeditorBundle\Form\Type\CkeditorType;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -30,7 +32,7 @@ class NodeTranslationType extends AbstractType
     {
         $builder->add(
             'title',
-            'text',
+            TextType::class,
             array(
                 'label' => 'form.node_translation.title',
                 'constraints' => array(new NotBlank()),
@@ -40,7 +42,7 @@ class NodeTranslationType extends AbstractType
 
         $builder->add(
             'description',
-            'ckeditor',
+            CkeditorType::class,
             array(
                 'label' => 'form.node_translation.description',
                 'required' => false
@@ -51,12 +53,12 @@ class NodeTranslationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'label' => false,
-                'translation_domain' => 'TadckaSitemapBundle',
+                'translation_domain' => 'SilvestraNode',
             )
         );
     }
@@ -64,8 +66,8 @@ class NodeTranslationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return 'tadcka_node_translation';
+        return 'silvestra_node_translation';
     }
 }

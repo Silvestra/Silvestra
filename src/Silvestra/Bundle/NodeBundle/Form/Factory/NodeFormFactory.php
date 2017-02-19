@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Factory;
 
+use Silvestra\Bundle\NodeBundle\Form\Type\NodeType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -93,7 +94,7 @@ class NodeFormFactory
     public function create(NodeInterface $node)
     {
         return $this->formFactory->create(
-            'tadcka_node',
+            NodeType::class,
             $node,
             array(
                 'action' => $this->router->getContext()->getPathInfo(),

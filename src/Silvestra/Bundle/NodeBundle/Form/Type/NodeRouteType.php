@@ -11,9 +11,10 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Type;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsFormsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -37,7 +38,6 @@ class NodeRouteType extends AbstractType
         $this->nodeClass = $nodeClass;
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -45,28 +45,26 @@ class NodeRouteType extends AbstractType
     {
         $builder->add(
             'translations',
-            'translations',
+            TranslationsFormsType::class,
             array(
-                'type' => 'silvestra_node_node_i18n_route',
+                'form_type' => NodeI18nRouteType::class,
                 'label' => false,
                 'options' => array(
                     'allowed_link_attributes' => $options['allowed_link_attributes'],
                 ),
             )
         );
-
-        $builder->add('submit', 'submit', array('label' => 'form.button.save'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => $this->nodeClass,
-                'translation_domain' => 'TadckaSitemapBundle',
+                'translation_domain' => 'SilvestraNode',
                 'allowed_link_attributes' => array(),
             )
         );
@@ -75,8 +73,8 @@ class NodeRouteType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return 'silvestra_node_node_route';
+        return 'silvestra_node_route';
     }
 }

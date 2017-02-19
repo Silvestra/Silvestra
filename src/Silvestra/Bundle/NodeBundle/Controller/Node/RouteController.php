@@ -9,31 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\NodeBundle\Controller;
+namespace Silvestra\Bundle\NodeBundle\Controller\Node;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Silvestra\Bundle\NodeBundle\Form\Factory\NodeRedirectRouteFormFactory;
-use Silvestra\Bundle\NodeBundle\Form\Handler\NodeRedirectRouteFormHandler;
+use Silvestra\Bundle\NodeBundle\Form\Factory\NodeRouteFormFactory;
+use Silvestra\Bundle\NodeBundle\Form\Handler\NodeRouteFormHandler;
 use Silvestra\Bundle\NodeBundle\Frontend\Message\Messages;
 use Silvestra\Bundle\NodeBundle\Frontend\ResponseHelper;
+use Tadcka\Component\Tree\Model\NodeInterface;
+use Silvestra\Bundle\NodeBundle\Routing\RouterHelper;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
  *
- * @since 11/1/14 7:47 PM
+ * @since  14.10.25 22.07
  */
-class NodeRedirectRouteController
+class RouteController
 {
     /**
-     * @var NodeRedirectRouteFormFactory
+     * @var NodeRouteFormFactory
      */
     private $formFactory;
 
     /**
-     * @var NodeRedirectRouteFormHandler
+     * @var NodeRouteFormHandler
      */
     private $formHandler;
 
@@ -43,20 +45,28 @@ class NodeRedirectRouteController
     private $responseHelper;
 
     /**
+     * @var RouterHelper
+     */
+    private $routerHelper;
+
+    /**
      * Constructor.
      *
-     * @param NodeRedirectRouteFormFactory $formFactory
-     * @param NodeRedirectRouteFormHandler $formHandler
+     * @param NodeRouteFormFactory $formFactory
+     * @param NodeRouteFormHandler $formHandler
      * @param ResponseHelper $responseHelper
+     * @param RouterHelper $routerHelper
      */
     public function __construct(
-        NodeRedirectRouteFormFactory $formFactory,
-        NodeRedirectRouteFormHandler $formHandler,
-        ResponseHelper $responseHelper
+        NodeRouteFormFactory $formFactory,
+        NodeRouteFormHandler $formHandler,
+        ResponseHelper $responseHelper,
+        RouterHelper $routerHelper
     ) {
         $this->formFactory = $formFactory;
         $this->formHandler = $formHandler;
         $this->responseHelper = $responseHelper;
+        $this->routerHelper = $routerHelper;
     }
 
 
@@ -64,8 +74,8 @@ class NodeRedirectRouteController
     {
         $node = $this->responseHelper->getNodeOr404($nodeId);
 
-        if ('redirect' !== $node->getType()) {
-            throw new NotFoundHttpException('Node type is not redirect!');
+        if (false === $this->routerHelper->hasController($node->getType())) {
+            throw new NotFoundHttpException('Node don\'t have controller.');
         }
 
         $form = $this->formFactory->create($node);
@@ -75,6 +85,9 @@ class NodeRedirectRouteController
         if ($this->formHandler->process($request, $form)) {
             $message = $this->formHandler->onSuccess($request->getLocale(), $node);
             $messages->addSuccess($message);
+            if ('json' === $request->getRequestFormat()) {
+                $jsonContent->setToolbar($this->renderToolbar($node));
+            }
 
             // Hack... Form with new data.
             $form = $this->formFactory->create($node);
@@ -82,27 +95,47 @@ class NodeRedirectRouteController
 
         if ('json' === $request->getRequestFormat()) {
             $jsonContent->setMessages($this->responseHelper->renderMessages($messages));
-            $jsonContent->setTab($this->renderNodeRedirectRoute($form));
+            $jsonContent->setTab($this->renderNodeRoute($form));
 
             return $this->responseHelper->getJsonResponse($jsonContent);
         }
 
-        return new Response($this->renderNodeRedirectRoute($form, $messages));
+        return new Response($this->renderNodeRoute($form, $messages));
     }
 
     /**
-     * Render node redirect route template.
+     * Render node route template.
      *
      * @param FormInterface $form
-     * @param Messages $messages
+     * @param null|Messages $messages
      *
      * @return string
      */
-    private function renderNodeRedirectRoute(FormInterface $form, Messages $messages = null)
+    private function renderNodeRoute(FormInterface $form, Messages $messages = null)
     {
         return $this->responseHelper->render(
-            'TadckaSitemapBundle:Node:redirect_route.html.twig',
+            'TadckaSitemapBundle:Node:route.html.twig',
             array('form' => $form->createView(), 'messages' => $messages)
+        );
+    }
+
+    /**
+     * Render toolbar template.
+     *
+     * @param NodeInterface $node
+     *
+     * @return string
+     */
+    private function renderToolbar(NodeInterface $node)
+    {
+        return $this->responseHelper->render(
+            'TadckaSitemapBundle:Sitemap:toolbar.html.twig',
+            array(
+                'node' => $node,
+                'multi_language_enabled' => $this->routerHelper->multiLanguageIsEnabled(),
+                'multi_language_locales' => $this->routerHelper->getMultiLanguageLocales(),
+                'has_controller' => $this->routerHelper->hasController($node->getType()),
+            )
         );
     }
 }

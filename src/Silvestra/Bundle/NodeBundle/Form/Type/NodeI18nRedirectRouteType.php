@@ -15,9 +15,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Silvestra\Bundle\NodeBundle\Form\DataTransformer\NodeI18nRedirectRouteTransformer;
 use Silvestra\Bundle\NodeBundle\Validator\Constraints\NodeParentIsOnline;
+use Tadcka\Bundle\RoutingBundle\Form\Type\RedirectRouteType;
+use Tadcka\Bundle\RoutingBundle\Form\Type\RouteType;
 use Tadcka\Component\Routing\Model\RouteInterface;
 
 /**
@@ -54,9 +56,9 @@ class NodeI18nRedirectRouteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('route', 'tadcka_route', array('label' => false, 'translation_domain' => 'TadckaSitemapBundle'));
+        $builder->add('route', RouteType::class, array('label' => false, 'translation_domain' => 'SilvestraNode'));
 
-        $builder->add('routeRedirect', 'tadcka_redirect_route', array('label' => false, 'mapped' => false, 'use_route_target' => false));
+        $builder->add('routeRedirect', RedirectRouteType::class, array('label' => false, 'mapped' => false, 'use_route_target' => false));
 
         $postSetDataListener = function (FormEvent $event) {
             $form = $event->getForm();
@@ -82,12 +84,12 @@ class NodeI18nRedirectRouteType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => $this->nodeTranslationClass,
-                'translation_domain' => 'TadckaSitemapBundle',
+                'translation_domain' => 'SilvestraNode',
                 'constraints' => array(new NodeParentIsOnline()),
             )
         );
@@ -98,6 +100,6 @@ class NodeI18nRedirectRouteType extends AbstractType
      */
     public function getName()
     {
-        return 'silvestra_node_node_i18n_redirect_route';
+        return 'silvestra_node_i18n_redirect_route';
     }
 }

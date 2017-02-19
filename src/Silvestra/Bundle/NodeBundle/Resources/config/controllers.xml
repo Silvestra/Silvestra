@@ -16,7 +16,7 @@
         </service>
 
         <!--Sitemap node content controller-->
-        <service id="silvestra_node.controller.node_content" class="Silvestra\Bundle\NodeBundle\Controller\NodeContentController">
+        <service id="silvestra_node.controller.node_content" class="Silvestra\Bundle\NodeBundle\Controller\Node\ContentController">
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="silvestra_node.factory.node_event" />
             <argument type="service" id="silvestra_node.helper.response" />
@@ -24,7 +24,7 @@
         </service>
 
         <!--Sitemap node online controller-->
-        <service id="silvestra_node.controller.node_online" class="Silvestra\Bundle\NodeBundle\Controller\NodeOnlineController">
+        <service id="silvestra_node.controller.node_online" class="Silvestra\Bundle\NodeBundle\Controller\Node\OnlineController">
             <argument type="service" id="silvestra_node.manager.node" />
             <argument type="service" id="silvestra_node.handler.node_online" />
             <argument type="service" id="silvestra_node.helper.response" />
@@ -32,14 +32,14 @@
         </service>
 
         <!--Sitemap node redirect controller-->
-        <service id="silvestra_node.controller.node_redirect_route" class="Silvestra\Bundle\NodeBundle\Controller\NodeRedirectRouteController">
+        <service id="silvestra_node.controller.node_redirect_route" class="Silvestra\Bundle\NodeBundle\Controller\Node\RedirectRouteController">
             <argument type="service" id="silvestra_node.form_factory.node_redirect_route" />
             <argument type="service" id="silvestra_node.form_handler.node_redirect_route" />
             <argument type="service" id="silvestra_node.helper.response" />
         </service>
 
         <!--Sitemap node route controller-->
-        <service id="silvestra_node.controller.node_route" class="Silvestra\Bundle\NodeBundle\Controller\NodeRouteController">
+        <service id="silvestra_node.controller.node_route" class="Silvestra\Bundle\NodeBundle\Controller\Node\RouteController">
             <argument type="service" id="silvestra_node.form_factory.node_route" />
             <argument type="service" id="silvestra_node.form_handler.node_route" />
             <argument type="service" id="silvestra_node.helper.response" />
@@ -47,7 +47,7 @@
         </service>
 
         <!--Sitemap node seo controller-->
-        <service id="silvestra_node.controller.node_seo" class="Silvestra\Bundle\NodeBundle\Controller\NodeSeoController">
+        <service id="silvestra_node.controller.node_seo" class="Silvestra\Bundle\NodeBundle\Controller\Node\SeoController">
             <argument type="service" id="silvestra_node.form_factory.node_seo" />
             <argument type="service" id="silvestra_node.form_handler.node_seo" />
             <argument type="service" id="silvestra_node.helper.response" />

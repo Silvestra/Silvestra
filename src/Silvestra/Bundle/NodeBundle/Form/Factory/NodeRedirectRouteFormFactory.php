@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Factory;
 
+use Silvestra\Bundle\NodeBundle\Form\Type\NodeRedirectRouteType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -55,7 +56,7 @@ class NodeRedirectRouteFormFactory
     public function create(NodeInterface $node)
     {
         return $this->formFactory->create(
-            'silvestra_node_node_redirect_route',
+            NodeRedirectRouteType::class,
             $node,
             array(
                 'action' => $this->router->getContext()->getPathInfo()

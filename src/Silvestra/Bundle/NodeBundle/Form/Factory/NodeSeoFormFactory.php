@@ -11,6 +11,7 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Factory;
 
+use Silvestra\Bundle\NodeBundle\Form\Type\NodeSeoType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -55,7 +56,7 @@ class NodeSeoFormFactory
     public function create(NodeInterface $node)
     {
         return $this->formFactory->create(
-            'silvestra_node_node_seo',
+            NodeSeoType::class,
             $node,
             array(
                 'action' => $this->router->getContext()->getPathInfo(),

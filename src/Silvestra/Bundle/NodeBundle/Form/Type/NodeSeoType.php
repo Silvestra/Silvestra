@@ -11,9 +11,10 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Type;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsFormsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -44,25 +45,23 @@ class NodeSeoType extends AbstractType
     {
         $builder->add(
             'translations',
-            'translations',
+            TranslationsFormsType::class,
             array(
-                'type' => 'silvestra_node_node_i18n_seo',
+                'form_type' => NodeI18nSeoType::class,
                 'label' => false,
             )
         );
-
-        $builder->add('submit', 'submit', array('label' => 'form.button.save'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => $this->nodeClass,
-                'translation_domain' => 'TadckaSitemapBundle',
+                'translation_domain' => 'SilvestraNode',
             )
         );
     }
@@ -70,8 +69,8 @@ class NodeSeoType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return 'silvestra_node_node_seo';
+        return 'silvestra_node_seo';
     }
 }

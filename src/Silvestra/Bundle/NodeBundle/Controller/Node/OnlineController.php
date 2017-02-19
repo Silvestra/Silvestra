@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Silvestra\Bundle\NodeBundle\Controller;
+namespace Silvestra\Bundle\NodeBundle\Controller\Node;
 
 use Symfony\Component\HttpFoundation\Response;
 use Silvestra\Bundle\NodeBundle\Frontend\Message\Messages;
@@ -24,7 +24,7 @@ use Silvestra\Bundle\NodeBundle\Routing\RouterHelper;
  *
  * @since 14.10.23 16.11
  */
-class NodeOnlineController
+class OnlineController
 {
     /**
      * @var NodeManagerInterface

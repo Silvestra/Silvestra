@@ -11,11 +11,13 @@
 
 namespace Silvestra\Bundle\NodeBundle\Form\Type;
 
+use Silvestra\Bundle\FormBundle\Form\Type\KeyValueType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Silvestra\Bundle\NodeBundle\Form\DataTransformer\NodeI18nRouteTransformer;
 use Silvestra\Bundle\NodeBundle\Validator\Constraints\NodeParentIsOnline;
+use Tadcka\Bundle\RoutingBundle\Form\Type\RouteType;
 
 /**
  * @author Tadas Gliaubicas <tadcka89@gmail.com>
@@ -51,12 +53,12 @@ class NodeI18nRouteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('route', 'tadcka_route', array('label' => false, 'translation_domain' => 'TadckaSitemapBundle'));
+        $builder->add('route', RouteType::class, array('label' => false, 'translation_domain' => 'SilvestraNode'));
 
         if (false === empty($options['allowed_link_attributes'])) {
             $builder->add(
                 'linkAttributes',
-                'silvestra_key_value',
+                KeyValueType::class,
                 array(
                     'value_type' => 'text',
                     'allowed_keys' => array_combine(
@@ -75,12 +77,12 @@ class NodeI18nRouteType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => $this->nodeTranslationClass,
-                'translation_domain' => 'TadckaSitemapBundle',
+                'translation_domain' => 'SilvestraNode',
                 'constraints' => array(new NodeParentIsOnline()),
                 'allowed_link_attributes' => array(),
             )
@@ -90,8 +92,8 @@ class NodeI18nRouteType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return 'silvestra_node_node_i18n_route';
+        return 'silvestra_node_i18n_route';
     }
 }
