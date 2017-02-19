@@ -1,0 +1,4 @@
+silvestra_node:
+  node_type_invalid: Nurodytas tipas "%node_type%" negali būti priskirtas šakos tėvui.
+  node_parent_is_not_online: Tėvinė kategorija nepublikuojama lokalėje [%locale%].
+  node_route_missing: Neįvestas kategorijos universalusis adresas lokalėje [%locale%].

@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Sitemap tree manager-->
+        <service id="silvestra_node.manager.tree.default" class="Silvestra\Bundle\NodeBundle\Doctrine\EntityManager\TreeManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%silvestra_node.model.tree.class%</argument>
+        </service>
+
+        <!--Sitemap default node manager-->
+        <service id="silvestra_node.manager.node.default" class="Silvestra\Bundle\NodeBundle\Doctrine\EntityManager\NodeManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%silvestra_node.model.node.class%</argument>
+        </service>
+
+        <!--Sitemap default node translation manager-->
+        <service id="silvestra_node.manager.node_translation.default" class="Silvestra\Bundle\NodeBundle\Doctrine\EntityManager\NodeTranslationManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%silvestra_node.model.node_translation.class%</argument>
+        </service>
+
+    </services>
+</container>

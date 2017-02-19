@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Sitemap node seo form factory-->
+        <service id="silvestra_node.form_factory.node_seo" class="Silvestra\Bundle\NodeBundle\Form\Factory\NodeSeoFormFactory" public="false">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+        </service>
+
+        <!--Sitemap node seo form handler-->
+        <service id="silvestra_node.form_handler.node_seo" class="Silvestra\Bundle\NodeBundle\Form\Handler\NodeSeoFormHandler" public="false">
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="silvestra_seo.manager.seo_metadata" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <!--Sitemap node seo form type-->
+        <service id="silvestra_node.form_type.node_seo" class="Silvestra\Bundle\NodeBundle\Form\Type\NodeSeoType">
+            <tag name="form.type" alias="silvestra_node_node_seo" />
+            <argument>%silvestra_node.model.node.class%</argument>
+        </service>
+
+        <service id="silvestra_node.form_type.node_i18n_seo" class="Silvestra\Bundle\NodeBundle\Form\Type\NodeI18nSeoType">
+            <tag name="form.type" alias="silvestra_node_node_i18n_seo" />
+            <argument>%silvestra_node.model.node_translation.class%</argument>
+        </service>
+
+    </services>
+</container>

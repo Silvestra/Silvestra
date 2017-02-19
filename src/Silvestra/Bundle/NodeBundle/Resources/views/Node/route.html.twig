@@ -1,0 +1,9 @@
+{% extends 'TadckaSitemapBundle:Tab:tab.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+        {{ form_errors(form.translations) }}
+        {{ form_widget(form.translations) }}
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}

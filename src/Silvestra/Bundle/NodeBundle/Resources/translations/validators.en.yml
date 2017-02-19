@@ -1,0 +1,2 @@
+silvestra_node:
+  node_type_invalid: The specified type "%node_type%" can not be assigned to node of the parent.

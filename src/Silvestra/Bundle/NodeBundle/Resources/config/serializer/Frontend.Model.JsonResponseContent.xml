@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+ This file is part of the Tadcka package.
+
+ (c) Tadas Gliaubicas <tadcka89@gmail.com>
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<serializer>
+
+    <class name="Silvestra\Bundle\NodeBundle\Frontend\Model\JsonResponseContent">
+
+        <property name="content" type="string" serialized-name="content" expose="true" />
+
+        <property name="nodeId" type="integer" serialized-name="node_id" expose="true" />
+
+        <property name="messages" type="string" serialized-name="messages" expose="true" />
+
+        <property name="subContent" type="string" serialized-name="sub_content" expose="true" />
+
+        <property name="tab" type="string" serialized-name="tab" expose="true" />
+
+        <property name="toolbar" type="string" serialized-name="toolbar" expose="true" />
+
+    </class>
+
+</serializer>

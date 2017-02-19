@@ -1,0 +1,25 @@
+#tadcka-sitemap-tree {
+    overflow-x: auto;
+}
+
+#tadcka-sitemap-tree, #tadcka-sitemap-content {
+    border: 1px solid #DDDDDD;
+    min-height: 300px;
+    padding: 10px;
+}
+
+#tadcka-sitemap-content .tadcka-sitemap-toolbar {
+    margin-bottom: 10px;
+}
+
+#tadcka-sitemap-content .tab-content {
+    padding-top: 10px;
+}
+
+.dn {
+    display: none !important
+}
+
+.fwb {
+    font-weight: 700 !important
+}

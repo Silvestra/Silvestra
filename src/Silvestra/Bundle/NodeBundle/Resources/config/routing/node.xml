@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="silvestra_node_tree_create_node" path="/sitemap-tree/create-node/{parentId}.{_format}">
+        <default key="_controller">silvestra_node.controller.node:createAction</default>
+        <default key="_format">html</default>
+        <requirement key="_format">html|json</requirement>
+        <requirement key="parentId">\d+</requirement>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="silvestra_node_tree_edit_node" path="/sitemap-tree/edit-node/{nodeId}.{_format}">
+        <default key="_controller">silvestra_node.controller.node:editAction</default>
+        <default key="_format">html</default>
+        <requirement key="_format">html|json</requirement>
+        <requirement key="nodeId">\d+</requirement>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="silvestra_node_tree_delete_node" path="sitemap-tree/delete-node/{nodeId}.{_format}">
+        <default key="_controller">silvestra_node.controller.node:deleteAction</default>
+        <default key="_format">html</default>
+        <requirement key="_format">html|json</requirement>
+        <requirement key="nodeId">\d+</requirement>
+        <option key="expose">true</option>
+    </route>
+
+</routes>

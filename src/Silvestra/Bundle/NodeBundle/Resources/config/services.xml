@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!--Override nercury translation form-->
+        <parameter key="form.type.translations.class">Silvestra\Bundle\NodeBundle\Form\Type\NercuryTranslationsEditorType</parameter>
+    </parameters>
+
+    <services>
+
+        <!--Sitemap node event listener-->
+        <service id="silvestra_node.listener.sitemap_node" class="Silvestra\Bundle\NodeBundle\EventListener\SitemapNodeListener">
+            <tag name="kernel.event_listener" event="silvestra_node.node_edit" method="onSitemapNodeEdit"/>
+
+            <argument type="service" id="silvestra_node.routing.helper"/>
+            <argument type="service" id="silvestra_node.factory.tab"/>
+        </service>
+
+        <!--Tree node create success event listener-->
+        <!--Tree node pre delete event listener-->
+        <service id="silvestra_node.listener.tree_node" class="Silvestra\Bundle\NodeBundle\EventListener\TreeNodeListener">
+            <tag name="kernel.event_listener" event="tadcka_tree.node.create.success" method="onSitemapNodeCreate"/>
+            <tag name="kernel.event_listener" event="tadcka_tree.node.pre_delete" method="onSitemapNodeDelete"/>
+
+            <argument type="service" id="silvestra_node.manager"/>
+        </service>
+
+        <!--Sitemap page node provider-->
+        <service id="silvestra_node.provider.page_node" class="Silvestra\Bundle\NodeBundle\Provider\PageNodeProvider">
+            <argument type="service" id="silvestra_node.manager.node_translation"/>
+        </service>
+
+        <!--Sitemap provider-->
+        <service id="silvestra_node.provider" class="Silvestra\Bundle\NodeBundle\Provider\SitemapProvider">
+            <argument type="service" id="silvestra_node.manager.node"/>
+            <argument type="service" id="silvestra_node.tree.provider"/>
+        </service>
+
+        <service id="silvestra_node.handler.node_delete" class="Silvestra\Bundle\NodeBundle\Handler\NodeDeleteHandler">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="silvestra_node.manager.node"/>
+            <argument type="service" id="translator"/>
+        </service>
+
+        <service id="silvestra_node.handler.node_online" class="Silvestra\Bundle\NodeBundle\Handler\NodeOnlineHandler">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="silvestra_node.manager.node"/>
+            <argument type="service" id="silvestra_node.routing.manager.visibility"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="validator"/>
+        </service>
+
+        <service id="silvestra_node.factory.node_event" class="Silvestra\Bundle\NodeBundle\Event\SitemapNodeEventFactory">
+            <argument type="service" id="router"/>
+            <argument type="service" id="translator"/>
+        </service>
+
+        <service id="silvestra_node.manager" class="Silvestra\Bundle\NodeBundle\Manager\SitemapManager" lazy="true" public="false">
+            <argument>%silvestra_node.priority.strategy%</argument>
+            <argument type="service" id="silvestra_node.priority.registry.strategy" />
+            <argument type="service" id="tadcka_routing.manager.redirect_route" />
+            <argument type="service" id="silvestra_node.factory.route" />
+            <argument type="service" id="tadcka_routing.manager.route" />
+            <argument type="service" id="silvestra_node.routing.helper" />
+            <argument type="service" id="silvestra_node.factory.seo" />
+            <argument type="service" id="silvestra_seo.manager.seo_metadata" />
+        </service>
+
+    </services>
+</container>

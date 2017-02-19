@@ -1,0 +1,49 @@
+sitemap:
+  page_header: Svetainės medis
+  publish: Publikuoti
+  unpublish: Nepublikuoti
+  add_subpage: Pridėti papildomą puslapį
+  preview: Peržiūrėti
+  delete: Pašalinti
+
+node:
+  menu: Meniu
+  seo: Optimizavimas paieškos sistemoms
+  route: Universalusis adresas
+
+form:
+  node_translation:
+    title: Pavadinimas
+    description: Aprašymas
+    link_attributes: Papildomi nuorodos attributai
+  node:
+    type: Tipas
+    priority: Prioritetas
+  route:
+    pattern: Publikavimo adresas
+    visible: Publikuoti kategoriją
+  select: Pasirinkite
+  button:
+    save: Išsaugoti
+
+success:
+  create_node: Sėkmingai sukurta nauja kategorija.
+  edit_node: Sėkmingai redaguota kategorija.
+  delete_node: Sėkmingai pašalinta kategorija: %title%.
+  node_seo_save: Sėkmingai išsaugota kategorijos optimizavimo paieškos sistemoms informacija.
+  node_redirect_route_save: Sėkmingai išsaugta kategorijos peradresavimo informacija.
+  node_route_save: Sėkmingai išsaugota kategorijos publikavimo informacija.
+  online_save: Sėkmingai išsaugota kategorijos publikavimo informacija lokalėje [%locale%].
+
+not_found_title: Pavadinimas nerastas
+delete_confirm: Ar tikrai norite trinti kategorija?
+yes: Taip
+no: Ne
+
+silvestra_node: Tadcka svetainės medis
+
+node_translation_not_found: Nepavyko rasti kategorijos lokalėje [%locale%].
+node_parent_is_not_online: Tėvinė kategorija nepublikuojama lokalėje [%locale%].
+node_route_missing: Neįvestas kategorijos universalusis adresas lokalėje [%locale%].
+
+redirect: Peradresavimas

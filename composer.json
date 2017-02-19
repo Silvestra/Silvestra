@@ -18,10 +18,9 @@
         "symfony/framework-bundle": "^3.2",
         "symfony/monolog-bundle": "^3.0.2",
         "symfony/swiftmailer-bundle": "^2.3.10",
-        "tadcka/routing": "~0.2",
-        "tadcka/routing-bundle": "~0.2",
-        "tadcka/sitemap-bundle": "0.3.*@dev",
-        "tadcka/tree": "0.2.*@dev",
+        "tadcka/routing": "dev-master",
+        "tadcka/routing-bundle": "dev-master",
+        "tadcka/tree": "dev-master",
         "Trsteel/ckeditor-bundle": "~1.2",
         "twig/extensions": "~1.0"
     },

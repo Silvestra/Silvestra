@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Sitemap route helper-->
+        <service id="silvestra_node.routing.helper" class="Silvestra\Bundle\NodeBundle\Routing\RouterHelper">
+            <argument>%silvestra_node.node_type.controllers%</argument>
+            <argument>%silvestra_node.multi_language.enabled%</argument>
+            <argument>%silvestra_node.multi_language.locales%</argument>
+            <argument>%silvestra_node.route.strategy%</argument>
+        </service>
+
+        <!--Sitemap node route generator-->
+        <service id="silvestra_node.routing.generator" class="Silvestra\Bundle\NodeBundle\Routing\RouteGenerator">
+            <argument type="service" id="silvestra_node.routing.provider" />
+            <argument type="service" id="silvestra_node.routing.helper" />
+        </service>
+
+        <!--Sitemap route visibility manager-->
+        <service id="silvestra_node.routing.manager.visibility" class="Silvestra\Bundle\NodeBundle\Routing\RouteVisibilityManager">
+            <argument>%silvestra_node.route.recursive_invisible%</argument>
+        </service>
+
+        <!--Sitemap route provider-->
+        <service id="silvestra_node.routing.provider" class="Silvestra\Bundle\NodeBundle\Routing\RouteProvider">
+            <argument type="service" id="tadcka_routing.manager.route.in_memory" />
+        </service>
+
+    </services>
+</container>

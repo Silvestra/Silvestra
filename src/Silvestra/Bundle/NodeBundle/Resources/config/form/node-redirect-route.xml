@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Sitemap node i18n redirect route data transformer-->
+        <service id="silvestra_node.data_transformer.node_i18n_redirect_route" class="Silvestra\Bundle\NodeBundle\Form\DataTransformer\NodeI18nRedirectRouteTransformer" public="false">
+            <argument type="service" id="tadcka_routing.manager.redirect_route" />
+            <argument type="service" id="silvestra_node.routing.generator" />
+            <argument type="service" id="tadcka_routing.manager.route.in_memory" />
+        </service>
+
+        <!--Sitemap node redirect route form factory-->
+        <service id="silvestra_node.form_factory.node_redirect_route" class="Silvestra\Bundle\NodeBundle\Form\Factory\NodeRedirectRouteFormFactory" public="false">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+        </service>
+
+        <!--Sitemap node redirect route form handler-->
+        <service id="silvestra_node.form_handler.node_redirect_route" class="Silvestra\Bundle\NodeBundle\Form\Handler\NodeRedirectRouteFormHandler" public="false">
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="silvestra_node.manager.node_translation" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <!--Sitemap node redirect route form type-->
+        <service id="silvestra_node.form_type.node_redirect_route" class="Silvestra\Bundle\NodeBundle\Form\Type\NodeRedirectRouteType">
+            <tag name="form.type" alias="silvestra_node_node_redirect_route" />
+            <argument>%silvestra_node.model.node.class%</argument>
+        </service>
+
+        <!--Sitemap node i18n redirect route form type-->
+        <service id="silvestra_node.form_type.node_i18n_redirect_route" class="Silvestra\Bundle\NodeBundle\Form\Type\NodeI18nRedirectRouteType">
+            <tag name="form.type" alias="silvestra_node_node_i18n_redirect_route" />
+            <argument type="service" id="silvestra_node.data_transformer.node_i18n_redirect_route" />
+            <argument>%silvestra_node.model.node_translation.class%</argument>
+        </service>
+
+    </services>
+</container>

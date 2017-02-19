@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Sitemap node form factory-->
+        <service id="silvestra_node.form_factory.node" class="Silvestra\Bundle\NodeBundle\Form\Factory\NodeFormFactory" public="false">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="silvestra_node.node.provider" />
+            <argument>%silvestra_node.model.node.class%</argument>
+            <argument>%silvestra_node.model.node_translation.class%</argument>
+        </service>
+
+        <!--Sitemap node form handler-->
+        <service id="silvestra_node.form_handler.node" class="Silvestra\Bundle\NodeBundle\Form\Handler\NodeFormHandler" public="false">
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="silvestra_node.manager.node" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <!--Sitemap node form type-->
+        <service id="silvestra_node.form_type.node" class="Silvestra\Bundle\NodeBundle\Form\Type\NodeType">
+            <tag name="form.type" alias="tadcka_node" />
+        </service>
+
+    </services>
+</container>
