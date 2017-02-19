@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Left menu node type-->
+        <service  class="%silvestra_node.node_type.config.class%">
+            <tag name="silvestra_node.node_type.config" />
+            <argument>redirect</argument>
+            <argument>redirect</argument>
+            <argument type="collection"></argument>
+            <argument>false</argument>
+            <argument>/bundles/tadckasitemap/images/icon/redirect.png</argument>
+            <call method="setTranslationDomain">
+                <argument>TadckaSitemapBundle</argument>
+            </call>
+        </service>
+
+    </services>
+</container>

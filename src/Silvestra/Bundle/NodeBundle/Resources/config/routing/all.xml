@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/node.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/node-content.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/node-online.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/node-redirect-route.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/node-route.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/node-seo.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/preview.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/sitemap.xml" />
+
+    <import resource="@TadckaSitemapBundle/Resources/config/routing/tree.xml" />
+
+</routes>

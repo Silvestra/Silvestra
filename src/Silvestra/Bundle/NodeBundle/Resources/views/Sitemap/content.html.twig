@@ -1,0 +1,26 @@
+{% trans_default_domain 'TadckaSitemapBundle' %}
+
+<div class="pull-right">
+    {% include 'TadckaSitemapBundle:Sitemap:toolbar.html.twig' with {has_controller: has_controller, node: node} %}
+</div>
+
+<div class="clearfix"><!-- --></div>
+<div class="messages"></div>
+<div class="clearfix"><!-- --></div>
+<div class="sub-content">
+    <ul class="nav nav-tabs" role="tablist">
+        {% for tab in tabs %}
+            <li{% if loop.index == 1 %} class="active"{% endif %}>
+                <a href="#{{ tab.slug }}" data-href="{{ tab.url }}" role="tab" data-toggle="tab">{{ tab.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if tabs is not empty %}
+        <div class="tab-content">
+            {% for tab in tabs %}
+                <div class="tab-pane fade tab-content{% if loop.index == 1 %} in active{% endif %}" id="{{ tab.slug }}"></div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

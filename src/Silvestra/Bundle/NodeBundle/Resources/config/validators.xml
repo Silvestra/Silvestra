@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Sitemap node parent is online validator-->
+        <service id="silvestra_node.validator.node_parent_is_online" class="Silvestra\Bundle\NodeBundle\Validator\Constraints\NodeParentIsOnlineValidator">
+            <tag name="validator.constraint_validator" alias="silvestra_node.node_parent_is_online"/>
+
+            <argument type="service" id="silvestra_node.routing.helper"/>
+        </service>
+
+        <!--Sitemap node route not empty validator-->
+        <service id="silvestra_node.validator.node_route_not_empty" class="Silvestra\Bundle\NodeBundle\Validator\Constraints\NodeRouteNotEmptyValidator">
+            <tag name="validator.constraint_validator" alias="silvestra_node.node_route_not_empty"/>
+
+            <argument type="service" id="silvestra_node.routing.helper"/>
+        </service>
+
+        <!--Sitemap node type validator-->
+        <service id="silvestra_node.validator.node_type" class="Silvestra\Bundle\NodeBundle\Validator\Constraints\NodeTypeValidator">
+            <tag name="validator.constraint_validator" alias="silvestra_node.node_type"/>
+
+            <argument type="service" id="silvestra_node.node.provider"/>
+        </service>
+
+    </services>
+</container>

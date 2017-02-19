@@ -12,16 +12,19 @@
     "require": {
         "php": ">=5.5.9",
 
+        "a2lix/auto-form-bundle": "dev-master",
+        "a2lix/translation-form-bundle": "dev-master",
+        "aferrandini/urlizer": "1.0.*",
+        "friendsofsymfony/jsrouting-bundle": "2.0.0-alpha1",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "nercury/translation-editor-bundle": "~0.1",
         "symfony/assetic-bundle": "^2.8",
         "symfony/framework-bundle": "^3.2",
         "symfony/monolog-bundle": "^3.0.2",
         "symfony/swiftmailer-bundle": "^2.3.10",
-        "tadcka/routing": "~0.2",
-        "tadcka/routing-bundle": "~0.2",
-        "tadcka/sitemap-bundle": "0.3.*@dev",
-        "tadcka/tree": "0.2.*@dev",
+        "tadcka/jstree-bundle": "dev-master",
+        "tadcka/routing": "dev-master",
+        "tadcka/routing-bundle": "dev-master",
+        "tadcka/tree": "dev-remove-seo-dependency",
         "Trsteel/ckeditor-bundle": "~1.2",
         "twig/extensions": "~1.0"
     },
@@ -36,7 +39,6 @@
         "silvestra/admin": "self.version",
         "silvestra/banner": "self.version",
         "silvestra/cache": "self.version",
-        "silvestra/form": "self.version",
         "silvestra/locale": "self.version",
         "silvestra/media": "self.version",
         "silvestra/notification": "self.version",
@@ -68,7 +70,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1-dev"
+            "dev-master": "0.2-dev"
         }
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="silvestra_node.node_type.config.class">Tadcka\Component\Tree\Registry\NodeType\NodeTypeConfig</parameter>
+    </parameters>
+
+    <services>
+
+        <!--Sitemap node type registry-->
+        <service id="silvestra_node.node_type.registry" class="Tadcka\Component\Tree\Registry\NodeType\NodeTypeRegistry" public="false" />
+
+        <!--Sitemap node provider-->
+        <service id="silvestra_node.node.provider" class="Tadcka\Component\Tree\Provider\NodeProvider" public="true">
+            <argument type="service" id="silvestra_node.manager.node" />
+            <argument type="service" id="silvestra_node.node_type.registry" />
+            <argument type="service" id="silvestra_node.node.validator" />
+        </service>
+
+        <!--Sitemap node validator-->
+        <service id="silvestra_node.node.validator" class="Tadcka\Component\Tree\Validator\NodeValidator" public="false">
+            <argument type="service" id="silvestra_node.manager.node" />
+            <argument type="service" id="silvestra_node.node_type.registry" />
+        </service>
+
+    </services>
+</container>

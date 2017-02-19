@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!--Sitemap response helper-->
+        <service id="silvestra_node.helper.response" class="Silvestra\Bundle\NodeBundle\Frontend\ResponseHelper">
+            <argument type="service" id="silvestra_node.manager.node" />
+            <argument type="service" id="serializer" />
+            <argument type="service" id="templating" />
+        </service>
+
+        <!--Sitemap tree helper-->
+        <service id="silvestra_node.helper.tree" class="Silvestra\Bundle\NodeBundle\Frontend\TreeHelper">
+            <argument type="service" id="silvestra_node.node.provider" />
+            <argument type="service" id="silvestra_node.manager.node_translation" />
+            <argument type="service" id="silvestra_node.provider" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="silvestra_node.tree.provider" />
+        </service>
+
+        <service id="silvestra_node.factory.tab" class="Silvestra\Bundle\NodeBundle\Frontend\TabFactory" lazy="true">
+            <argument type="service" id="router" />
+            <argument type="service" id="translator" />
+        </service>
+
+    </services>
+</container>

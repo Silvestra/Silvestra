@@ -1,0 +1,38 @@
+sitemap:
+  page_header: Sitemap tree
+  publish: Publish
+  unpublish: Unpublish
+  add_subpage: Add subpage
+  preview: Preview
+  delete: Delete
+
+node:
+  menu: Menu
+  seo: SEO
+
+form:
+  seo_route:
+      publish_category: Publish category
+  node_translation:
+    title: Title
+    description: Description
+    link_attributes: Extra attributes for link
+  node:
+    type: Type
+    priority: Priority
+  select: Select
+  button:
+    save: Save
+
+success:
+  create_node: Sėkmingai sukurta nauja medžio viršūnė.
+  edit_node: Sėkmingai redaguota medžio viršūnė.
+  delete_node: Sėkmingai pašalinta medžio viršūnė: %title%.
+  node_seo_save: Sėkmingai išsaugota medžio viršūnės optimizavimas paieškos sistemoms.
+
+not_found_title: Title not found
+delete_confirm: Ar tikrai norite trinti medžio viršūnę?
+yes: Yes
+no: No
+
+silvestra_node: Tadcka sitemap tree

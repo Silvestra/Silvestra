@@ -1,0 +1,64 @@
+{% trans_default_domain 'TadckaSitemapBundle' %}
+
+<div class="btn-group tadcka-sitemap-toolbar">
+    <a href="{{ path('silvestra_node_tree_create_node', {_format: 'json', parentId: node.id}) }}" class="btn btn-outline btn-primary load">
+        {{ 'sitemap.add_subpage'|trans }}
+    </a>
+    {% if node.parent is not empty %}
+        {% if has_controller %}
+            {% if multi_language_enabled %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline btn-primary dropdown-toggle" data-toggle="dropdown">
+                        {{ 'sitemap.publish'|trans }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        {% for locale in multi_language_locales %}
+                            {% for translation in node.translations if ((translation.lang == locale) and (translation.route is not empty)) %}
+                            <li>
+                                <a href="{{ path('silvestra_node_node_online', {_format: 'json', locale: locale, nodeId: node.id}) }}" class="load">
+                                    [{{ locale }}] {{ translation.route.isVisible ? 'sitemap.unpublish'|trans : 'sitemap.publish'|trans }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if node.type != 'redirect' %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline btn-primary dropdown-toggle" data-toggle="dropdown">
+                            {{ 'sitemap.preview'|trans }}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for locale in multi_language_locales %}
+                                {% for translation in node.translations if (translation.lang == locale and translation.route is not empty) %}
+                                    <li>
+                                        <a target="_blank" href="{{ path('silvestra_node_preview', {_locale: locale, route: translation.route.routePattern}) }}">
+                                            [{{ locale }}] {{ 'sitemap.preview'|trans }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% else %}
+                {% set translation = node.translation(app.request.locale) %}
+                {% if translation is not empty and translation.route is not empty %}
+                    <a href="{{ path('silvestra_node_node_online', {_format: 'json', locale: app.request.locale, nodeId: node.id}) }}" class="btn btn-outline btn-primary load">
+                        {{ translation.route.isVisible ? 'sitemap.unpublish'|trans : 'sitemap.publish'|trans }}
+                    </a>
+                    {% if node.type != 'redirect' %}
+                        <a href="{{ path('silvestra_node_preview', {route: translation.route.routePattern}) }}" target="_blank" class="btn btn-outline btn-primary">
+                            {{ 'sitemap.preview'|trans }}
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        <a href="{{ path('silvestra_node_tree_delete_node', {_format: 'json', nodeId: node.id}) }}" class="btn btn-outline btn-primary load">
+            {{ 'sitemap.delete'|trans }}
+        </a>
+    {% endif %}
+</div>
